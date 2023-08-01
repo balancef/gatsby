@@ -13,12 +13,9 @@ import {
 
 const CustomSection = ({ sections }) => {
   const sectionResult = sections.map((section) => {
-    {
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "textBlock"
-      ) {
+
+    if (section?._type !== null && section?._type !== undefined) {
+      if (section?._type === "textBlock") {
         return (
           <TextBlock
             key={section._key}
@@ -27,11 +24,8 @@ const CustomSection = ({ sections }) => {
           />
         );
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "textImage"
-      ) {
+
+      if (section?._type === "textImage") {
         return (
           <TextImage
             key={section._key}
@@ -41,11 +35,8 @@ const CustomSection = ({ sections }) => {
           />
         );
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "iconsTextBlocks"
-      ) {
+
+      if (section?._type === "iconsTextBlocks") {
         return (
           <IconsTextBlocks
             key={section._key}
@@ -55,11 +46,8 @@ const CustomSection = ({ sections }) => {
           />
         );
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "accordion"
-      ) {
+
+      if (section?._type === "accordion") {
         return (
           <Accordion
             key={section._key}
@@ -68,11 +56,8 @@ const CustomSection = ({ sections }) => {
           />
         );
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "fullCardList"
-      ) {
+
+      if (section?._type === "fullCardList") {
         return (
           <FullCard
             key={section._key}
@@ -81,11 +66,8 @@ const CustomSection = ({ sections }) => {
           />
         );
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "textBlockList"
-      ) {
+
+      if (section?._type === "textBlockList") {
         return (
           <TextBlockList
             key={section._key}
@@ -95,25 +77,16 @@ const CustomSection = ({ sections }) => {
           />
         );
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "logosCarousel"
-      ) {
+
+      if (section?._type === "logosCarousel") {
         return <LogosCarousel key={section._key} data={section}/>;
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "imageCarousel"
-      ) {
+
+      if (section?._type === "imageCarousel") {
         return <ImageCarousel key={section._key} data={section} />;
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "textImageCarousel"
-      ) {
+
+      if (section?._type === "textImageCarousel") {
         return (
           <TextImageCarousel
             key={section._key}
@@ -122,7 +95,7 @@ const CustomSection = ({ sections }) => {
             text={section.textBlock?._rawContent}
           />
         );
-      }
+      }      
     }
   });
 
