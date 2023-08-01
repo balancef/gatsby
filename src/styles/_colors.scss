@@ -1,0 +1,32 @@
+
+$bg-primary: var(--bg-primary);
+$bg-secondary: var(--bg-secondary);
+$bg-elevation-1: var(--bg-elevation-1);
+$bg-elevation-2: var(--bg-elevation-2); // background of accordion-body
+$color-text-primary: var(--color-text-primary);
+$color-border: var(--color-border); 
+$bg-gray-elevation-1: var(--bg-gray-elevation-1);
+$bg-gray-elevation-2: var(--bg-gray-elevation-2);
+$border-color: var(--border-color); // border of accordion-item, headings of tetBlockList
+//Other styles
+$box-shadow: 0 3px 6px 0 rgb(0 0 0 / 16%);
+
+
+// Customizable colors
+
+$color-primary: #1A73E8;
+$color-secondary: #BA19A1;
+$color-tertiary: #cccccc;
+
+$color-white: #ffffff;
+$color-black: #000000;
+$color-black-text: #5F6368;
+
+
+// state colors
+
+$color-warning: #F2994A;
+$color-success: #219653;
+$color-danger: #EB5757;
+$color-info: #2D9CDB;
+$color-disabled: mix($color-black, white, 10%);

@@ -1,0 +1,70 @@
+@import "../../styles/colors";
+@import "../../styles/text";
+@import "../../styles/global";
+
+.custom-link {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  margin-right: 1rem;
+  &:last-child{
+    margin-right: 0rem;
+  }
+  p {
+    font-family: $primary-font;
+    white-space: nowrap;
+  }
+  &.link {
+    color: $color-secondary;
+    svg {
+      font-size: 2rem;
+      padding-right: 0.5rem;
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &.button {
+    background-color: $color-primary;
+    padding: 0.2rem 1rem;
+    border-radius: 200px;
+    svg {
+      font-size: 1.4rem;
+      padding-right: 0.5rem;
+      color: $color-white;
+    }
+    p {
+      color: $color-white;
+    }
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+  &.mobile {
+    padding: 0.3rem 0.24rem;
+    width: 30px;
+    height: 30px;
+    svg {
+      padding-right: 0rem;
+    }
+    p {
+      display: none;
+    }
+    @media (min-width: $lg-breakpoint) {
+      padding: 0.2rem 1rem;
+      width: auto;
+      height: 40px;
+      svg {
+        padding-right: 0.5rem;
+        font-size: 1.8rem;
+      }
+      p {
+        display: block;
+      }
+    }
+  }
+  &.icon {
+    margin-right: 0;
+  }
+}

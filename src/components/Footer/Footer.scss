@@ -1,0 +1,72 @@
+@import "../../styles/colors";
+@import "../../styles/text";
+
+.footer {
+  background-color: #35373a;
+  color: $color-white;
+  p {
+    font-family: $secondary-font;
+  }
+  a {
+    color: $color-white;
+    opacity: 0.9;
+    text-decoration: none;
+    &:hover {
+      color: $color-primary;
+    }
+  }
+  font-family: $secondary-font;
+  &__down {
+    background-color: #202124;
+  }
+  .row {
+    a {
+      width: auto;
+      svg {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+  .contactBlock {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    .qrCode {
+      width: 80px;
+      height: 113px;
+    }
+    &__socialMedia {
+      a,
+      svg,
+      a:hover,
+      svg:hover {
+        transition: all ease-in-out 0s;
+      }
+    }
+  }
+  ul {
+    list-style-type: none;
+    padding: 0 0 0 5px;
+    margin: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer {
+    .contactBlock {
+      justify-content: flex-end;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      gap: 20px;
+      &__socialMedia {
+        h5 {
+          text-align: right;
+        }
+        .row {
+          justify-content: end;
+        }
+      }
+    }
+  }
+}

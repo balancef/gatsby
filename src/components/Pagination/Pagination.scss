@@ -1,0 +1,84 @@
+@import "../../styles/global";
+
+.CardsContent {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.CardsContent .Card:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+nav {
+  padding-top: 3rem;
+  .Pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    color: $color-text-primary;
+    & svg {
+      font-size: 12px;
+      margin: 0 0.5rem;
+    }
+
+    &__item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 1rem;
+      width: 32px;
+      height: 32px;
+      text-align: center;
+      border-radius: 4px;
+      box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2),
+        0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12);
+
+      a,
+      a:hover,
+      a:focus {
+        color: $color-text-primary;
+      }
+    }
+
+    &__link {
+      padding: 0.2rem 0.5rem;
+      text-decoration: none;
+      &:hover,
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
+  }
+}
+
+.active-page {
+  background: $color-primary;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2), 0px 9px 10px rgba(0, 0, 0, 0.14),
+    0px 5px 14px rgba(0, 0, 0, 0.12);
+}
+
+@media (min-width: $md-breakpoint) {
+  .CardsContent {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2.1rem;
+    align-items: stretch;
+  }
+  .CardsContent .Card:not(:last-child) {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: $xl-breakpoint) {
+  .CardsContent {
+    gap: 4rem;
+    align-items: stretch;
+  }
+}

@@ -1,0 +1,62 @@
+@import "../../styles/global";
+
+.textImage {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  background: $bg-gray-elevation-1;
+  color: $color-text-primary;
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  padding: 0 15px 10px;
+  &__title {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 15px;
+  }
+  &__image {
+    height: 230px;
+    object-fit: cover;
+  }
+}
+
+@media (min-width: $md-breakpoint) {
+  .textImage {
+    padding: 20px;
+    &__image {
+      height: 300px;
+    }
+  }
+}
+
+@media (min-width: $lg-breakpoint) {
+  .textImage {
+    padding: 20px 50px 50px;
+    &__title {
+      padding-bottom: 30px;
+    }
+    &__content {
+      flex-direction: row;
+      gap: 35px;
+    }
+    &__image {
+      min-width: 380px;
+      height: 300px;
+    }
+  }
+}
+
+@media (min-width: $xl-breakpoint) {
+  .textImage {
+    &__image {
+      min-width: 550px;
+      height: 400px;
+      object-fit: cover;
+    }
+  }
+}

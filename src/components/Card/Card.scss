@@ -1,0 +1,126 @@
+@import "../../styles/global";
+@import "../../styles/colors";
+
+.Card {
+  width: 100%;
+  padding: 16px;
+  background-color: $bg-elevation-1;
+  box-shadow: $box-shadow;
+  display: flex;
+  flex-direction: column;
+
+  .Link {
+    color: $color-primary;
+    padding-top: 24px;
+    text-decoration: none;
+
+    a,
+    small {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .Title {
+    padding-top: 1rem;
+    display: block;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .Content {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-clamp: 4;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 95px;
+  }
+
+  .ImageContainer {
+    width: 100%;
+    height: 235px;
+    object-fit: cover;
+  }
+
+  .PersonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    line-height: normal;
+    padding-top: 30px;
+
+    .Profile {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      height: auto;
+      align-items: center;
+      max-width: 30%;
+      color: $color-primary;
+
+      a {
+        color: $color-primary;
+        text-align: center;
+      }
+
+      .Icon {
+        max-width: 40px;
+      }
+    }
+
+    .Person {
+      padding-left: 16px;
+      font-size: 14px;
+      display: block;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-clamp: 2;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}
+
+@media screen and (min-width: $sm-breakpint) {
+  .Card {
+    width: 420px;
+
+    &.wide {
+      .ImageContainer {
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $md-breakpoint) {
+  .Card {
+    width: 240px;
+
+    &.wide {
+      width: 282px;
+
+      .ImageContainer {
+        width: 100%;
+        height: auto;
+        max-height: 180px;
+        object-fit: scale-down;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $lg-breakpoint) {
+  .Card {
+    width: 280px;
+  }
+}

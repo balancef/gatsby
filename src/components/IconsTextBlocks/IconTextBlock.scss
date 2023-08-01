@@ -1,0 +1,38 @@
+@import "../../styles/global.scss";
+
+.iconsTextBlock {
+  &__textTitle {
+    text-align: center;
+  }
+
+  .contentIconCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__icon {
+      img {
+        height: 55px;
+      }
+    }
+  }
+}
+
+
+.iconsTextBlock__iconsContainer .contentIconCard:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+@media (min-width: $md-breakpoint) {
+  .iconsTextBlock {
+    &__iconsContainer {
+      display: flex;
+      justify-content: center;
+    }
+    .contentIconCard {
+      width: 33%;
+    }
+  }
+  .iconsTextBlock__iconsContainer .contentIconCard:not(:last-child) {
+    margin-bottom: 0px;
+  }
+}

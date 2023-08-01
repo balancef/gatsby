@@ -1,0 +1,24 @@
+@import "../../styles/global";
+
+.accordion-item {
+  border-color: $border-color !important;
+  .accordion-button {
+    background-color: $bg-elevation-1 !important;
+    color: $bg-secondary !important;
+    box-shadow: none !important;
+    &:focus {
+      border: none !important;
+      box-shadow: none;
+    }
+  }
+  .accordion-body {
+    background-color: $bg-elevation-2 !important;
+    color: $bg-secondary !important;
+  }
+  .accordion-button.collapsed::after {
+    filter: brightness(0%) invert(70%);
+  }
+  .accordion-button:not(.collapsed)::after {
+    filter: brightness(0%) invert(70%);
+  }
+}
