@@ -23,11 +23,25 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   pageQueryData.allSanityPages.nodes.forEach(node => {
-    const page = path.resolve("./src/templates/page.js")
+    const pageEN = path.resolve("./src/templates/pageEN.js")
     createPage({
       path: "/" + node.slug.current,
-      component: page,
-      context: { slug: node.slug.current },
+      component: pageEN,
+      context: { slug: node.slug.current, language: "en" },
+    })
+
+    const pageES = path.resolve("./src/templates/pageES.js")
+    createPage({
+      path: "/es/" + node.slug.current,
+      component: pageES,
+      context: { slug: node.slug.current, language: "es" },
+    })
+
+    const pageGER = path.resolve("./src/templates/pageDE.js")
+    createPage({
+      path: "/de/" + node.slug.current,
+      component: pageGER,
+      context: { slug: node.slug.current, language: "de" },
     })
   })
 }

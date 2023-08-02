@@ -1,19 +1,19 @@
 
-import React from "react";
+import React, {useState, createContext} from "react";
 import PropTypes from 'prop-types'
 import { Header, Footer} from "..";
-import ThemeProvider from "../../context/themeContext";
+import { LanguageProvider } from "../../context/languajeContext";
 
 import "./Layout.scss";
 
 const Layout = ({ children }) => {
 
   return (
-    <ThemeProvider>
+    <LanguageProvider>
       <Header/>
       <main>{children}</main>
       <Footer/>
-    </ThemeProvider>
+    </LanguageProvider>
   );
 };
 

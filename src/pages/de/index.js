@@ -1,13 +1,13 @@
 import * as React from "react"
-import { Layout , Home} from "../components"
+import { Layout , Home} from "../../components"
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/global.scss";
+import "../../styles/global.scss";
 
 const IndexPage = () => {
   return (
     <Layout>
-      <Home languaje={'en'}/>
+      <Home languaje={'de'}/>
     </Layout>
   )
 }
