@@ -3,7 +3,6 @@ import SanityImage from "gatsby-plugin-sanity-image";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { MaterialIcon, FontAwesomeIcon} from "..";
-import { useTheme } from "../../context/themeContext";
 
 import "./Header.scss";
 import LinkBlock from "./LinkBlock";
@@ -12,7 +11,6 @@ import useHeader from "../../hooks/useHeader";
 
 const Header = () => {
   const data = useHeader().sanityHeader;
-  const { theme, toggleTheme } = useTheme();
   
 
   return data !== null ? (
@@ -20,20 +18,10 @@ const Header = () => {
       <Navbar expand="lg">
         <Container>
           <Navbar.Brand href="/">
-            {theme === "dark" ? (
-                data.logo.imageDark !== null ? (
+            {data.logo.image.image !== null ? (
               <SanityImage
-                {...data.logo.imageDark}
-                alt={`${data.logo.image.alt}`}
-                className="header__logo"
-              />
-              ) : (
-                <></>
-              )
-            ) :  data.logo.image.image !== null ? (
-              <SanityImage
-                {...data.logo.image.image}
-                alt={`${data.logo.image.alt}`}
+                {...data.logo.image}
+                alt={`${data.logo.alt}`}
                 className="header__logo"
               />
               ) : (
@@ -46,14 +34,6 @@ const Header = () => {
           ) : (
             <></>
           )}
-           <button onClick={toggleTheme} className="header__theme-toggle">
-        <div className={`moon ${theme === "dark" ? "" : "moon-animate"}`}>
-          <FontAwesomeIcon code="FaMoon" />
-        </div>
-        <div className={`sun ${theme === "dark" ? "sun-animate" : ""}`}>
-          <MaterialIcon code="MdWbSunny" />
-        </div>
-      </button>
         </Container>
       </Navbar>
     </header>

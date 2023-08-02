@@ -129,12 +129,8 @@ const useHome = () => {
           ... on SanityLogosCarousel {
             _key
             _type
-            titleSubtitle {
-              title
-              _rawContent
-            }
+            title
             carousel {
-              image {
                 alt
                 image {
                   asset {
@@ -153,24 +149,6 @@ const useHome = () => {
                     y
                   }
                 }
-              }
-              imageDark {
-                asset {
-                  _id
-                }
-                crop {
-                  bottom
-                  left
-                  right
-                  top
-                }
-                hotspot {
-                  y
-                  x
-                  width
-                  height
-                }
-              }
             }
           }
           ... on SanityFullCardList {
@@ -226,7 +204,6 @@ const useHome = () => {
                 _rawContent
               }
               iconImage {
-                image {
                   alt
                   image {
                     asset {
@@ -245,24 +222,6 @@ const useHome = () => {
                       bottom
                     }
                   }
-                }
-                imageDark {
-                  asset {
-                    _id
-                  }
-                  crop {
-                    top
-                    right
-                    left
-                    bottom
-                  }
-                  hotspot {
-                    height
-                    width
-                    x
-                    y
-                  }
-                }
               }
             }
           }

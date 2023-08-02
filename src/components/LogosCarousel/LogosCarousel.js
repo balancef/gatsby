@@ -11,7 +11,7 @@ const LogosCarousel = ({ data }) => {
    
     return (
       <div className="logos__image">
-        <SanityImage {...logo.image.image} alt="logo" />
+        <SanityImage {...logo.image} alt="logo" />
       </div>
     )
   })

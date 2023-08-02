@@ -43,24 +43,6 @@ const useHeader = () => {
               _type
             }
             logo {
-              imageDark {
-                hotspot {
-                  y
-                  x
-                  width
-                  height
-                }
-                crop {
-                  top
-                  right
-                  left
-                  bottom
-                }
-                asset {
-                  _id
-                }
-              }
-              image {
                 alt
                 image {
                   hotspot {
@@ -79,7 +61,6 @@ const useHeader = () => {
                     _id
                   }
                 }
-              }
               _type
               _key
             }
