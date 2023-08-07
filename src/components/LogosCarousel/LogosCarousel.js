@@ -6,12 +6,10 @@ import SanityImage from "gatsby-plugin-sanity-image"
 import "./LogosCarousel.scss"
 
 const LogosCarousel = ({ data }) => {
-    
   const logoList = data.carousel.map(logo => {
-   
     return (
       <div className="logos__image">
-        <SanityImage {...logo.image.image} alt="logo" />
+        <SanityImage {...logo.image} alt="logo" />
       </div>
     )
   })
@@ -19,36 +17,38 @@ const LogosCarousel = ({ data }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1441 },
-      items: 3,
+      items: 6,
     },
     tablet: {
       breakpoint: { max: 1440, min: 992 },
-      items: 3,
+      items: 4,
     },
     mobileTablet: {
       breakpoint: { max: 991, min: 577 },
-      items: 2,
+      items: 3,
     },
     mobile: {
       breakpoint: { max: 576, min: 0 },
-      items: 1,
+      items: 2,
     },
   }
 
   return (
     <div className="container logos py-5">
+      <h2 className="body-large logos__title">{data.title}</h2>
       <Carousel
         responsive={responsive}
-        autoPlay={logoList.length > 3}
+        autoPlay={true}
         autoPlaySpeed={3000}
-        infinite={logoList.length > 3}
+        infinite={true}
         containerClass={"containerCarrusel"}
-        removeArrowOnDeviceType={logoList.length <= 3 && ["tablet", "desktop"]}
+        removeArrowOnDeviceType={["tablet", "desktop", "mobileTablet", "mobile"]}
       >
         {logoList}
       </Carousel>
     </div>
   )
 }
+
 
 export default LogosCarousel
