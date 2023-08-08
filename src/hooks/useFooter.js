@@ -9,7 +9,7 @@ const useFooter = () => {
           links {
             link {
               url
-              text
+              title
               _key
             }
             icon {
@@ -70,7 +70,7 @@ const useFooter = () => {
           title
           links {
             url
-            text
+            title
             _key
           }
         }

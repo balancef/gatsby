@@ -194,7 +194,7 @@ export const query = graphql`
               }
               link {
                 url
-                text
+                title
               }
               icon {
                 icon
