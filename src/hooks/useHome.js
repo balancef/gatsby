@@ -38,6 +38,51 @@ const useHome = () => {
             }
           }
           dinamicContent {
+            ... on SanityTextImageButton {
+              _key
+              _type
+              textImage {
+                textBlock {
+                  title
+                  _rawContent
+                }
+                image {
+                  alt
+                  _key
+                  image {
+                    hotspot {
+                      y
+                      x
+                      width
+                      height
+                    }
+                    crop {
+                      top
+                      right
+                      left
+                      bottom
+                    }
+                    asset {
+                      _id
+                    }
+                    _key
+                  }
+                }
+                _type
+                _key
+              }
+              link {
+                url
+                title
+              }
+              callToActionLink {
+                title
+                link {
+                  url
+                  title
+                }
+              }
+            }
             ... on SanityImageCarousel {
               _key
               _type
@@ -131,6 +176,8 @@ const useHome = () => {
               _key
               _type
               title
+              titleSpanish
+              titleGerman
               carousel {
                   alt
                   image {
@@ -183,7 +230,7 @@ const useHome = () => {
                 }
                 link {
                   url
-                  text
+                  title
                 }
                 icon {
                   icon
@@ -306,6 +353,51 @@ const useHome = () => {
             }
           }
           dinamicContent {
+            ... on SanityTextImageButton {
+              _key
+              _type
+              textImage {
+                textBlock {
+                  title: titleSpanish
+                  _rawContent: _rawContentSpanish
+                }
+                image {
+                  alt
+                  _key
+                  image {
+                    hotspot {
+                      y
+                      x
+                      width
+                      height
+                    }
+                    crop {
+                      top
+                      right
+                      left
+                      bottom
+                    }
+                    asset {
+                      _id
+                    }
+                    _key
+                  }
+                }
+                _type
+                _key
+              }
+              link {
+                url
+                title: titleSpanish
+              }
+              callToActionLink {
+                title: titleSpanish
+                link {
+                  url
+                  title: titleSpanish
+                }
+              }
+            }
             ... on SanityImageCarousel {
               _key
               _type
@@ -398,7 +490,7 @@ const useHome = () => {
             ... on SanityLogosCarousel {
               _key
               _type
-              title
+              title: titleSpanish
               carousel {
                   alt
                   image {
@@ -451,7 +543,7 @@ const useHome = () => {
                 }
                 link {
                   url
-                  text
+                  title
                 }
                 icon {
                   icon
@@ -574,6 +666,51 @@ const useHome = () => {
             }
           }
           dinamicContent {
+            ... on SanityTextImageButton {
+              _key
+              _type
+              textImage {
+                textBlock {
+                  title: titleGerman
+                  _rawContent: _rawContentGerman
+                }
+                image {
+                  alt
+                  _key
+                  image {
+                    hotspot {
+                      y
+                      x
+                      width
+                      height
+                    }
+                    crop {
+                      top
+                      right
+                      left
+                      bottom
+                    }
+                    asset {
+                      _id
+                    }
+                    _key
+                  }
+                }
+                _type
+                _key
+              }
+              link {
+                url
+                title: titleGerman
+              }
+              callToActionLink {
+                title: titleGerman
+                link {
+                  url
+                  title: titleGerman
+                }
+              }
+            }
             ... on SanityImageCarousel {
               _key
               _type
@@ -666,7 +803,7 @@ const useHome = () => {
             ... on SanityLogosCarousel {
               _key
               _type
-              title
+              title: titleGerman
               carousel {
                   alt
                   image {
@@ -719,7 +856,7 @@ const useHome = () => {
                 }
                 link {
                   url
-                  text
+                  title
                 }
                 icon {
                   icon

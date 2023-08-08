@@ -102,7 +102,7 @@ export const query = graphql`
           ... on SanityLogosCarousel {
             _key
             _type
-            title
+            title: titleGerman
             carousel {
                 alt
                 image {
@@ -194,7 +194,7 @@ export const query = graphql`
               }
               link {
                 url
-                text
+                title
               }
               icon {
                 icon
