@@ -14,7 +14,7 @@ const useHeader = () => {
                     separated
                     link {
                       url
-                      text
+                      title
                       _key
                     }
                   }
@@ -29,7 +29,7 @@ const useHeader = () => {
                   _type
                   link {
                     url
-                    text
+                    title
                     _type
                     _key
                   }
@@ -69,7 +69,7 @@ const useHeader = () => {
                 style
                 link {
                   url
-                  text
+                  title
                 }
                 icon {
                   icon
