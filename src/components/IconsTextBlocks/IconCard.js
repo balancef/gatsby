@@ -1,27 +1,16 @@
 import React from "react";
 import SanityImage from "gatsby-plugin-sanity-image";
 import { PortableText } from "@portabletext/react";
-import { useTheme } from "../../context/themeContext";
 import "./IconTextBlock.scss";
 
 const IconCard = ({ data }) => {
-  const { theme } = useTheme();
   return (
     <div className="contentIconCard">
       <div className="contentIconCard__icon">
-        {theme === "dark" ? (
-          data.iconImage.imageDark !== null ? (
-            <SanityImage
-              {...data.iconImage.imageDark}
-              alt={`${data.iconImage.image.alt}`}
-            />
-          ) : (
-            <></>
-          )
-        ) : data.iconImage.image.image !== null ? (
+        {data.iconImage.image !== null ? (
           <SanityImage
-            {...data.iconImage.image.image}
-            alt={`${data.iconImage.image.alt}`}
+            {...data.iconImage.image}
+            alt={`${data.iconImage.alt}`}
           />
         ) : (
           <></>

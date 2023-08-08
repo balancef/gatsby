@@ -2,7 +2,6 @@ import React from "react";
 import SanityImage from "gatsby-plugin-sanity-image";
 import "./Footer.scss";
 import useFooter from "../../hooks/useFooter";
-import { useTheme } from "../../context/themeContext";
 import FooterLinkBlock from "./FooterLinkBlock";
 import SocialMediaBlock from "./SocialMediaBlock";
 
@@ -49,9 +48,9 @@ const Footer = () => {
         <div className="footer__down">
           <div className="container d-flex justify-content-end align-items-center py-4">
             { (
-              data.logo.image.image !== null ?  <SanityImage
-                {...data.logo.image.image}
-                alt={`${data.logo.image.alt}`}
+              data.logo.image !== null ?  <SanityImage
+                {...data.logo.image}
+                alt={`${data.logo.alt}`}
                 className="header__logo"
               /> : <></>
             )}

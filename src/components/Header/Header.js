@@ -43,10 +43,10 @@ const Header = () => {
       <Navbar expand="lg">
         <Container>
           <Navbar.Brand href="/">
-            { data.logo.image.image !== null ? (
+            { data.logo.image !== null ? (
               <SanityImage
-                {...data.logo.image.image}
-                alt={`${data.logo.image.alt}`}
+                {...data.logo.image}
+                alt={`${data.logo.alt}`}
                 className="header__logo"
               />
             ) : (

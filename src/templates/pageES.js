@@ -78,7 +78,6 @@ export const query = graphql`
                 _rawContent
               }
               iconImage {
-                image {
                   alt
                   image {
                     asset {
@@ -97,36 +96,14 @@ export const query = graphql`
                       bottom
                     }
                   }
-                }
-                imageDark {
-                  asset {
-                    _id
-                  }
-                  crop {
-                    top
-                    right
-                    left
-                    bottom
-                  }
-                  hotspot {
-                    height
-                    width
-                    x
-                    y
-                  }
-                }
               }
             }
           }
           ... on SanityLogosCarousel {
             _key
             _type
-            titleSubtitle {
-              title
-              _rawContent
-            }
+            title
             carousel {
-              image {
                 alt
                 image {
                   asset {
@@ -145,24 +122,6 @@ export const query = graphql`
                     y
                   }
                 }
-              }
-              imageDark {
-                asset {
-                  _id
-                }
-                crop {
-                  bottom
-                  left
-                  right
-                  top
-                }
-                hotspot {
-                  y
-                  x
-                  width
-                  height
-                }
-              }
             }
           }
           ... on SanityAccordion {

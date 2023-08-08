@@ -4,6 +4,25 @@
   li {
     width: 130px;
   }
+  &__title{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+    color: $color-black-text;
+    --text-divider-gap: 1rem;
+  }
+  &__title::before, &__title::after{
+    content: "";
+    width: 10rem;
+    background-color: #8c98a4;
+    flex-grow: 1;
+  }
+  &__title::before {
+    margin-right: var(--text-divider-gap);
+  }
+  &__title::after {
+    margin-left: var(--text-divider-gap);
+  }
   &__logos {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -13,6 +32,7 @@
     justify-content: center;
   }
   &__image {
+    width: 100px;
     height: 60px;
     overflow: hidden;
     display: flex;
