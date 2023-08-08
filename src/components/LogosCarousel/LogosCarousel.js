@@ -32,13 +32,28 @@ const LogosCarousel = ({ data }) => {
       items: 2,
     },
   }
+  
+  const SelectAutoPlay = {
+    desktop: logoList.length > 6,
+    tablet: logoList.length > 4,
+    mobileTablet: logoList.length > 3,
+    mobile: logoList.length > 2,
+  }
 
   return (
     <div className="container logos py-5">
       <h2 className="body-large logos__title">{data.title}</h2>
       <Carousel
         responsive={responsive}
-        autoPlay={true}
+        autoPlay={"mobile" && SelectAutoPlay.mobile 
+        ? true 
+        : ("mobileTablet" && SelectAutoPlay.mobileTablet
+          ? true 
+          : ("tablet" && SelectAutoPlay.tablet
+          ? true 
+            : ("desktop" && SelectAutoPlay.desktop
+            ? true 
+            : false)))}
         autoPlaySpeed={3000}
         infinite={true}
         containerClass={"containerCarrusel"}
