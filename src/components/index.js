@@ -21,6 +21,7 @@ import LogosCarousel from './LogosCarousel/LogosCarousel'
 import { Seo } from "./seo";
 import ImageCarousel from "./ImageCarousel/ImageCarousel";
 import TextImageCarousel from "./TextImageCarousel/TextImageCarousel";
+import TextImageButton from "./TextImageButton/TextImageButton";
 
 export {
   Header,
@@ -45,5 +46,6 @@ export {
   TextBlockList,
   LogosCarousel,
   ImageCarousel,
-  TextImageCarousel
+  TextImageCarousel,
+  TextImageButton
 };

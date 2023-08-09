@@ -8,7 +8,8 @@ import {
   TextBlockList,
   LogosCarousel,
   ImageCarousel,
-  TextImageCarousel
+  TextImageCarousel,
+  TextImageButton
 } from "../";
 
 const CustomSection = ({ sections }) => {
@@ -95,7 +96,20 @@ const CustomSection = ({ sections }) => {
             text={section.textBlock?._rawContent}
           />
         );
-      }      
+      }   
+      
+      if (section?._type === "textImageButton") {
+        return (
+          <TextImageButton
+            key={section._key}
+            title={section.textImage.textBlock?.title}
+            text={section.textImage.textBlock?._rawContent}
+            image={section.textImage.image.image}
+            button={section.link}
+            callToActionLink={section.callToActionLink}
+          />
+        );
+      }  
     }
   });
 
