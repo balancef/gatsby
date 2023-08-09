@@ -176,8 +176,6 @@ const useHome = () => {
               _key
               _type
               title
-              titleSpanish
-              titleGerman
               carousel {
                   alt
                   image {

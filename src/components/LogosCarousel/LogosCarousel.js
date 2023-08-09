@@ -16,19 +16,19 @@ const LogosCarousel = ({ data }) => {
 
   const responsive = {
     desktop: {
-      breakpoint: { max: 3000, min: 1441 },
+      breakpoint: { max: 3000, min: 1200 },
       items: 6,
     },
     tablet: {
-      breakpoint: { max: 1440, min: 992 },
+      breakpoint: { max: 1199, min: 770 },
       items: 4,
     },
     mobileTablet: {
-      breakpoint: { max: 991, min: 577 },
+      breakpoint: { max: 769, min: 481 },
       items: 3,
     },
     mobile: {
-      breakpoint: { max: 576, min: 0 },
+      breakpoint: { max: 480, min: 0 },
       items: 2,
     },
   }
