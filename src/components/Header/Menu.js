@@ -22,12 +22,12 @@ const Menu = ({ links, button }) => {
           dropdownLink.separated ? (
             <>
               <NavDropdown.Divider />
-              <NavDropdown.Item href={dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.url : dropdownLink.link.url}>
+              <NavDropdown.Item key={dropdownLink._key} href={dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.url : dropdownLink.link.url}>
                 {dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.title : dropdownLink.link.title}
               </NavDropdown.Item>
             </>
           ) : (
-            <NavDropdown.Item href={dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.url : dropdownLink.link.url}>
+            <NavDropdown.Item key={dropdownLink._key} href={dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.url : dropdownLink.link.url}>
               {dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.title : dropdownLink.link.title}
             </NavDropdown.Item>
           )

@@ -36,7 +36,7 @@ const LogosCarousel = ({ data }) => {
 
   return (
     <div className="container logos py-5">
-      <h2 className="body-large logos__title">{data.title}</h2>
+      <p className="logos__title">{data.title}</p>
       <Carousel
         responsive={responsive}
         autoPlay={true}

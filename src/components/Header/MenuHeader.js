@@ -25,7 +25,13 @@ const MenuHeader = ({ headerMenu }) => {
     ));
 
     const itemsMenuDropdown =
-        <DropdownButton title={headerMenu.dropdownTitle} id="basic-nav-dropdown" className="drop-options" >
+        <DropdownButton 
+        title={headerMenu.dropdownTitle} 
+        id="basic-nav-dropdown" 
+        className="drop-options" 
+        drop="start"
+
+        >
             {headerMenu.links.map((dropdownLink) => (
                 <Dropdown.Item href={dropdownLink.link.url} key={`drop${dropdownLink._key}`}>
                     {dropdownLink.link.title}

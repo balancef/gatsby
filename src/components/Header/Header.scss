@@ -6,8 +6,7 @@
   background-color: $bg-elevation-1;
 
   &__logo {
-    width: 140px;
-    height: 40px;
+    width: 11.5rem;
     overflow: hidden;
 
     .gatsby-image-wrapper {
@@ -45,7 +44,7 @@
     justify-content: center;
 
     &:hover {
-      background-color: rgba($color: $color-black-text, $alpha: 0.2);
+      background-color: rgba($color: $color-text, $alpha: 0.2);
     }
 
     .sun,
@@ -93,56 +92,100 @@
     }
   }
 
-  .navbar{
+  .navbar {
     padding: 0rem !important;
   }
-  
+
 
   .navbar-collapse {
     order: 2;
+    .dropstart {
+      .btn {
+        color: $bg-secondary !important;
+        background-color: transparent !important;
+        border: none;
+        margin-left: 0px;
+        padding: 0;
+      }
+    }
   }
 
   .navbar-nav {
-
     .nav-link {
-      color: $bg-secondary;
-      font-family: $primary-font;
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-
-      .icon {
-        padding-right: .3rem;
-      }
+      color: $color-text;
+      padding-right: 0.5rem !important;
+      padding-left: 0.5rem !important;
 
       &:hover {
-        opacity: 0.8;
-      }
-
-      &.active {
-        color: $color-primary;
+        color: $color-brand;
       }
     }
 
-    .show {      
+    .nav-item {
+      color: $color-text !important;
+
       .nav-link {
-        color: $bg-secondary;
-        opacity: 0.6;
+        font-family: $primary-font;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        padding: 0 1rem;
+        transition: all ease-in 0.3s;
+
+        .icon {
+          padding-right: .3rem;
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        &.active {
+          color: $color-primary;
+        }
+      }
+    }
+
+    .nav-item.dropdown {
+      .nav-link {
+        padding: 0.25rem 0rem !important;
+
+        &:hover {
+          color: $color-brand;
+        }
+      }
+    }
+
+    .show {
+      .nav-link {
+        color: $color-brand;
       }
     }
 
     .dropdown-menu {
       border-top: 0.1875rem solid $color-brand !important;
+
+      .dropdown-item {
+        color: $color-text;
+
+        &:hover {
+          color: $color-brand;
+          background-color: $color-white;
+        }
+      }
     }
 
   }
 
   .header__language {
-    .btn-primary {
+    color: $color-text;
+
+    .btn {
       color: $bg-secondary;
       background-color: transparent;
       border: none;
       margin-left: 0px;
+      padding: 0;
     }
 
     .btn:active {
@@ -154,46 +197,77 @@
       background-color: $color-white;
       box-shadow: 0 5px 9px rgba(55, 125, 255, 0.075), 0 5px 9px rgba(119, 131, 143, 0.075);
       border-color: transparent;
-      
+
       .dropdown-item {
         &:hover {
           color: $color-brand;
         }
 
-        color: $bg-secondary;
+        color: $color-text;
       }
     }
-
   }
 
-  .dropdown {
+  .header__menu {
     .btn {
-      color: $bg-secondary;
-      background-color: transparent;
-      border: none;
+      background-color: $color-brand;
+      border-color: $color-brand;
+      margin-left: 1rem;
 
       &:hover {
-        color: $bg-secondary;
-        background-color: transparent;
+        background-color: $color-brand;
+        border-color: $color-brand;
+        box-shadow: 0 4px 11px rgba(255, 158, 71, 0.41);
       }
     }
 
+    .dropdown {
+      padding: 0 0.5rem;
+      color: $color-text;
+
+      .btn {
+        color: $bg-secondary;
+        background-color: transparent;
+        border: none;
+
+        &:hover {
+          color: $bg-secondary;
+          background-color: transparent;
+        }
+      }
+
+      .dropdown-item {
+        padding-left: 1.5rem;
+        padding-right: 6rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        color: $color-text;
+        font-size: 0.875rem;
+      }
+
+    }
   }
 
+
+
   .navbar-text {
-    color: $bg-secondary;
-    
+
+
+    .header_link {
+      color: $color-text;
+      &:hover {
+        color: $color-brand;
+      }
+    }
+
     padding: 10px;
+
     a {
       text-decoration: none;
     }
   }
 
-  .btn {
-    background-color: $color-brand;
-    border-color: $color-brand;
-    margin-left: 1rem;
-  }
+
 
 
 
@@ -204,7 +278,7 @@
 
     .navbar-collapse {
       order: 0;
-    }    
+    }
   }
 
   @media (min-width: $sm-breakpint) {

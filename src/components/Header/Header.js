@@ -49,7 +49,7 @@ const Header = () => {
 
   return data !== null ? (
     <header className="header">
-      <Navbar >
+      <Navbar>
         <Container>
           <Navbar.Brand>
             <DropdownButton
@@ -71,7 +71,7 @@ const Header = () => {
         </Container>
       </Navbar>
 
-      <Navbar expand="lg">
+      <Navbar expand="lg"  className="header__menu">
         <Container>
           <Navbar.Brand href="/">
             {data.logo.image !== null ? (
@@ -84,7 +84,6 @@ const Header = () => {
               <></>
             )}
           </Navbar.Brand>
-          {console.log(data)}
           {data.menu !== null ? <Menu links={data.menu.links} button={data.buttonMenu} /> : <></>}
           {data.customLinkBlock !== null ? (
             <LinkBlock links={data.customLinkBlock?.links} />
