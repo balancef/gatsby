@@ -15,23 +15,25 @@
   }
   &__text {
     h3 {
-      span {
+      margin-bottom: 15px;
+      code {
         color: $color-primary;
         font-weight: 600;
+        font-size: 40px;
+        font-family: $primary-font;
       }
     }
     &_callToAction {
       display: flex;
-        label {
-            margin-right: 10px;
-            font-weight: 500;
-            align-self: center;
-        }
+      label {
+        margin-right: 10px;
+        font-weight: 500;
+        align-self: center;
+      }
     }
     &_button {
-      margin: 15px 0;
+      margin: 20px 0 15px 0;
     }
-
   }
   &__content {
     display: flex;
@@ -46,9 +48,9 @@
       width: 100%;
       object-fit: cover;
     }
-    
   }
 }
+
 
 @media (min-width: $md-breakpoint) {
   .textImageButton {
@@ -70,7 +72,10 @@
       gap: 10%;
     }
     &__text {
-      width: 40%;  
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     &__image {
       width: 50%;
@@ -78,6 +83,7 @@
       img {
         height: 100%;
         object-fit: cover;
+        border-radius: 39% 61% 64% 36% / 36% 32% 68% 64%;
       }
     }
   }
@@ -86,7 +92,6 @@
 @media (min-width: $xl-breakpoint) {
   .textImageButton {
     &__image {
-      min-width: 550px;
       height: 400px;
       object-fit: cover;
     }

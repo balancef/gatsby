@@ -15,7 +15,7 @@ $xxl-breakpoint: 1400px;
 $primary-font: "Poppins", Helvetica, Arial, sans-serif;;
 $secondary-font: "Roboto", sans-serif;
 
-body {
+body > * {
   font-family: $primary-font;
 }
 
@@ -63,6 +63,12 @@ label {
 @media (min-width: $lg-breakpoint) {
   h1 {
     font-size: 72px;
+  }
+}
+
+@media (min-width: $xl-breakpoint) {
+  .container {
+    max-width: 960px !important;
   }
 }
 

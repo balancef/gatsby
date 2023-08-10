@@ -11,7 +11,6 @@ const TextImageButton = ({ title, text, image, button, callToActionLink }) => {
         <div className="textImageButton container">
           <div className="textImageButton__content">
             <div className="textImageButton__text">
-              {title && <h3 className="textImageButton__title">{title}</h3>}
               <PortableText value={text} />
               <div className="textImageButton__text_button">
                 <CustomLink
@@ -32,7 +31,6 @@ const TextImageButton = ({ title, text, image, button, callToActionLink }) => {
             </div>
             {image && (
               <div className="textImageButton__image">
-                {" "}
                 <SanityImage
                   {...image}
                   alt={`${title}`}
