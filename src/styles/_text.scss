@@ -1,10 +1,23 @@
 /* Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600;1,700&family=Poppins:wght@400;500;600;700&display=swap');
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap");
 
-$primary-font: "Ubuntu", sans-serif;
+
+// breakpoints
+$sm-breakpint: 576px;
+$md-breakpoint: 768px;
+$lg-breakpoint: 992px;
+$xl-breakpoint: 1200px;
+$xxl-breakpoint: 1400px;
+
+
+$primary-font: "Poppins", Helvetica, Arial, sans-serif;;
 $secondary-font: "Roboto", sans-serif;
+
+body > * {
+  font-family: $primary-font;
+}
 
 h1,
 h2,
@@ -12,84 +25,50 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $primary-font;
+  color: $color-black;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: 48px;
+}
+h2 {
+  font-size: 56px;
+}
+h3 {
+  font-size: 40px;
+}
+h4 {
+  font-size: 32px;
+}
+h5 {
+  font-size: 24px;
+}
+h6 {
+  font-size: 20px;
 }
 
 p {
-  font-family: $secondary-font;
-}
-
-.body-large {
+  color: $color-text;
   font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.5px;
 }
-.body-medium {
+small {
   font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.25px;
 }
-.body-small {
+label {
   font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.4px;
 }
 
-.label-large {
-  font-size: 13px;
-  line-height: 20px;
-  letter-spacing: 0.1px;
-}
-.label-medium {
-  font-size: 11px;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-}
-.label-small {
-  font-size: 10px;
-  line-height: 16px;
-  letter-spacing: 0.5px;
+@media (min-width: $lg-breakpoint) {
+  h1 {
+    font-size: 72px;
+  }
 }
 
-.title-large {
-  font-size: 22px;
-  line-height: 28px;
-}
-.title-medium {
-  font-size: 16px;
-  line-height: 24px;
-}
-.title-small {
-  font-size: 14px;
-  line-height: 20px;
+@media (min-width: $xl-breakpoint) {
+  .container {
+    max-width: 960px !important;
+  }
 }
 
-.headline-large {
-  font-size: 32px;
-  line-height: 40px;
-  font-weight: 300;
-}
-.headline-medium {
-  font-size: 28px;
-  line-height: 36px;
-  font-weight: 300;
-}
-.headline-small {
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 300;
-}
-
-.display-large {
-  font-size: 57px;
-  line-height: 64px;
-  letter-spacing: -0.25px;
-}
-.display-medium {
-  font-size: 45px;
-  line-height: 52px;
-}
-.display-small {
-  font-size: 36px;
-  line-height: 44px;
-}
