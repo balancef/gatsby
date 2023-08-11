@@ -9,7 +9,6 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 24px;
-    color: #8c98a4;
     --text-divider-gap: 1rem;
     text-align: center;
   }
@@ -44,17 +43,6 @@
     justify-content: center;
   }
 
-  .react-multiple-carousel__arrow {
-    min-height: 30px !important;
-    min-width: 30px !important;
-
-    &--right {
-      right: 0 !important;
-    }
-    &--left {
-      left: 0 !important;
-    }
-  }
 
   .react-multi-carousel-list {
     .react-multi-carousel-item {
