@@ -38,6 +38,16 @@ const useHome = () => {
             }
           }
           dinamicContent {
+            ... on SanityTextSubtitleBlocks {
+              _key
+              _type
+              title
+              textBlocks {
+                authorDetail
+                author
+                _rawText
+              }
+            }
             ... on SanityTextImageButton {
               _key
               _type
@@ -163,7 +173,6 @@ const useHome = () => {
             ... on SanityTextBlockList {
               _key
               _type
-              }
               textBlocks {
                 title
                 _rawContent
@@ -348,6 +357,16 @@ const useHome = () => {
             }
           }
           dinamicContent {
+            ... on SanityTextSubtitleBlocks {
+              _key
+              _type
+              title: titleSpanish
+              textBlocks {
+                authorDetail: authorDetailSpanish
+                author
+                _rawText: _rawTextSpanish
+              }
+            }
             ... on SanityTextImageButton {
               _key
               _type
@@ -657,6 +676,16 @@ const useHome = () => {
             }
           }
           dinamicContent {
+            ... on SanityTextSubtitleBlocks {
+              _key
+              _type
+              title:  titleGerman
+              textBlocks {
+                authorDetail: authorDetailGerman
+                author
+                _rawText: _rawTextGerman
+              }
+            }
             ... on SanityTextImageButton {
               _key
               _type

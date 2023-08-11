@@ -9,7 +9,8 @@ import {
   LogosCarousel,
   ImageCarousel,
   TextImageCarousel,
-  TextImageButton
+  TextImageButton,
+  TextSubtitleBlocks
 } from "../";
 
 const CustomSection = ({ sections }) => {
@@ -105,6 +106,16 @@ const CustomSection = ({ sections }) => {
             image={section.textImage.image.image}
             button={section.link}
             callToActionLink={section.callToActionLink}
+          />
+        );
+      }  
+
+      if (section?._type === "textSubtitleBlocks") {
+        return (
+          <TextSubtitleBlocks
+            key={section._key}
+            title={section.title}
+            blocks={section.textBlocks}
           />
         );
       }  

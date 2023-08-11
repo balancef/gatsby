@@ -22,7 +22,6 @@ const Home = ({ languaje }) => {
       <Seo title="Home" description="" keywords="" />
       {data !== null ? (
         <div>
-          {data.banner !== null ? <Banner banner={data.banner} /> : <></>}
           {data.dinamicContent !== null ? (
             <CustomSection sections={data.dinamicContent} />
           ) : (

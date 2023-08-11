@@ -46,7 +46,7 @@
     img {
       height: 100%;
       width: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
   }
 }
@@ -82,18 +82,17 @@
       height: 500px;
       img {
         height: 100%;
-        object-fit: cover;
-        border-radius: 39% 61% 64% 36% / 36% 32% 68% 64%;
+        // object-fit: contain;
+        // border-radius: 39% 61% 64% 36% / 36% 32% 68% 64%;
       }
     }
   }
 }
 
-@media (min-width: $xl-breakpoint) {
-  .textImageButton {
-    &__image {
-      height: 400px;
-      object-fit: cover;
-    }
-  }
-}
+// @media (min-width: $xl-breakpoint) {
+//   .textImageButton {
+//     &__image {
+//       height: 400px;
+//     }
+//   }
+// }
