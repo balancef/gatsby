@@ -1,0 +1,34 @@
+@import "../../styles/global";
+
+.textSubtitleItemList {
+  display: flex;
+  flex-direction: column;
+  .textSubtitleItem {
+    width: 100%;
+    margin-bottom: 25px;
+    &__title {
+      border-bottom: 1px $border-color solid;
+      padding-bottom: 15px;
+    }
+  }
+}
+@media (min-width: $md-breakpoint) {
+  .textSubtitleItemList__heading {
+    text-align: center;
+  }
+  .textSubtitleItemList {
+    flex-direction: row;
+    .textSubtitleItem {
+      width: 25%;
+      padding: 0 10px;
+      text-align: center;
+      &__title {
+        width: 95%;
+        margin: 0 auto;
+        @media (min-width: $lg-breakpoint) {
+          width: 85%;
+        }
+      }
+    }
+  }
+}
