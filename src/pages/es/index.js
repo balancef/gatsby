@@ -7,7 +7,7 @@ import "../../styles/global.scss";
 const IndexPage = () => {
   return (
     <Layout>
-      <Home languaje={'es'}/>
+      <Home/>
     </Layout>
   )
 }

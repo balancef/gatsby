@@ -11,39 +11,70 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 import { LanguageContext } from "../../context/languajeContext";
 import { navigate } from "gatsby";
+import MenuHeader from "./MenuHeader";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const Header = () => {
-  const data = useHeader().sanityHeader;
-  const { language, setLanguage } = useContext(LanguageContext);
+  const query = useHeader();
+  const { language } = useContext(LanguageContext);
+  const dimensions = useWindowSize()
 
+  let data = null;
+  if (language === "es") {
+    data = query.sanityHeaderES;
+  } else {
+    if (language === "de") {
+      data = query.sanityHeaderDE;
+    } else {
+      data = query.sanityHeader;
+    }
+  }
 
   const handleSelect = (e) => {
     const url = window.location.pathname.replace(/^\/(es|de)/, "");
-
     if (e === "es") {
-        navigate(`/es${url}`);
-      } else if (e === "de") {
-        navigate(`/de${url}`);
-      } else {
-        navigate(`${url}`);
-      }
-
-      setLanguage(e);
+      navigate(`/es${url}`);
+    } else if (e === "de") {
+      navigate(`/de${url}`);
+    } else {
+      navigate(`${url}`);
+    }
   }
 
   const title = {
-    en: "🇺🇸 English",
-    es: "🇪🇸 Spanish",
-    de: "🇩🇪 Deutsch",
+    en: `🇺🇸 ${dimensions.windowWidth > 575 ? 'English' : 'US'}`,
+    es: `🇪🇸 ${dimensions.windowWidth > 575 ? 'Español' : 'ES'}`,
+    de: `🇩🇪 ${dimensions.windowWidth > 575 ? 'Deutsch' : 'DE'}`,
   }
 
   return data !== null ? (
-
     <header className="header">
-      <Navbar expand="lg">
+      <Navbar>
+        <Container>
+          <Navbar.Brand>
+            <DropdownButton
+              title={language ? title[language] : "..."}
+              id="dropdown-menu-align-right"
+              onSelect={handleSelect}
+              className="header__language"
+            >
+              <Dropdown.Item eventKey="de">🇩🇪 Deutsch</Dropdown.Item>
+              <Dropdown.Item eventKey="">🇺🇸 English</Dropdown.Item>
+              <Dropdown.Item eventKey="es">🇪🇸 Spanish</Dropdown.Item>
+            </DropdownButton>
+
+          </Navbar.Brand>
+          <Navbar.Toggle />
+          <Navbar.Collapse className="justify-content-end">
+            {data.menu !== null ? <MenuHeader headerMenu={data.headerMenu} /> : <></>}
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+      <Navbar expand="lg"  className="header__menu">
         <Container>
           <Navbar.Brand href="/">
-            { data.logo.image !== null ? (
+            {data.logo.image !== null ? (
               <SanityImage
                 {...data.logo.image}
                 alt={`${data.logo.alt}`}
@@ -53,7 +84,7 @@ const Header = () => {
               <></>
             )}
           </Navbar.Brand>
-          {data.menu !== null ? <Menu links={data.menu.links} /> : <></>}
+          {data.menu !== null ? <Menu links={data.menu.links} button={data.buttonMenu} /> : <></>}
           {data.customLinkBlock !== null ? (
             <LinkBlock links={data.customLinkBlock?.links} />
           ) : (
@@ -70,7 +101,7 @@ const Header = () => {
         title={language ? title[language] : "..."}
         id="dropdown-menu-align-right"
         onSelect={handleSelect}
-        style={{padding: "12px", background: "black", borderColor: "black"}}
+        style={{ padding: "12px", background: "black", borderColor: "black" }}
       >
         <Dropdown.Item eventKey="de">🇩🇪 Deutsch</Dropdown.Item>
         <Dropdown.Item eventKey="">🇺🇸 English</Dropdown.Item>
