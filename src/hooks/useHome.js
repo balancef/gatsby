@@ -163,9 +163,6 @@ const useHome = () => {
             ... on SanityTextBlockList {
               _key
               _type
-              titleSubtitle {
-                title
-                _rawContent
               }
               textBlocks {
                 title
@@ -476,10 +473,6 @@ const useHome = () => {
             ... on SanityTextBlockList {
               _key
               _type
-              titleSubtitle {
-                title
-                _rawContent
-              }
               textBlocks {
                 title
                 _rawContent
@@ -789,10 +782,6 @@ const useHome = () => {
             ... on SanityTextBlockList {
               _key
               _type
-              titleSubtitle {
-                title
-                _rawContent
-              }
               textBlocks {
                 title
                 _rawContent

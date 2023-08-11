@@ -71,8 +71,6 @@ const CustomSection = ({ sections }) => {
         return (
           <TextBlockList
             key={section._key}
-            title={section?.titleSubtitle?.title}
-            subtitle={section?.titleSubtitle?._rawContent}
             blocks={section?.textBlocks}
           />
         );
