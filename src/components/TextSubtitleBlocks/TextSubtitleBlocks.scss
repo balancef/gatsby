@@ -5,10 +5,26 @@
   flex-direction: column;
   .textSubtitleItem {
     width: 100%;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &__icons {
+      svg {
+        color: $color-warning;
+        margin-right: 3px;
+      }
+      margin-bottom: 20px;
+    }
+    &__content {
+      margin-bottom: 32px;
+    }
     &__title {
-      border-bottom: 1px $border-color solid;
-      padding-bottom: 15px;
+      color: $color-black;
+      font-weight: 500;
     }
   }
 }
@@ -18,16 +34,24 @@
   }
   .textSubtitleItemList {
     flex-direction: row;
+    justify-content: space-between;
+    flex-grow: 1;
+    gap: 30px;
     .textSubtitleItem {
-      width: 25%;
-      padding: 0 10px;
-      text-align: center;
-      &__title {
-        width: 95%;
-        margin: 0 auto;
-        @media (min-width: $lg-breakpoint) {
-          width: 85%;
-        }
+      margin-bottom: 0;
+      &__content {
+        height: 180px;
+      }
+    }
+  }
+}
+
+@media (min-width: $lg-breakpoint) {
+  .textSubtitleItemList {
+    gap: 50px;
+    .textSubtitleItem {
+      &__content {
+        height: 130px;
       }
     }
   }
