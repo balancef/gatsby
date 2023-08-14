@@ -1,7 +1,7 @@
 import React from "react";
 import { PortableText } from "@portabletext/react";
 import "./TextBlockList.scss";
-import separador from "./images/image-separador.svg";
+
 
 const TextBlockList = ({ blocks }) => {
   const textBlocks = blocks?.map((block, id) => (
@@ -10,7 +10,7 @@ const TextBlockList = ({ blocks }) => {
           <div className="textItem__content">
             <PortableText value={block?._rawContent} />
           </div>
-          {id < blocks.length - 1 && <img src="separador" alt="separador"/>}
+          {id < blocks.length - 1 && <img src="" />}
       </div>
   ));
   return (
