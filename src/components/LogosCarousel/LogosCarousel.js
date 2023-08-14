@@ -6,9 +6,10 @@ import SanityImage from "gatsby-plugin-sanity-image"
 import "./LogosCarousel.scss"
 
 const LogosCarousel = ({ data }) => {
+
   const logoList = data.carousel.map(logo => {
     return (
-      <div className="logos__image">
+      <div className="logos__image" key={logo.image.asset._id}>
         <SanityImage {...logo.image} alt="logo" />
       </div>
     )

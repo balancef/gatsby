@@ -1,16 +1,18 @@
-import React from "react";
+import React, {useContext} from "react";
 import useHome from "../../hooks/useHome";
 import Banner from "../Banner/Banner";
-import { TextExample, Seo, CustomSection } from "../";
+import { Seo, CustomSection} from "../";
+import { LanguageContext } from "../../context/languajeContext";
 
-const Home = ({ languaje }) => {
-  let query = useHome();
-  let data = null;
+const Home = () => {
+  let query = useHome()
+  const { language } = useContext(LanguageContext);
+  let data = null
 
-  if (languaje === "es") {
+  if (language === "es" ) {
     data = query.sanityHomeES;
   } else {
-    if (languaje === "de") {
+    if (language === "de" ) {
       data = query.sanityHomeDE;
     } else {
       data = query.sanityHome;
@@ -30,11 +32,11 @@ const Home = ({ languaje }) => {
         </div>
       ) : (
         <div className="d-flex justify-content-center">
-          {languaje === "en" ? (
+          {language === "en" ? (
             <h2>Home in Sanity has no content</h2>
-          ) : languaje === "es" ? (
+          ) : language === "es" ? (
             <h2>Home en Sanity no tiene contenido</h2>
-          ) : languaje === "de" ? (
+          ) : language === "de" ? (
             <h2>Home in Sanity hat keinen Inhalt</h2>
           ) : (
             <></>
