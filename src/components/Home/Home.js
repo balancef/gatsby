@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import useHome from "../../hooks/useHome";
-import Banner from "../Banner/Banner";
+import Banner from "../Carrousel/Carrousel";
 import { Seo, CustomSection} from "../";
 import { LanguageContext } from "../../context/languajeContext";
 
