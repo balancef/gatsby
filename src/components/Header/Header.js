@@ -32,6 +32,7 @@ const Header = () => {
 
   const handleSelect = (e) => {
     const url = window.location.pathname.replace(/^\/(es|de)/, "");
+
     if (e === "es") {
       navigate(`/es${url}`);
     } else if (e === "de") {

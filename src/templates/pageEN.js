@@ -3,17 +3,13 @@ import { graphql } from "gatsby";
 import { Layout, CustomSection, Banner} from "../components";
 
 const Page = ({location,  data }) => {
-  const {
-    dinamicContent
-  } = data?.allSanityPages?.nodes[0]
-
-  const bannerInfo = data?.allSanityPages?.nodes[0]
+  const { dinamicContent, banner} = data?.allSanityPages?.nodes[0]
   
 
   return (
     <Layout location={location}>
-      <div className="container">
-      {(bannerInfo.banner !== null && bannerInfo.banner?.slides?.length !== 0) ? <Banner banner={bannerInfo.banner}/> : <></>}
+      {(banner !== null) ? <Banner banner={banner}/> : <></>}
+      <div className="container">      
         {dinamicContent !== null  && dinamicContent.length !==0  &&(
           <CustomSection sections={dinamicContent} />
         )}
@@ -34,12 +30,8 @@ export const query = graphql`
         }
         id
         banner {
-          autoplay
-          slides {
             title
-            text
-            url
-            overlay
+            subtitle
             image {
               alt
               image {
@@ -60,8 +52,7 @@ export const query = graphql`
                   height
                 }
               }
-            }
-          }
+            }          
         }
         dinamicContent {
           ... on SanityIconsTextBlocks {
@@ -210,40 +201,7 @@ export const query = graphql`
           }
         }
       
-        descriptionPage
-        banner {
-          slides {
-            url
-            title
-            text
-            overlay
-            _key
-            image {
-              alt
-              image {
-                _key
-                asset {
-                  _id
-                }
-                crop {
-                  top
-                  right
-                  left
-                  bottom
-                }
-                hotspot {
-                  y
-                  x
-                  width
-                  height
-                }
-              }
-  
-
-            }
-          }
-          autoplay
-        }
+        
       }
     }
   }
