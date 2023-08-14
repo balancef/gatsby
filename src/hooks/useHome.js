@@ -493,8 +493,8 @@ const useHome = () => {
               _key
               _type
               textBlocks {
-                title
-                _rawContent
+                title: titleSpanish
+                _rawContent: _rawContentSpanish
               }
             }
             ... on SanityLogosCarousel {
@@ -812,8 +812,8 @@ const useHome = () => {
               _key
               _type
               textBlocks {
-                title
-                _rawContent
+                title: titleGerman
+                _rawContent: _rawContentGerman
               }
             }
             ... on SanityLogosCarousel {

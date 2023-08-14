@@ -3,31 +3,77 @@
 .textItemList {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+
   .textItem {
+    position: relative;
     width: 100%;
-    margin-bottom: 25px;
+    margin-bottom: 40px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &__content {
+      text-align: center;
+      padding: 0 30px;
+      line-height: 1.7;
+    }
+
     &__title {
-      border-bottom: 1px $border-color solid;
-      padding-bottom: 15px;
+      color: $color-primary;
+      text-align: center;
+      font-weight: 300;
+      line-height: 1.2;
+    }
+
+    &__separador {
+      display: none;
     }
   }
 }
+
 @media (min-width: $md-breakpoint) {
-  .textItemList__heading {
-    text-align: center;
-  }
   .textItemList {
     flex-direction: row;
+    flex-grow: 1;
+    gap: 30px;
+
+
     .textItem {
-      width: 25%;
       padding: 0 10px;
       text-align: center;
+      margin-bottom: 0;
+
+      &__content {
+        padding: 0 10px;
+      }
+
+      &__separador {
+        display: flex;
+        width: 40px;
+        height: 15px;
+        position: absolute;
+        top: 25%;
+        right: -35px;
+        transform: translateY(-50%);
+      }
+
       &__title {
-        width: 95%;
         margin: 0 auto;
-        @media (min-width: $lg-breakpoint) {
-          width: 85%;
-        }
+      }
+    }
+  }
+}
+
+@media (min-width: $lg-breakpoint) {
+  .textItemList {
+    gap: 50px;
+    .textItem {
+      &__content {
+        padding: 0 30px;
+      }
+      &__separador{
+        right: -45px;
       }
     }
   }
