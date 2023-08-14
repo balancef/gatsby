@@ -3,42 +3,53 @@
 .textItemList {
   display: flex;
   flex-direction: column;
+
   .textItem {
     width: 100%;
-    margin-bottom: 25px;
-    &__title {
-      // border-bottom: 1px $border-color solid;
-      padding-bottom: 15px;
+    margin-bottom: 3rem !important;
+
+    &__content {
+      text-align: center;
+      padding: 0 30px;
+      line-height: 1.7;
     }
-    // &__icon{
-    //   display: none; /*no renderizar el icono en mobile*/
-    // }
+
+    &__title {
+      color: $color-primary;
+      text-align: center;
+      font-weight: 300;
+      line-height: 1.2;
+    }
   }
 }
 
 @media (min-width: $md-breakpoint) {
-  .textItemList__heading {
-    text-align: center;
-  }
   .textItemList {
     flex-direction: row;
+
+
     .textItem {
-      width: 25%;
       padding: 0 10px;
       text-align: center;
-      // &__icon {
-      //   display: flex;
-      //   position: absolute;
-      //   /* Alinea el ícono al lado del bloque de texto */
-      //   top: 50%;
-      //   right: -20px;
-      //   /* Ajusta la posición del ícono al lado derecho */
-      //   transform: translateY(-50%);
-      //   /* Centra verticalmente el ícono */
-      // }
+
+      &__content {
+        padding: 0 10px;
+      }
+
+      &__title-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      &__title::after {
+        content: "";
+        
+      }
+
       &__title {
-        width: 95%;
         margin: 0 auto;
+
 
         @media (min-width: $lg-breakpoint) {
           width: 85%;
