@@ -16,6 +16,7 @@ import {
 const CustomSection = ({ sections }) => {
   const sectionResult = sections.map((section) => {
 
+
     if (section?._type !== null && section?._type !== undefined) {
       if (section?._type === "textBlock") {
         return (
@@ -33,7 +34,9 @@ const CustomSection = ({ sections }) => {
             key={section._key}
             title={section.textBlock?.title}
             text={section.textBlock?._rawContent}
-            image={section.image.image}
+            image={section.image?.image}
+            videoUrl={section.videoUrl}
+            imageRight={section.imageRight}
           />
         );
       }
