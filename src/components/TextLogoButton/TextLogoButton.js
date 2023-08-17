@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { PortableText } from "@portabletext/react";
 import "./TextLogoButton.scss";
 import { CustomLink } from "..";
+import { LanguageContext } from "../../context/languajeContext";
 import SanityImage from "gatsby-plugin-sanity-image";
 
 
 const TextLogoButton = ({ title, text, button, image }) => {
+
+  const { language } = useContext(LanguageContext);
+
   return (
     <>
       <div className="py-5 container">
@@ -26,9 +30,9 @@ const TextLogoButton = ({ title, text, button, image }) => {
           ) : <></>}
           {button ? (<div className="textLogoButton__button">
             <CustomLink
-              href={button.url}
+              href={language === "en" ? button.url : `/${language}/${button.url.replace("/", "")}`}
               text={button.title}
-              style={"button"}
+              type={"button"}
             />
           </div>) : <></>}
         </div>
