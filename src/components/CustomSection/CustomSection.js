@@ -10,7 +10,8 @@ import {
   ImageCarousel,
   TextImageCarousel,
   TextImageButton,
-  TextSubtitleBlocks
+  TextSubtitleBlocks,
+  TextLogoButton,
 } from "../";
 
 const CustomSection = ({ sections }) => {
@@ -33,7 +34,7 @@ const CustomSection = ({ sections }) => {
             key={section._key}
             title={section.textBlock?.title}
             text={section.textBlock?._rawContent}
-            image={section.image.image}
+            image={section.image ?.image}
           />
         );
       }
@@ -118,7 +119,19 @@ const CustomSection = ({ sections }) => {
             blocks={section.textBlocks}
           />
         );
-      }  
+      } 
+      
+      if (section?._type === "textButton" || section?._type === "logoText") {
+        return (
+          <TextLogoButton
+            key={section._key}
+            title={section.textBlock?.title}
+            text={section.textBlock?._rawContent}
+            button={section.link}
+            image={section.image?.image}
+          />
+        );
+      }
     }
   });
 
