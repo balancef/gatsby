@@ -5,7 +5,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { MaterialIcon, Icon } from "..";
 import { Button } from "react-bootstrap";
 
-const Menu = ({ links, button }) => {
+const Menu = ({ links, button, language }) => {
   const itemsMenu = links.map((link) =>
     link._type === "dropdown" ? (
       <NavDropdown
@@ -22,12 +22,24 @@ const Menu = ({ links, button }) => {
           dropdownLink.separated ? (
             <>
               <NavDropdown.Divider />
-              <NavDropdown.Item key={dropdownLink._key} href={dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.url : dropdownLink.link.url}>
+              <NavDropdown.Item
+                key={dropdownLink._key}
+                href={dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.url
+                  : language === "en" ? dropdownLink.link.url : `/${language}/${dropdownLink.link.url.replace("/", "")}`
+                }
+                target={dropdownLink._type === "dropdownExternalLink" ? "_blank" : ""}
+              >
                 {dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.title : dropdownLink.link.title}
               </NavDropdown.Item>
             </>
           ) : (
-            <NavDropdown.Item key={dropdownLink._key} href={dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.url : dropdownLink.link.url}>
+            <NavDropdown.Item
+              key={dropdownLink._key}
+              href={dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.url
+                : language === "en" ? dropdownLink.link.url : `/${language}/${dropdownLink.link.url.replace("/", "")}`
+              }
+              target={dropdownLink._type === "dropdownExternalLink" ? "_blank" : ""}
+            >
               {dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.title : dropdownLink.link.title}
             </NavDropdown.Item>
           )
@@ -36,12 +48,19 @@ const Menu = ({ links, button }) => {
     ) :
       link._type === "menuLink" ?
         (
-          <Nav.Link href={link.link.url} key={link._key}>
+          <Nav.Link
+            href={language === "en" ? link.link.url : `/${language}/${link.link.url.replace("/", "")}`}
+            key={link._key}
+          >
             {link.icon !== null && <Icon code={link.icon.icon}></Icon>}
             {link.link.title}
           </Nav.Link>
         ) : (
-          <Nav.Link href={link.externalLink.url} key={link._key}>
+          <Nav.Link
+            href={link.externalLink.url}
+            key={link._key}
+            target="_blank"
+          >
             {link.icon !== null && <Icon code={link.icon.icon}></Icon>}
             {link.externalLink.title}
           </Nav.Link>
@@ -49,8 +68,8 @@ const Menu = ({ links, button }) => {
   );
 
   const buttonMenu = button !== null ? (
-     <Button href={button.url}> {button.title}</Button>
-  ): <></>
+    <Button href={button.url}> {button.title}</Button>
+  ) : <></>
 
 
   return (

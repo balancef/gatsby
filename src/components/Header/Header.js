@@ -74,7 +74,7 @@ const Header = () => {
 
       <Navbar expand="lg"  className="header__menu">
         <Container>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href={language === "en" ? "/" : `/${language}`}>
             {data.logo.image !== null ? (
               <SanityImage
                 {...data.logo.image}
@@ -85,7 +85,7 @@ const Header = () => {
               <></>
             )}
           </Navbar.Brand>
-          {data.menu !== null ? <Menu links={data.menu.links} button={data.buttonMenu} /> : <></>}
+          {data.menu !== null ? <Menu links={data.menu.links} button={data.buttonMenu} language={language} /> : <></>}
           {data.customLinkBlock !== null ? (
             <LinkBlock links={data.customLinkBlock?.links} />
           ) : (
