@@ -339,8 +339,8 @@ const useHome = () => {
           }
         }
         sanityHomeES: sanityHome {
-          titlePage
-          descriptionPage
+          titlePage: titlePageSpanish
+          descriptionPage: descriptionPageSpanish
           banner {
             autoplay
             slides {
@@ -673,8 +673,8 @@ const useHome = () => {
           }
         }
         sanityHomeDE: sanityHome {
-          titlePage
-          descriptionPage
+          titlePage: titlePageGerman
+          descriptionPage: descriptionPageGerman
           banner {
             autoplay
             slides {
