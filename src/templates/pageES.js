@@ -29,8 +29,8 @@ export const query = graphql`
         }
         id
         banner {
-            title
-            subtitle
+            title:titleSpanish
+            subtitle:subtitleSpanish
             image {
               alt
               image {
