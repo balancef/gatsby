@@ -61,7 +61,7 @@ const Header = () => {
             >
               <Dropdown.Item eventKey="de">🇩🇪 Deutsch</Dropdown.Item>
               <Dropdown.Item eventKey="">🇺🇸 English</Dropdown.Item>
-              <Dropdown.Item eventKey="es">🇪🇸 Spanish</Dropdown.Item>
+              <Dropdown.Item eventKey="es">🇪🇸 Español</Dropdown.Item>
             </DropdownButton>
 
           </Navbar.Brand>
@@ -106,7 +106,7 @@ const Header = () => {
       >
         <Dropdown.Item eventKey="de">🇩🇪 Deutsch</Dropdown.Item>
         <Dropdown.Item eventKey="">🇺🇸 English</Dropdown.Item>
-        <Dropdown.Item eventKey="es">🇪🇸 Spanish</Dropdown.Item>
+        <Dropdown.Item eventKey="es">🇪🇸 Español</Dropdown.Item>
       </DropdownButton>
     </header>
   );
