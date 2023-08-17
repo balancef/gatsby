@@ -24,6 +24,8 @@ import TextImageCarousel from "./TextImageCarousel/TextImageCarousel";
 import TextImageButton from "./TextImageButton/TextImageButton";
 import TextSubtitleBlocks from "./TextSubtitleBlocks/TextSubtitleBlocks";
 import Banner from "./Banner/Banner";
+import TextLogoButton from "./TextLogoButton/TextLogoButton";
+
 
 export {
   Header,
@@ -51,5 +53,6 @@ export {
   TextImageCarousel,
   TextImageButton,
   TextSubtitleBlocks,
-  Banner
+  Banner,
+  TextLogoButton,
 };

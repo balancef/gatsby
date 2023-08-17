@@ -54,6 +54,35 @@ export const query = graphql`
             }          
         }
         dinamicContent {
+          ... on SanityLogoText {
+            _key
+            _type
+            image {
+              _key
+              alt
+              image {
+                asset {
+                  _id
+                }
+                crop {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                hotspot {
+                  height
+                  width
+                  x
+                  y
+                }
+              }
+            }
+            textBlock {
+              title: titleSpanish
+              _rawContent: _rawContentSpanish
+            }
+          }
           ... on SanityIconsTextBlocks {
             _key
             _type
