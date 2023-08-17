@@ -4,9 +4,6 @@
 .footer {
   background-color: #35373a;
   color: $color-white;
-  p {
-    font-family: $secondary-font;
-  }
   a {
     color: $color-white;
     opacity: 0.9;
@@ -15,7 +12,6 @@
       color: $color-primary;
     }
   }
-  font-family: $secondary-font;
   &__down {
     background-color: #202124;
   }

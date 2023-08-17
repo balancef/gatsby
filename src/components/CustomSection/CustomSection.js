@@ -8,17 +8,18 @@ import {
   TextBlockList,
   LogosCarousel,
   ImageCarousel,
-  TextImageCarousel
+  TextImageCarousel,
+  TextImageButton,
+  TextSubtitleBlocks,
+  TextLogoButton,
 } from "../";
 
 const CustomSection = ({ sections }) => {
   const sectionResult = sections.map((section) => {
-    {
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "textBlock"
-      ) {
+
+
+    if (section?._type !== null && section?._type !== undefined) {
+      if (section?._type === "textBlock") {
         return (
           <TextBlock
             key={section._key}
@@ -27,25 +28,21 @@ const CustomSection = ({ sections }) => {
           />
         );
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "textImage"
-      ) {
+
+      if (section?._type === "textImage") {
         return (
           <TextImage
             key={section._key}
             title={section.textBlock?.title}
             text={section.textBlock?._rawContent}
-            image={section.image.image}
+            image={section.image?.image}
+            videoUrl={section.videoUrl}
+            imageRight={section.imageRight}
           />
         );
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "iconsTextBlocks"
-      ) {
+
+      if (section?._type === "iconsTextBlocks") {
         return (
           <IconsTextBlocks
             key={section._key}
@@ -55,11 +52,8 @@ const CustomSection = ({ sections }) => {
           />
         );
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "accordion"
-      ) {
+
+      if (section?._type === "accordion") {
         return (
           <Accordion
             key={section._key}
@@ -68,11 +62,8 @@ const CustomSection = ({ sections }) => {
           />
         );
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "fullCardList"
-      ) {
+
+      if (section?._type === "fullCardList") {
         return (
           <FullCard
             key={section._key}
@@ -81,45 +72,66 @@ const CustomSection = ({ sections }) => {
           />
         );
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "textBlockList"
-      ) {
+
+      if (section?._type === "textBlockList") {
         return (
           <TextBlockList
             key={section._key}
-            title={section?.titleSubtitle?.title}
-            subtitle={section?.titleSubtitle?._rawContent}
             blocks={section?.textBlocks}
           />
         );
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "logosCarousel"
-      ) {
+
+      if (section?._type === "logosCarousel") {
         return <LogosCarousel key={section._key} data={section}/>;
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "imageCarousel"
-      ) {
+
+      if (section?._type === "imageCarousel") {
         return <ImageCarousel key={section._key} data={section} />;
       }
-      if (
-        section?._type !== null &&
-        section?._type !== undefined &&
-        section?._type === "textImageCarousel"
-      ) {
+
+      if (section?._type === "textImageCarousel") {
         return (
           <TextImageCarousel
             key={section._key}
             slides={section.slides}
             title={section.title}
             text={section.textBlock?._rawContent}
+          />
+        );
+      }   
+      
+      if (section?._type === "textImageButton") {
+        return (
+          <TextImageButton
+            key={section._key}
+            title={section.textImage.textBlock?.title}
+            text={section.textImage.textBlock?._rawContent}
+            image={section.textImage.image.image}
+            button={section.link}
+            callToActionLink={section.callToActionLink}
+          />
+        );
+      }  
+
+      if (section?._type === "textSubtitleBlocks") {
+        return (
+          <TextSubtitleBlocks
+            key={section._key}
+            title={section.title}
+            blocks={section.textBlocks}
+          />
+        );
+      } 
+      
+      if (section?._type === "textButton" || section?._type === "logoText") {
+        return (
+          <TextLogoButton
+            key={section._key}
+            title={section.textBlock?.title}
+            text={section.textBlock?._rawContent}
+            button={section.link}
+            image={section.image?.image}
           />
         );
       }

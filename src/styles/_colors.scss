@@ -14,19 +14,21 @@ $box-shadow: 0 3px 6px 0 rgb(0 0 0 / 16%);
 
 // Customizable colors
 
-$color-primary: #1A73E8;
-$color-secondary: #BA19A1;
+$color-primary: #fba83c;
+$color-secondary: #feebd5;
 $color-tertiary: #cccccc;
 
 $color-white: #ffffff;
 $color-black: #000000;
-$color-black-text: #5F6368;
+$color-text: #8e9091;
+$color-background-secondary: #f8f9fa;
 
 
 // state colors
 
-$color-warning: #F2994A;
+$color-warning: #ffc107;
 $color-success: #219653;
 $color-danger: #EB5757;
 $color-info: #2D9CDB;
 $color-disabled: mix($color-black, white, 10%);
+$color-brand: #fba83c;

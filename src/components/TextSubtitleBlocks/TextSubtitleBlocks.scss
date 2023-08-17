@@ -1,0 +1,55 @@
+@import "../../styles/global";
+
+.textSubtitleItemList {
+  display: flex;
+  flex-direction: column;
+  .textSubtitleItem {
+    width: 100%;
+    margin-bottom: 50px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &__icons {
+      svg {
+        color: $color-warning;
+        margin-right: 3px;
+      }
+      margin-bottom: 20px;
+    }
+    &__content {
+      margin-bottom: 32px;
+    }
+    &__title {
+      color: $color-black;
+      font-weight: 500;
+    }
+  }
+}
+@media (min-width: $md-breakpoint) {
+  .textSubtitleItemList__heading {
+    text-align: center;
+  }
+  .textSubtitleItemList {
+    flex-direction: row;
+    justify-content: space-between;
+    flex-grow: 1;
+    gap: 30px;
+    .textSubtitleItem {
+      margin-bottom: 0;
+      &__content {
+        height: 180px;
+      }
+    }
+  }
+}
+
+@media (min-width: $lg-breakpoint) {
+  .textSubtitleItemList {
+    gap: 50px;
+    .textSubtitleItem {
+      &__content {
+        height: 130px;
+      }
+    }
+  }
+}

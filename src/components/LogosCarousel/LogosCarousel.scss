@@ -4,6 +4,29 @@
   li {
     width: 130px;
   }
+  &__title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    --text-divider-gap: 1rem;
+    text-align: center;
+  }
+  &__title::before, &__title::after{
+    content: "";
+    height: 1px;
+    width: 40px;
+    transform: translateY(-50%);
+
+  }
+  &__title::before {
+    margin-right: var(--text-divider-gap);
+    background: linear-gradient(45deg, transparent 0%, #bdc5d1 100%);
+  }
+  &__title::after {
+    margin-left: var(--text-divider-gap);
+    background: linear-gradient(45deg,  #bdc5d1 0%, transparent 100%);
+  }
   &__logos {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -13,23 +36,13 @@
     justify-content: center;
   }
   &__image {
+    width: 100px;
     height: 60px;
     overflow: hidden;
     display: flex;
     justify-content: center;
   }
 
-  .react-multiple-carousel__arrow {
-    min-height: 30px !important;
-    min-width: 30px !important;
-
-    &--right {
-      right: 0 !important;
-    }
-    &--left {
-      left: 0 !important;
-    }
-  }
 
   .react-multi-carousel-list {
     .react-multi-carousel-item {
@@ -39,9 +52,21 @@
     }
   }
 }
+@media (min-width: $md-breakpoint){
+  .logos{
+    &__title::before, &__title::after{
+      width: 160px;
+    }
+  }
+}
 
 @media (min-width: $lg-breakpoint) {
   .logos {
     padding-bottom: 3rem;
+
+    &__title::before, &__title::after{
+      width: 160px;
+    }
   }
+
 }

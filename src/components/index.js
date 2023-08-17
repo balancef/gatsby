@@ -7,7 +7,7 @@ import MaterialIcon from "./Icons/MetertialIcon";
 import CustomLink from "./CustomLink/CustomLink";
 import TextExample from "./TextExample/TextExample";
 import Home from "./Home/Home";
-import Banner from "./Banner/Banner";
+import Carrousel from "./Carrousel/Carrousel";
 import TextBlock from "./TextBlock/TextBlock";
 import TextImage from "./TextImage/TextImage";
 import CustomSection from "./CustomSection/CustomSection";
@@ -21,6 +21,11 @@ import LogosCarousel from './LogosCarousel/LogosCarousel'
 import { Seo } from "./seo";
 import ImageCarousel from "./ImageCarousel/ImageCarousel";
 import TextImageCarousel from "./TextImageCarousel/TextImageCarousel";
+import TextImageButton from "./TextImageButton/TextImageButton";
+import TextSubtitleBlocks from "./TextSubtitleBlocks/TextSubtitleBlocks";
+import Banner from "./Banner/Banner";
+import TextLogoButton from "./TextLogoButton/TextLogoButton";
+
 
 export {
   Header,
@@ -32,7 +37,7 @@ export {
   TextExample,
   Icon,
   Home,
-  Banner,
+  Carrousel,
   TextBlock,
   TextImage,
   CustomSection,
@@ -45,5 +50,9 @@ export {
   TextBlockList,
   LogosCarousel,
   ImageCarousel,
-  TextImageCarousel
+  TextImageCarousel,
+  TextImageButton,
+  TextSubtitleBlocks,
+  Banner,
+  TextLogoButton,
 };

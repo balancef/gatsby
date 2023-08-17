@@ -9,7 +9,7 @@ const useFooter = () => {
           links {
             link {
               url
-              text
+              title
               _key
             }
             icon {
@@ -44,24 +44,6 @@ const useFooter = () => {
           }
         }
         logo {
-          imageDark {
-            hotspot {
-              y
-              x
-              width
-              height
-            }
-            crop {
-              top
-              right
-              left
-              bottom
-            }
-            asset {
-              _id
-            }
-          }
-          image {
             alt
             _key
             image {
@@ -83,13 +65,12 @@ const useFooter = () => {
               }
             }
           }
-        }
         linkBlock {
           _key
           title
           links {
             url
-            text
+            title
             _key
           }
         }

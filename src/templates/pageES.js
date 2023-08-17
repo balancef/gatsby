@@ -3,19 +3,14 @@ import { graphql } from "gatsby";
 import { Layout, CustomSection, Banner} from "../components";
 
 const Page = ({location,  data }) => {
-  const {
-    dinamicContent
-  } = data?.allSanityPages?.nodes[0]
-
-  const bannerInfo = data?.allSanityPages?.nodes[0]
-  
+  const { dinamicContent, banner} = data?.allSanityPages?.nodes[0]
 
   return (
     <Layout location={location}>
-      <div className="container">
-      {(bannerInfo.banner !== null && bannerInfo.banner?.slides?.length !== 0) ? <Banner banner={bannerInfo.banner}/> : <></>}
+      {(banner !== null) ? <Banner banner={banner}/> : <></>}
+      <div className="container">      
         {dinamicContent !== null  && dinamicContent.length !==0  &&(
-          <CustomSection sections={dinamicContent} />
+          <CustomSection sections={dinamicContent}/>
         )}
       </div>
     </Layout>
@@ -34,12 +29,8 @@ export const query = graphql`
         }
         id
         banner {
-          autoplay
-          slides {
             title
-            text
-            url
-            overlay
+            subtitle
             image {
               alt
               image {
@@ -60,10 +51,38 @@ export const query = graphql`
                   height
                 }
               }
-            }
-          }
+            }          
         }
         dinamicContent {
+          ... on SanityLogoText {
+            _key
+            _type
+            image {
+              _key
+              alt
+              image {
+                asset {
+                  _id
+                }
+                crop {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                hotspot {
+                  height
+                  width
+                  x
+                  y
+                }
+              }
+            }
+            textBlock {
+              title: titleSpanish
+              _rawContent: _rawContentSpanish
+            }
+          }
           ... on SanityIconsTextBlocks {
             _key
             _type
@@ -78,7 +97,6 @@ export const query = graphql`
                 _rawContent
               }
               iconImage {
-                image {
                   alt
                   image {
                     asset {
@@ -97,36 +115,14 @@ export const query = graphql`
                       bottom
                     }
                   }
-                }
-                imageDark {
-                  asset {
-                    _id
-                  }
-                  crop {
-                    top
-                    right
-                    left
-                    bottom
-                  }
-                  hotspot {
-                    height
-                    width
-                    x
-                    y
-                  }
-                }
               }
             }
           }
           ... on SanityLogosCarousel {
             _key
             _type
-            titleSubtitle {
-              title
-              _rawContent
-            }
+            title: titleSpanish
             carousel {
-              image {
                 alt
                 image {
                   asset {
@@ -145,24 +141,6 @@ export const query = graphql`
                     y
                   }
                 }
-              }
-              imageDark {
-                asset {
-                  _id
-                }
-                crop {
-                  bottom
-                  left
-                  right
-                  top
-                }
-                hotspot {
-                  y
-                  x
-                  width
-                  height
-                }
-              }
             }
           }
           ... on SanityAccordion {
@@ -177,9 +155,11 @@ export const query = graphql`
           ... on SanityTextImage {
             _key
             _type
+            videoUrl
+            imageRight
             textBlock {
-              title
-              _rawContent
+              title: titleSpanish
+              _rawContent: _rawContentSpanish
             }
             image {
               alt
@@ -235,7 +215,7 @@ export const query = graphql`
               }
               link {
                 url
-                text
+                title
               }
               icon {
                 icon
@@ -249,41 +229,6 @@ export const query = graphql`
             title
             _rawContent
           }
-        }
-      
-        descriptionPage
-        banner {
-          slides {
-            url
-            title
-            text
-            overlay
-            _key
-            image {
-              alt
-              image {
-                _key
-                asset {
-                  _id
-                }
-                crop {
-                  top
-                  right
-                  left
-                  bottom
-                }
-                hotspot {
-                  y
-                  x
-                  width
-                  height
-                }
-              }
-  
-
-            }
-          }
-          autoplay
         }
       }
     }
