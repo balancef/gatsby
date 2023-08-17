@@ -155,6 +155,8 @@ export const query = graphql`
           ... on SanityTextImage {
             _key
             _type
+            videoUrl
+            imageRight
             textBlock {
               title: titleSpanish
               _rawContent: _rawContentSpanish

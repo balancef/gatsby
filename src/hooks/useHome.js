@@ -308,6 +308,8 @@ const useHome = () => {
             ... on SanityTextImage {
               _key
               _type
+              videoUrl
+              imageRight
               image {
                 alt
                 image {
@@ -640,6 +642,8 @@ const useHome = () => {
             ... on SanityTextImage {
               _key
               _type
+              videoUrl
+              imageRight
               image {
                 alt
                 image {
@@ -972,6 +976,8 @@ const useHome = () => {
             ... on SanityTextImage {
               _key
               _type
+              videoUrl
+              imageRight
               image {
                 alt
                 image {

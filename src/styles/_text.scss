@@ -17,6 +17,7 @@ $secondary-font: "Roboto", sans-serif;
 
 body > * {
   font-family: $primary-font;
+  color: $color-text;
 }
 
 h1,
@@ -50,7 +51,6 @@ h6 {
 }
 
 p {
-  color: $color-text;
   font-size: 16px;
 }
 small {
@@ -58,7 +58,18 @@ small {
 }
 label {
   font-size: 12px;
-  color: $color-text;
+}
+
+.markdown-format {
+  p {
+    margin-bottom: 24px;
+  }
+  ul {
+    padding-left: 0;
+    li {
+      margin-bottom: 24px;
+    }
+  }
 }
 
 @media (min-width: $lg-breakpoint) {
