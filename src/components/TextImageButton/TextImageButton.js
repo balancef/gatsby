@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { PortableText } from "@portabletext/react";
 import SanityImage from "gatsby-plugin-sanity-image";
+import { LanguageContext } from "../../context/languajeContext";
 import "./TextImageButton.scss";
 import { CustomLink, Icon } from "..";
 
 const TextImageButton = ({ title, text, image, button, callToActionLink }) => {
+
+  const { language } = useContext(LanguageContext);
+
+
   return (
     <>
       {text && (
@@ -14,18 +19,18 @@ const TextImageButton = ({ title, text, image, button, callToActionLink }) => {
               <PortableText value={text} />
               <div className="textImageButton__text_button">
                 <CustomLink
-                  href={button.url}
+                  href={language === "en" ? button.url : `/${language}/${button.url.replace("/", "")}`}
                   text={button.title}
-                  style={"button"}
+                  type={"button"}
                   icon={<Icon code={"FaSearch"}></Icon>}
                 />
               </div>
               <div className="textImageButton__text_callToAction">
                 <label>{callToActionLink.title}</label>
                 <CustomLink
-                  href={callToActionLink.link.url}
+                  href={language === "en" ? callToActionLink.link.url : `/${language}/${callToActionLink.link.url.replace("/", "")}`}
                   text={callToActionLink.link.title}
-                  style={"link-secondary"}
+                  type={"link-secondary"}
                 />
               </div>
             </div>

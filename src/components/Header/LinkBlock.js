@@ -18,7 +18,7 @@ const LinkBlock = ({ links }) => {
       <CustomLink
         href={url}
         icon={iconCode && <Icon code={iconCode}></Icon>}
-        style={`${style} mobile`}
+        type={`${style} mobile`}
         text={title}
         key={key}
       />

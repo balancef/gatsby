@@ -67,7 +67,7 @@ const Header = () => {
           </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
-            {data.menu !== null ? <MenuHeader headerMenu={data.headerMenu} /> : <></>}
+            {data.menu !== null ? <MenuHeader headerMenu={data.headerMenu} language={language}/> : <></>}
           </Navbar.Collapse>
         </Container>
       </Navbar>
