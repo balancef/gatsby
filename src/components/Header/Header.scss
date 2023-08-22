@@ -28,6 +28,29 @@
 
   }
 
+  .navbar-brand {
+    .brand-container {
+      display: flex;
+      align-items: center;
+      img {
+        width: 22px;
+        height: 15px;
+        margin-right: 7px;
+      }
+
+      .dropdown {
+        .dropdown-menu {
+          img {
+            width: 30px;
+            margin-right: 10px;
+            height: 20px;
+
+          }
+        }
+      }
+    }
+  }
+
   &__theme-toggle {
     position: relative;
     border: none;
@@ -164,9 +187,15 @@
 
     .dropdown-menu {
       border-top: 0.1875rem solid $color-brand !important;
-
+      
       .dropdown-item {
         color: $color-text;
+
+        img {
+          margin-right: 10px;
+          width: 30px;
+          height: 30px;
+        }
 
         &:hover {
           color: $color-brand;
