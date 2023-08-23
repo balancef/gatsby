@@ -1,13 +1,14 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { Layout, CustomSection, Banner} from "../components";
+import { Layout, CustomSection, Banner, Seo} from "../components";
 
 const Page = ({location,  data }) => {
-  const { dinamicContent, banner} = data?.allSanityPages?.nodes[0]
+  const { dinamicContent, banner, titlePage, descriptionPage} = data?.allSanityPages?.nodes[0]
   
 
   return (
     <Layout location={location}>
+      <Seo title={titlePage} description={descriptionPage} keywords="" />
       {(banner !== null) ? <Banner banner={banner}/> : <></>}
         {dinamicContent !== null  && dinamicContent.length !==0  &&(
           <CustomSection sections={dinamicContent} />
@@ -22,14 +23,15 @@ export const query = graphql`
   query ($slug: String!) {
     allSanityPages(filter: { slug: { current: { eq: $slug } } }) {
       nodes {
-        titlePage
+        titlePage: titlePageGerman
+        descriptionPage: descriptionPageGerman
         slug {
           current
         }
         id
         banner {
-            title
-            subtitle
+            title:titleGerman
+            subtitle:subtitleGerman
             image {
               alt
               image {

@@ -9,7 +9,7 @@ const FooterLinkBlock = ({ links, title }) => {
       icon={<Icon code={link.icon.icon}></Icon>}
       href={link.link.url}
       text={link.link.text}
-      style={link.style}
+      type={link.style}
     />
   ));
   return (

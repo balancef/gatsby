@@ -1,6 +1,5 @@
 import React, {useContext} from "react";
 import useHome from "../../hooks/useHome";
-import Banner from "../Carrousel/Carrousel";
 import { Seo, CustomSection} from "../";
 import { LanguageContext } from "../../context/languajeContext";
 
@@ -21,7 +20,7 @@ const Home = () => {
 
   return (
     <>
-      <Seo title="Home" description="" keywords="" />
+      <Seo title={data.titlePage} description={data.descriptionPage} keywords="" />
       {data !== null ? (
         <div>
           {data.dinamicContent !== null ? (

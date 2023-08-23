@@ -241,7 +241,7 @@ const useHeader = () => {
           }
           _type
         }
-        logo {
+        logo: logoSpanish {
             alt
             image {
               hotspot {
@@ -409,7 +409,7 @@ const useHeader = () => {
           }
           _type
         }
-        logo {
+        logo: logoGerman {
             alt
             image {
               hotspot {
