@@ -25,6 +25,7 @@ import TextImageButton from "./TextImageButton/TextImageButton";
 import TextSubtitleBlocks from "./TextSubtitleBlocks/TextSubtitleBlocks";
 import Banner from "./Banner/Banner";
 import TextLogoButton from "./TextLogoButton/TextLogoButton";
+import AuthorReference from "./AuthorReference/AuthorReference";
 
 
 export {
@@ -55,4 +56,5 @@ export {
   TextSubtitleBlocks,
   Banner,
   TextLogoButton,
+  AuthorReference,
 };

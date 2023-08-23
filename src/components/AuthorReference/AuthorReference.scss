@@ -1,0 +1,62 @@
+@import "../../styles/global";
+
+.AuthorReference {
+  background-color: $color-background-secondary;
+  text-align: center;
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    color: $color-tertiary;
+  }
+
+  &__text p {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  &__referent {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    &-content {
+      p {
+        color: $color-black;
+      }
+
+      text-align: left;
+    }
+
+    &-image {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      object-position: center center;
+      border-radius: 50%;
+    }
+  }
+
+}
+
+@media (min-width: $md-breakpoint) {
+
+  .AuthorReference {
+    &__text {
+      width: 80%;
+      margin: auto;
+    }
+  }
+}
+
+@media (min-width: $lg-breakpoint) {
+
+  .AuthorReference {
+    &__text {
+      width: 50%;
+    }
+  }
+}
