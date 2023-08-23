@@ -12,6 +12,7 @@ import {
   TextImageButton,
   TextSubtitleBlocks,
   TextLogoButton,
+  AuthorReference,
 } from "../";
 
 const CustomSection = ({ sections }) => {
@@ -132,6 +133,18 @@ const CustomSection = ({ sections }) => {
             text={section.textBlock?._rawContent}
             button={section.link}
             image={section.image?.image}
+          />
+        );
+      }
+
+      if (section?._type === "authorReference") {
+        return (
+          <AuthorReference
+            key={section._key}
+            author={section.authorReference?.author}
+            detail={section.authorReference?.authorDetail}
+            text={section.authorReference?._rawText}
+            image={section.authorAppearance?.image}
           />
         );
       }
