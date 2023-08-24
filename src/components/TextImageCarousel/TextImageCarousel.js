@@ -26,7 +26,7 @@ const TextImageCarousel = ({ slides, title }) => {
 
   return (
     <>
-        <div className="py-5 container">
+        <div className="section-padding container">
           {title && <h3 className="mb-4">{title}</h3>}
           <Carousel
             showStatus={false}

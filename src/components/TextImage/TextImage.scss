@@ -12,7 +12,6 @@
     padding-bottom: 20px;
   }
   &__text {
-    padding: 2rem;
     .markdown-format {
       a {
         color: $color-brand;
@@ -63,6 +62,9 @@
 @media (min-width: $md-breakpoint) {
   .textImage {
     padding: 20px;
+    &__image {
+     margin: auto;
+    }
   }
 }
 
@@ -71,6 +73,9 @@
     padding: 20px 50px 50px;
     &__title {
       padding-bottom: 30px;
+    }
+    &__text {
+      padding: 2rem;
     }
     &__content {
       flex-direction: row-reverse;
@@ -81,7 +86,7 @@
     }
     &__image {
       min-width: 450px;
-      max-height: 400px;
+      max-height: 450px;
     }
     &__video {
       height: 350px;

@@ -12,7 +12,7 @@ const TextLogoButton = ({ title, text, button, image }) => {
 
   return (
     <>
-      <div className="py-5 container">
+      <div className="section-padding container">
         <div className="textLogoButton">
           {image ?
             <div className="textLogoButton__image">

@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import SanityImage from "gatsby-plugin-sanity-image";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-
 import "./Header.scss";
 import LinkBlock from "./LinkBlock";
 import Menu from "./Menu";
