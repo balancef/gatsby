@@ -5,7 +5,7 @@ import "./TextBlock.scss";
 const TextBlock = ({ title, text }) => {
 
   return (
-    <div className="textBlock py-5 container">
+    <div className="textBlock section-padding container">
       {title && <h3 className="textBlock__title mb-4">{title}</h3>}
       {text && (
         <div className="textBlock__text">

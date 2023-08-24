@@ -7,6 +7,7 @@
   text-decoration: none;
   align-items: center;
   margin-right: 1rem;
+  gap: 3px;
   &:last-child {
     margin-right: 0rem;
   }
@@ -15,18 +16,20 @@
     white-space: nowrap;
   }
   &.link {
-    color: $color-secondary;
+    color: $color-text;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
     svg {
-      font-size: 2rem;
+      font-size: 22px;
       padding-right: 0.5rem;
     }
     &:hover {
-      opacity: 0.8;
+      color: $color-primary;
     }
   }
 
   &.link-secondary {
-    border-bottom: 1px dashed $color-text; 
+    border-bottom: 1px dashed $color-text;
     width: max-content;
     svg {
       font-size: 2rem;
@@ -36,7 +39,7 @@
       small {
         color: $color-primary;
       }
-      border-color: $color-primary; 
+      border-color: $color-primary;
     }
   }
 
@@ -63,29 +66,7 @@
       }
     }
   }
-  &.mobile {
-    padding: 0.3rem 0.24rem;
-    width: 30px;
-    height: 30px;
-    svg {
-      padding-right: 0rem;
-    }
-    p {
-      display: none;
-    }
-    @media (min-width: $lg-breakpoint) {
-      padding: 0.2rem 1rem;
-      width: auto;
-      height: 40px;
-      svg {
-        padding-right: 0.5rem;
-        font-size: 1.8rem;
-      }
-      p {
-        display: block;
-      }
-    }
-  }
+
   &.icon {
     margin-right: 0;
   }

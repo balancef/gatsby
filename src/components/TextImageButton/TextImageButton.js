@@ -13,7 +13,7 @@ const TextImageButton = ({ title, text, image, button, callToActionLink }) => {
   return (
     <>
       {text && (
-        <div className="textImageButton container">
+        <div className="textImageButton container section-padding">
           <div className="textImageButton__content">
             <div className="textImageButton__text">
               <PortableText value={text} />
