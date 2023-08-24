@@ -58,6 +58,6 @@ export {
   Banner,
   TextLogoButton,
   Help,
-  HelpFilter
+  HelpFilter,
   AuthorReference,
 };
