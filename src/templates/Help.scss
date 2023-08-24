@@ -1,0 +1,90 @@
+@import "../styles/colors";
+@import "../styles/text";
+
+.help {
+
+
+    &__breadcrumb {
+        padding: 1rem;
+        font-size: 0.875rem;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+
+        a {
+            color: $color-brand !important;
+            text-decoration: none;
+        }
+    }
+
+    &__card {
+        padding: 1.5rem !important;
+        box-shadow: 0 0 35px rgba(140, 152, 164, 0.125) !important;
+        border: 1px solid #e7eaf3;
+        border-radius: 0.3125rem;
+        margin-bottom: 2.5rem;
+
+        h1 {
+            font-size: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: 1.25rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            line-height: 1.7;
+        }
+
+        blockquote {
+            padding: 1rem;
+            color: #856404;
+            background-color: #fff3cd;
+            margin: 1rem 0;
+            word-wrap: break-word;
+            padding-left: 3rem;
+            position: relative;
+        }
+
+        blockquote::before {
+            content: "!";
+            font-size: 2rem;
+            font-weight: 600;
+            margin-right: 20px;
+            height: 100%;
+            display: block;
+            position: absolute;
+            left: 20px;
+
+        }
+
+        a {
+            color: $color-brand;
+            text-decoration: none;
+        }
+
+        &__h1 {
+            font-size: 2rem !important;
+        }
+
+    }
+}
+
+@media screen and (min-width: $md-breakpoint) {
+    .help {
+
+        width: 80% !important;
+        margin: 0 auto !important;
+
+        &__card {
+            padding: 3rem !important;
+        }
+    }
+
+}
