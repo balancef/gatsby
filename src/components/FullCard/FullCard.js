@@ -15,7 +15,7 @@ const FullCard = ({ title, cards }) => {
   });
 
   return (
-    <div className="container py-5">
+    <div className="container section-padding">
       <h3 className="text-center mb-4">{title}</h3>
       <div>
         <Pagination posts={cardsComponent} postPerPage={3} />

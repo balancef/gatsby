@@ -15,7 +15,7 @@ const TextBlockList = ({ blocks }) => {
       </div>
   ));
   return (
-    <div className="py-5 container">
+    <div className="section-padding container">
       <div className="textItemList">{textBlocks}</div>
     </div>
   );

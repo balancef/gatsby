@@ -29,7 +29,7 @@ const TextSubtitleBlocks = ({ title, blocks }) => {
     </div>
   ));
   return (
-    <div className="py-5 container">
+    <div className="section-padding container">
       <div className="textSubtitleItemList__heading">
         {title && <h4 className="mb-5">{title}</h4>}
       </div>

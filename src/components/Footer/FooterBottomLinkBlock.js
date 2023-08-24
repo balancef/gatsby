@@ -1,6 +1,6 @@
 import React from "react";
 
-const FooterLinkBlock = ({ links, title }) => {
+const FooterBottomLinkBlock = ({ links }) => {
   const linksList = links.map((link) => {
     const url = link?.url;
     const linkTitle = link?.title;
@@ -16,11 +16,10 @@ const FooterLinkBlock = ({ links, title }) => {
   });
 
   return (
-    <div className="footer__linkBlock_container">
-      <p className="footer__linkBlock_title">{title}</p>
+    <div>
       <ul>{linksList}</ul>
     </div>
   );
 };
 
-export default FooterLinkBlock;
+export default FooterBottomLinkBlock;
