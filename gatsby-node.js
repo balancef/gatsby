@@ -44,13 +44,10 @@ exports.createPages = async ({ graphql, actions }) => {
       context: { slug: node.slug.current, language: "de" },
     })
   })
-}
 
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
 
   // CREACION DE PAGINAS DE AYUDA
-  const { data: pageQueryData } = await graphql(`
+  const { data: helpQueryData } = await graphql(`
     query HelpPages {
       allSanityHelp {
         nodes {
@@ -62,11 +59,11 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  if (pageQueryData.errors) {
+  if (helpQueryData.errors) {
     reporter.panicOnBuild("Error creando paginas")
   }
 
-  pageQueryData.allSanityHelp.nodes.forEach(node => {
+  helpQueryData.allSanityHelp.nodes.forEach(node => {
     const pageEN = path.resolve("./src/templates/helpEN.js")
     createPage({
       path: "/help/" + node.slug.current,

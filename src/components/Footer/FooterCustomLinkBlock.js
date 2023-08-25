@@ -9,7 +9,7 @@ const FooterCustomLinkBlock = ({ links, title }) => {
     const iconCode = link?.icon?.icon;
     const style = link?.style;
     const title = link?.link?.title;
-    const key = link?.link?._key;
+    const key = link?._key;
 
     return (
       <CustomLink

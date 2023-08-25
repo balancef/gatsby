@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import useHelp from "../../hooks/useHelp";
 import { Seo, HelpFilter } from "../";
 import { LanguageContext } from "../../context/languajeContext";
-import { Button, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { Link } from 'gatsby';
 import { dataLanguage } from './data';
 

@@ -62,7 +62,7 @@ const Header = () => {
         <Container>
           <Navbar.Brand>
             <div className="brand-container">
-              <img src={flag[language]} className="brand-container__img"/>
+              <img src={flag[language]} alt="flag" className="brand-container__img"/>
               <DropdownButton
                 title={language ? title[language] : "..."}
                 id="dropdown-menu-align-right"
@@ -71,8 +71,8 @@ const Header = () => {
 
               >
                 <Dropdown.Item eventKey="de" style={{ display: "flex" }}><img src={de} alt="de" /> Deutsch</Dropdown.Item>
-                <Dropdown.Item eventKey="en" style={{ display: "flex" }}><img src={us} />English</Dropdown.Item>
-                <Dropdown.Item eventKey="es" style={{ display: "flex" }}><img src={es} /> Español</Dropdown.Item>
+                <Dropdown.Item eventKey="en" style={{ display: "flex" }}><img src={us} alt="us" />English</Dropdown.Item>
+                <Dropdown.Item eventKey="es" style={{ display: "flex" }}><img src={es} alt="es"/> Español</Dropdown.Item>
               </DropdownButton>
             </div>
           </Navbar.Brand>
