@@ -85,4 +85,45 @@ exports.createPages = async ({ graphql, actions }) => {
       context: { slug: node.slug.current, language: "de" },
     })
   })
+
+  // CREACION DE PAGINAS LEGALES  
+  const { data: legalPageQueryData } = await graphql(`
+    query LegalPages {
+      allSanityLegalPages {
+        nodes {
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `)
+
+  if (legalPageQueryData.errors) {
+    reporter.panicOnBuild("Error creando paginas legales")
+  }
+
+  legalPageQueryData.allSanityLegalPages.nodes.forEach(node => {
+    const LegalPagesEN = path.resolve("./src/templates/legalEN.js")
+    createPage({
+      path: "/legal/" + node.slug.current,
+      component: LegalPagesEN,
+      context: { slug: node.slug.current, language: "en" },
+    })
+
+    const LegalPagesES = path.resolve("./src/templates/legalES.js")
+    createPage({
+      path: "/es/legal/" + node.slug.current,
+      component: LegalPagesES,
+      context: { slug: node.slug.current, language: "es" },
+    })
+
+    const LegalPagesGER = path.resolve("./src/templates/legalDE.js")
+    createPage({
+      path: "/de/legal/" + node.slug.current,
+      component: LegalPagesGER,
+      context: { slug: node.slug.current, language: "de" },
+    })
+  })
+
 }

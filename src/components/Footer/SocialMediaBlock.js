@@ -1,9 +1,8 @@
 import React from "react";
 import CustomLink from "../CustomLink/CustomLink";
-import  {Icon}  from "..";
+import { Icon } from "..";
 
 const FooterLinkBlock = ({ links }) => {
-
   const socialMediaList = links.map((link) => (
     <CustomLink
       key={link._key}
@@ -13,11 +12,7 @@ const FooterLinkBlock = ({ links }) => {
       type={link.style}
     />
   ));
-  return (
-    <div className="socialMediaLinks">
-     {socialMediaList}
-    </div>
-  );
+  return <div className="socialMediaLinks">{socialMediaList}</div>;
 };
 
 export default FooterLinkBlock;

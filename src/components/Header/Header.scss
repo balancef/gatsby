@@ -25,7 +25,6 @@
     a:nth-last-of-type(1) {
       margin-right: 0.5rem !important;
     }
-
   }
 
   .navbar-brand {
@@ -44,7 +43,6 @@
             width: 30px;
             margin-right: 10px;
             height: 20px;
-
           }
         }
       }
@@ -78,7 +76,7 @@
       font-size: 1.4rem;
       width: fit-content;
       height: fit-content;
-      transition: all ease-in .4s;
+      transition: all ease-in 0.4s;
     }
 
     .sun {
@@ -92,20 +90,19 @@
 
     .sun-animate {
       transform: translate(-30px, 30px);
-      transition: all ease-in .4s;
+      transition: all ease-in 0.4s;
     }
 
     .moon-animate {
       transform: translate(30px, 30px);
-      transition: all ease-in .4s;
+      transition: all ease-in 0.4s;
     }
-
   }
 
   .navbar-toggler {
     order: 1;
     border: none;
-    padding: .5rem;
+    padding: 0.5rem;
     border: none;
     font-size: 1.8rem;
     color: $bg-secondary;
@@ -118,7 +115,6 @@
   .navbar {
     padding: 0rem !important;
   }
-
 
   .navbar-collapse {
     order: 2;
@@ -156,7 +152,7 @@
         transition: all ease-in 0.3s;
 
         .icon {
-          padding-right: .3rem;
+          padding-right: 0.3rem;
         }
 
         &:hover {
@@ -187,7 +183,7 @@
 
     .dropdown-menu {
       border-top: 0.1875rem solid $color-brand !important;
-      
+
       .dropdown-item {
         color: $color-text;
 
@@ -203,7 +199,6 @@
         }
       }
     }
-
   }
 
   .header__language {
@@ -224,7 +219,8 @@
 
     .dropdown-menu {
       background-color: $color-white;
-      box-shadow: 0 5px 9px rgba(55, 125, 255, 0.075), 0 5px 9px rgba(119, 131, 143, 0.075);
+      box-shadow: 0 5px 9px rgba(55, 125, 255, 0.075),
+        0 5px 9px rgba(119, 131, 143, 0.075);
       border-color: transparent;
 
       .dropdown-item {
@@ -273,15 +269,16 @@
         color: $color-text;
         font-size: 0.875rem;
       }
-
     }
   }
 
-
+  .header__menu {
+    .btn {
+      margin-left: 0.5rem;
+    }
+  }
 
   .navbar-text {
-
-
     .header_link {
       color: $color-text;
       &:hover {
@@ -296,16 +293,18 @@
     }
   }
 
-
-.drop-options {
-  .dropdown-item{
-    color: $color-text;
+  .drop-options {
+    .dropdown-item {
+      color: $color-text;
+    }
   }
-  
-}
-
 
   @media (min-width: $lg-breakpoint) {
+    .header__menu {
+      .btn {
+        margin-left: 1rem;
+      }
+    }
     .navbar-toggler {
       order: 0;
     }
