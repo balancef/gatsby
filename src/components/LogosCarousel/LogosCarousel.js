@@ -35,7 +35,7 @@ const LogosCarousel = ({ data }) => {
   }
 
   return (
-    <div className="container logos py-5">
+    <div className="container logos section-padding">
       {data.title ? <p className="logos__title">{data.title}</p> : <></>}
       <Carousel
         responsive={responsive}

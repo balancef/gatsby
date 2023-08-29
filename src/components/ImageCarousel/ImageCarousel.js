@@ -8,7 +8,7 @@ const ImageCarousel = ({ data }) => {
   const secondLineSlides = [...data.secondLineSlides, ...data.secondLineSlides];
 
   return (
-    <div className="image-carousel py-5">
+    <div className="image-carousel section-padding">
       <div className="carousel-wrapper">
         {firstLineSlides.map((slide, index) => (
           <div className="carousel-slide" key={slide._key + index}>

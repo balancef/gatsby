@@ -4,14 +4,16 @@ import "./CustomLink.scss"
 
 function CustomLink({href, icon, type, text}) {
 
-  if (type === "icon") {
-    return null;
-  }
+  // if (type === "icon") {
+  //   return null;
+  // }
 
   let renderedElement;
 
   if (type === "link-secondary") {
     renderedElement = <small className="mb-0">{text}</small>;
+  } else if (type === "icon")  {
+    renderedElement=""
   } else {
     renderedElement = <p className="mb-0">{text}</p>;
   }

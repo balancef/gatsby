@@ -10,11 +10,9 @@ const Page = ({location,  data }) => {
     <Layout location={location}>
       <Seo title={titlePage} description={descriptionPage} keywords="" />
       {(banner !== null) ? <Banner banner={banner}/> : <></>}
-      <div className="container">      
         {dinamicContent !== null  && dinamicContent.length !==0  &&(
           <CustomSection sections={dinamicContent} />
         )}
-      </div>
     </Layout>
   );
 };
@@ -57,6 +55,41 @@ export const query = graphql`
             }          
         }
         dinamicContent {
+          ... on SanityAuthorReference {
+            _key
+            _type
+            authorAppearance {
+              _key
+              _type
+              alt
+              image {
+                _key
+                _type
+                asset {
+                  _id
+                }
+                crop {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                hotspot {
+                  height
+                  width
+                  x
+                  y
+                }
+              }
+            }
+            authorReference {
+              _key
+              _type
+              author
+              authorDetail: authorDetailGerman
+              _rawText: _rawTextGerman
+            }
+          }
           ... on SanityLogoText {
             _key
             _type

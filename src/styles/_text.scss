@@ -59,6 +59,9 @@ small {
 label {
   font-size: 12px;
 }
+b {
+  font-weight: 500;
+}
 
 .markdown-format {
   p {
@@ -72,9 +75,16 @@ label {
   }
 }
 
+.section-padding {
+  padding: 60px 20px;
+}
+
 @media (min-width: $lg-breakpoint) {
   h1 {
     font-size: 72px;
+  }
+  .section-padding {
+    padding: 70px 20px;
   }
 }
 
@@ -83,4 +93,6 @@ label {
     max-width: 1140px !important;
   }
 }
+
+
 

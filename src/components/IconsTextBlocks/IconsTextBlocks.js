@@ -6,7 +6,7 @@ import "./IconTextBlock.scss";
 const IconsTextBlocks = ({ title, subtitle, iconBlock }) => {
   const iconCards = iconBlock?.map((card ) => <IconCard data={card} />);
   return (
-    <div className='container iconsTextBlock py-5'>
+    <div className='container iconsTextBlock section-padding'>
       <div className='iconsTextBlock__textTitle'>
         {title && <h3 className='mb-4'>{title}</h3>}
         {subtitle && <div className='mb-5'><PortableText value={subtitle} /></div> }

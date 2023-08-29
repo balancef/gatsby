@@ -1,0 +1,120 @@
+@import "../../styles/global";
+@import "../../styles/colors";
+@import "../../styles/text";
+
+.helpContainer {
+    background-color: $color-background-secondary;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+
+    &__helpHeader {
+        font-weight: 500;
+        font-size: 2.5rem;
+        color: #1e2022;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    &__input {
+        margin: 0 auto;
+
+        .input-group-text {
+            background-color: $color-primary;
+
+            svg {
+                color: $color-white;
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+        }
+
+        .icon {
+            color: $color-primary;
+        }
+
+        .form-control {
+            font-size: 1rem;
+            color: $color-text;
+
+            &::placeholder {
+                color: $color-text;
+            }
+
+            &:focus {
+                box-shadow: none;
+                border-color: $color-text;
+                color: $color-text;
+            }
+        }
+    }
+}
+
+.component_container{
+    background-color: $color-background-secondary;
+
+    &__info {
+        padding: 5rem;
+        text-align: center;
+    }
+
+    &__title {
+        font-weight: 500;
+        font-size: 1.75rem;
+        color: $color-black;
+        margin-bottom: 1.5rem;
+    }
+
+    &__subTitle {
+        font-size: 1rem;
+        color: $color-text;
+        margin-bottom: 2rem;
+        margin-top: 2rem !important;
+    }
+
+    a {
+        background-color: $color-primary;
+        color: $color-white;
+        border: none;
+        border-radius: 0.3125rem;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        margin-bottom: 1.5rem;
+        text-decoration: none;
+
+        &:hover {
+            background-color: $color-primary;
+            box-shadow: 0 4px 11px rgba(255, 158, 71, 0.41);
+        }
+    }
+}
+
+.questions {
+    .card {
+        padding: 2rem;
+        margin-bottom: 2rem;
+        flex-direction: row;
+
+        a {
+            color: $color-brand;
+            text-decoration: none;
+            display: flex;
+            gap: 0.5rem;
+            justify-content: end;
+        }
+
+        b {
+            font-weight: 600;
+        }
+
+    }
+}
+
+@media screen and (min-width: $md-breakpoint) {
+    .helpContainer {
+        &__input {
+            width: 60%;
+        }
+    }
+}

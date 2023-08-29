@@ -1,64 +1,100 @@
-import React from "react";
+import React, { useContext } from "react";
+import { LanguageContext } from "../../context/languajeContext";
 import SanityImage from "gatsby-plugin-sanity-image";
 import "./Footer.scss";
 import useFooter from "../../hooks/useFooter";
 import FooterLinkBlock from "./FooterLinkBlock";
 import SocialMediaBlock from "./SocialMediaBlock";
+import FooterCustomLinkBlock from "./FooterCustomLinkBlock";
+import FooterBottomLinkBlock from "./FooterBottomLinkBlock";
 
 const Footer = () => {
-  const data = useFooter().sanityFooter;
+  const query = useFooter();
+  const { language } = useContext(LanguageContext);
+
+  let data = null;
+  if (language === "es") {
+    data = query.sanityFooterES;
+  } else {
+    if (language === "de") {
+      data = query.sanityFooterDE;
+    } else {
+      data = query.sanityFooter;
+    }
+  }
 
   return (
     data !== null && (
-      <footer className="footer">
-        <div className="container py-4 d-flex flex-wrap">
-          {data.linkBlock.length !== 0 &&
-            data.linkBlock.map((block) => (
-              <FooterLinkBlock
-                key={block._key}
-                links={block.links}
-                title={block.title}
-              />
-            ))}
-
-          <div className="col-12 col-md-4 flex-md-grow-1 ">
-            <div className="contactBlock">
-              {data.qrCode && (
-                <a
-                  href={data.qrCode.url}
-                  title={`${data.qrCode.image.alt}`}
-                  className="py-2"
-                >
+      <footer>
+        <div className="container section-padding">
+          <div className="footer">
+            <div className="logoContainer">
+              {data.logo.image !== null && (
+                <a href={language === "en" ? "/" : `/${language}`}>
                   <SanityImage
-                    {...data.qrCode.image.image}
-                    alt={`${data.qrCode.image.alt}`}
-                    className="qrCode"
+                    {...data.logo.image}
+                    alt={`${data.logo.alt}`}
+                    className="header__logo"
                   />
                 </a>
               )}
+
+              {data.copyright && <small>{data.copyright}</small>}
+            </div>
+            <div className="linkBlockContainer">
+              <div className="footer__linkBlock">
+                {data.externalLinks && (
+                  <FooterLinkBlock
+                    links={data.externalLinks.links}
+                    title={data.externalLinks?.title}
+                  />
+                )}
+              </div>
+              <div className="footer__linkBlock">
+                {data.internalLinks && (
+                  <FooterLinkBlock
+                    links={data.internalLinks.links}
+                    title={data.internalLinks?.title}
+                  />
+                )}
+              </div>
+              <div className="footer__linkBlock">
+                {" "}
+                {data.customLinkBlock && (
+                  <FooterCustomLinkBlock
+                    links={data.customLinkBlock.links}
+                    title={data.customLinkBlock?.title}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="footerBottom">
+            <div className="footerBottom__socialMedia">
               {data.socialMediaBlock && (
                 <SocialMediaBlock
                   links={data.socialMediaBlock.links}
-                  title={data.socialMediaBlock.title}
+                  title={data.socialMediaBlock?.title}
                 />
               )}
             </div>
-          </div>
-        </div>
-        <div className="footer__down">
-          <div className="container d-flex justify-content-end align-items-center py-4">
-            { (
-              data.logo.image !== null ?  <SanityImage
-                {...data.logo.image}
-                alt={`${data.logo.alt}`}
-                className="header__logo"
-              /> : <></>
-            )}
+            <div className="footerBottom__internalPages">
+              {data.bottomMenu && (
+                <FooterBottomLinkBlock
+                  links={data.bottomMenu.links}
+                  title={data.bottomMenu?.title}
+                />
+              )}
+            
+            </div>
           </div>
         </div>
       </footer>
     )
   );
+
+
+
 };
 
 export default Footer;

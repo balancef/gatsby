@@ -29,7 +29,7 @@ const TextImage = ({ title, text, image, imageRight, videoUrl }) => {
   return (
     <>
       {text && (
-        <div className="textImage container py-5">
+        <div className="textImage container section-padding">
           <div className={`textImage__content ${!imageRight && "imageRight"}`}>
             {videoUrl !== null && videoUrl !== undefined && (
               <div className="textImage__video">

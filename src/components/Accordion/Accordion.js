@@ -14,7 +14,7 @@ function AccordionComponent({ title, items }) {
   ));
 
   return (
-    <div className="py-5 container">
+    <div className="section-padding container">
       <h3 className="mb-4">{title}</h3>
       <Accordion defaultActiveKey="0" flush>
         {accordionItems}

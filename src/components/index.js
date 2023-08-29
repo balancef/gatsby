@@ -25,7 +25,9 @@ import TextImageButton from "./TextImageButton/TextImageButton";
 import TextSubtitleBlocks from "./TextSubtitleBlocks/TextSubtitleBlocks";
 import Banner from "./Banner/Banner";
 import TextLogoButton from "./TextLogoButton/TextLogoButton";
-
+import Help from "./Help/Help";
+import HelpFilter from "./Help/HelpFilter";
+import AuthorReference from "./AuthorReference/AuthorReference";
 
 export {
   Header,
@@ -55,4 +57,7 @@ export {
   TextSubtitleBlocks,
   Banner,
   TextLogoButton,
+  Help,
+  HelpFilter,
+  AuthorReference,
 };
