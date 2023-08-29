@@ -28,6 +28,7 @@ import TextLogoButton from "./TextLogoButton/TextLogoButton";
 import Help from "./Help/Help";
 import HelpFilter from "./Help/HelpFilter";
 import AuthorReference from "./AuthorReference/AuthorReference";
+import Contact from "./Contact/Contact";
 
 export {
   Header,
@@ -60,4 +61,5 @@ export {
   Help,
   HelpFilter,
   AuthorReference,
+  Contact
 };
