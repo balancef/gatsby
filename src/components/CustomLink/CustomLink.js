@@ -1,25 +1,26 @@
 import React from "react";
-import "./CustomLink.scss"
+import "./CustomLink.scss";
 
-
-function CustomLink({href, icon, type, text}) {
-
-  // if (type === "icon") {
-  //   return null;
-  // }
-
+function CustomLink({ href, icon, type, text }) {
   let renderedElement;
+
+  const targetAttribute = type === "icon" ? "_blank" : "_self";
 
   if (type === "link-secondary") {
     renderedElement = <small className="mb-0">{text}</small>;
-  } else if (type === "icon")  {
-    renderedElement=""
+  } else if (type === "icon") {
+    renderedElement = "";
   } else {
     renderedElement = <p className="mb-0">{text}</p>;
   }
 
   return (
-    <a href={href} title={text} className={`custom-link ${type}`}>
+    <a
+      href={href}
+      title={text}
+      className={`custom-link ${type}`}
+      target={targetAttribute}
+    >
       {renderedElement}
       {icon && icon}
     </a>
