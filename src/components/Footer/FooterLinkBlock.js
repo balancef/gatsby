@@ -1,15 +1,22 @@
 import React from "react";
 
-const FooterLinkBlock = ({ links, title }) => {
+const FooterLinkBlock = ({ links, title, external, language }) => {
   const linksList = links.map((link) => {
-    const url = link?.url;
+    const url =
+      language === "en" || external
+        ? link.url
+        : `/${language}/${link.url.replace("/", "")}`;
     const linkTitle = link?.title;
     const key = link?._key;
+
+    const linkProps = external
+      ? { href: url, target: "_blank", rel: "noreferrer" }
+      : { href: url, target: "_self" };
 
     return (
       <li key={key}>
         <small>
-          <a href={url}>{linkTitle}</a>
+          <a {...linkProps}>{linkTitle}</a>
         </small>
       </li>
     );
