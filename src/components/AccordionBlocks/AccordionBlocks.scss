@@ -1,0 +1,124 @@
+@import "../../styles/global";
+
+.AccordionBlocks{
+  display: flex;
+  flex-direction: column;
+
+  hr{
+    margin: 0;
+  }
+
+  &__title {
+    font-size: 28px;
+    color: $color-primary;
+  }
+  
+  &__links {
+    height: max-content;
+    background-color: $color-primary;
+    border-radius: 8px;
+    padding: 16px 32px;
+    margin-top: 64px;
+    ul{
+      list-style: none;
+      padding-left: 0;
+    }
+    li {
+      padding: 16px 0px;
+    }
+  
+    a {
+      text-decoration: none;
+      color: $color-white;
+    }
+  }
+
+}
+
+.AccordionComponent{
+  margin: 64px 0;
+
+}
+
+.accordion-flush .accordion-item {
+  border-bottom: 0;
+}
+
+.accordion-item {
+  border-color: $border-color !important;
+  margin-bottom: 1rem;
+
+  .icon{
+    color: $color-primary;
+  }
+
+  .accordion-header {
+    border: 1px solid #e7eaf3;
+    font-weight: 400;
+    border-radius: 5px;
+
+  }
+  .accordion-header:hover{
+    color: $color-primary;
+    cursor: pointer;
+    background-color: $color-background-secondary;
+  }
+
+  .accordion-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 16px;
+    background-color: $bg-elevation-1 !important;
+    color: $bg-secondary !important;
+    box-shadow: none !important;
+
+    .icon{
+      transform: none;
+    }
+
+    &:focus {
+      border: none !important;
+      box-shadow: none;
+    }
+  }
+  .accordion-button:not(.collapsed){
+    .icon{
+      transform: rotate(90deg);
+    }
+  }
+  .accordion-button::after {
+    content: none;
+    
+  }
+
+  .accordion-body {
+    border: 1px solid #e7eaf3;
+    border-top: 0;
+    background-color: $bg-elevation-2 !important;
+    color: $bg-secondary !important;
+  }
+
+}
+
+
+@media (min-width: $lg-breakpoint) {
+  .AccordionBlocks {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    margin-bottom: 5rem;
+    &__links {
+      flex: 2 1;
+      position: sticky;
+      top: 30px;
+
+    }
+
+    &__components {
+      flex: 6 1;
+    }
+  }
+
+}
