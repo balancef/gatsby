@@ -48,22 +48,20 @@ const Footer = () => {
                     links={data.externalLinks.links}
                     title={data.externalLinks?.title}
                     external={true}
-                    language={language}
                   />
                 )}
               </div>
               <div className="footer__linkBlock">
-                {data.internalLinks && (
+                {data.internalLinks && language !== null &&(
                   <FooterLinkBlock
                     links={data.internalLinks.links}
                     title={data.internalLinks?.title}
-                    language={language}
                   />
                 )}
               </div>
               <div className="footer__linkBlock">
                 {" "}
-                {data.customLinkBlock && (
+                {data.customLinkBlock && language !== null && (
                   <FooterCustomLinkBlock
                     links={data.customLinkBlock.links}
                     title={data.customLinkBlock?.title}
@@ -82,11 +80,10 @@ const Footer = () => {
               )}
             </div>
             <div className="footerBottom__internalPages">
-              {data.bottomMenu && (
+              {data.bottomMenu && language !== null &&  (
                 <FooterBottomLinkBlock
                   links={data.bottomMenu.links}
                   title={data.bottomMenu?.title}
-                  language={language}
                 />
               )}
             
