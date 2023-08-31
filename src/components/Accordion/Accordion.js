@@ -18,15 +18,12 @@ function AccordionComponent({ title, items }) {
   ));
 
   return (
-    <>
-      <div className="AccordionComponent" >
-        <h5 className="mb-4 AccordionBlocks__title" id={title}>{title}</h5>
-        <Accordion defaultActiveKey="0" flush >
-          {accordionItems}
-        </Accordion>
-      </div>
-      <hr />
-    </>
+    <div className="AccordionComponent" >
+      <h5 className="mb-4 AccordionBlocks__title" id={title}>{title}</h5>
+      <Accordion defaultActiveKey="0" flush >
+        {accordionItems}
+      </Accordion>
+    </div>
 
   );
 }

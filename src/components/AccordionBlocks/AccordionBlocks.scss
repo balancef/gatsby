@@ -1,32 +1,31 @@
 @import "../../styles/global";
 
-.AccordionBlocks{
+.AccordionBlocks {
   display: flex;
   flex-direction: column;
-
-  hr{
-    margin: 0;
-  }
 
   &__title {
     font-size: 28px;
     color: $color-primary;
   }
-  
+
   &__links {
     height: max-content;
     background-color: $color-primary;
     border-radius: 8px;
     padding: 16px 32px;
     margin-top: 64px;
-    ul{
+
+    ul {
       list-style: none;
       padding-left: 0;
+      margin: 0;
     }
+
     li {
       padding: 16px 0px;
     }
-  
+
     a {
       text-decoration: none;
       color: $color-white;
@@ -35,9 +34,14 @@
 
 }
 
-.AccordionComponent{
-  margin: 64px 0;
+.AccordionComponent {
+  padding: 64px 0;
+  border-bottom: 1px solid #e7eaf3;
 
+}
+
+.AccordionComponent:last-child {
+  border-bottom: 0;
 }
 
 .accordion-flush .accordion-item {
@@ -48,7 +52,7 @@
   border-color: $border-color !important;
   margin-bottom: 1rem;
 
-  .icon{
+  .icon {
     color: $color-primary;
   }
 
@@ -58,7 +62,8 @@
     border-radius: 5px;
 
   }
-  .accordion-header:hover{
+
+  .accordion-header:hover {
     color: $color-primary;
     cursor: pointer;
     background-color: $color-background-secondary;
@@ -74,7 +79,7 @@
     color: $bg-secondary !important;
     box-shadow: none !important;
 
-    .icon{
+    .icon {
       transform: none;
     }
 
@@ -83,14 +88,16 @@
       box-shadow: none;
     }
   }
-  .accordion-button:not(.collapsed){
-    .icon{
+
+  .accordion-button:not(.collapsed) {
+    .icon {
       transform: rotate(90deg);
     }
   }
+
   .accordion-button::after {
     content: none;
-    
+
   }
 
   .accordion-body {
@@ -109,6 +116,7 @@
     flex-direction: row;
     gap: 40px;
     margin-bottom: 5rem;
+
     &__links {
       flex: 2 1;
       position: sticky;
