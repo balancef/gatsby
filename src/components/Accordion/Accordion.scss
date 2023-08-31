@@ -2,23 +2,39 @@
 
 .accordion-item {
   border-color: $border-color !important;
+  .icon{
+    color: $color-primary;
+  }
+
   .accordion-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 16px;
     background-color: $bg-elevation-1 !important;
     color: $bg-secondary !important;
     box-shadow: none !important;
+    .icon{
+      transform: none;
+    }
     &:focus {
       border: none !important;
       box-shadow: none;
     }
   }
+  .accordion-button:not(.collapsed){
+    .icon{
+      transform: rotate(90deg);
+    }
+  }
+  .accordion-button::after {
+    content: none;
+    
+  }
   .accordion-body {
     background-color: $bg-elevation-2 !important;
     color: $bg-secondary !important;
   }
-  .accordion-button.collapsed::after {
-    filter: brightness(0%) invert(70%);
-  }
-  .accordion-button:not(.collapsed)::after {
-    filter: brightness(0%) invert(70%);
-  }
+
 }

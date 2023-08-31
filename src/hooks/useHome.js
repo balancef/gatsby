@@ -627,10 +627,10 @@ const useHome = () => {
             ... on SanityAccordion {
               _key
               _type
-              title
+              title: titleSpanish
               accordionItems {
-                title
-                _rawContent
+                title: titleSpanish
+                _rawContent: _rawContentSpanish
               }
             }
             ... on SanityTextBlock {
@@ -961,10 +961,10 @@ const useHome = () => {
             ... on SanityAccordion {
               _key
               _type
-              title
+              title: titleGerman
               accordionItems {
-                title
-                _rawContent
+                title: titleGerman
+                _rawContent: _rawContentGerman
               }
             }
             ... on SanityTextBlock {
