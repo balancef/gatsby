@@ -1,8 +1,7 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
-import { Layout, Seo } from "../components";
+import { graphql } from "gatsby";
+import { Layout  } from "../components";
 import "./Legal.scss";
-import { PortableText } from "@portabletext/react";
 import Legal from "./legal";
 
 const LegalPage = ({ location, data }) => {

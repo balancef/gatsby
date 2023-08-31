@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext }  from "react";
 import { CustomLink, Icon } from "..";
+import { LanguageContext } from "../../context/languajeContext";
 import "./Footer.scss";
 
-const FooterCustomLinkBlock = ({ links, title, language }) => {
+const FooterCustomLinkBlock = ({ links, title }) => {
+  const { language } = useContext(LanguageContext);
+
   const linksList = links.map((link) => {
     const url = link?.link?.url;
     const iconCode = link?.icon?.icon;
@@ -11,14 +14,20 @@ const FooterCustomLinkBlock = ({ links, title, language }) => {
     const key = link?._key;
 
     return (
-      <CustomLink
-        language={language}
-        href={url}
-        icon={iconCode && <Icon code={iconCode}></Icon>}
-        type={`${style} mobile`}
-        text={title}
-        key={key}
-      />
+      language !== null && (
+        <CustomLink
+          language={language}
+          href={
+            language === "en"
+              ? url
+              : `/${language}/${url.replace("/", "")}`
+          }
+          icon={iconCode && <Icon code={iconCode}></Icon>}
+          type={`${style} mobile`}
+          text={title}
+          key={key}
+        />
+      )
     );
   });
 

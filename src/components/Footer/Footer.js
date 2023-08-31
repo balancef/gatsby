@@ -48,7 +48,6 @@ const Footer = () => {
                     links={data.externalLinks.links}
                     title={data.externalLinks?.title}
                     external={true}
-                    language={language}
                   />
                 )}
               </div>
@@ -57,7 +56,6 @@ const Footer = () => {
                   <FooterLinkBlock
                     links={data.internalLinks.links}
                     title={data.internalLinks?.title}
-                    language={language}
                   />
                 )}
               </div>
@@ -67,7 +65,6 @@ const Footer = () => {
                   <FooterCustomLinkBlock
                     links={data.customLinkBlock.links}
                     title={data.customLinkBlock?.title}
-                    language={language}
                   />
                 )}
               </div>
@@ -87,7 +84,6 @@ const Footer = () => {
                 <FooterBottomLinkBlock
                   links={data.bottomMenu.links}
                   title={data.bottomMenu?.title}
-                  language={language}
                 />
               )}
             

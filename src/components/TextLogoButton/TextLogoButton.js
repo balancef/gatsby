@@ -28,11 +28,12 @@ const TextLogoButton = ({ title, text, button, image }) => {
               <PortableText value={text} />
             </div>
           ) : <></>}
-          {button ? (<div className="textLogoButton__button">
+          {button && language ? (<div className="textLogoButton__button">
             <CustomLink
               href={language === "en" ? button.url : `/${language}/${button.url.replace("/", "")}`}
               text={button.title}
               type={"button"}
+
             />
           </div>) : <></>}
         </div>

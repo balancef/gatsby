@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { LanguageContext } from "../../context/languajeContext";
 
-const FooterBottomLinkBlock = ({ links, language }) => {
+const FooterBottomLinkBlock = ({ links }) => {
+  const { language } = useContext(LanguageContext);
+
   const linksList = links.map((link) => {
     const url =
       language === "en"
@@ -10,11 +13,13 @@ const FooterBottomLinkBlock = ({ links, language }) => {
     const key = link?._key;
 
     return (
-      <li key={key}>
-        <small>
-          <a href={url}>{linkTitle}</a>
-        </small>
-      </li>
+      language && (
+        <li key={key}>
+          <small>
+            <a href={url}>{linkTitle}</a>
+          </small>
+        </li>
+      )
     );
   });
 
