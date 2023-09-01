@@ -14,6 +14,7 @@ import {
   TextLogoButton,
   AuthorReference,
 } from "../";
+import AccordionBlocks from "../AccordionBlocks/AccordionBlocks";
 
 const CustomSection = ({ sections }) => {
   const sectionResult = sections.map((section) => {
@@ -145,6 +146,15 @@ const CustomSection = ({ sections }) => {
             detail={section.authorReference?.authorDetail}
             text={section.authorReference?._rawText}
             image={section.authorAppearance?.image}
+          />
+        );
+      }
+
+      if (section?._type === "accordionBlocks") {
+        return (
+          <AccordionBlocks
+            key={section._key}
+            blocks={section?.blocks}
           />
         );
       }

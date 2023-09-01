@@ -55,6 +55,21 @@ export const query = graphql`
             }          
         }
         dinamicContent {
+          ... on SanityAccordionBlocks {
+            _key
+            _type
+            blocks {
+              _key
+              _type
+              title: titleGerman
+              accordionItems {
+                _key
+                _type
+                title: titleGerman
+                _rawContent: _rawContentGerman
+              }
+            }
+          }
           ... on SanityAuthorReference {
             _key
             _type
@@ -182,10 +197,10 @@ export const query = graphql`
           ... on SanityAccordion {
             _key
             _type
-            title
+            title: titleGerman
             accordionItems {
-              title
-              _rawContent
+              title: titleGerman
+              _rawContent: _rawContentGerman
             }
           }
           ... on SanityTextImage {
