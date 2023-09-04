@@ -23,12 +23,15 @@
     display: flex;
     justify-content: center;
     margin-top: 2rem;
+
     p {
         font-size: 0.75rem;
     }
 }
 
-.contact_form{
+.contact_form {
+    position: relative;
+
     &__button {
         display: flex;
         justify-content: center;
@@ -56,12 +59,26 @@
                 background-color: $color-brand !important;
                 border-color: $color-brand !important;
             }
+
+            &:disabled {
+                background-color: $color-brand;
+                border-color: $color-brand;
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
         }
     }
 
     &__checkbox {
         display: flex;
         justify-content: center;
+
+        a {
+            color: $color-brand;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            text-decoration: none;
+        }
     }
 
     .form-label {
@@ -84,6 +101,28 @@
             border-color: #dee2e6;
         }
     }
+}
+
+.btn-close:focus {
+    box-shadow: none;
+}
+
+.form-check-input:checked {
+    background-color: $color-brand !important;
+    border-color: $color-brand !important;
+}
+
+.form-check-input:focus {
+    outline: 0;
+    box-shadow: none !important;
+    border-color: $color-brand !important;
+}
+
+.spinner-border {
+    position: absolute;
+    top: 40%;
+    right: 50%;
+    color: orange;
 }
 
 @media screen and (min-width: $md-breakpoint) {

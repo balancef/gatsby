@@ -24,7 +24,7 @@ const Contact = () => {
 
     return (
         <>
-            <Seo title={""} description={""} keywords="" />
+            <Seo title={data.titlePage} description={data.description} keywords="" />
             {(data.banner !== null) ? <Banner banner={data.banner} /> : <></>}
             <div className='container'>
                 <Row className='contact_title'>
@@ -35,7 +35,7 @@ const Contact = () => {
                 </Row>
             </div>
             <div className='container'>
-                {language !== null && <ContactForm language={language} />}
+                {language !== null && <ContactForm language={language} emailTo={data.destinationEmails} emailCC={data.ccEmails} />}
             </div>
             <div className='container'>
                 <Row className=''>

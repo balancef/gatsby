@@ -9,6 +9,10 @@ const useContact = () => {
       title
       text
       subTitle
+      titlePage
+      descriptionPage
+      ccEmails
+      destinationEmails
       banner {
         title
         subtitle
@@ -41,6 +45,10 @@ const useContact = () => {
         title: titleSpanish
         text: textSpanish
         subTitle: subTitleSpanish
+        titlePage: titlePageSpanish
+        descriptionPage: descriptionPageSpanish
+        ccEmails
+        destinationEmails
         banner {
           title: titleSpanish
           subtitle: subtitleSpanish
@@ -73,6 +81,10 @@ const useContact = () => {
         title: titleGerman
         text: textGerman
         subTitle: subTitleGerman
+        titlePage: titlePageGerman
+        descriptionPage: descriptionPageGerman
+        ccEmails
+        destinationEmails
         banner {
           title: titleGerman
           subtitle: subtitleGerman
