@@ -6,22 +6,23 @@ import { MaterialIcon, Icon } from "..";
 import { Button } from "react-bootstrap";
 
 const Menu = ({ links, button, language }) => {
-  const itemsMenu = links.map((link) =>
+
+  const itemsMenu = links.map((link, idx) =>
     link._type === "dropdown" ? (
       <NavDropdown
         title={
-          <div className="nav-link">
+          <div className="nav-link" key={`title-${idx}`}>
             {link.icon !== null && <Icon code={link.icon.icon}></Icon>}
             {link.text}
           </div>
         }
         id="basic-nav-dropdown"
-        key={link._key}
+        key={`drop-${idx}`}
       >
         {link.links.map((dropdownLink) =>
           dropdownLink.separated ? (
             <>
-              <NavDropdown.Divider />
+              <NavDropdown.Divider key={`divider-${dropdownLink._key}`}/>
               <NavDropdown.Item
                 key={dropdownLink._key}
                 href={dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.url
