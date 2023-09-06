@@ -1,0 +1,18 @@
+.professional {
+  &__image {
+    img {
+      border-radius: 50%;
+    }
+    width: 100px;
+    height: 100px;
+  }
+  &__academyLogo {
+    height: 30px;
+    img {
+        height: 100%;
+    }
+  }
+  &__verified {
+    height: 30px;
+  }
+}
