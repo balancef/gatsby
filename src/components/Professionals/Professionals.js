@@ -9,6 +9,10 @@ const Professionals = () => {
   const { language } = useContext(LanguageContext);
   let data = null;
 
+  let defaultData = null;
+
+  console.log(query, "query");
+
   if (language === "es") {
     data = query.allSanityProfessional.ProfessionalsES;
   } else {
@@ -19,17 +23,30 @@ const Professionals = () => {
     }
   }
 
+  if (language === "es") {
+    defaultData = query.sanityProfessionalConfigES;
+  } else {
+    if (language === "de") {
+      defaultData = query.sanityProfessionalConfigDE;
+    } else {
+      defaultData = query.sanityProfessionalConfig;
+    }
+  }
+
   const professionals = data.map((professional) => {
     return (
       <ProfessionalCard
-        photo={professional.image}
-        ranking={professional.ranking}
+        defaultPhoto={defaultData.photoDefault.image}
+        photo={professional.image.image}
+        ranking={professional.ranking?.ranking}
         official={professional.official}
         verified={professional.verified}
         name={professional.name}
         professions={professional.profession}
         services={professional.services}
         address={professional.address}
+        slug={professional.slug.current}
+        logoAcademy={defaultData.academyLogo.image}
       />
     );
   });
