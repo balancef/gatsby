@@ -3,6 +3,135 @@ import { useStaticQuery, graphql } from "gatsby";
 const useProfessionals = () => {
   return useStaticQuery(graphql`
     {
+      sanityProfessionalConfig {
+        photoDefault {
+          alt
+          image {
+            hotspot {
+              y
+              x
+              width
+              height
+            }
+            crop {
+              top
+              right
+              left
+              bottom
+            }
+            asset {
+              _id
+            }
+          }
+        }
+        academyLogo {
+          image {
+            hotspot {
+              y
+              x
+              width
+              height
+            }
+            crop {
+              top
+              right
+              left
+              bottom
+            }
+            asset {
+              _id
+            }
+          }
+          alt
+        }
+        _rawDescriptionDefault
+      }
+      sanityProfessionalConfigES: sanityProfessionalConfig  {
+        photoDefault {
+          alt
+          image {
+            hotspot {
+              y
+              x
+              width
+              height
+            }
+            crop {
+              top
+              right
+              left
+              bottom
+            }
+            asset {
+              _id
+            }
+          }
+        }
+        academyLogo {
+          image {
+            hotspot {
+              y
+              x
+              width
+              height
+            }
+            crop {
+              top
+              right
+              left
+              bottom
+            }
+            asset {
+              _id
+            }
+          }
+          alt
+        }
+        _rawDescriptionDefault: _rawDescriptionDefaultSpanish
+      }
+      sanityProfessionalConfigDE: sanityProfessionalConfig   {
+        photoDefault {
+          alt
+          image {
+            hotspot {
+              y
+              x
+              width
+              height
+            }
+            crop {
+              top
+              right
+              left
+              bottom
+            }
+            asset {
+              _id
+            }
+          }
+        }
+        academyLogo {
+          image {
+            hotspot {
+              y
+              x
+              width
+              height
+            }
+            crop {
+              top
+              right
+              left
+              bottom
+            }
+            asset {
+              _id
+            }
+          }
+          alt
+        }
+        _rawDescriptionDefault: _rawDescriptionDefaultGerman
+      }
       allSanityProfessional {
         ProfessionalsEN: nodes {
           website
@@ -17,6 +146,7 @@ const useProfessionals = () => {
           }
           ranking {
             ranking
+            priority
             id
           }
           profession {
@@ -76,6 +206,7 @@ const useProfessionals = () => {
           }
           ranking {
             ranking: rankingSpanish
+            priority
             id
           }
           profession {
@@ -135,6 +266,7 @@ const useProfessionals = () => {
           }
           ranking {
             ranking: rankingGerman
+            priority
             id
           }
           profession {
