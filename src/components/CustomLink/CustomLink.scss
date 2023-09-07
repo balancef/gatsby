@@ -67,7 +67,21 @@
     }
   }
 
+  &.button-thin {
+    padding: 8px 16px;
+    width: 100%;
+    justify-content: center;
+  }
+
   &.icon {
     margin-right: 0;
+  }
+}
+
+@media (min-width: $md-breakpoint) {
+  .custom-link {
+    &.button-thin {
+      width: max-content;
+    }
   }
 }

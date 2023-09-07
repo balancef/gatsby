@@ -47,44 +47,44 @@ exports.createPages = async ({ graphql, actions }) => {
 
 
   // CREACION DE PAGINAS DE AYUDA
-  // const { data: helpQueryData } = await graphql(`
-  //   query HelpPages {
-  //     allSanityHelp {
-  //       nodes {
-  //         slug {
-  //           current
-  //         }
-  //       }
-  //     }
-  //   }
-  // `)
+  const { data: helpQueryData } = await graphql(`
+    query HelpPages {
+      allSanityHelp {
+        nodes {
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `)
 
-  // if (helpQueryData.errors) {
-  //   reporter.panicOnBuild("Error creando paginas")
-  // }
+  if (helpQueryData.errors) {
+    reporter.panicOnBuild("Error creando paginas")
+  }
 
-  // helpQueryData.allSanityHelp.nodes.forEach(node => {
-  //   const pageEN = path.resolve("./src/templates/helpEN.js")
-  //   createPage({
-  //     path: "/help/" + node.slug.current,
-  //     component: pageEN,
-  //     context: { slug: node.slug.current, language: "en" },
-  //   })
+  helpQueryData.allSanityHelp.nodes.forEach(node => {
+    const pageEN = path.resolve("./src/templates/helpEN.js")
+    createPage({
+      path: "/help/" + node.slug.current,
+      component: pageEN,
+      context: { slug: node.slug.current, language: "en" },
+    })
 
-  //   const pageES = path.resolve("./src/templates/helpES.js")
-  //   createPage({
-  //     path: "/es/help/" + node.slug.current,
-  //     component: pageES,
-  //     context: { slug: node.slug.current, language: "es" },
-  //   })
+    const pageES = path.resolve("./src/templates/helpES.js")
+    createPage({
+      path: "/es/help/" + node.slug.current,
+      component: pageES,
+      context: { slug: node.slug.current, language: "es" },
+    })
 
-  //   const pageGER = path.resolve("./src/templates/helpDE.js")
-  //   createPage({
-  //     path: "/de/help/" + node.slug.current,
-  //     component: pageGER,
-  //     context: { slug: node.slug.current, language: "de" },
-  //   })
-  // })
+    const pageGER = path.resolve("./src/templates/helpDE.js")
+    createPage({
+      path: "/de/help/" + node.slug.current,
+      component: pageGER,
+      context: { slug: node.slug.current, language: "de" },
+    })
+  })
 
   // CREACION DE PAGINAS LEGALES  
   const { data: legalPageQueryData } = await graphql(`
