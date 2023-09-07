@@ -146,6 +146,7 @@ const useProfessionals = () => {
           }
           ranking {
             ranking
+            priority
             id
           }
           profession {
@@ -205,6 +206,7 @@ const useProfessionals = () => {
           }
           ranking {
             ranking: rankingSpanish
+            priority
             id
           }
           profession {
@@ -264,6 +266,7 @@ const useProfessionals = () => {
           }
           ranking {
             ranking: rankingGerman
+            priority
             id
           }
           profession {
