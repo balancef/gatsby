@@ -254,6 +254,15 @@ const Professionals = () => {
           address={professional.address}
           slug={professional.slug?.current}
           logoAcademy={defaultData.academyLogo.image}
+          descriptionDefault={defaultData._rawDescriptionDefault}
+          certificateNumber={professional.certificateNumber}
+          certificateDate={professional.certificateDate}
+          lastCertificateUpdate={professional.lastCertificateUpdate}
+          validTo={professional.validTo}
+          description={professional._rawDescription}
+          phone={professional.phone}
+          email={professional.email}
+          website={professional.website}
         />
       );
     });
