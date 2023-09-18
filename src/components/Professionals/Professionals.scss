@@ -52,7 +52,7 @@
 
   &__name {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
 
   &__logos {
@@ -93,11 +93,12 @@
   &__address {
     a {
       &:hover {
-        text-decoration: underline;
+        text-decoration: none;
+        color: $color-primary;
       }
 
       text-decoration: none;
-      color: $color-primary;
+      color: $color-text;
       display: flex;
 
       svg {
@@ -120,15 +121,15 @@
     }
 
     li {
-      padding: 8px 0;
+      padding: 5px 0;
       display: flex;
       align-items: center;
     }
     &-dates{
-      margin-bottom: 10px;
+      margin: 20px 0;
     }
     &-description{
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
 
     &-contact {
@@ -136,7 +137,7 @@
         text-decoration: none;
         color: $color-text;
         p {
-          font-size: 13px;
+          font-size: 14px;
         }
       }
 
@@ -148,9 +149,14 @@
   }
 
   &__button{
-    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
     color: $color-black;
-    text-decoration:underline $color-black;
+    text-decoration:none;
+    svg{
+      min-width: 25px;
+    }
   }
 
 }
@@ -202,7 +208,7 @@
 
       &__button:hover{
         color: $color-text;
-        text-decoration: underline $color-text;
+        text-decoration: none;
       }
 
     }
@@ -217,12 +223,12 @@
         &-dates {
           ul {
             justify-content: start;
-            gap: 70px;
+            gap: 20px;
           }
         }
         &-contact{
           ul{
-            gap: 70px;
+            gap: 20px;
           }
         }
       }

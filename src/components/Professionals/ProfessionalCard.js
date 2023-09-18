@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./Professionals.scss";
-import { FaStar, FaGraduationCap, FaRegClock, FaPhoneAlt} from "react-icons/fa";
+import { FaStar, FaGraduationCap, FaRegClock, FaPhoneAlt, FaAngleDown, FaAngleUp} from "react-icons/fa";
 import { MdInfo, MdLocationOn, MdEmail, MdOutlinePersonalVideo, MdMoreTime, } from "react-icons/md";
 import { LanguageContext } from "../../context/languajeContext";
 import SanityImage from "gatsby-plugin-sanity-image";
@@ -180,7 +180,6 @@ const ProfessionalCard = ({
               </div>
               {
                 <div className="professional__information-contact">
-                  <p>{language === "es" ? "Contacto" : language === "en" ? "Contact" : "Kontakt"}</p>
                   <ul>
                     {phone && <li><FaPhoneAlt size={20} /><CustomLink href={`phone:${phone}`} text={phone} /></li>}
                     {email && <li><MdEmail size={20} /><CustomLink href={`mailto:${email}`} text={email} /></li>}
@@ -191,6 +190,7 @@ const ProfessionalCard = ({
           }
           <Link onClick={ProfessionalDescription} to="#professional" className="professional__button">
             {IsExpanded ? (language === "es" ? "Ocultar información" : language === "en" ? "Hide information" : "Informationen verheimlichen") : (language === "es" ? "Más información" : language === "en" ? "More information" : "Mehr Informationen")}
+            {IsExpanded ? <FaAngleUp size={20}/> : <FaAngleDown size={20}/>}
           </Link>
         </div>
       </div>
