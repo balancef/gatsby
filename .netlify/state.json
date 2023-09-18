@@ -1,0 +1,19 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Minsk",
+			"country": {
+				"code": "BY",
+				"name": "Belarus"
+			},
+			"subdivision": {
+				"code": "HM",
+				"name": "Minsk City"
+			},
+			"timezone": "Europe/Minsk",
+			"latitude": 53.9007,
+			"longitude": 27.5709
+		},
+		"timestamp": 1694436611090
+	}
+}

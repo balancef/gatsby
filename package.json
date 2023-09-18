@@ -38,6 +38,7 @@
     "react-multi-carousel": "^2.8.4",
     "react-responsive-carousel": "^3.2.23",
     "sass": "^1.57.1",
-    "sharp": "^0.31.3"
+    "sharp": "^0.31.3",
+    "unorm": "^1.6.0"
   }
 }
