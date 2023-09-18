@@ -18,92 +18,216 @@
 .professional {
   &__image {
     align-self: center;
+
     img {
       border-radius: 50%;
     }
+
     width: 100px;
     height: 100px;
     margin-bottom: 15px;
   }
+
   &__ranking {
     text-align: center;
     margin-bottom: 15px;
+
     svg {
       color: $color-warning;
       font-size: 22px;
       margin-right: 1px;
     }
+
     h6 {
       img {
         display: inline;
         margin-right: 7px;
         height: 28px;
       }
+
       font-weight: 700;
       color: $color-black;
     }
   }
+
   &__name {
     text-align: center;
     margin-bottom: 15px;
   }
+
   &__logos {
     display: flex;
     gap: 10px;
     justify-content: center;
     margin-bottom: 20px;
+
     &_academyLogo {
       height: 25px;
+
       img {
         height: 100%;
       }
     }
+
     &_verified {
       height: 25px;
     }
   }
+
   &__professions {
     font-weight: 500;
     margin-bottom: 15px;
     padding-left: 5px;
   }
+
   &__services {
     display: flex;
+
     svg {
       min-width: 35px;
     }
+
     margin-bottom: 10px;
   }
+
   &__address {
     a {
       &:hover {
         text-decoration: underline;
       }
+
       text-decoration: none;
       color: $color-primary;
       display: flex;
+
       svg {
         min-width: 35px;
       }
+
+    }
+    margin-bottom: 10px;
+  }
+
+  &__information {
+    svg {
+      min-width: 35px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+    }
+    &-dates{
       margin-bottom: 10px;
     }
+    &-description{
+      margin-bottom: 10px;
+    }
+
+    &-contact {
+      a {
+        text-decoration: none;
+        color: $color-text;
+        p {
+          font-size: 13px;
+        }
+      }
+
+      a:hover {
+        cursor: pointer;
+        color: $color-primary;
+      }
+    }
   }
+
+  &__button{
+    padding: 10px 0;
+    color: $color-black;
+    text-decoration:underline $color-black;
+  }
+
 }
 
 @media (min-width: $md-breakpoint) {
   .professionalWrapper {
     flex-direction: row;
+
     .leftContainer {
       flex: 1;
     }
+
     .rightContainer {
       flex: 3;
     }
+
     .professional {
       &__name {
         text-align: left;
         padding-left: 5px;
       }
+
+      &__information {
+        &-dates {
+          ul {
+            display: flex;
+            gap: 5px;
+          }
+        }
+
+        &-description {
+          padding-left: 5px;
+        }
+        &-contact{
+          p{
+            padding-left: 5px;
+          }
+          a{
+            p{
+              font-size: 16px;
+            }
+          }
+        }
+
+      }
+      &__button{
+        padding-left: 5px;
+      }
+
+      &__button:hover{
+        color: $color-text;
+        text-decoration: underline $color-text;
+      }
+
+    }
+
+  }
+}
+
+@media (min-width: $lg-breakpoint) {
+  .professionalWrapper {
+    .professional {
+      &__information {
+        &-dates {
+          ul {
+            justify-content: start;
+            gap: 70px;
+          }
+        }
+        &-contact{
+          ul{
+            gap: 70px;
+          }
+        }
+      }
+
     }
   }
+
 }

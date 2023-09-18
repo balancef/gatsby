@@ -56,6 +56,15 @@ const Professionals = () => {
           address={professional.address}
           slug={professional.slug?.current}
           logoAcademy={defaultData.academyLogo.image}
+          descriptionDefault={defaultData._rawDescriptionDefault}
+          certificateNumber={professional.certificateNumber}
+          certificateDate={professional.certificateDate}
+          lastCertificateUpdate={professional.lastCertificateUpdate}
+          validTo={professional.validTo}
+          description={professional._rawDescription}
+          phone={professional.phone}
+          email={professional.email}
+          website={professional.website}
         />
       );
     });
@@ -78,10 +87,10 @@ const Professionals = () => {
   };
 
   return (
-    <div ref={wrapperRef} className="container">
+    <div ref={wrapperRef}>
       <div> {currentProfessionals}</div>
       {pageNumbers.length >= 2 ? (
-        <nav>
+        <nav className="container">
           <ul className="Pagination">
             {currentPage !== 1 && (
               <li className="Pagination__item">
