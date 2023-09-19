@@ -1,0 +1,234 @@
+@import "../../styles/global";
+
+.ProfessionalPage {
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid $color-border;
+
+  .Professional {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    &__image {
+      margin: 0 auto;
+
+      &-image {
+        border-radius: 50%;
+        max-width: 100px;
+      }
+
+    }
+
+    &__ranking {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 40px;
+
+      &-master {
+        display: flex;
+        flex-direction: row;
+        font-weight: 700;
+        margin-bottom: 0;
+      }
+
+      &-logo {
+        height: 28px;
+        padding-right: 5px;
+      }
+
+    }
+
+    &__logos {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      &::last-child {
+        padding-left: 10px;
+      }
+
+
+      &-academy {
+        height: 25px;
+      }
+
+      &-verified {
+        padding-left: 10px;
+      }
+
+
+    }
+
+    &__content {
+
+      &-name {
+        text-align: center;
+        margin: 0;
+
+      }
+
+      &-location {
+        display: flex;
+        align-items: center;
+
+        svg {
+          margin-right: 10px;
+        }
+      }
+
+      &-dates {
+        padding-left: 0;
+        margin-bottom: 0;
+
+        li {
+          list-style: none;
+          margin-bottom: 10px;
+
+          svg {
+            margin-right: 10px;
+          }
+        }
+
+      }
+
+      &-professions {
+        p {
+          margin-bottom: 10px;
+        }
+
+        svg {
+          margin-right: 10px;
+        }
+      }
+
+
+      &-services {
+        svg {
+          margin-right: 10px;
+        }
+
+        p {
+          margin-bottom: 10px;
+        }
+      }
+
+    }
+
+    &__contact {
+      ul {
+        padding: 0;
+
+        div {
+          margin-bottom: 20px;
+          align-items: center;
+        }
+      }
+
+      &-phone {
+        display: flex;
+        flex-direction: row;
+
+        a {
+          margin-left: 10px;
+        }
+      }
+
+      &-email {
+        display: flex;
+        flex-direction: row;
+
+        a {
+          margin-left: 10px;
+        }
+      }
+
+      &-website {
+        display: flex;
+        flex-direction: row;
+
+        a {
+          margin-left: 10px;
+        }
+      }
+    }
+
+  }
+}
+
+.regresar {
+  display: flex;
+  justify-content: start;
+
+  a {
+    color: $color-text;
+    display: flex;
+    flex-direction: row-reverse;
+
+    p {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: $md-breakpoint) {
+  .regresar {
+    a {
+      p {
+        display: flex;
+      }
+    }
+  }
+
+  .ProfessionalPage {
+
+    .Professional {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      &__image {
+        margin: 0;
+      }
+
+      &__logos {
+        margin: 0;
+      }
+
+      &__content {
+        &-name {
+          text-align: left;
+        }
+
+        &-dates {
+          display: flex;
+          flex-direction: row;
+          gap: 50px;
+        }
+
+
+      }
+
+      &__contact {
+        a{
+          text-decoration: none;
+          color: $color-text;
+        }
+        a:hover{
+          cursor: pointer;
+          color: $color-primary;
+        }
+
+        div {
+          margin: 0;
+        }
+      }
+
+    }
+
+  }
+
+}
