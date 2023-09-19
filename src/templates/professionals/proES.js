@@ -8,32 +8,32 @@ const ProPage = ({location,  data }) => {
   const professionalData = data?.allSanityProfessional?.nodes[0];
   const titlePage = professionalData.name
   let query = useProfessionals();
-  let defaultData = query.sanityProfessionalConfigES;
+  let defaultData = query?.sanityProfessionalConfigES;
 
   return (
     <Layout location={location}>
       <Seo title={titlePage} description="" keywords="" />
       <ProfessionalCard
-          defaultPhoto={defaultData.photoDefault.image}
-          photo={professionalData.image?.image}
+          defaultPhoto={defaultData?.photoDefault?.image}
+          photo={professionalData?.image?.image}
           ranking={professionalData.ranking?.ranking}
-          official={professionalData.official}
-          verified={professionalData.verified}
+          official={professionalData?.official}
+          verified={professionalData?.verified}
           name={professionalData.name}
           professions={professionalData.profession}
-          services={professionalData.services}
+          services={professionalData?.services}
           address={professionalData.address}
           slug={professionalData.slug?.current}
-          logoAcademy={defaultData.academyLogo.image}
-          descriptionDefault={defaultData._rawDescriptionDefault}
-          certificateNumber={professionalData.certificateNumber}
-          certificateDate={professionalData.certificateDate}
-          lastCertificateUpdate={professionalData.lastCertificateUpdate}
-          validTo={professionalData.validTo}
-          description={professionalData._rawDescription}
+          logoAcademy={defaultData?.academyLogo?.image}
+          descriptionDefault={defaultData?._rawDescriptionDefault}
+          certificateNumber={professionalData?.certificateNumber}
+          certificateDate={professionalData?.certificateDate}
+          lastCertificateUpdate={professionalData?.lastCertificateUpdate}
+          validTo={professionalData?.validTo}
+          description={professionalData?._rawDescription}
           phone={professionalData.phone}
           email={professionalData.email}
-          website={professionalData.website}
+          website={professionalData?.website}
         />
     </Layout>
   );
