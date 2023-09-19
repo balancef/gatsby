@@ -171,7 +171,7 @@ const ProfessionalCard = ({
                     <li title={language === "es" ? "Número de certificación" : language === "en" ? "Certification number" : "Zertifizierungsnummer"}><FaGraduationCap size={20} />{certificateNumber}</li>
                     {certificateDate && <li title={language === "es" ? "Fecha de certificación" : language === "en" ? "Certification date" : "Zertifizierungsdatum"}><MdOutlinePersonalVideo size={20} />{formatoFechas(certificateDate)}</li>}
                     {lastCertificateUpdate && <li title={language === "es" ? "Ultima actualización" : language === "en" ? "Last update" : "<Letztes Update>"}><FaRegClock size={20} />{formatoFechas(lastCertificateUpdate)}</li>}
-                    {validTo && <li title={language === "es" ? "Válido hasta" : language === "en" ? "Valid To" : "Gültig bis"}><MdMoreTime size={20} />{formatoFechas(validTo)}</li>}
+                    {(ranking.toLowerCase() === "master" || ranking.toLowerCase() === "supervisor") ? <></> : <li title={language === "es" ? "Válido hasta" : language === "en" ? "Valid To" : "Gültig bis"}><MdMoreTime size={20} />{formatoFechas(validTo)}</li>}
                   </ul>
                 </div>
               )}

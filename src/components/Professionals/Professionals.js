@@ -38,8 +38,6 @@ const Professionals = () => {
     }
   }
 
-  console.log(data, "data");
-
   const professionals = data
     .sort((a, b) => a.ranking.priority - b.ranking.priority)
     .map((professional) => {
