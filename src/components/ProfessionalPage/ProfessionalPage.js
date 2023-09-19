@@ -13,7 +13,6 @@ import { BsGlobe, BsFillFilePersonFill } from "react-icons/bs"
 
 
 const ProfessionalPage = ({ professionalData }) => {
-  console.log(professionalData);
 
   const professionsList = professionalData?.profession?.map((profession) => profession.profession).join(", ");
 
@@ -44,7 +43,6 @@ const ProfessionalPage = ({ professionalData }) => {
       titleProfessions = "Professions"
     }
   }
-  console.log(defaultData)
 
   function RankingComponent({ professional }) {
     if (professional.includes("1")) {

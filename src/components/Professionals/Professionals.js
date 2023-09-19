@@ -83,11 +83,7 @@ const Professionals = () => {
   const uniqueCountries = [
     ...new Set(data.map((item) => item.country.country)),
   ];
-
-  console.log(filteredProfessionalsList, "list");
-  console.log(data, "data");
-  console.log(language, "language");
-
+  
   const handleSearch = () => {
     const query = removeDiacritics(searchQuery.toLowerCase());
 
@@ -157,7 +153,10 @@ const Professionals = () => {
           checked={selectedProfessions.includes(item.profession)}
           onChange={handleProfessionCheckboxChange}
         />
-        {item.profession}
+        <p>
+          {item.profession}
+          <p className="profession-description">{item.professionDescription}</p>
+        </p>
       </label>
     ));
   };
@@ -209,6 +208,13 @@ const Professionals = () => {
     setSelectedCountry(e.target.value);
   };
 
+  const resetFilters = () => {
+    setSelectedCountry("");
+    setSelectedRankings([]);
+    setSelectedProfessions([]);
+    setSelectedServices([]);
+  };
+
   const filteredProfessionals = filteredProfessionalsList.filter(
     (professional) => {
       const matchesRanking =
@@ -240,7 +246,6 @@ const Professionals = () => {
   const professionals = filteredProfessionals
     .sort((a, b) => a.ranking.priority - b.ranking.priority)
     .map((professional) => {
-      // console.log(professional, "professional");
       return (
         <ProfessionalCard
           defaultPhoto={defaultData.photoDefault.image}
@@ -305,38 +310,50 @@ const Professionals = () => {
             </div>
           </div>
         </div>
+        <h6 className="container mt-4">
+          {selectedCountry ? `All in ${selectedCountry}` : "All the results"}
+        </h6>
         <div className="container filter-wrapper">
-
-          <div className={`filter ${showFilter ? 'filter-expanded' : ''}`}>
-            <button className="filter-button" onClick={() => setShowFilter(!showFilter)}>Filter by <Icon code={"FaAngleDown"}></Icon></button>
-          <div
-            className={`filter-container ${showFilter ? 'show-filter' : ''}`}
-          >
-            <select
-            className="filter-select"
-              value={selectedCountry}
-              onChange={handleCountrySelectChange}
+          <div className={`filter ${showFilter ? "filter-expanded" : ""}`}>
+            <button
+              className="filter-button"
+              onClick={() => setShowFilter(!showFilter)}
             >
-              <option value="">All Countries</option>
-              {uniqueCountries.map((country) => (
-                <option key={country} value={country}>
-                  {country}
-                </option>
-              ))}
-            </select>
-            <div className="filter-checkbox ranking">
-              <h6>Ranking</h6>
-              {renderRankingCheckboxes()}
+              Filter by <Icon code={"FaAngleDown"}></Icon>
+            </button>
+            <div
+              className={`filter-container ${showFilter ? "show-filter" : ""}`}
+            >
+              <div className="filter-description">
+                <p>Filter by:</p>
+                <button onClick={resetFilters}>Reset filters</button>
+              </div>
+
+              <select
+                className="filter-select"
+                value={selectedCountry}
+                onChange={handleCountrySelectChange}
+              >
+                <option value="">All Countries</option>
+                {uniqueCountries.map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
+              <div className="filter-checkbox ranking">
+                <p className="checkbox-title">Ranking</p>
+                {renderRankingCheckboxes()}
+              </div>
+              <div className="filter-checkbox professions">
+                <p className="checkbox-title">Professions</p>
+                {renderProfessionsCheckboxes()}
+              </div>
+              <div className="filter-checkbox services">
+                <p className="checkbox-title">Services</p>
+                {renderServicesCheckboxes()}
+              </div>
             </div>
-            <div className="filter-checkbox professions">
-              <h6>Professions</h6>
-              {renderProfessionsCheckboxes()}
-            </div>
-            <div className="filter-checkbox services">
-              <h6>Services</h6>
-              {renderServicesCheckboxes()}
-            </div>
-          </div>
           </div>
           <div className="results-container">
             <div> {currentProfessionals}</div>

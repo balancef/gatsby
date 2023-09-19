@@ -66,7 +66,7 @@ input[type="text"] {
   margin-top: 20px;
 }
 
-.filter button {
+.filter-button {
   display: block;
   border: none;
   background: none;
@@ -81,6 +81,21 @@ input[type="text"] {
 .filter-container {
   display: none;
 }
+
+.filter-description {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  button {
+    border: none;
+    background: none;
+    color: $color-primary;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 .filter-container.show-filter {
   display: block;
   position: absolute;
@@ -97,19 +112,51 @@ input[type="text"] {
   padding: 5px;
   color: $color-text;
   margin-bottom: 15px;
+  border-color: #cfcfc8;
+  background-color: white;
+  &:focus-visible {
+    outline: none;
+    border: 1px solid #cfcfc8;
+  }
+  option {
+    background-color: white;
+  }
 }
 
 .filter-checkbox {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid $color-border;
   display: flex;
   flex-direction: column;
+  max-height: 350px;
+  overflow-y: auto;
+  padding-bottom: 15px;
+  .checkbox-title {
+    font-weight: 500;
+    color: $color-black;
+    margin-bottom: 10px;
+  }
   label {
     font-size: 14px;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
+    color: $color-black;
+    display: flex;
+    align-items: start;
+    p {
+      font-size: 14px;
+    }
+    .profession-description {
+      color: $color-text;
+    }
     input {
-      margin-right: 5px;
+      margin-right: 8px;
+      margin-top: 3px;
     }
   }
+}
+
+.filter-checkbox.services {
+  border: none;
 }
 
 // professional card
@@ -218,7 +265,6 @@ input[type="text"] {
       svg {
         min-width: 35px;
       }
-
     }
     margin-bottom: 10px;
   }
@@ -239,10 +285,10 @@ input[type="text"] {
       display: flex;
       align-items: center;
     }
-    &-dates{
+    &-dates {
       margin: 20px 0;
     }
-    &-description{
+    &-description {
       margin-bottom: 20px;
     }
 
@@ -262,17 +308,16 @@ input[type="text"] {
     }
   }
 
-  &__button{
+  &__button {
     display: flex;
     align-items: center;
     padding-top: 20px;
     color: $color-black;
-    text-decoration:none;
-    svg{
+    text-decoration: none;
+    svg {
       min-width: 25px;
     }
   }
-
 }
 
 @media (min-width: $md-breakpoint) {
@@ -304,46 +349,46 @@ input[type="text"] {
         &-description {
           padding-left: 5px;
         }
-        &-contact{
-          p{
+        &-contact {
+          p {
             padding-left: 5px;
           }
-          a{
-            p{
+          a {
+            p {
               font-size: 16px;
             }
           }
         }
-
       }
-      &__button{
+      &__button {
         padding-left: 5px;
       }
 
-      &__button:hover{
+      &__button:hover {
         color: $color-text;
         text-decoration: none;
       }
-
     }
-
   }
   .container.filter-wrapper {
     flex-direction: row;
   }
 
   .filter {
-    width: auto;
+    max-width: 270px;
+    height: fit-content;
+    border-radius: 5px;
+    padding: 15px;
+    border: 1px solid $color-border;
   }
 
-  .filter button {
+  .filter-button {
     display: none;
   }
 
   .filter-container {
     display: block;
     position: relative;
-    width: 300px;
   }
   .filter-container.show-filter {
     display: block;
@@ -376,14 +421,12 @@ input[type="text"] {
             gap: 20px;
           }
         }
-        &-contact{
-          ul{
+        &-contact {
+          ul {
             gap: 20px;
           }
         }
       }
-
     }
   }
-
 }
