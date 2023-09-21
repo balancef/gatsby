@@ -46,7 +46,6 @@ const Professionals = () => {
 
   const { language } = useContext(LanguageContext);
 
-
   let data = null;
   let defaultData = null;
   let servicesData = null;
@@ -84,7 +83,6 @@ const Professionals = () => {
   if (matchingCountry) {
     setSelectedCountry(matchingCountry.country);
   }
-
 
   function removeDiacritics(str) {
     return unorm.nfkd(str).replace(/[\u0300-\u036f]/g, "");
@@ -206,17 +204,19 @@ const Professionals = () => {
   };
 
   const renderServicesCheckboxes = () => {
-    return servicesData.map((item) => (
-      <label key={item.id}>
-        <input
-          type="checkbox"
-          value={item.services}
-          checked={selectedServices.includes(item.services)}
-          onChange={handleServicesCheckboxChange}
-        />
-        {item.services}
-      </label>
-    ));
+    return servicesData
+      .sort((a, b) => a.services.localeCompare(b.services))
+      .map((item) => (
+        <label key={item.id}>
+          <input
+            type="checkbox"
+            value={item.services}
+            checked={selectedServices.includes(item.services)}
+            onChange={handleServicesCheckboxChange}
+          />
+          {item.services}
+        </label>
+      ));
   };
 
   const handleRankingCheckboxChange = (e) => {
