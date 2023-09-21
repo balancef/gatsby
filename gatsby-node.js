@@ -126,4 +126,45 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
+    // CREACION DE PAGINAS PROFESIONALES  
+    const { data: professionalsDataPages } = await graphql(`
+    query ProfessionalsPages {
+      allSanityProfessional {
+        nodes {
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `)
+
+  if (professionalsDataPages.errors) {
+    reporter.panicOnBuild("Error creando paginas de profesionales")
+  }
+
+  professionalsDataPages.allSanityProfessional.nodes.forEach(node => {
+    const ProfessionalPagesEN = path.resolve("./src/templates/professionals/proEN.js")
+    createPage({
+      path: "/search/" + node.slug.current,
+      component: ProfessionalPagesEN,
+      context: { slug: node.slug.current, language: "en" },
+    })
+
+    const ProfessionalPagesES = path.resolve("./src/templates/professionals/proES.js")
+    createPage({
+      path: "/es/search/" + node.slug.current,
+      component: ProfessionalPagesES,
+      context: { slug: node.slug.current, language: "es" },
+    })
+
+    const ProfessionalPagesGER = path.resolve("./src/templates/professionals/proDE.js")
+    createPage({
+      path: "/de/search/" + node.slug.current,
+      component: ProfessionalPagesGER,
+      context: { slug: node.slug.current, language: "de" },
+    })
+  })
+
 }
+
