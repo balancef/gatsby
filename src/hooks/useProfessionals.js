@@ -45,6 +45,7 @@ const useProfessionals = () => {
           alt
         }
         _rawDescriptionDefault
+
       }
       sanityProfessionalConfigES: sanityProfessionalConfig  {
         photoDefault {
@@ -134,6 +135,10 @@ const useProfessionals = () => {
       }
       allSanityProfessional {
         ProfessionalsEN: nodes {
+          country {
+            country
+            countryCode
+          }
           website
           verified
           validTo
@@ -194,6 +199,10 @@ const useProfessionals = () => {
           _id
         }
         ProfessionalsES: nodes {
+          country {
+            country:countrySpanish
+            countryCode
+          }
           website
           verified
           validTo
@@ -254,6 +263,10 @@ const useProfessionals = () => {
           _id
         }
         ProfessionalsDE: nodes {
+          country {
+            country: countryGerman
+            countryCode
+          }
           website
           verified
           validTo
