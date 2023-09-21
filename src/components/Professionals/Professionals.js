@@ -1,11 +1,22 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
+import axios from "axios";
 import unorm from "unorm";
 import { Link } from "gatsby";
 import "./Professionals.scss";
 import useProfessionals from "../../hooks/useProfessionals";
 import useServices from "../../hooks/useServices";
+import useWindowSize from "../../hooks/useWindowSize";
+import useGeolocation from "../../hooks/useGeolocation";
 import { LanguageContext } from "../../context/languajeContext";
-import { FaChevronLeft, FaChevronRight, FaAngleDown } from "react-icons/fa";
+import { dataLanguageTexts } from "./data";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaAngleDown,
+  FaAngleUp,
+  FaStar,
+} from "react-icons/fa";
+import emptyState from "../../images/emptyState.png";
 import ProfessionalCard from "./ProfessionalCard";
 import useRankings from "../../hooks/useRankings";
 import useProfessions from "../../hooks/useProfessions";
@@ -13,9 +24,11 @@ import { Icon } from "..";
 
 const Professionals = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
+  const [postsPerPage] = useState(10);
   const pageNumbers = [];
   const wrapperRef = useRef(null);
+  const dimensions = useWindowSize();
+  const countryCode = useGeolocation();
 
   const [showFilter, setShowFilter] = useState(false);
 
@@ -33,11 +46,13 @@ const Professionals = () => {
 
   const { language } = useContext(LanguageContext);
 
+
   let data = null;
   let defaultData = null;
   let servicesData = null;
   let professionsData = null;
   let rankingsData = null;
+  const texts = language !== null && dataLanguageTexts[language];
 
   if (language === "es") {
     data = query.allSanityProfessional.ProfessionalsES;
@@ -61,8 +76,35 @@ const Professionals = () => {
     }
   }
 
+  const countryList = [...new Set(data.map((item) => item.country))];
+
+  const matchingCountry = countryList.find(
+    (item) => item.countryCode === countryCode
+  );
+  if (matchingCountry) {
+    setSelectedCountry(matchingCountry.country);
+  }
+
+
   function removeDiacritics(str) {
     return unorm.nfkd(str).replace(/[\u0300-\u036f]/g, "");
+  }
+
+  function extractNumberWithIcon(inputString) {
+    const match = inputString.match(/\d+/);
+
+    if (match) {
+      const number = match[0];
+      const result = (
+        <p>
+          <FaStar size={14} />
+          {number}
+        </p>
+      );
+      return result;
+    } else {
+      return inputString;
+    }
   }
 
   const [filteredProfessionalsList, setFilteredProfessionalsList] =
@@ -83,7 +125,7 @@ const Professionals = () => {
   const uniqueCountries = [
     ...new Set(data.map((item) => item.country.country)),
   ];
-  
+
   const handleSearch = () => {
     const query = removeDiacritics(searchQuery.toLowerCase());
 
@@ -131,7 +173,9 @@ const Professionals = () => {
   };
 
   const renderRankingCheckboxes = () => {
-    return rankingsData.map((item) => (
+    const sortedRankings = rankingsData.sort((a, b) => a.priority - b.priority);
+
+    return sortedRankings.map((item) => (
       <label key={item.priority}>
         <input
           type="checkbox"
@@ -139,7 +183,7 @@ const Professionals = () => {
           checked={selectedRankings.includes(item.ranking)}
           onChange={handleRankingCheckboxChange}
         />
-        {item.ranking}
+        {extractNumberWithIcon(item.ranking)}
       </label>
     ));
   };
@@ -251,23 +295,23 @@ const Professionals = () => {
           defaultPhoto={defaultData.photoDefault.image}
           photo={professional.image?.image}
           ranking={professional.ranking?.ranking}
-          official={professional.official}
-          verified={professional.verified}
+          official={professional?.official}
+          verified={professional?.verified}
           name={professional.name}
           professions={professional.profession}
-          services={professional.services}
+          services={professional?.services}
           address={professional.address}
           slug={professional.slug?.current}
-          logoAcademy={defaultData.academyLogo.image}
+          logoAcademy={defaultData?.academyLogo.image}
           descriptionDefault={defaultData._rawDescriptionDefault}
-          certificateNumber={professional.certificateNumber}
-          certificateDate={professional.certificateDate}
-          lastCertificateUpdate={professional.lastCertificateUpdate}
-          validTo={professional.validTo}
+          certificateNumber={professional?.certificateNumber}
+          certificateDate={professional?.certificateDate}
+          lastCertificateUpdate={professional?.lastCertificateUpdate}
+          validTo={professional?.validTo}
           description={professional._rawDescription}
           phone={professional.phone}
           email={professional.email}
-          website={professional.website}
+          website={professional?.website}
         />
       );
     });
@@ -293,13 +337,11 @@ const Professionals = () => {
       <div>
         <div className="search-container">
           <div className="container">
-            <h6 className="input-title">
-              Buscador de Especialistas en Podología
-            </h6>
+            <h6 className="input-title">{texts.inputTitle}</h6>
             <div className="input-container">
               <input
                 type="text"
-                placeholder="Buscá por servicio, especialidad o país para localizar expertos en tu región"
+                placeholder={texts.inputPlaceholder}
                 value={searchQuery}
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
@@ -311,7 +353,9 @@ const Professionals = () => {
           </div>
         </div>
         <h6 className="container mt-4">
-          {selectedCountry ? `All in ${selectedCountry}` : "All the results"}
+          {selectedCountry
+            ? `${texts.allIn} ${selectedCountry}`
+            : texts.allResults}
         </h6>
         <div className="container filter-wrapper">
           <div className={`filter ${showFilter ? "filter-expanded" : ""}`}>
@@ -319,14 +363,19 @@ const Professionals = () => {
               className="filter-button"
               onClick={() => setShowFilter(!showFilter)}
             >
-              Filter by <Icon code={"FaAngleDown"}></Icon>
+              {texts.filterBy}{" "}
+              <span className={showFilter ? "rotate180" : ""}>
+                <FaAngleDown size={16} />
+              </span>
             </button>
             <div
-              className={`filter-container ${showFilter ? "show-filter" : ""}`}
+              className={`filter-container ${
+                showFilter && dimensions.windowWidth < 768 ? "show-filter" : ""
+              }`}
             >
               <div className="filter-description">
-                <p>Filter by:</p>
-                <button onClick={resetFilters}>Reset filters</button>
+                <p>{texts.filterBy}:</p>
+                <button onClick={resetFilters}>{texts.resetFilters}</button>
               </div>
 
               <select
@@ -334,7 +383,7 @@ const Professionals = () => {
                 value={selectedCountry}
                 onChange={handleCountrySelectChange}
               >
-                <option value="">All Countries</option>
+                <option value="">{texts.allCountries}</option>
                 {uniqueCountries.map((country) => (
                   <option key={country} value={country}>
                     {country}
@@ -342,21 +391,38 @@ const Professionals = () => {
                 ))}
               </select>
               <div className="filter-checkbox ranking">
-                <p className="checkbox-title">Ranking</p>
+                <p className="checkbox-title">{texts.ranking}</p>
                 {renderRankingCheckboxes()}
               </div>
               <div className="filter-checkbox professions">
-                <p className="checkbox-title">Professions</p>
+                <p className="checkbox-title">{texts.profession}</p>
                 {renderProfessionsCheckboxes()}
               </div>
               <div className="filter-checkbox services">
-                <p className="checkbox-title">Services</p>
+                <p className="checkbox-title">{texts.services}</p>
                 {renderServicesCheckboxes()}
+              </div>
+              <div className="no-service-results">
+                <p>{texts.noServices}</p>
+                <a href="#">{texts.moreInfo}</a>
               </div>
             </div>
           </div>
           <div className="results-container">
-            <div> {currentProfessionals}</div>
+            {currentProfessionals.length !== 0 ? (
+              <div> {currentProfessionals}</div>
+            ) : (
+              <div className="results-empty-state">
+                <img
+                  src={emptyState}
+                  alt="no results"
+                  className="image-empty-state"
+                />
+                <h5>{texts.noResults}</h5>
+                <p>{texts.noResultsExplain}</p>
+              </div>
+            )}
+
             {pageNumbers.length >= 2 ? (
               <nav>
                 <ul className="Pagination">
@@ -383,7 +449,7 @@ const Professionals = () => {
                         >
                           <Link
                             onClick={() => paginate(number)}
-                            to="#Professionals"
+                            to="#professionals"
                             className={`Pagination__link`}
                           >
                             {number}
@@ -393,7 +459,7 @@ const Professionals = () => {
                         <li key={number} className="Pagination__item">
                           <Link
                             onClick={() => paginate(number)}
-                            to="#Professionals"
+                            to="#professionals"
                             className={`Pagination__link `}
                           >
                             {number}
@@ -406,7 +472,7 @@ const Professionals = () => {
                     {currentPage !== pageNumbers[pageNumbers.length - 1] ? (
                       <Link
                         onClick={() => paginate(currentPage + 1)}
-                        to="#Articles"
+                        to="#professionals"
                       >
                         <FaChevronRight />
                       </Link>

@@ -56,9 +56,15 @@ input[type="text"] {
   }
 }
 
+.rotate180 {
+  transition: transform 0.2s ease-in-out;
+  transform: rotate(180deg);
+}
+
 .container.filter-wrapper {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .filter {
@@ -86,7 +92,11 @@ input[type="text"] {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  p {
+    font-size: 14px !important;
+  }
   button {
+    font-size: 14px !important;
     border: none;
     background: none;
     color: $color-primary;
@@ -96,10 +106,29 @@ input[type="text"] {
   }
 }
 
+.no-service-results {
+  display: flex;
+  margin-top: 15px;
+  p {
+    font-size: 14px !important;
+    margin-right: 5px;
+  }
+  a {
+    font-size: 14px !important;
+    border: none;
+    background: none;
+    color: $color-primary;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 .filter-container.show-filter {
   display: block;
   position: absolute;
-  top: 350px;
+  margin-top: 15px;
   background-color: $color-white;
   width: 70%;
   padding: 30px;
@@ -152,6 +181,11 @@ input[type="text"] {
       margin-right: 8px;
       margin-top: 3px;
     }
+    svg {
+      margin-bottom: 4px;
+      margin-right: 3px;
+      color: $color-black;
+    }
   }
 }
 
@@ -159,11 +193,29 @@ input[type="text"] {
   border: none;
 }
 
-// professional card
+.results-container {
+  margin: 0 auto;
+  width: 100%;
+}
 
+.results-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  img {
+    height: 120px;
+    margin-bottom: 20px;
+  }
+}
+
+// professional card
+.proContainer:first-child{
+  border-top: 1px solid $color-border;
+}
 .professionalWrapper {
   padding: 30px 10px;
-  border: 1px solid $color-border;
+  border-bottom: 1px solid $color-border;
   border-radius: 5px;
   margin: 20px 0;
   display: flex;
@@ -174,6 +226,13 @@ input[type="text"] {
 .rightContainer {
   display: flex;
   flex-direction: column;
+}
+
+.rightContainer {
+  p,
+  a {
+    font-size: 14px !important;
+  }
 }
 
 .professional {
@@ -191,29 +250,30 @@ input[type="text"] {
 
   &__ranking {
     text-align: center;
-    margin-bottom: 15px;
-
+    margin-bottom: 5px;
     svg {
       color: $color-warning;
       font-size: 22px;
       margin-right: 1px;
     }
-
     h6 {
       img {
         display: inline;
         margin-right: 7px;
         height: 28px;
       }
-
-      font-weight: 700;
+      font-weight: 600;
       color: $color-black;
     }
   }
 
   &__name {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    img {
+      display: inline;
+      height: 23px;
+    }
   }
 
   &__logos {
@@ -229,13 +289,10 @@ input[type="text"] {
         height: 100%;
       }
     }
-
-    &_verified {
-      height: 25px;
-    }
   }
 
   &__professions {
+    text-align: center;
     font-weight: 500;
     margin-bottom: 15px;
     padding-left: 5px;
@@ -243,12 +300,10 @@ input[type="text"] {
 
   &__services {
     display: flex;
-
     svg {
       min-width: 35px;
     }
-
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   &__address {
@@ -281,7 +336,8 @@ input[type="text"] {
     }
 
     li {
-      padding: 5px 0;
+      font-size: 14px;
+      padding: 3px 0;
       display: flex;
       align-items: center;
     }
@@ -311,6 +367,7 @@ input[type="text"] {
   &__button {
     display: flex;
     align-items: center;
+    justify-content: end;
     padding-top: 20px;
     color: $color-black;
     text-decoration: none;
@@ -323,6 +380,7 @@ input[type="text"] {
 @media (min-width: $md-breakpoint) {
   .professionalWrapper {
     flex-direction: row;
+    gap: 10px;
 
     .leftContainer {
       flex: 1;
@@ -336,6 +394,9 @@ input[type="text"] {
       &__name {
         text-align: left;
         padding-left: 5px;
+      }
+      &__professions {
+        text-align: left;
       }
 
       &__information {
@@ -375,7 +436,8 @@ input[type="text"] {
   }
 
   .filter {
-    max-width: 270px;
+    margin-top: 0;
+    max-width: 250px;
     height: fit-content;
     border-radius: 5px;
     padding: 15px;
@@ -385,34 +447,22 @@ input[type="text"] {
   .filter-button {
     display: none;
   }
+  //   .filter-container.show-filter {
+  //   display: none;
+  // }
+  .show-filter {
+    display: none;
+  }
 
   .filter-container {
     display: block;
     position: relative;
   }
-  .filter-container.show-filter {
-    display: block;
-    position: relative;
-    background-color: $color-white;
-    width: 300px;
-    padding: 30px;
-    border: 1px solid $color-border;
-  }
-}
-
-@media (min-width: $lg-breakpoint) {
-  .input-container,
-  .input-title {
-    width: 80%;
-    margin: auto;
-  }
-  .input-title {
-    margin-bottom: 10px;
-  }
 }
 
 @media (min-width: $lg-breakpoint) {
   .professionalWrapper {
+    gap: 15px;
     .professional {
       &__information {
         &-dates {
@@ -428,5 +478,16 @@ input[type="text"] {
         }
       }
     }
+  }
+  .input-container,
+  .input-title {
+    width: 80%;
+    margin: auto;
+  }
+  .input-title {
+    margin-bottom: 10px;
+  }
+  .filter {
+    max-width: 270px;
   }
 }

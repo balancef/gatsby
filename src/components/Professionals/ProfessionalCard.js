@@ -1,7 +1,20 @@
 import React, { useContext, useState } from "react";
 import "./Professionals.scss";
-import { FaStar, FaGraduationCap, FaRegClock, FaPhoneAlt, FaAngleDown, FaAngleUp} from "react-icons/fa";
-import { MdInfo, MdLocationOn, MdEmail, MdOutlinePersonalVideo, MdMoreTime, } from "react-icons/md";
+import {
+  FaStar,
+  FaGraduationCap,
+  FaRegClock,
+  FaPhoneAlt,
+  FaAngleDown,
+  FaAngleUp,
+} from "react-icons/fa";
+import {
+  MdInfo,
+  MdLocationOn,
+  MdEmail,
+  MdOutlinePersonalVideo,
+  MdMoreTime,
+} from "react-icons/md";
 import { LanguageContext } from "../../context/languajeContext";
 import SanityImage from "gatsby-plugin-sanity-image";
 import verifiedImg from "../../images/verified_badge.png";
@@ -41,12 +54,11 @@ const ProfessionalCard = ({
     setIsExpanded(!IsExpanded);
   };
 
-
   const professionList = professions.map((item) => item.profession).join(", ");
   const serviceList = services.map((item) => item.services).join(", ");
 
   function formatoFechas(fecha) {
-    return format(new Date(fecha), "dd-MM-yyyy")
+    return format(new Date(fecha), "dd-MM-yyyy");
   }
 
   function RankingComponent({ ranking }) {
@@ -107,11 +119,15 @@ const ProfessionalCard = ({
   }
 
   return (
-    <div className="container">
+    <div className="container proContainer">
       <div className="professionalWrapper">
         <div className="leftContainer">
           <div className="professional__image">
-            <SanityImage {...(photo ? photo : defaultPhoto)} alt={`${name}`} className="professional__image" />
+            <SanityImage
+              {...(photo ? photo : defaultPhoto)}
+              alt={`${name}`}
+              className="professional__image"
+            />
           </div>
           {ranking && (
             <div className="professional__ranking">
@@ -119,23 +135,25 @@ const ProfessionalCard = ({
             </div>
           )}
 
-          <div className="professional__logos">
-            {official && (
+          {official && (
+            <div className="professional__logos">
               <div className="professional__logos_academyLogo">
                 <SanityImage {...logoAcademy} alt={`${name}`} />
               </div>
-            )}
+            </div>
+          )}
+        </div>
+        <div className="rightContainer">
+          <h5 className="professional__name">
+            {name}{" "}
             {verified && (
               <img
                 src={verifiedImg}
                 alt="verified"
-                className="professional__logos_verified"
+                className="professional__verified"
               />
             )}
-          </div>
-        </div>
-        <div className="rightContainer">
-          <h5 className="professional__name">{name}</h5>
+          </h5>
           {professions.length > 0 && (
             <div className="professional__professions">
               <p>{professionList}</p>
@@ -143,7 +161,7 @@ const ProfessionalCard = ({
           )}
           {services.length > 0 && (
             <div className="professional__services">
-              <MdInfo size={20} />
+              <MdInfo size={18} />
               <p>{serviceList}</p>
             </div>
           )}
@@ -157,40 +175,122 @@ const ProfessionalCard = ({
                 rel="noopener noreferrer"
               >
                 {" "}
-                <MdLocationOn size={20} />
+                <MdLocationOn size={18} />
                 <br />
                 <p>{address}</p>
               </a>
             </div>
           )}
-          {IsExpanded &&
+          {IsExpanded && (
             <div className="professional__information">
               {certificateNumber && (
                 <div className="professional__information-dates">
                   <ul>
-                    <li title={language === "es" ? "Número de certificación" : language === "en" ? "Certification number" : "Zertifizierungsnummer"}><FaGraduationCap size={20} />{certificateNumber}</li>
-                    {certificateDate && <li title={language === "es" ? "Fecha de certificación" : language === "en" ? "Certification date" : "Zertifizierungsdatum"}><MdOutlinePersonalVideo size={20} />{formatoFechas(certificateDate)}</li>}
-                    {lastCertificateUpdate && <li title={language === "es" ? "Ultima actualización" : language === "en" ? "Last update" : "<Letztes Update>"}><FaRegClock size={20} />{formatoFechas(lastCertificateUpdate)}</li>}
-                    {validTo && <li title={language === "es" ? "Válido hasta" : language === "en" ? "Valid To" : "Gültig bis"}><MdMoreTime size={20} />{formatoFechas(validTo)}</li>}
+                    <li
+                      title={
+                        language === "es"
+                          ? "Número de certificación"
+                          : language === "en"
+                          ? "Certification number"
+                          : "Zertifizierungsnummer"
+                      }
+                    >
+                      <FaGraduationCap size={18} />
+                      {certificateNumber}
+                    </li>
+                    {certificateDate && (
+                      <li
+                        title={
+                          language === "es"
+                            ? "Fecha de certificación"
+                            : language === "en"
+                            ? "Certification date"
+                            : "Zertifizierungsdatum"
+                        }
+                      >
+                        <MdOutlinePersonalVideo size={18} />
+                        {formatoFechas(certificateDate)}
+                      </li>
+                    )}
+                    {lastCertificateUpdate && (
+                      <li
+                        title={
+                          language === "es"
+                            ? "Ultima actualización"
+                            : language === "en"
+                            ? "Last update"
+                            : "<Letztes Update>"
+                        }
+                      >
+                        <FaRegClock size={20} />
+                        {formatoFechas(lastCertificateUpdate)}
+                      </li>
+                    )}
+                    {validTo && (
+                      <li
+                        title={
+                          language === "es"
+                            ? "Válido hasta"
+                            : language === "en"
+                            ? "Valid To"
+                            : "Gültig bis"
+                        }
+                      >
+                        <MdMoreTime size={20} />
+                        {formatoFechas(validTo)}
+                      </li>
+                    )}
                   </ul>
                 </div>
               )}
               <div className="professional__information-description">
-                <PortableText value={description ? description : descriptionDefault} />
+                <PortableText
+                  value={description ? description : descriptionDefault}
+                />
               </div>
               {
                 <div className="professional__information-contact">
                   <ul>
-                    {phone && <li><FaPhoneAlt size={20} /><CustomLink href={`phone:${phone}`} text={phone} /></li>}
-                    {email && <li><MdEmail size={20} /><CustomLink href={`mailto:${email}`} text={email} /></li>}
-                    {website && <li><BsGlobe size={20} /><CustomLink href={website} text={website} /></li>}
+                    {phone && (
+                      <li>
+                        <FaPhoneAlt size={18} />
+                        <CustomLink href={`phone:${phone}`} text={phone} />
+                      </li>
+                    )}
+                    {email && (
+                      <li>
+                        <MdEmail size={18} />
+                        <CustomLink href={`mailto:${email}`} text={email} />
+                      </li>
+                    )}
+                    {website && (
+                      <li>
+                        <BsGlobe size={18} />
+                        <CustomLink href={website} text={website} />
+                      </li>
+                    )}
                   </ul>
-                </div>}
+                </div>
+              }
             </div>
-          }
-          <Link onClick={ProfessionalDescription} to="#professional" className="professional__button">
-            {IsExpanded ? (language === "es" ? "Ocultar información" : language === "en" ? "Hide information" : "Informationen verheimlichen") : (language === "es" ? "Más información" : language === "en" ? "More information" : "Mehr Informationen")}
-            {IsExpanded ? <FaAngleUp size={20}/> : <FaAngleDown size={20}/>}
+          )}
+          <Link
+            onClick={ProfessionalDescription}
+            to="#professional"
+            className="professional__button"
+          >
+            {IsExpanded
+              ? language === "es"
+                ? "Ocultar información"
+                : language === "en"
+                ? "Hide information"
+                : "Informationen verheimlichen"
+              : language === "es"
+              ? "Más información"
+              : language === "en"
+              ? "More information"
+              : "Mehr Informationen"}
+            {IsExpanded ? <FaAngleUp size={18} /> : <FaAngleDown size={18} />}
           </Link>
         </div>
       </div>

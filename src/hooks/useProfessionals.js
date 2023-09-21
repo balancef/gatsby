@@ -137,6 +137,7 @@ const useProfessionals = () => {
         ProfessionalsEN: nodes {
           country {
             country
+            countryCode
           }
           website
           verified
@@ -200,6 +201,7 @@ const useProfessionals = () => {
         ProfessionalsES: nodes {
           country {
             country:countrySpanish
+            countryCode
           }
           website
           verified
@@ -263,6 +265,7 @@ const useProfessionals = () => {
         ProfessionalsDE: nodes {
           country {
             country: countryGerman
+            countryCode
           }
           website
           verified

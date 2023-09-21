@@ -1,95 +1,50 @@
-export const dataLanguage = {
-    es: {
-        fieldName: "Tu nombre",
-        fieldEmail: "Tu dirección de correo electrónico",
-        fieldSubject: "Asunto",
-        fieldPhone: "Tu número de teléfono",
-        fieldMessage: "¿Cómo podemos ayudarte?",
-        
-        placeholderName: "Jhon Doe",
-        placeholderEmail: "jhon.doe@gmail.com",
-        placeholderSubject: "Solicitud de apoyo",
-        placeholderPhone: "+49 1769642745",
-        placeholderMessage: "Hola, me gustaría...",
-        buttonTitle: "Enviar",
-        checkboxLabelInit: "Acepto la ",
-        checkboxLabelLink: "política de privacidad",
-        checkboxLabelEnd: " de F-Balance.",
-        checkboxLink: "/es/legal/privacy-policy",
-        errorEmail: "Por favor, introduzca una dirección de correo electrónico válida.",
-        errorPhone: "Por favor, introduzca un número de teléfono válido. (+49 1769642745)",
-        errorField: "El campo es requerido",
-        alert: {
-            success: {
-                title: "¡Gracias!",
-                message: "Su mensaje ha sido enviado con éxito. Nos pondremos en contacto con usted lo antes posible."
-            },
-            error: {
-                title: "¡Error!",
-                message: "Su mensaje no ha podido ser enviado. Por favor, inténtelo de nuevo más tarde."
-            }
-        }
-    },
-    de: {
-        fieldName: "Ihr Name",
-        fieldEmail: "Ihre E-Mail Adresse",
-        fieldSubject: "Betreff",
-        fieldPhone: "Ihre Telefon Nummer",
-        fieldMessage: "Wie können wir Ihnen helfen?",
-        
-        placeholderName: "Max Mustermann",
-        placeholderEmail: "maxmusterman@gmail.com",
-        placeholderSubject: "Support Anfrage",
-        placeholderPhone: "+49 1769642745",
-        placeholderMessage: "Guuten Tag, ich möchte gerne...",
-        buttonTitle: "Absenden",
-        checkboxLabelInit: "Ich akzeptiere die",
-        checkboxLabelLink: "Datenschutzbestimmungen",
-        checkboxLabelEnd: " von F-Balance akzeptieren.",
-        checkboxLink: "/de/legal/privacy-policy",
-        errorEmail: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
-        errorPhone: "Bitte geben Sie eine gültige Telefonnummer ein. (+49 1769642745)",
-        errorField: "Das Feld ist erforderlich",
-        alert: {
-            success: {
-                title: "Vielen Dank!",
-                message: "Ihre Nachricht wurde erfolgreich versendet. Wir werden uns so schnell wie möglich bei Ihnen melden."
-            },
-            error: {
-                title: "Fehler",
-                message: "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut."
-            }
-        }
-    },
-    en: {
-        fieldName: "Your Name",
-        fieldEmail: "Your E-Mail Adress",
-        fieldSubject: "Subject",
-        fieldPhone: "Your Phone Number",
-        fieldMessage: "How can we help you?",
-        
-        placeholderName: "Max Mustermann",
-        placeholderEmail: "maxmusterman@gmail.com",
-        placeholderSubject: "Support Anfrage",
-        placeholderPhone: "+49 1769642745",
-        placeholderMessage: "Hi there, I would like to...",
-        buttonTitle: "Submit",
-        checkboxLabelInit: "I accept the ",
-        checkboxLabelLink: "privacy policy",
-        checkboxLabelEnd: " of F-Balance.",
-        checkboxLink: "/en/legal/privacy-policy",
-        errorEmail: "Please enter a valid email address.",
-        errorPhone: "Please enter a valid phone number. +49 1769642745",
-        errorField: "The field is required",
-        alert: {
-            success: {
-                title: "Thank you!",
-                message: "Your message has been sent successfully. We will get back to you as soon as possible."
-            },
-            error: {
-                title: "Error",
-                message: "Your message could not be sent. Please try again later."
-            }
-        }
-    },
-}
+export const dataLanguageTexts = {
+  es: {
+    inputTitle: "Buscador de Especialistas en Podología",
+    inputPlaceholder: "Buscá especialistas por palabra clave",
+    filterBy: "Filtrar por",
+    resetFilters: "Reiniciar el fitro",
+    ranking: "Ranking",
+    profession: "Ocupación",
+    services: "Servicios",
+    noResults: "Sin resultados",
+    noResultsExplain: "Intente cambiar los filtros o buscar algo diferente",
+    allResults: "Todos los resultados",
+    allCountries: "Todos los paises",
+    allIn: "Todos en",
+    noServices: "¿No está en la lista?",
+    moreInfo: "Más información"
+  },
+  de: {
+    inputTitle: "Suche nach Podologie-Spezialisten",
+    inputPlaceholder: "Spezialisten nach Stichworten suchen",
+    filterBy: "Filtern nach",
+    resetFilters: "Filter zurücksetzen",
+    ranking: "Ranking",
+    profession: "Beruf",
+    services: "Dienstleistungen",
+    noResults: "Keine Ergebnisse",
+    noResultsExplain: "Versuchen Sie, die Filter zu ändern oder nach etwas anderem zu suchen",
+    allResults: "Alle Ergebnisse",
+    allCountries: "Alle Länder",
+    allIn: "Alles in",
+    noServices: "Sie sind nicht gelistet?",
+    moreInfo: "Mehr erfahren"
+  },
+  en: {
+    inputTitle: "Search Podiatry Specialists",
+    inputPlaceholder: "Search specialists by keyword",
+    filterBy: "Flter by",
+    resetFilters: "Reset filters",
+    ranking: "Ranking",
+    profession: "Profession",
+    services: "Services",
+    noResults: "No results",
+    noResultsExplain: "Try to change the filters or search for something else",
+    allResults: "All the results",
+    allCountries: "All countries",
+    allIn: "All in",
+    noServices: "Not listed?",
+    moreInfo: "Learn more"
+  },
+};
