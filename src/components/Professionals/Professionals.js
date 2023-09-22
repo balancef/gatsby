@@ -37,7 +37,7 @@ const Professionals = () => {
   const [selectedRankings, setSelectedRankings] = useState([]);
   const [selectedProfessions, setSelectedProfessions] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState("");
+  
 
   let query = useProfessionals();
   let services = useServices().allSanityServices;
@@ -80,9 +80,12 @@ const Professionals = () => {
   const matchingCountry = countryList.find(
     (item) => item.countryCode === countryCode
   );
+  let temp = ""
   if (matchingCountry) {
-    setSelectedCountry(matchingCountry.country);
+    temp = matchingCountry.country;
   }
+
+  const [selectedCountry, setSelectedCountry] = useState(temp);
 
   function removeDiacritics(str) {
     return unorm.nfkd(str).replace(/[\u0300-\u036f]/g, "");
