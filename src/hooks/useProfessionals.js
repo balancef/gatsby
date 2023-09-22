@@ -4,6 +4,16 @@ const useProfessionals = () => {
   return useStaticQuery(graphql`
     {
       sanityProfessionalConfig {
+        contactForm {
+          title
+          _rawTemplateContent
+          linkToPolicy {
+            slug {
+              current
+            }
+            titlePage
+          }
+        }
         photoDefault {
           alt
           image {
@@ -48,6 +58,16 @@ const useProfessionals = () => {
 
       }
       sanityProfessionalConfigES: sanityProfessionalConfig  {
+        contactForm {
+          title:titleSpanish
+          _rawTemplateContent :_rawTemplateContentSpanish
+          linkToPolicy {
+            slug {
+              current
+            }
+            titlePage: titlePageSpanish
+          }
+        }
         photoDefault {
           alt
           image {
@@ -65,7 +85,7 @@ const useProfessionals = () => {
             }
             asset {
               _id
-            }
+            } 
           }
         }
         academyLogo {
@@ -91,6 +111,16 @@ const useProfessionals = () => {
         _rawDescriptionDefault: _rawDescriptionDefaultSpanish
       }
       sanityProfessionalConfigDE: sanityProfessionalConfig   {
+        contactForm {
+          title:titleGerman
+          _rawTemplateContent: _rawTemplateContentGerman
+          linkToPolicy {
+            slug {
+              current
+            }
+            titlePage: titlePageGerman
+          }
+        }
         photoDefault {
           alt
           image {

@@ -1,5 +1,4 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
-import axios from "axios";
 import unorm from "unorm";
 import { Link } from "gatsby";
 import "./Professionals.scss";
@@ -18,8 +17,10 @@ import {
 } from "react-icons/fa";
 import emptyState from "../../images/emptyState.png";
 import ProfessionalCard from "./ProfessionalCard";
+import { Seo } from "../";
 import useRankings from "../../hooks/useRankings";
 import useProfessions from "../../hooks/useProfessions";
+import useSearchPage from "../../hooks/useSearchPage";
 import { Icon } from "..";
 
 const Professionals = () => {
@@ -37,9 +38,9 @@ const Professionals = () => {
   const [selectedRankings, setSelectedRankings] = useState([]);
   const [selectedProfessions, setSelectedProfessions] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
-  
 
   let query = useProfessionals();
+  let page = useSearchPage();
   let services = useServices().allSanityServices;
   let rankings = useRankings().allSanityRanking;
   let professions = useProfessions().allSanityProfession;
@@ -51,6 +52,7 @@ const Professionals = () => {
   let servicesData = null;
   let professionsData = null;
   let rankingsData = null;
+  let pageData = null;
   const texts = language !== null && dataLanguageTexts[language];
 
   if (language === "es") {
@@ -59,6 +61,7 @@ const Professionals = () => {
     servicesData = services.ServicesES;
     rankingsData = rankings.RankingES;
     professionsData = professions.ProfessionES;
+    pageData = page.SearchPageES;
   } else {
     if (language === "de") {
       data = query.allSanityProfessional.ProfessionalsDE;
@@ -66,12 +69,14 @@ const Professionals = () => {
       servicesData = services.ServicesDE;
       rankingsData = rankings.RankingDE;
       professionsData = professions.ProfessionDE;
+      pageData = page.SearchPageDE;
     } else {
       data = query.allSanityProfessional.ProfessionalsEN;
       defaultData = query.sanityProfessionalConfig;
       servicesData = services.ServicesEN;
       rankingsData = rankings.RankingEN;
       professionsData = professions.ProfessionEN;
+      pageData = page.SearchPageEN;
     }
   }
 
@@ -80,7 +85,7 @@ const Professionals = () => {
   const matchingCountry = countryList.find(
     (item) => item.countryCode === countryCode
   );
-  let temp = ""
+  let temp = "";
   if (matchingCountry) {
     temp = matchingCountry.country;
   }
@@ -136,11 +141,12 @@ const Professionals = () => {
     }
 
     const filtered = data.filter((professional) => {
-      const { address, name, profession, services } = professional;
+      const { address, name, profession, services, country } = professional;
 
       const matches =
         removeDiacritics(address.toLowerCase()).includes(query) ||
         removeDiacritics(name.toLowerCase()).includes(query) ||
+        removeDiacritics(country.country.toLowerCase()).includes(query) ||
         profession.some((p) =>
           removeDiacritics(p.professionDescription.toLowerCase()).includes(
             query
@@ -336,160 +342,177 @@ const Professionals = () => {
   };
 
   return (
-    <div ref={wrapperRef}>
-      <div>
-        <div className="search-container">
-          <div className="container">
-            <h6 className="input-title">{texts.inputTitle}</h6>
-            <div className="input-container">
-              <input
-                type="text"
-                placeholder={texts.inputPlaceholder}
-                value={searchQuery}
-                onChange={handleInputChange}
-                onKeyPress={handleKeyPress}
-              />
-              <div className="search-icon" onClick={handleSearch}>
-                <Icon code={"FaSearch"}></Icon>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h6 className="container mt-4">
-          {selectedCountry
-            ? `${texts.allIn} ${selectedCountry}`
-            : texts.allResults}
-        </h6>
-        <div className="container filter-wrapper">
-          <div className={`filter ${showFilter ? "filter-expanded" : ""}`}>
-            <button
-              className="filter-button"
-              onClick={() => setShowFilter(!showFilter)}
-            >
-              {texts.filterBy}{" "}
-              <span className={showFilter ? "rotate180" : ""}>
-                <FaAngleDown size={16} />
-              </span>
-            </button>
-            <div
-              className={`filter-container ${
-                showFilter && dimensions.windowWidth < 768 ? "show-filter" : ""
-              }`}
-            >
-              <div className="filter-description">
-                <p>{texts.filterBy}:</p>
-                <button onClick={resetFilters}>{texts.resetFilters}</button>
-              </div>
-
-              <select
-                className="filter-select"
-                value={selectedCountry}
-                onChange={handleCountrySelectChange}
-              >
-                <option value="">{texts.allCountries}</option>
-                {uniqueCountries.map((country) => (
-                  <option key={country} value={country}>
-                    {country}
-                  </option>
-                ))}
-              </select>
-              <div className="filter-checkbox ranking">
-                <p className="checkbox-title">{texts.ranking}</p>
-                {renderRankingCheckboxes()}
-              </div>
-              <div className="filter-checkbox professions">
-                <p className="checkbox-title">{texts.profession}</p>
-                {renderProfessionsCheckboxes()}
-              </div>
-              <div className="filter-checkbox services">
-                <p className="checkbox-title">{texts.services}</p>
-                {renderServicesCheckboxes()}
-              </div>
-              <div className="no-service-results">
-                <p>{texts.noServices}</p>
-                <a href="#">{texts.moreInfo}</a>
-              </div>
-            </div>
-          </div>
-          <div className="results-container">
-            {currentProfessionals.length !== 0 ? (
-              <div> {currentProfessionals}</div>
-            ) : (
-              <div className="results-empty-state">
-                <img
-                  src={emptyState}
-                  alt="no results"
-                  className="image-empty-state"
+    <>
+      <Seo
+        title={pageData.titlePage}
+        description={pageData.description}
+        keywords=""
+      />
+      <div ref={wrapperRef}>
+        <div>
+          <div className="search-container">
+            <div className="container">
+              <h6 className="input-title">{texts.inputTitle}</h6>
+              <div className="input-container">
+                <input
+                  type="text"
+                  placeholder={texts.inputPlaceholder}
+                  value={searchQuery}
+                  onChange={handleInputChange}
+                  onKeyPress={handleKeyPress}
                 />
-                <h5>{texts.noResults}</h5>
-                <p>{texts.noResultsExplain}</p>
+                <div className="search-icon" onClick={handleSearch}>
+                  <Icon code={"FaSearch"}></Icon>
+                </div>
               </div>
-            )}
+            </div>
+          </div>
+          <h6 className="container mt-4">
+            {selectedCountry
+              ? `${texts.allIn} ${selectedCountry}`
+              : texts.allResults}
+          </h6>
+          <div className="container filter-wrapper">
+            <div className={`filter ${showFilter ? "filter-expanded" : ""}`}>
+              <button
+                className="filter-button"
+                onClick={() => setShowFilter(!showFilter)}
+              >
+                {texts.filterBy}{" "}
+                <span className={showFilter ? "rotate180" : ""}>
+                  <FaAngleDown size={16} />
+                </span>
+              </button>
+              <div
+                className={`filter-container ${
+                  showFilter && dimensions.windowWidth < 768
+                    ? "show-filter"
+                    : ""
+                }`}
+              >
+                <div className="filter-description">
+                  <p>{texts.filterBy}:</p>
+                  <button onClick={resetFilters}>{texts.resetFilters}</button>
+                </div>
 
-            {pageNumbers.length >= 2 ? (
-              <nav>
-                <ul className="Pagination">
-                  {currentPage !== 1 && (
+                <select
+                  className="filter-select"
+                  value={selectedCountry}
+                  onChange={handleCountrySelectChange}
+                >
+                  <option value="">{texts.allCountries}</option>
+                  {uniqueCountries.map((country) => (
+                    <option key={country} value={country}>
+                      {country}
+                    </option>
+                  ))}
+                </select>
+                <div className="filter-checkbox ranking">
+                  <p className="checkbox-title">{texts.ranking}</p>
+                  {renderRankingCheckboxes()}
+                </div>
+                <div className="filter-checkbox professions">
+                  <p className="checkbox-title">{texts.profession}</p>
+                  {renderProfessionsCheckboxes()}
+                </div>
+                <div className="filter-checkbox services">
+                  <p className="checkbox-title">{texts.services}</p>
+                  {renderServicesCheckboxes()}
+                </div>
+                <div className="no-service-results">
+                  <p>
+                    {texts.noServices}{" "}
+                    <a
+                      href={`${
+                        language === "en" ? "" : `/${language}`
+                      }/help/${pageData?.linkToHelpPage?.slug.current}`}
+                    >
+                      {texts.moreInfo}
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="results-container">
+              {currentProfessionals.length !== 0 ? (
+                <div> {currentProfessionals}</div>
+              ) : (
+                <div className="results-empty-state">
+                  <img
+                    src={emptyState}
+                    alt="no results"
+                    className="image-empty-state"
+                  />
+                  <h5>{texts.noResults}</h5>
+                  <p>{texts.noResultsExplain}</p>
+                </div>
+              )}
+
+              {pageNumbers.length >= 2 ? (
+                <nav>
+                  <ul className="Pagination">
+                    {currentPage !== 1 && (
+                      <li className="Pagination__item">
+                        {currentPage !== 1 ? (
+                          <Link
+                            onClick={() => paginate(currentPage - 1)}
+                            to="#professionals"
+                          >
+                            <FaChevronLeft />
+                          </Link>
+                        ) : (
+                          <FaChevronLeft />
+                        )}
+                      </li>
+                    )}
+                    {pageNumbers.map((number) => (
+                      <>
+                        {number === currentPage ? (
+                          <li
+                            key={number}
+                            className="Pagination__item active-page"
+                          >
+                            <Link
+                              onClick={() => paginate(number)}
+                              to="#professionals"
+                              className={`Pagination__link`}
+                            >
+                              {number}
+                            </Link>
+                          </li>
+                        ) : (
+                          <li key={number} className="Pagination__item">
+                            <Link
+                              onClick={() => paginate(number)}
+                              to="#professionals"
+                              className={`Pagination__link `}
+                            >
+                              {number}
+                            </Link>
+                          </li>
+                        )}
+                      </>
+                    ))}
                     <li className="Pagination__item">
-                      {currentPage !== 1 ? (
+                      {currentPage !== pageNumbers[pageNumbers.length - 1] ? (
                         <Link
-                          onClick={() => paginate(currentPage - 1)}
+                          onClick={() => paginate(currentPage + 1)}
                           to="#professionals"
                         >
-                          <FaChevronLeft />
+                          <FaChevronRight />
                         </Link>
                       ) : (
-                        <FaChevronLeft />
+                        <FaChevronRight />
                       )}
                     </li>
-                  )}
-                  {pageNumbers.map((number) => (
-                    <>
-                      {number === currentPage ? (
-                        <li
-                          key={number}
-                          className="Pagination__item active-page"
-                        >
-                          <Link
-                            onClick={() => paginate(number)}
-                            to="#professionals"
-                            className={`Pagination__link`}
-                          >
-                            {number}
-                          </Link>
-                        </li>
-                      ) : (
-                        <li key={number} className="Pagination__item">
-                          <Link
-                            onClick={() => paginate(number)}
-                            to="#professionals"
-                            className={`Pagination__link `}
-                          >
-                            {number}
-                          </Link>
-                        </li>
-                      )}
-                    </>
-                  ))}
-                  <li className="Pagination__item">
-                    {currentPage !== pageNumbers[pageNumbers.length - 1] ? (
-                      <Link
-                        onClick={() => paginate(currentPage + 1)}
-                        to="#professionals"
-                      >
-                        <FaChevronRight />
-                      </Link>
-                    ) : (
-                      <FaChevronRight />
-                    )}
-                  </li>
-                </ul>
-              </nav>
-            ) : null}
+                  </ul>
+                </nav>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
