@@ -107,13 +107,13 @@ input[type="text"] {
 }
 
 .no-service-results {
-  display: flex;
   margin-top: 15px;
   p {
     font-size: 14px !important;
-    margin-right: 5px;
+    
   }
   a {
+    margin-left: 5px;
     font-size: 14px !important;
     border: none;
     background: none;
@@ -130,7 +130,7 @@ input[type="text"] {
   position: absolute;
   margin-top: 15px;
   background-color: $color-white;
-  width: 70%;
+  width: 80%;
   padding: 30px;
   border: 1px solid $color-border;
   border-radius: 5px;
