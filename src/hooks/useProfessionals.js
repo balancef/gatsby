@@ -6,13 +6,7 @@ const useProfessionals = () => {
       sanityProfessionalConfig {
         contactForm {
           title
-          _rawTemplateContent
-          linkToPolicy {
-            slug {
-              current
-            }
-            titlePage
-          }
+          templateContent
         }
         photoDefault {
           alt
@@ -60,13 +54,7 @@ const useProfessionals = () => {
       sanityProfessionalConfigES: sanityProfessionalConfig  {
         contactForm {
           title:titleSpanish
-          _rawTemplateContent :_rawTemplateContentSpanish
-          linkToPolicy {
-            slug {
-              current
-            }
-            titlePage: titlePageSpanish
-          }
+          templateContent :templateContentSpanish
         }
         photoDefault {
           alt
@@ -113,13 +101,7 @@ const useProfessionals = () => {
       sanityProfessionalConfigDE: sanityProfessionalConfig   {
         contactForm {
           title:titleGerman
-          _rawTemplateContent: _rawTemplateContentGerman
-          linkToPolicy {
-            slug {
-              current
-            }
-            titlePage: titlePageGerman
-          }
+          templateContent: templateContentGerman
         }
         photoDefault {
           alt
