@@ -21,6 +21,7 @@ import { Seo } from "../";
 import useRankings from "../../hooks/useRankings";
 import useProfessions from "../../hooks/useProfessions";
 import useSearchPage from "../../hooks/useSearchPage";
+import useContact from '../../hooks/useContact'
 import { Icon } from "..";
 
 const Professionals = () => {
@@ -29,7 +30,8 @@ const Professionals = () => {
   const pageNumbers = [];
   const wrapperRef = useRef(null);
   const dimensions = useWindowSize();
-  const countryCode = useGeolocation();
+  // const countryCode = useGeolocation();
+  const countryCode = "";
 
   const [showFilter, setShowFilter] = useState(false);
 
@@ -44,6 +46,7 @@ const Professionals = () => {
   let services = useServices().allSanityServices;
   let rankings = useRankings().allSanityRanking;
   let professions = useProfessions().allSanityProfession;
+  let bccEmails = useContact().allSanityContact.ContactEN[0].ccEmails
 
   const { language } = useContext(LanguageContext);
 
@@ -320,7 +323,10 @@ const Professionals = () => {
           description={professional._rawDescription}
           phone={professional.phone}
           email={professional.email}
+          bccEmails={bccEmails}
           website={professional?.website}
+          emailSubject={defaultData?.contactForm.title}
+          emailBody={defaultData?.contactForm.templateContent}
         />
       );
     });
