@@ -13,7 +13,7 @@ export const dataLanguageTexts = {
     allCountries: "Todos los paises",
     allIn: "Todos en",
     noServices: "¿No está en la lista?",
-    moreInfo: "Más información"
+    moreInfo: "Más información",
   },
   de: {
     inputTitle: "Suche nach Podologie-Spezialisten",
