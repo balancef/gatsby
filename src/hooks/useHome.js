@@ -38,6 +38,47 @@ const useHome = () => {
             }
           }
           dinamicContent {
+            ... on SanityHighlightedExternalAccess {
+              _key
+              _type
+              highlightedLink {
+                link {
+                  url
+                  title
+                  description
+                }
+                image {
+                  alt
+                  image {
+                    hotspot {
+                      y
+                      x
+                      width
+                      height
+                    }
+                    crop {
+                      top
+                      right
+                      left
+                      bottom
+                    }
+                    asset {
+                      _id
+                      url
+                    }
+                  }
+                }
+              }
+              externalLink {
+                url
+                title
+              }
+              fullCardsItems {
+                url
+                title
+                description
+              }
+            }
             ... on SanityTextButton {
               _key
               _type
@@ -87,6 +128,7 @@ const useHome = () => {
                     }
                     asset {
                       _id
+                      url
                     }
                     _key
                   }
@@ -372,6 +414,47 @@ const useHome = () => {
             }
           }
           dinamicContent {
+            ... on SanityHighlightedExternalAccess {
+              _key
+              _type
+              highlightedLink {
+                link {            
+                  url: urlSpanish           
+                  title: titleSpanish
+                  description: descriptionSpanish
+                }
+                image {
+                  alt
+                  image {
+                    hotspot {
+                      y
+                      x
+                      width
+                      height
+                    }
+                    crop {
+                      top
+                      right
+                      left
+                      bottom
+                    }
+                    asset {
+                      _id
+                      url
+                    }
+                  }
+                }
+              }
+              externalLink {
+                url: urlSpanish
+                title: titleSpanish
+              }
+              fullCardsItems {
+                url: urlSpanish       
+                title: titleSpanish
+                description: descriptionSpanish
+              }
+            }
             ... on SanityTextButton {
               _key
               _type
@@ -706,6 +789,47 @@ const useHome = () => {
             }
           }
           dinamicContent {
+            ... on SanityHighlightedExternalAccess {
+              _key
+              _type
+              highlightedLink {
+                link {
+                  url:urlGerman           
+                  title:  titleGerman
+                  description: descriptionGerman
+                }
+                image {
+                  alt
+                  image {
+                    hotspot {
+                      y
+                      x
+                      width
+                      height
+                    }
+                    crop {
+                      top
+                      right
+                      left
+                      bottom
+                    }
+                    asset {
+                      _id
+                      url
+                    }
+                  }
+                }
+              }
+              externalLink {
+                url:urlGerman
+                title:titleGerman
+              }
+              fullCardsItems {                
+                url: urlGerman
+                title: titleGerman
+                description :descriptionGerman
+              }
+            }
             ... on SanityTextButton {
               _key
               _type

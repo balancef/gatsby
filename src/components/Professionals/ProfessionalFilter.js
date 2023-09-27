@@ -10,7 +10,7 @@ import axios from 'axios';
 
 const ProfessionalsFilter = ({
     data, defaultData, servicesData,
-    rankingsData, professionsData, pageData, texts, language, countriesData }) => {
+    rankingsData, professionsData, pageData, texts, language, countriesData, bccEmails }) => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(6);
@@ -257,7 +257,10 @@ const ProfessionalsFilter = ({
                     description={professional._rawDescription}
                     phone={professional.phone}
                     email={professional.email}
+                    bccEmails={bccEmails}
                     website={professional?.website}
+                    emailSubject={defaultData?.contactForm.title}
+                    emailBody={defaultData?.contactForm.templateContent}
                     key={`pro-${idx}`}
                 />
             );
@@ -398,7 +401,7 @@ const ProfessionalsFilter = ({
                                             </li>
                                         )}
                                         {pageNumbers.map((number, idx) => (
-                                            <div key={idx}> 
+                                            <div key={idx}>
                                                 {number === currentPage ? (
                                                     <li
                                                         key={idx}

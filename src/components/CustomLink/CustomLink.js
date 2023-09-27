@@ -1,7 +1,7 @@
 import React from "react";
 import "./CustomLink.scss";
 
-function CustomLink({ href, icon, type, text }) {
+function CustomLink({ href, icon, type, text, target }) {
   let renderedElement;
 
   const targetAttribute = type === "icon" ? "_blank" : "_self";
@@ -19,7 +19,7 @@ function CustomLink({ href, icon, type, text }) {
       href={href}
       title={text}
       className={`custom-link ${type}`}
-      target={targetAttribute}
+      target={target || targetAttribute}
     >
       {renderedElement}
       {icon && icon}

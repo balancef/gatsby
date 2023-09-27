@@ -10,8 +10,9 @@ import useRankings from "../../hooks/useRankings";
 import useProfessions from "../../hooks/useProfessions";
 import useSearchPage from "../../hooks/useSearchPage";
 import ProfessionalsFilter from "./ProfessionalFilter";
-
 import useCountries from "../../hooks/useCountries";
+import useContact from '../../hooks/useContact'
+import { Icon } from "..";
 
 const Professionals = () => {
 
@@ -20,6 +21,7 @@ const Professionals = () => {
   const services = useServices().allSanityServices;
   const rankings = useRankings().allSanityRanking;
   const professions = useProfessions().allSanityProfession;
+  const bccEmails = useContact().allSanityContact.ContactEN[0].ccEmails
   const countries = useCountries().allSanityCountry;
   const { language } = useContext(LanguageContext);
 
@@ -60,8 +62,6 @@ const Professionals = () => {
     }
   }
 
-  
-
   return (
     <>
       <Seo
@@ -78,6 +78,7 @@ const Professionals = () => {
         pageData={pageData}
         texts={texts}
         countriesData={countriesData}
+        bccEmails={bccEmails}
       />}
     </>
   );
