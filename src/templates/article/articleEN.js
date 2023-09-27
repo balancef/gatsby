@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { Layout, Seo } from "../../components";
-import Article from "../../components/Articles/Article";
+import Article from "./Article";
 
 const ArticlePage = ({ location, data }) => {
   const ArticleQuery = data?.data.nodes[0];
@@ -9,15 +9,6 @@ const ArticlePage = ({ location, data }) => {
 
   const titlePage = bannerData?.title;
   
-
-  const banner = { bannerData }
-  const publicationDate = ArticleQuery?._createdAt;
-  const content = ArticleQuery?._rawContent;
-  const author = ArticleQuery?.author;
-  const relatedArticles = ArticleQuery?.relatedArticles;
-  
-  console.log("ArticleQuery:", ArticleQuery)
-  console.log("banner data:", bannerData)
   return (
 
     <Layout location={location}>
@@ -27,11 +18,8 @@ const ArticlePage = ({ location, data }) => {
         keywords=""
       />
       <Article
-        banner={banner}
-        publicationDate={publicationDate}
-        content={content}
-        author={author}
-        relatedArticles={relatedArticles}
+        data={ArticleQuery}
+        banner={bannerData}
       />
     </Layout>
   );

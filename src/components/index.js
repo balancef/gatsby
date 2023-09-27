@@ -30,7 +30,9 @@ import HelpFilter from "./Help/HelpFilter";
 import AuthorReference from "./AuthorReference/AuthorReference";
 import Contact from "./Contact/Contact";
 import Professionals from "./Professionals/Professionals";
-import Article from "./Articles/Article";
+import Article from "../templates/article/Article";
+import MainCourses from "./MainCourses/MainCourses";
+
 
 
 export {
@@ -67,4 +69,5 @@ export {
   Contact,
   Professionals,
   Article,
+  MainCourses,
 };

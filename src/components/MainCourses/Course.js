@@ -1,20 +1,23 @@
-import React from "react"
-import { Link } from "gatsby"
-import "./_MainCourses.scss"
+import React from "react";
+import "./MainCourses.scss";
 
 const Course = ({ course, variant }) => {
-  const { title, slug } = course
-
   return (
     <>
       <div className={`course course__${variant}`}>
-        <h3 className={`course__${variant}__titulo`}>
-          <Link to={`/identidad21/${slug}`}>{title}</Link>
-        </h3>
-        <p className={`course__${variant}__fecha`}>{publishedAt}</p>
+        <p className={`course__${variant}__titulo`}>
+          <a target="_blank" rel="noreferrer"  href={course?.url}>
+            {course.title}
+          </a>
+        </p>
+        {course.description && (
+          <small className={`course__${variant}__fecha`}>
+            {course.description}
+          </small>
+        )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Course
+export default Course;
