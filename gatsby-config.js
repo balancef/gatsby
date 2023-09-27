@@ -17,7 +17,7 @@ module.exports = {
       "projectId": process.env.SANITY_ID_PROJECT,
       "dataset": process.env.SANITY_DATASET
     }
-  }, "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp", "gatsby-plugin-sass", "gatsby-plugin-sitemap", {
+  }, "gatsby-plugin-image", "gatsby-plugin-sass", "gatsby-plugin-sitemap", {
     resolve: 'gatsby-plugin-manifest',
     options: {
       "icon": "src/images/favicon.ico"
@@ -34,8 +34,6 @@ module.exports = {
     options: {
       projectId: process.env.SANITY_ID_PROJECT,
       dataset: process.env.SANITY_DATASET,
-      customImageTypes: ["customImage"],
-      altFieldName: "alt",
     },
   }
 ]

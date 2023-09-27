@@ -1,168 +1,143 @@
-const path = require("path")
-
-
-
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  // CREACION DE PAGINAS
-  const { data: pageQueryData } = await graphql(`
-    query Pages {
-      allSanityPages {
-        nodes {
+
+  const result = await graphql(`
+    {
+      pages: allSanityPages {
+        edges {
+        node {
           slug {
             current
           }
         }
       }
+      }
+      help: allSanityHelp {
+        edges {
+        node {
+          slug {
+            current
+          }
+        }
+      }
+      }
+      legal: allSanityLegalPages {
+        edges {
+        node {
+          slug {
+            current
+          }
+        }
+      }
+      }
+      professionals: allSanityProfessional {
+        edges {
+        node {
+          slug {
+            current
+          }
+        }
+      }
+      }
     }
-  `)
+`)
 
-  if (pageQueryData.errors) {
-    reporter.panicOnBuild("Error creando paginas")
+  if (result.errors) {
+    throw result.errors
   }
 
-  pageQueryData.allSanityPages.nodes.forEach(node => {
-    const pageEN = path.resolve("./src/templates/pageEN.js")
+
+  result.data.pages.edges.forEach(node => {
+    const pageEN = require.resolve("./src/templates/pageEN.js")
     createPage({
-      path: "/" + node.slug.current,
+      path: "/" + node.node.slug.current,
       component: pageEN,
-      context: { slug: node.slug.current, language: "en" },
+      context: { slug: node.node.slug.current, language: "en" },
     })
 
-    const pageES = path.resolve("./src/templates/pageES.js")
+    const pageES = require.resolve("./src/templates/pageES.js")
     createPage({
-      path: "/es/" + node.slug.current,
+      path: "/es/" + node.node.slug.current,
       component: pageES,
-      context: { slug: node.slug.current, language: "es" },
+      context: { slug: node.node.slug.current, language: "es" },
     })
 
-    const pageGER = path.resolve("./src/templates/pageDE.js")
+    const pageGER = require.resolve("./src/templates/pageDE.js")
     createPage({
-      path: "/de/" + node.slug.current,
+      path: "/de/" + node.node.slug.current,
       component: pageGER,
-      context: { slug: node.slug.current, language: "de" },
+      context: { slug: node.node.slug.current, language: "de" },
     })
   })
 
-
-  // CREACION DE PAGINAS DE AYUDA
-  const { data: helpQueryData } = await graphql(`
-    query HelpPages {
-      allSanityHelp {
-        nodes {
-          slug {
-            current
-          }
-        }
-      }
-    }
-  `)
-
-  if (helpQueryData.errors) {
-    reporter.panicOnBuild("Error creando paginas")
-  }
-
-  helpQueryData.allSanityHelp.nodes.forEach(node => {
-    const pageEN = path.resolve("./src/templates/helpEN.js")
+  result.data.help.edges.forEach(node => {
+    const pageEN = require.resolve("./src/templates/helpEN.js")
     createPage({
-      path: "/help/" + node.slug.current,
+      path: "/help/" + node.node.slug.current,
       component: pageEN,
-      context: { slug: node.slug.current, language: "en" },
+      context: { slug: node.node.slug.current, language: "en" },
     })
 
-    const pageES = path.resolve("./src/templates/helpES.js")
+    const pageES = require.resolve("./src/templates/helpES.js")
     createPage({
-      path: "/es/help/" + node.slug.current,
+      path: "/es/help/" + node.node.slug.current,
       component: pageES,
-      context: { slug: node.slug.current, language: "es" },
+      context: { slug: node.node.slug.current, language: "es" },
     })
 
-    const pageGER = path.resolve("./src/templates/helpDE.js")
+    const pageGER = require.resolve("./src/templates/helpDE.js")
     createPage({
-      path: "/de/help/" + node.slug.current,
+      path: "/de/help/" + node.node.slug.current,
       component: pageGER,
-      context: { slug: node.slug.current, language: "de" },
+      context: { slug: node.node.slug.current, language: "de" },
     })
   })
 
-  // CREACION DE PAGINAS LEGALES  
-  const { data: legalPageQueryData } = await graphql(`
-    query LegalPages {
-      allSanityLegalPages {
-        nodes {
-          slug {
-            current
-          }
-        }
-      }
-    }
-  `)
-
-  if (legalPageQueryData.errors) {
-    reporter.panicOnBuild("Error creando paginas legales")
-  }
-
-  legalPageQueryData.allSanityLegalPages.nodes.forEach(node => {
-    const LegalPagesEN = path.resolve("./src/templates/legalEN.js")
+  result.data.legal.edges.forEach(node => {
+    const LegalPagesEN = require.resolve("./src/templates/legalEN.js")
     createPage({
-      path: "/legal/" + node.slug.current,
+      path: "/legal/" + node.node.slug.current,
       component: LegalPagesEN,
-      context: { slug: node.slug.current, language: "en" },
+      context: { slug: node.node.slug.current, language: "en" },
     })
 
-    const LegalPagesES = path.resolve("./src/templates/legalES.js")
+    const LegalPagesES = require.resolve("./src/templates/legalES.js")
     createPage({
-      path: "/es/legal/" + node.slug.current,
+      path: "/es/legal/" + node.node.slug.current,
       component: LegalPagesES,
-      context: { slug: node.slug.current, language: "es" },
+      context: { slug: node.node.slug.current, language: "es" },
     })
 
-    const LegalPagesGER = path.resolve("./src/templates/legalDE.js")
+    const LegalPagesGER = require.resolve("./src/templates/legalDE.js")
     createPage({
-      path: "/de/legal/" + node.slug.current,
+      path: "/de/legal/" + node.node.slug.current,
       component: LegalPagesGER,
-      context: { slug: node.slug.current, language: "de" },
+      context: { slug: node.node.slug.current, language: "de" },
     })
   })
 
-    // CREACION DE PAGINAS PROFESIONALES  
-    const { data: professionalsDataPages } = await graphql(`
-    query ProfessionalsPages {
-      allSanityProfessional {
-        nodes {
-          slug {
-            current
-          }
-        }
-      }
-    }
-  `)
-
-  if (professionalsDataPages.errors) {
-    reporter.panicOnBuild("Error creando paginas de profesionales")
-  }
-
-  professionalsDataPages.allSanityProfessional.nodes.forEach(node => {
-    const ProfessionalPagesEN = path.resolve("./src/templates/professionals/proEN.js")
+  //   // CREACION DE PAGINAS PROFESIONALES  
+  result.data.professionals.edges.forEach(node => {
+    const ProfessionalPagesEN = require.resolve("./src/templates/professionals/proEN.js")
     createPage({
-      path: "/search/" + node.slug.current,
+      path: "/search/" + node.node.slug.current,
       component: ProfessionalPagesEN,
-      context: { slug: node.slug.current, language: "en" },
+      context: { slug: node.node.slug.current, language: "en" },
     })
 
-    const ProfessionalPagesES = path.resolve("./src/templates/professionals/proES.js")
+    const ProfessionalPagesES = require.resolve("./src/templates/professionals/proES.js")
     createPage({
-      path: "/es/search/" + node.slug.current,
+      path: "/es/search/" + node.node.slug.current,
       component: ProfessionalPagesES,
-      context: { slug: node.slug.current, language: "es" },
+      context: { slug: node.node.slug.current, language: "es" },
     })
 
-    const ProfessionalPagesGER = path.resolve("./src/templates/professionals/proDE.js")
+    const ProfessionalPagesGER = require.resolve("./src/templates/professionals/proDE.js")
     createPage({
-      path: "/de/search/" + node.slug.current,
+      path: "/de/search/" + node.node.slug.current,
       component: ProfessionalPagesGER,
-      context: { slug: node.slug.current, language: "de" },
+      context: { slug: node.node.slug.current, language: "de" },
     })
   })
 
