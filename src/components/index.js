@@ -30,6 +30,7 @@ import HelpFilter from "./Help/HelpFilter";
 import AuthorReference from "./AuthorReference/AuthorReference";
 import Contact from "./Contact/Contact";
 import Professionals from "./Professionals/Professionals";
+import ProfessionalsFilter from "./Professionals/ProfessionalFilter";
 
 export {
   Header,
@@ -64,4 +65,5 @@ export {
   AuthorReference,
   Contact,
   Professionals,
+  ProfessionalsFilter
 };

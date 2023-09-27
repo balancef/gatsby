@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { Layout, CustomSection, Banner, Seo, ProfessionalPage} from "../components";
+import { Layout, CustomSection, Banner, Seo } from "../components";
 
 const Page = ({location,  data }) => {
   const { dinamicContent, banner, titlePage, descriptionPage} = data?.allSanityPages?.nodes[0]
