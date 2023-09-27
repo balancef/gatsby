@@ -64,6 +64,7 @@ const useHome = () => {
                     }
                     asset {
                       _id
+                      url
                     }
                   }
                 }
@@ -127,6 +128,7 @@ const useHome = () => {
                     }
                     asset {
                       _id
+                      url
                     }
                     _key
                   }
@@ -438,6 +440,7 @@ const useHome = () => {
                     }
                     asset {
                       _id
+                      url
                     }
                   }
                 }
@@ -812,6 +815,7 @@ const useHome = () => {
                     }
                     asset {
                       _id
+                      url
                     }
                   }
                 }
