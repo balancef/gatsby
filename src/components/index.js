@@ -31,6 +31,7 @@ import AuthorReference from "./AuthorReference/AuthorReference";
 import Contact from "./Contact/Contact";
 import Professionals from "./Professionals/Professionals";
 import ProfessionalsFilter from "./Professionals/ProfessionalFilter";
+import Article from "../templates/article/Article";
 import MainCourses from "./MainCourses/MainCourses";
 
 
@@ -69,5 +70,7 @@ export {
   Contact,
   Professionals,
   ProfessionalsFilter,
-  MainCourses
+  MainCourses,
+  Article,
+  MainCourses,
 };

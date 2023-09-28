@@ -141,5 +141,45 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
+  // CREACION DE PAGINAS ARTICULOS 
+  const { data: articleQueryData } = await graphql(`
+    query ArticlePage {
+      allSanityArticle {
+        nodes {
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `)
+
+  if (articleQueryData.errors) {
+    reporter.panicOnBuild("Error creando pagina de articulo")
+  }
+
+  articleQueryData.allSanityArticle.nodes.forEach(node => { 
+    const ArticlePageEN = path.resolve("./src/templates/article/articleEN.js")
+    createPage({
+      path: "/blog/" + node.slug.current,
+      component: ArticlePageEN,
+      context: { slug: node.slug.current, language: "en" },
+    })
+
+    const ArticlePageES = path.resolve("./src/templates/article/articleES.js")
+    createPage({
+      path: "/es/blog/" + node.slug.current,
+      component: ArticlePageES,
+      context: { slug: node.slug.current, language: "es" },
+    })
+
+    const ArticlePageGER = path.resolve("./src/templates/article/articleDE.js")
+    createPage({
+      path: "/de/blog/" + node.slug.current,
+      component: ArticlePageGER,
+      context: { slug: node.slug.current, language: "de" },
+    })
+  })
+
 }
 
