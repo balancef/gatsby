@@ -25,6 +25,7 @@ const ProfessionalsFilter = ({
   const [selectedCountry, setSelectedCountry] = useState("");
   const [results, setResults] = useState(data);
   const [filterByValidTo, setFilterByValidTo] = useState(true);
+  
   const isValidToValid = (professional) => {
     if (professional?.ranking?.ranking && (professional?.ranking?.ranking.toLowerCase() === "master" || professional?.ranking?.ranking.toLowerCase() === "supervisor")) {
       return true;
@@ -75,7 +76,7 @@ const ProfessionalsFilter = ({
           const userCountryHasProfessionals = countriesData.some(country => country.countryCode === selectedCountry);
           const matchesCountry =
             !selectedCountry || !userCountryHasProfessionals || professional.country.countryCode === selectedCountry;
-          const isValidTo = (hasMasterOrSupervisorRanking || filterByValidTo && isValidToValid(professional));
+          const isValidTo = ((hasMasterOrSupervisorRanking || filterByValidTo) && isValidToValid(professional));
           return (
             matchesRanking && matchesProfession && matchesServices && matchesCountry && isValidTo
           );

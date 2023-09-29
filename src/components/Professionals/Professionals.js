@@ -12,7 +12,6 @@ import useSearchPage from "../../hooks/useSearchPage";
 import ProfessionalsFilter from "./ProfessionalFilter";
 import useCountries from "../../hooks/useCountries";
 import useContact from '../../hooks/useContact'
-import { Icon } from "..";
 
 const Professionals = () => {
 
