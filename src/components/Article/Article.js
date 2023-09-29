@@ -9,7 +9,7 @@ import { CustomLink } from "..";
 import "./Article.scss";
 
 const Article = (data) => {
-  console.log("data:", data);
+  // console.log("data:", data);
 
   const { language } = useContext(LanguageContext);
 
@@ -81,9 +81,7 @@ const Article = (data) => {
                 </div>
               </div>
               <div className="authorDescription">
-                <small>
-                  <PortableText value={data.data.author._rawDescription} />
-                </small>
+                <PortableText value={data.data.author._rawDescription} />
               </div>
             </div>
           </div> */}
