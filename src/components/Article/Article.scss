@@ -1,0 +1,40 @@
+@import "../../styles/global";
+
+.articleContainer {
+  padding: 20px 10px;
+}
+.article__date {
+  margin-bottom: 20px;
+}
+.image_portable {
+  margin: 15px 0;
+  height: 250px;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+.authorContainer {
+  display: flex;
+}
+.auhorPhoto {
+  img {
+    border-radius: 50%;
+  }
+}
+.authorTitle {
+  display: flex;
+  &_text {
+    flex: 4;
+  }
+}
+
+@media (min-width: $lg-breakpoint) {
+  .articleContainer {
+    margin: 50px 150px;
+  }
+  .image_portable {
+    height: 500px;
+  }
+}

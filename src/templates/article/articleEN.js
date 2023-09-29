@@ -1,7 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { Layout, Seo } from "../../components";
-import Article from "./Article";
+import { Layout, Seo, Article } from "../../components";
 
 const ArticlePage = ({ location, data }) => {
   const ArticleQuery = data?.data.nodes[0];
@@ -35,6 +34,7 @@ export const query = graphql`
           _rawContent
           author {
             name
+            title
             _rawDescription
             photo {
               alt
