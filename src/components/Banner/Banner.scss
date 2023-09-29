@@ -67,5 +67,8 @@
         font-weight: 400;
       }
     }
-  }
+    &__description p:last-child{
+        font-weight: 600;
+    }
+}
 }
