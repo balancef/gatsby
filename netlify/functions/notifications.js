@@ -52,9 +52,9 @@ const handler = async (event, context) => {
     })
 
     console.log("Profesionales a notificar: " + professionalsToNotify.length + " para el día: " + day)
-    professionalsToNotify.forEach((professional) => {
+    professionalsToNotify.forEach(async (professional) => {
       const language = professional.language !== null ? professional.language[0]?.language : 'English'
-      sendMail(professional.email, language)
+      await sendMail(professional.email, language)
     })
 
   })
