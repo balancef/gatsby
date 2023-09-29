@@ -235,7 +235,7 @@ const ProfessionalCard = ({
                         {formatoFechas(lastCertificateUpdate)}
                       </li>
                     )}
-                    {validTo && (
+                    {(validTo && ((ranking.toLowerCase() === "master") || (ranking.toLowerCase() === "supervisor"))) ? <></> : (
                       <li
                         title={
                           language === "es"
