@@ -57,8 +57,6 @@ const ProfessionalCard = ({
     setIsExpanded(!IsExpanded);
   };
 
-  console.log(typeof bccEmails);
-
   const professionList = professions.map((item) => item.profession).join(", ");
   const serviceList = services.map((item) => item.services).join(", ");
   const bccEmailArray = bccEmails.split(",");
