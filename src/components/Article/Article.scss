@@ -1,0 +1,52 @@
+@import "../../styles/global";
+
+.articleContainer {
+  padding: 20px 10px;
+}
+.article__date {
+  margin-bottom: 20px;
+}
+.image_portable {
+  margin: 15px 0;
+  height: 250px;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+.authorContainer {
+  display: flex;
+}
+.auhorPhoto {
+  img {
+    border-radius: 50%;
+  }
+}
+.authorText {
+    display: flex;
+    flex-direction: column;
+}
+.authorTitle {
+  display: flex;
+  &_text {
+    flex: 6;
+  }
+  &_button {
+    flex: 3;
+  }
+}
+.authorDescription {
+    p {
+        font-size: 14px !important;
+    }
+}
+
+@media (min-width: $lg-breakpoint) {
+  .articleContainer {
+    margin: 50px 150px;
+  }
+  .image_portable {
+    height: 500px;
+  }
+}

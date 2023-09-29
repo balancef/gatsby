@@ -2,6 +2,7 @@ import React from "react";
 import useProfessionals from "../../hooks/useProfessionals";
 import { graphql } from "gatsby";
 import { Layout, Seo} from "../../components";
+import useContact from '../../hooks/useContact';
 import ProfessionalCard from "../../components/Professionals/ProfessionalCard";
 
 const ProPage = ({location,  data }) => {
@@ -9,6 +10,7 @@ const ProPage = ({location,  data }) => {
   const titlePage = professionalData.name
   let query = useProfessionals();
   let defaultData = query?.sanityProfessionalConfigES;
+  const bccEmails = useContact().allSanityContact.ContactEN[0].ccEmails
 
   return (
     <Layout location={location}>
@@ -34,6 +36,9 @@ const ProPage = ({location,  data }) => {
           phone={professionalData.phone}
           email={professionalData.email}
           website={professionalData?.website}
+          emailSubject={defaultData?.contactForm.title}
+          emailBody={defaultData?.contactForm.templateContent}
+          bccEmails={bccEmails}
         />
     </Layout>
   );
