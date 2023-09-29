@@ -13,6 +13,7 @@ import {
   TextSubtitleBlocks,
   TextLogoButton,
   AuthorReference,
+  MainCourses,
 } from "../";
 import AccordionBlocks from "../AccordionBlocks/AccordionBlocks";
 
@@ -158,7 +159,24 @@ const CustomSection = ({ sections }) => {
           />
         );
       }
+
+      if (section?._type === "highlightedExternalAccess") {
+        return (
+          <MainCourses
+            key={section._key}
+            highlightedLink={section.highlightedLink}
+            externalLinks={section.fullCardsItems}
+            button={section.externalLink}
+          />
+        );
+      }
+
+      return <></>
+    } else {
+      return <></>
     }
+
+
   });
 
   return <>{sectionResult}</>;

@@ -4,6 +4,10 @@ const useProfessionals = () => {
   return useStaticQuery(graphql`
     {
       sanityProfessionalConfig {
+        contactForm {
+          title
+          templateContent
+        }
         photoDefault {
           alt
           image {
@@ -48,6 +52,10 @@ const useProfessionals = () => {
 
       }
       sanityProfessionalConfigES: sanityProfessionalConfig  {
+        contactForm {
+          title:titleSpanish
+          templateContent :templateContentSpanish
+        }
         photoDefault {
           alt
           image {
@@ -65,7 +73,7 @@ const useProfessionals = () => {
             }
             asset {
               _id
-            }
+            } 
           }
         }
         academyLogo {
@@ -91,6 +99,10 @@ const useProfessionals = () => {
         _rawDescriptionDefault: _rawDescriptionDefaultSpanish
       }
       sanityProfessionalConfigDE: sanityProfessionalConfig   {
+        contactForm {
+          title:titleGerman
+          templateContent: templateContentGerman
+        }
         photoDefault {
           alt
           image {

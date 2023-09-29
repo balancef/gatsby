@@ -44,6 +44,9 @@ const ProfessionalCard = ({
   description,
   phone,
   email,
+  bccEmails,
+  emailSubject,
+  emailBody,
   website,
   descriptionDefault,
 }) => {
@@ -54,8 +57,14 @@ const ProfessionalCard = ({
     setIsExpanded(!IsExpanded);
   };
 
+  console.log(typeof bccEmails);
+
   const professionList = professions.map((item) => item.profession).join(", ");
   const serviceList = services.map((item) => item.services).join(", ");
+  const bccEmailArray = bccEmails.split(",");
+
+  const bccEmail1 = bccEmailArray[0] || "";
+  const bccEmail2 = bccEmailArray[1] || "";
 
   function formatoFechas(fecha) {
     return format(new Date(fecha), "dd-MM-yyyy");
@@ -226,7 +235,7 @@ const ProfessionalCard = ({
                         {formatoFechas(lastCertificateUpdate)}
                       </li>
                     )}
-                    {validTo && (
+                    {(validTo && ((ranking.toLowerCase() === "master") || (ranking.toLowerCase() === "supervisor"))) ? <></> : (
                       <li
                         title={
                           language === "es"
@@ -260,7 +269,20 @@ const ProfessionalCard = ({
                     {email && (
                       <li>
                         <MdEmail size={18} />
-                        <CustomLink href={`mailto:${email}`} text={email} />
+                        <a
+                          target="_blank"
+                          href={`mailto:${encodeURIComponent(
+                            email
+                          )}?bcc=${encodeURIComponent(
+                            bccEmail1
+                          )}&bcc=${encodeURIComponent(
+                            bccEmail2
+                          )}&subject=${`${emailSubject}`}&body=${emailBody}
+
+                          `}
+                        >
+                          {email}
+                        </a>
                       </li>
                     )}
                     {website && (

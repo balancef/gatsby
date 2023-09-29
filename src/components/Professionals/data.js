@@ -3,7 +3,7 @@ export const dataLanguageTexts = {
     inputTitle: "Buscador de Especialistas en Podología",
     inputPlaceholder: "Buscá especialistas por palabra clave",
     filterBy: "Filtrar por",
-    resetFilters: "Reiniciar el fitro",
+    resetFilters: "Reiniciar",
     ranking: "Ranking",
     profession: "Ocupación",
     services: "Servicios",
@@ -13,7 +13,7 @@ export const dataLanguageTexts = {
     allCountries: "Todos los paises",
     allIn: "Todos en",
     noServices: "¿No está en la lista?",
-    moreInfo: "Más información"
+    moreInfo: "Más información",
   },
   de: {
     inputTitle: "Suche nach Podologie-Spezialisten",

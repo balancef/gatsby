@@ -69,7 +69,7 @@ const Menu = ({ links, button, language }) => {
   );
 
   const buttonMenu = button !== null ? (
-    <Button href={button.url}> {button.title}</Button>
+    <Button target="_blank" href={button.url}> {button.title}</Button>
   ) : <></>
 
 

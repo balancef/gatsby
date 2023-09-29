@@ -1,9 +1,9 @@
 {
-  "name": "starter",
+  "name": "f-balance",
   "version": "1.0.0",
   "private": true,
-  "description": "starter",
-  "author": "Martin",
+  "description": "f-balance",
+  "author": "Bitlogic",
   "keywords": [
     "gatsby"
   ],
@@ -15,6 +15,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@netlify/functions": "^2.1.0",
     "@portabletext/react": "^2.0.1",
     "@react-icons/all-files": "^4.1.0",
     "bootstrap": "^5.3.0",
@@ -24,12 +25,11 @@
     "gatsby-plugin-manifest": "^5.3.1",
     "gatsby-plugin-sanity-image": "^0.13.3",
     "gatsby-plugin-sass": "^6.3.1",
-    "gatsby-plugin-sharp": "^5.3.2",
     "gatsby-plugin-sitemap": "^6.3.1",
     "gatsby-source-filesystem": "^5.3.1",
     "gatsby-source-sanity": "^7.6.1",
-    "gatsby-transformer-sharp": "^5.3.1",
     "js-search": "^2.0.1",
+    "node-fetch": "^2.7.0",
     "nodemailer": "^6.9.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",

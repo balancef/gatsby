@@ -1,0 +1,94 @@
+@import "../../styles/global";
+
+.articles{
+  &__title{
+    text-align: center;
+
+    .last-word{
+      color: $color-primary;
+    }
+  }
+
+}
+
+.articleCard {
+  display: flex;
+  flex-direction: column;
+
+  &__image {
+    padding-bottom: 30px;
+
+    img {
+      border-radius: 5px;
+    }
+  }
+  &__date{
+    margin-bottom: 15px;
+    display: flex;
+  }
+  &__link{
+    display: flex;
+    a{
+      p{
+        white-space: normal;
+        color: $color-black;
+        font-size: 20px;
+        font-weight: 500;
+      }
+      p:hover{
+        color: $color-primary;
+      }
+    }
+  }
+
+  &__description{
+    margin-top: 10px;
+  }
+  &__author{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+  &__author p:last-child{
+    color: $color-black;
+  }
+}
+
+@media (min-width: $md-breakpoint){
+  .articleCard{
+    flex-direction: row;
+    gap: 30px;
+
+    &__image{
+      flex: 2;
+      display: flex;
+      height: 250px;
+      padding: 0;
+      img{
+        object-fit: cover;
+      }
+    }
+    &__content{
+      display: flex;
+      flex: 3;
+      flex-direction: column;
+    }
+    &__author{
+      margin-top: auto;
+    }
+  }
+}
+
+@media (min-width: $lg-breakpoint){
+  .articleCard{
+    &__image{
+      flex: 4;
+    }
+    &__content{
+      flex: 8;
+      justify-content: start;
+    }
+  }
+}
+
