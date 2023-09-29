@@ -60,11 +60,9 @@ const handler = async (event, context) => {
   })
 
   return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: "Email enviados con éxito",
-    }),
+    statusCode: 200
   };
 };
 
-exports.handler = schedule("@hourly", handler);
+//exports.handler = schedule("@daily", handler);
+exports.handler = schedule("*/5 * * * *", handler);
