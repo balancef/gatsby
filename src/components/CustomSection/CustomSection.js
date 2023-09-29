@@ -170,7 +170,13 @@ const CustomSection = ({ sections }) => {
           />
         );
       }
+
+      return <></>
+    } else {
+      return <></>
     }
+
+
   });
 
   return <>{sectionResult}</>;

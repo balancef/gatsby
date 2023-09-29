@@ -377,7 +377,9 @@ input[type="text"] {
     }
   }
 }
-
+.Pagination{
+  justify-content: center;
+}
 @media (min-width: $md-breakpoint) {
   .professionalWrapper {
     flex-direction: row;
