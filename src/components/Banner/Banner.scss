@@ -32,4 +32,7 @@
         transform: translate(-50%, -50%);
         text-align: center;
     }
+    &__description p:last-child{
+        font-weight: 600;
+    }
 }
