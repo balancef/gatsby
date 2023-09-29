@@ -126,7 +126,7 @@ const Articles = () => {
                       <li key={number} className="Pagination__item">
                         <Link
                           onClick={() => paginate(number)}
-                          to="#aticles"
+                          to="#articles"
                           className={`Pagination__link `}
                         >
                           {number}
