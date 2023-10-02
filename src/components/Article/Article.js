@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Banner from "../Banner/Banner";
+import CustomLink from "../CustomLink/CustomLink";
 import { format } from "date-fns";
 import { es, en, de } from "date-fns/locale";
 import { LanguageContext } from "../../context/languajeContext";

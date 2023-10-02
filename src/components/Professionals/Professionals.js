@@ -33,6 +33,8 @@ const Professionals = () => {
   let countriesData = null;
   const texts = language !== null && dataLanguageTexts[language];
 
+
+
   if (language === "es") {
     data = query.allSanityProfessional.ProfessionalsES;
     defaultData = query.sanityProfessionalConfigES;
@@ -61,11 +63,13 @@ const Professionals = () => {
     }
   }
 
+  console.log(pageData.descriptionPage, "descr")
+
   return (
     <>
       <Seo
         title={pageData.titlePage}
-        description={pageData.description}
+        description={pageData.descriptionPage}
         keywords=""
       />
       {language !== null && <ProfessionalsFilter
