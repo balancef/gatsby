@@ -7,12 +7,13 @@ const ArticlePage = ({ location, data }) => {
   const bannerData = data.banner.nodes[0];
 
   const titlePage = bannerData?.title
+  const descriptionPage = data?.data.nodes[0]._rawContent[0].children[0].text
 
   return (
     <Layout location={location}>
-      <Seo  //AGREGAR SEO
+      <Seo
         title={titlePage}
-        description=""
+        description={descriptionPage}
         keywords=""
       />
       <Article

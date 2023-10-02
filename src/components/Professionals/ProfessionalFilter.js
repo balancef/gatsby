@@ -37,7 +37,7 @@ const ProfessionalsFilter = ({
   const [selectedServices, setSelectedServices] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [results, setResults] = useState(data);
-  const [filterByValidTo, setFilterByValidTo] = useState(true);
+  const filterByValidTo = true;
 
   const isValidToValid = (professional) => {
     if (
@@ -356,12 +356,12 @@ const ProfessionalsFilter = ({
               </div>
             </div>
           </div>
-          <h6 className="container mt-4">
-            {countriesData.some(
-              (country) => country.countryCode === selectedCountry
-            )
-              ? `${texts.allIn} ${selectedCountry}`
-              : texts.allResults}
+          <h6 className='container mt-4'>
+            {selectedCountry ? (
+              `${texts.allIn} ${countriesData.find(country => country.countryCode === selectedCountry)?.country}`
+            ) : (
+              texts.allResults
+            )}
           </h6>
           <div className="container filter-wrapper">
             <div className={`filter ${showFilter ? "filter-expanded" : ""}`}>
@@ -414,11 +414,9 @@ const ProfessionalsFilter = ({
                   <p>
                     {texts.noServices}{" "}
                     <a
-                      href={
-                        language === "es" || language === "de"
-                          ? `${language}/help/${pageData?.linkToHelpPage?.slug.current}`
-                          : `/help/${pageData?.linkToHelpPage?.slug.current}`
-                      }
+                      href={(language === "es" || language === "de") ?
+                        `${language}/help/${pageData?.linkToHelpPage?.slug.current}` :
+                        `/help/${pageData?.linkToHelpPage?.slug.current}`}
                     >
                       {texts.moreInfo}
                     </a>

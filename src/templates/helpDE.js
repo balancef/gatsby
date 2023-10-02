@@ -1,31 +1,32 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
-import { Layout, Seo} from "../components";
+import { Layout, Seo } from "../components";
 import "./Help.scss";
 import { PortableText } from "@portabletext/react";
 
-const Help = ({location, data}) => {
+const Help = ({ location, data }) => {
 
-    const { title, _rawDescription } = data.allSanityHelp.nodes[0];
+  const { title, _rawDescription } = data.allSanityHelp.nodes[0];
+  const descriptionPage = _rawDescription ? _rawDescription[0].children[0].text : ""
 
-    return (
-        <Layout location={location}>
-            <Seo title={title} description="" keywords="" />
-            <div className="container">
-                <div className="help">
-                    <div className="help__breadcrumb">
-                        <Link to="/de/help">Hilfe</Link>
-                        {` > ${title}`}
-                    </div>
-                    <div className="help__card">
-                        <h1 className="help__card__h1">{title}</h1>
-                        <PortableText value={_rawDescription} />
-                    </div>
-                </div>
+  return (
+    <Layout location={location}>
+      <Seo title={title} description={descriptionPage} keywords="" />
+      <div className="container">
+        <div className="help">
+          <div className="help__breadcrumb">
+            <Link to="/de/help">Hilfe</Link>
+            {` > ${title}`}
+          </div>
+          <div className="help__card">
+            <h1 className="help__card__h1">{title}</h1>
+            <PortableText value={_rawDescription} />
+          </div>
+        </div>
 
-            </div>
-        </Layout>
-    );
+      </div>
+    </Layout>
+  );
 };
 
 export default Help;
