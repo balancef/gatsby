@@ -1,5 +1,4 @@
 import React from "react";
-import useProfessionals from "../../hooks/useProfessionals";
 import { graphql } from "gatsby";
 import { Layout, Seo} from "../../components";
 import useContact from '../../hooks/useContact';

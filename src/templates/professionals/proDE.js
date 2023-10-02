@@ -7,7 +7,7 @@ import {
 } from "../../components";
 import useContact from '../../hooks/useContact';
 import ProfessionalCard from "../../components/Professionals/ProfessionalCard";
-import { PortableText } from "@portabletext/react";
+
 
 const ProPage = ({ location, data }) => {
   const professionalData = data?.allSanityProfessional?.nodes[0];

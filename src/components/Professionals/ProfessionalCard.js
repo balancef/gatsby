@@ -274,6 +274,7 @@ const ProfessionalCard = ({
                         <MdEmail size={18} />
                         <a
                           target="_blank"
+                          rel="noreferrer"
                           href={`mailto:${encodeURIComponent(
                             email
                           )}?bcc=${encodeURIComponent(
