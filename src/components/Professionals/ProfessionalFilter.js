@@ -357,7 +357,7 @@ const ProfessionalsFilter = ({
             </div>
           </div>
           <h6 className='container mt-4'>
-            {selectedCountry ? (
+            {selectedCountry && countriesData.find(country => country.countryCode === selectedCountry) ? (
               `${texts.allIn} ${countriesData.find(country => country.countryCode === selectedCountry)?.country}`
             ) : (
               texts.allResults
