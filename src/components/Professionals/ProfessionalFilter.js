@@ -1,17 +1,30 @@
-import React, { useEffect, useRef, useState } from 'react';
-import useWindowSize from '../../hooks/useWindowSize';
-import unorm from 'unorm';
-import { FaAngleDown, FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa';
-import ProfessionalCard from './ProfessionalCard';
-import Icon from '../Icons/Icon';
-import { Link } from 'gatsby';
+import React, { useEffect, useRef, useState } from "react";
+import useWindowSize from "../../hooks/useWindowSize";
+import unorm from "unorm";
+import {
+  FaAngleDown,
+  FaChevronLeft,
+  FaChevronRight,
+  FaStar,
+} from "react-icons/fa";
+import ProfessionalCard from "./ProfessionalCard";
+import Icon from "../Icons/Icon";
+import { Link } from "gatsby";
 import emptyState from "../../images/emptyState.png";
-import axios from 'axios';
+import axios from "axios";
 
 const ProfessionalsFilter = ({
-  data, defaultData, servicesData,
-  rankingsData, professionsData, pageData, texts, language, countriesData, bccEmails }) => {
-
+  data,
+  defaultData,
+  servicesData,
+  rankingsData,
+  professionsData,
+  pageData,
+  texts,
+  language,
+  countriesData,
+  bccEmails,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
   const pageNumbers = [];
@@ -24,10 +37,14 @@ const ProfessionalsFilter = ({
   const [selectedServices, setSelectedServices] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [results, setResults] = useState(data);
-  const [filterByValidTo, setFilterByValidTo] = useState(true);
-  
+  const filterByValidTo = true;
+
   const isValidToValid = (professional) => {
-    if (professional?.ranking?.ranking && (professional?.ranking?.ranking.toLowerCase() === "master" || professional?.ranking?.ranking.toLowerCase() === "supervisor")) {
+    if (
+      professional?.ranking?.ranking &&
+      (professional?.ranking?.ranking.toLowerCase() === "master" ||
+        professional?.ranking?.ranking.toLowerCase() === "supervisor")
+    ) {
       return true;
     }
     const currentDate = new Date();
@@ -36,57 +53,74 @@ const ProfessionalsFilter = ({
   };
 
   useEffect(() => {
-    const apiKey = 'e6889c81cf7b4529a7dd8f062ef5848a';
+    const apiKey = "e6889c81cf7b4529a7dd8f062ef5848a";
 
     const fetchUserCountry = async () => {
       try {
-        const response = await axios.get(`https://api.geoapify.com/v1/ipinfo?apiKey=${apiKey}`);
+        const response = await axios.get(
+          `https://api.geoapify.com/v1/ipinfo?apiKey=${apiKey}`
+        );
         setSelectedCountry(response.data.country.iso_code);
       } catch (error) {
-        console.error('Error fetching user country:', error);
+        console.error("Error fetching user country:", error);
       }
     };
     fetchUserCountry();
-
   }, []);
 
   useEffect(() => {
     setResults(
-      data.filter(
-        (professional) => {
-          const hasMasterOrSupervisorRanking =
-            professional.ranking?.ranking.toLowerCase() === "master" || professional.ranking?.ranking.toLowerCase() === "supervisor";
-          const matchesRanking =
-            selectedRankings.length === 0 ||
-            selectedRankings.includes(professional.ranking.ranking);
-          const matchesProfession =
-            selectedProfessions.length === 0 ||
-            selectedProfessions.every((selectedProf) => {
-              return professional.profession.some(
-                (prof) => prof.profession === selectedProf
-              );
-            });
-          const matchesServices =
-            selectedServices.length === 0 ||
-            selectedServices.every((selectedService) => {
-              return professional.services.some(
-                (service) => service.services === selectedService
-              );
-            });
-          const userCountryHasProfessionals = countriesData.some(country => country.countryCode === selectedCountry);
-          const matchesCountry =
-            !selectedCountry || !userCountryHasProfessionals || professional.country.countryCode === selectedCountry;
-          const isValidTo = ((hasMasterOrSupervisorRanking || filterByValidTo) && isValidToValid(professional));
-          return (
-            matchesRanking && matchesProfession && matchesServices && matchesCountry && isValidTo
-          );
-        }
-      )
-    )
+      data.filter((professional) => {
+        const hasMasterOrSupervisorRanking =
+          professional.ranking?.ranking.toLowerCase() === "master" ||
+          professional.ranking?.ranking.toLowerCase() === "supervisor";
+        const matchesRanking =
+          selectedRankings.length === 0 ||
+          selectedRankings.includes(professional.ranking.ranking);
+        const matchesProfession =
+          selectedProfessions.length === 0 ||
+          selectedProfessions.every((selectedProf) => {
+            return professional.profession.some(
+              (prof) => prof.profession === selectedProf
+            );
+          });
+        const matchesServices =
+          selectedServices.length === 0 ||
+          selectedServices.every((selectedService) => {
+            return professional.services.some(
+              (service) => service.services === selectedService
+            );
+          });
+        const userCountryHasProfessionals = countriesData.some(
+          (country) => country.countryCode === selectedCountry
+        );
+        const matchesCountry =
+          !selectedCountry ||
+          !userCountryHasProfessionals ||
+          professional.country.countryCode === selectedCountry;
+        const isValidTo =
+          (hasMasterOrSupervisorRanking || filterByValidTo) &&
+          isValidToValid(professional);
+        return (
+          matchesRanking &&
+          matchesProfession &&
+          matchesServices &&
+          matchesCountry &&
+          isValidTo
+        );
+      })
+    );
 
-
-    setCurrentPage(1)
-  }, [selectedRankings, selectedProfessions, selectedServices, selectedCountry, filterByValidTo, countriesData, data]);
+    setCurrentPage(1);
+  }, [
+    selectedRankings,
+    selectedProfessions,
+    selectedServices,
+    selectedCountry,
+    filterByValidTo,
+    countriesData,
+    data,
+  ]);
 
   function removeDiacritics(str) {
     return unorm.nfkd(str).replace(/[\u0300-\u036f]/g, "");
@@ -139,7 +173,7 @@ const ProfessionalsFilter = ({
       return matches;
     });
 
-    setCurrentPage(1)
+    setCurrentPage(1);
 
     setResults(filtered);
   };
@@ -312,16 +346,22 @@ const ProfessionalsFilter = ({
                   onChange={handleInputChange}
                   onKeyDown={handleKeyPress}
                 />
-                <button className="search-icon" onClick={handleSearch}>
+                <button
+                  title="Search button"
+                  className="search-icon"
+                  onClick={handleSearch}
+                >
                   <Icon code={"FaSearch"}></Icon>
                 </button>
               </div>
             </div>
           </div>
-          <h6 className="container mt-4">
-            {countriesData.some(country => country.countryCode === selectedCountry)
-              ? `${texts.allIn} ${selectedCountry}`
-              : texts.allResults}
+          <h6 className='container mt-4'>
+            {selectedCountry && countriesData.find(country => country.countryCode === selectedCountry) ? (
+              `${texts.allIn} ${countriesData.find(country => country.countryCode === selectedCountry)?.country}`
+            ) : (
+              texts.allResults
+            )}
           </h6>
           <div className="container filter-wrapper">
             <div className={`filter ${showFilter ? "filter-expanded" : ""}`}>
@@ -335,10 +375,11 @@ const ProfessionalsFilter = ({
                 </span>
               </button>
               <div
-                className={`filter-container ${showFilter && dimensions.windowWidth < 768
-                  ? "show-filter"
-                  : ""
-                  }`}
+                className={`filter-container ${
+                  showFilter && dimensions.windowWidth < 768
+                    ? "show-filter"
+                    : ""
+                }`}
               >
                 <div className="filter-description">
                   <p>{texts.filterBy}:</p>
@@ -374,7 +415,7 @@ const ProfessionalsFilter = ({
                     {texts.noServices}{" "}
                     <a
                       href={(language === "es" || language === "de") ?
-                       `${language}/help/${pageData?.linkToHelpPage?.slug.current}` :
+                        `${language}/help/${pageData?.linkToHelpPage?.slug.current}` :
                         `/help/${pageData?.linkToHelpPage?.slug.current}`}
                     >
                       {texts.moreInfo}
@@ -415,34 +456,29 @@ const ProfessionalsFilter = ({
                         )}
                       </li>
                     )}
-                    {pageNumbers.map((number, idx) => (
-                      <div key={idx}>
-                        {number === currentPage ? (
-                          <li
-                            key={idx}
-                            className="Pagination__item active-page"
+                    {pageNumbers.map((number, idx) =>
+                      number === currentPage ? (
+                        <li key={idx} className="Pagination__item active-page">
+                          <Link
+                            onClick={() => paginate(number)}
+                            to="#professionals"
+                            className={`Pagination__link`}
                           >
-                            <Link
-                              onClick={() => paginate(number)}
-                              to="#professionals"
-                              className={`Pagination__link`}
-                            >
-                              {number}
-                            </Link>
-                          </li>
-                        ) : (
-                          <li key={idx} className="Pagination__item">
-                            <Link
-                              onClick={() => paginate(number)}
-                              to="#professionals"
-                              className={`Pagination__link `}
-                            >
-                              {number}
-                            </Link>
-                          </li>
-                        )}
-                      </div>
-                    ))}
+                            {number}
+                          </Link>
+                        </li>
+                      ) : (
+                        <li key={idx} className="Pagination__item">
+                          <Link
+                            onClick={() => paginate(number)}
+                            to="#professionals"
+                            className={`Pagination__link `}
+                          >
+                            {number}
+                          </Link>
+                        </li>
+                      )
+                    )}
                     <li className="Pagination__item">
                       {currentPage !== pageNumbers[pageNumbers.length - 1] ? (
                         <Link
@@ -464,7 +500,6 @@ const ProfessionalsFilter = ({
       </div>
     </>
   );
-
-}
+};
 
 export default ProfessionalsFilter;

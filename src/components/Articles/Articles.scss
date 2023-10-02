@@ -1,14 +1,16 @@
 @import "../../styles/global";
 
-.articles{
-  &__title{
+.articleTitleContainer {
+  background-color: $color-background-secondary;
+}
+.articles {
+  &__title {
     text-align: center;
-
-    .last-word{
+    padding: 50px 0;
+    .last-word {
       color: $color-primary;
     }
   }
-
 }
 
 .articleCard {
@@ -22,73 +24,77 @@
       border-radius: 5px;
     }
   }
-  &__date{
+  &__date {
     margin-bottom: 15px;
     display: flex;
   }
-  &__link{
+  &__link {
     display: flex;
-    a{
-      p{
+    a {
+      p {
         white-space: normal;
         color: $color-black;
         font-size: 20px;
         font-weight: 500;
       }
-      p:hover{
+      p:hover {
         color: $color-primary;
       }
     }
   }
 
-  &__description{
+  &__description {
     margin-top: 10px;
   }
-  &__author{
+  &__author {
     margin-top: 15px;
     display: flex;
     flex-direction: row;
     gap: 5px;
   }
-  &__author p:last-child{
+  &__author p:last-child {
     color: $color-black;
   }
 }
 
-@media (min-width: $md-breakpoint){
-  .articleCard{
+@media (min-width: $md-breakpoint) {
+  .articles {
+    &__title {
+      padding: 80px 0;
+    }
+  }
+  .articleCard {
     flex-direction: row;
     gap: 30px;
 
-    &__image{
+    &__image {
       flex: 2;
       display: flex;
       height: 250px;
       padding: 0;
-      img{
+      img {
         object-fit: cover;
       }
     }
-    &__content{
+    &__content {
       display: flex;
       flex: 3;
       flex-direction: column;
     }
-    &__author{
+    &__author {
       margin-top: auto;
     }
   }
 }
 
-@media (min-width: $lg-breakpoint){
-  .articleCard{
-    &__image{
+@media (min-width: $lg-breakpoint) {
+  .articleCard {
+    &__image {
       flex: 4;
     }
-    &__content{
+    &__content {
       flex: 8;
       justify-content: start;
     }
   }
 }
-

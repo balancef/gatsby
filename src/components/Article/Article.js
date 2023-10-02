@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Banner from "../Banner/Banner";
+import CustomLink from "../CustomLink/CustomLink";
 import { format } from "date-fns";
 import { es, en, de } from "date-fns/locale";
 import { LanguageContext } from "../../context/languajeContext";
@@ -8,7 +9,6 @@ import SanityImage from "gatsby-plugin-sanity-image";
 import "./Article.scss";
 
 const Article = (data) => {
-  // console.log("data:", data);
 
   const { language } = useContext(LanguageContext);
 
@@ -29,7 +29,7 @@ const Article = (data) => {
       image: ({ value }) => {
         return (
           <div className="image_portable">
-            <SanityImage {...value} />
+            <SanityImage {...value} alt={data.banner.title}/>
           </div>
         );
       },
@@ -56,9 +56,9 @@ const Article = (data) => {
               />
             </div>
           )}
-          {/* <div className="authorContainer">
+          <div className="authorContainer">
             <div className="authorPhoto">
-              <SanityImage {...data.data.author.photo.image} />
+              <SanityImage {...data.data.author.photo.image} alt={data.banner.title}/>
             </div>
             <div className="authorText">
               <div className="authorTitle">
@@ -72,9 +72,15 @@ const Article = (data) => {
                 <div className="authorTitle_button">
                   <CustomLink
                     href={
-                      language === "en" ? "contact" : `/${language}/contact`
+                      language === "en" ? "/contact" : `/${language}/contact`
                     }
-                    text={"button.title"}
+                    text={
+                      language === "es"
+                        ? "Contacto"
+                        : language === "en"
+                        ? "Contact"
+                        : "Kontakt"
+                    }
                     type={"button"}
                   />
                 </div>
@@ -83,30 +89,32 @@ const Article = (data) => {
                 <PortableText value={data.data.author._rawDescription} />
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
-      {/* {data.data.relatedArticles > 0 && (
+      {data.data.relatedArticles.length > 0 && (
         <div className="relatedArticlesContainer">
-          {data.data.relatedArticles.map((article) => {
-            return (
-              <div className="relatedArticle">
-                <div className="relatedArticle__image">
-                  <SanityImage {...article.image.image} />
-                </div>
-                <div className="relatedArticle__description">
-                  <div className="relatedArticle__description_date">
-                    {article._createdAt}
+          <div className="container">
+            {data.data.relatedArticles.slice(0, 3).map((article) => {
+              return (
+                <div className="relatedArticle">
+                  <div className="relatedArticle__image">
+                    <SanityImage {...article.image.image} />
                   </div>
-                  <div className="relatedArticle__description_title">
-                    {article.title}
+                  <div className="relatedArticle__description">
+                    <div className="relatedArticle__description_date">
+                      {formatDate(article._createdAt)}
+                    </div>
+                    <a href={language === "en" ? `/blog/${article.slug.current}` : `/${language}/blog/${article.slug.current}`} className="relatedArticle__description_title">
+                      {article.title}
+                    </a>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      )} */}
+      )}
     </>
   );
 };

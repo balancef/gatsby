@@ -8,8 +8,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Seo } from "../seo";
 
 const Articles = () => {
-
-  let query = useArticle()
+  let query = useArticle();
   const { language } = useContext(LanguageContext);
   let data = null;
   let titlePage = null;
@@ -17,28 +16,25 @@ const Articles = () => {
 
   if (language === "es") {
     data = query.allSanityArticle.ArticleES;
-    titlePage = query.allSanityBlogPage?.nodes[0]?.titlePageSpanish
-    descriptionPage = query.allSanityBlogPage?.nodes[0]?.descriptionPageSpanish
-
+    titlePage = query.allSanityBlogPage?.nodes[0]?.titlePageSpanish;
+    descriptionPage = query.allSanityBlogPage?.nodes[0]?.descriptionPageSpanish;
   } else {
     if (language === "de") {
       data = query.allSanityArticle.ArticleDE;
-      titlePage = query.allSanityBlogPage?.nodes[0]?.titlePageGerman
-      descriptionPage = query.allSanityBlogPage?.nodes[0]?.descriptionPageGerman
-
+      titlePage = query.allSanityBlogPage?.nodes[0]?.titlePageGerman;
+      descriptionPage =
+        query.allSanityBlogPage?.nodes[0]?.descriptionPageGerman;
     } else {
       data = query.allSanityArticle.ArticleEN;
-      titlePage = query.allSanityBlogPage?.nodes[0]?.titlePage
-      descriptionPage = query.allSanityBlogPage?.nodes[0]?.descriptionPage
+      titlePage = query.allSanityBlogPage?.nodes[0]?.titlePage;
+      descriptionPage = query.allSanityBlogPage?.nodes[0]?.descriptionPage;
     }
   }
 
   data.sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt));
 
-  const titleWords = titlePage.split(' ');
+  const titleWords = titlePage.split(" ");
   const lastWord = titleWords[titleWords.length - 1];
-
-
 
   const ArticlesList = data?.map((article) => {
     return (
@@ -49,9 +45,8 @@ const Articles = () => {
         description={article?._rawContent}
         date={article?._createdAt}
         author={article?.author?.name}
-
       />
-    )
+    );
   });
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -76,20 +71,20 @@ const Articles = () => {
   };
   return (
     <>
-      <Seo
-        title={titlePage}
-        description={descriptionPage}
-        keywords=""
-      />
+      <Seo title={titlePage} description={descriptionPage} keywords="" />
       <div ref={wrapperRef}>
-        <div className="articles container">
-          {titlePage && <h3 className="articles__title py-5 ">
-            {titleWords.slice(0, -1).join(' ')}{' '}
-            <span className="last-word">{lastWord}</span></h3>
-          }
-          <div className="articles__items">
-            {currentArticles}
+        {titlePage && (
+          <div className="articleTitleContainer">
+            <div className="container">
+              <h6 className="articles__title">
+                {titleWords.slice(0, -1).join(" ")}{" "}
+                <span className="last-word">{lastWord}</span>
+              </h6>
+            </div>
           </div>
+        )}
+        <div className="articles container">
+          <div className="articles__items">{currentArticles}</div>
           {pageNumbers.length >= 2 ? (
             <nav>
               <ul className="Pagination">
@@ -110,10 +105,7 @@ const Articles = () => {
                 {pageNumbers.map((number) => (
                   <>
                     {number === currentPage ? (
-                      <li
-                        key={number}
-                        className="Pagination__item active-page"
-                      >
+                      <li key={number} className="Pagination__item active-page">
                         <Link
                           onClick={() => paginate(number)}
                           to="#articles"
@@ -153,7 +145,6 @@ const Articles = () => {
         </div>
       </div>
     </>
-
   );
 };
 

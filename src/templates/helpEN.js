@@ -7,10 +7,11 @@ import { PortableText } from "@portabletext/react";
 const Help = ({location, data}) => {
 
     const { title, _rawDescription } = data.allSanityHelp.nodes[0];
+    const descriptionPage = _rawDescription ? _rawDescription[0].children[0].text : ""
 
     return (
         <Layout location={location}>
-            <Seo title={title} description="" keywords="" />
+            <Seo title={title} description={descriptionPage} keywords="" />
             <div className="container">
                 <div className="help">
                     <div className="help__breadcrumb">
