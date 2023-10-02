@@ -2,13 +2,20 @@ const nodemailer = require('nodemailer');
 const fetch = require("node-fetch");
 const { schedule } = require("@netlify/functions");
 
-const sendMail = async (to, language) => {
+const client = nodemailer.createTransport({
+  service: "Gmail",
+  auth: {
+    user: "cmsfbalance@gmail.com",
+    pass: "tjfefvrssnwdqwip"
+  }
+});
+
+const sendMail = async (to, language, cc) => {
 
   language = language.toLowerCase()
-
   const mailOptions = {
     to: to,
-    cc: notification.result[0].CCemails,
+    cc: cc,
     subject: language === 'spanish' ? notification.result[0].subjectSpanish : language === 'german' ? notification.result[0].subjectGerman : notification.result[0].subject,
     text: language === 'spanish' ? notification.result[0].templateSpanish : language === 'german' ? notification.result[0].templateGerman : notification.result[0].template,
   };
@@ -31,13 +38,7 @@ const handler = async (event, context) => {
   const professionals = await professionalsResp.json()
 
   const daysToNotify = notification.result[0].daysToNotify
-  const client = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: "cmsfbalance@gmail.com",
-      pass: "tjfefvrssnwdqwip"
-    }
-  });
+ 
 
   daysToNotify.forEach((day) => {
     const professionalsToNotify = professionals.result.filter(professional => {
@@ -55,9 +56,8 @@ const handler = async (event, context) => {
     
     professionalsToNotify.forEach(async (professional) => {
       const language = professional.language !== null ? professional.language[0]?.language : 'English'
-      await sendMail(professional.email, language)
+      await sendMail(professional.email, language, notification.result[0].CCemails)
     })
-
   })
 
   return {
