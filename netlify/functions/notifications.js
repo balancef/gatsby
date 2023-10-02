@@ -60,6 +60,6 @@ const handler = async (event, context) => {
   };
 };
 
-//exports.handler = schedule("@daily", handler);
-exports.handler = schedule("*/5 * * * *", handler);
+exports.handler = schedule("@daily", handler);
+//exports.handler = schedule("*/5 * * * *", handler);
 
