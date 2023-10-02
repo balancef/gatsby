@@ -5,7 +5,6 @@ import { es, en, de } from "date-fns/locale";
 import { LanguageContext } from "../../context/languajeContext";
 import { PortableText } from "@portabletext/react";
 import SanityImage from "gatsby-plugin-sanity-image";
-import { CustomLink } from "..";
 import "./Article.scss";
 
 const Article = (data) => {
@@ -39,7 +38,7 @@ const Article = (data) => {
   return (
     <>
       {data.banner !== null ? (
-        <Banner banner={data.banner} variant={"blog"} />
+        <Banner banner={data.banner} />
       ) : (
         <></>
       )}

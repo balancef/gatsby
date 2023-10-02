@@ -91,6 +91,7 @@
     }
 
     .form-control {
+        border: var(--bs-border-width) solid var(--bs-border-color);
         &::placeholder {
             color: $color-text;
             opacity: 1;

@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const fetch = require("node-fetch");
-//const { schedule } = require("@netlify/functions");
+const { schedule } = require("@netlify/functions");
 
 const handler = async (event, context) => {
 
@@ -19,27 +19,7 @@ const handler = async (event, context) => {
     }
   });
 
-  const sendMail = async (to, language) => {
-
-    language = language.toLowerCase()
-
-    const mailOptions = {
-      to: to,
-      cc: notification.result[0].CCemails,
-      subject: language === 'spanish' ? notification.result[0].subjectSpanish : language === 'german' ? notification.result[0].subjectGerman : notification.result[0].subject,
-      text: language === 'spanish' ? notification.result[0].templateSpanish : language === 'german' ? notification.result[0].templateGerman : notification.result[0].template,
-    };
-
-    try {
-      await client.sendMail(mailOptions);
-      console.log('Email enviado con éxito a: ' + to)
-    } catch (error) {
-      console.log(error);
-      console.log('Fallo el envio de mail para el profesional: ' + to);
-    }
-  }
-
-  daysToNotify.forEach((day) => {
+  for (const day of daysToNotify) {
     const professionalsToNotify = professionals.result.filter(professional => {
       if (professional.validTo === null) return false
       const validTo = new Date(professional.validTo)
@@ -52,12 +32,34 @@ const handler = async (event, context) => {
     })
 
     console.log("Profesionales a notificar: " + professionalsToNotify.length + " para el día: " + day)
-    professionalsToNotify.forEach((professional) => {
-      const language = professional.language !== null ? professional.language[0]?.language : 'English'
-      sendMail(professional.email, language)
-    })
 
-  })
+    for (const professional of professionalsToNotify) {
+      let language = professional.language !== null ? professional.language[0]?.language : 'English'
+      language = language.toLowerCase()
+
+      const mailOptions = {
+        to: professional.email,
+        cc: notification.result[0].CCemails,
+        subject: language === 'spanish' ? notification.result[0].subjectSpanish : language === 'german' ? notification.result[0].subjectGerman : notification.result[0].subject,
+        text: language === 'spanish' ? notification.result[0].templateSpanish : language === 'german' ? notification.result[0].templateGerman : notification.result[0].template,
+      };
+
+      try {
+        await client.sendMail(mailOptions);
+        console.log('Email enviado con éxito a: ' + professional.email)
+      } catch (error) {
+        console.log(error);
+        console.log('Fallo el envio de mail para el profesional: ' + professional.email);
+      }
+
+    }
+  }
+
+  return {
+    statusCode: 200
+  };
 };
 
-exports.handler = schedule("@hourly", handler);
+exports.handler = schedule("@daily", handler);
+//exports.handler = schedule("*/5 * * * *", handler);
+
