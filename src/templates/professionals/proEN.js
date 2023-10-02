@@ -12,13 +12,14 @@ const ProPage = ({ location, data }) => {
 
   const professionalData = data?.allSanityProfessional?.nodes[0];
   const titlePage = professionalData.name
+  const description = professionalData?._rawDescription ? professionalData._rawDescription[0].children[0].text : ""
   let query = useProfessionals();
   let defaultData = query?.sanityProfessionalConfig;
   const bccEmails = useContact().allSanityContact.ContactEN[0].ccEmails
 
   return (
     <Layout location={location}>
-      <Seo title={titlePage} description="" keywords="" />
+      <Seo title={titlePage} description={description} keywords="" />
         <ProfessionalCard
           defaultPhoto={defaultData.photoDefault.image}
           photo={professionalData?.image?.image}

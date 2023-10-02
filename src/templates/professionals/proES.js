@@ -8,13 +8,13 @@ import ProfessionalCard from "../../components/Professionals/ProfessionalCard";
 const ProPage = ({location,  data }) => {
   const professionalData = data?.allSanityProfessional?.nodes[0];
   const titlePage = professionalData.name
-  let query = useProfessionals();
+  const description = professionalData?._rawDescription ? professionalData._rawDescription[0].children[0].text : ""
   let defaultData = query?.sanityProfessionalConfigES;
   const bccEmails = useContact().allSanityContact.ContactEN[0].ccEmails
 
   return (
     <Layout location={location}>
-      <Seo title={titlePage} description="" keywords="" />
+      <Seo title={titlePage} description={description} keywords="" />
       <ProfessionalCard
           defaultPhoto={defaultData?.photoDefault?.image}
           photo={professionalData?.image?.image}

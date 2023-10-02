@@ -57,6 +57,8 @@ const ProfessionalCard = ({
     setIsExpanded(!IsExpanded);
   };
 
+  console.log(typeof bccEmails);
+
   const professionList = professions.map((item) => item.profession).join(", ");
   const serviceList = services.map((item) => item.services).join(", ");
   const bccEmailArray = bccEmails.split(",");
@@ -233,7 +235,10 @@ const ProfessionalCard = ({
                         {formatoFechas(lastCertificateUpdate)}
                       </li>
                     )}
-                    {(validTo && ((ranking.toLowerCase() === "master") || (ranking.toLowerCase() === "supervisor"))) ? <></> : (
+                    {validTo ? 
+                    (ranking.toLowerCase() === "master" || ranking.toLowerCase() === "supervisor") ? 
+                    <></> 
+                    : (
                       <li
                         title={
                           language === "es"
@@ -246,7 +251,7 @@ const ProfessionalCard = ({
                         <MdMoreTime size={20} />
                         {formatoFechas(validTo)}
                       </li>
-                    )}
+                    ) : <></>}
                   </ul>
                 </div>
               )}
@@ -269,7 +274,6 @@ const ProfessionalCard = ({
                         <MdEmail size={18} />
                         <a
                           target="_blank"
-                          rel="noopener noreferrer"
                           href={`mailto:${encodeURIComponent(
                             email
                           )}?bcc=${encodeURIComponent(
