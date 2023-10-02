@@ -7,7 +7,7 @@ const Banner = ({ banner, variant }) => {
 
     return (
         <div className={`banner ${variant}`}>
-            <SanityImage {...banner.image.image} alt={`${banner.image.alt}`} />
+            <SanityImage {...banner.image.image} alt={`${banner.image.alt || banner.title}`} />
             <div className={`banner__description ${variant}`}>
                 {banner.title !== null ? <h3 className={`banner__title ${variant}`}>{banner.title}</h3> : <></>}
                 {banner.subtitle !== null ? <p>{banner.subtitle}</p> : <></>}
