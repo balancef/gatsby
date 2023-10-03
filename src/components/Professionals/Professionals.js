@@ -63,8 +63,6 @@ const Professionals = () => {
     }
   }
 
-  console.log(pageData.descriptionPage, "descr")
-
   return (
     <>
       <Seo
