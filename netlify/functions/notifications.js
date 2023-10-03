@@ -7,7 +7,7 @@ const handler = async (event, context) => {
   const notificationResp = await fetch('https://dlep2zfh.api.sanity.io/v2021-06-07/data/query/production?query=*[_type == "notification"]{CCemails, subjectGerman, subjectSpanish, subject, daysToNotify, templateGerman, templateSpanish, template}')
   const notification = await notificationResp.json()
 
-  const professionalsResp = await fetch('https://dlep2zfh.api.sanity.io/v2021-06-07/data/query/production?query=*[_type == "professional"]{email, validTo, language[]->{language}}')
+  const professionalsResp = await fetch('https://dlep2zfh.api.sanity.io/v2021-06-07/data/query/production?query=*[_type == "professional"]{name, email, validTo, language[]->{language}}')
   const professionals = await professionalsResp.json()
 
   const daysToNotify = notification.result[0].daysToNotify
@@ -37,11 +37,15 @@ const handler = async (event, context) => {
       let language = professional.language !== null ? professional.language[0]?.language : 'English'
       language = language.toLowerCase()
 
+      const body = language === 'spanish' ? notification.result[0].templateSpanish : language === 'german' ? notification.result[0].templateGerman : notification.result[0].template
+      const bodyHtml = body.replaceAll('{{ name }}', professional.name).replaceAll('{{ validTo }}', professional.validTo.split("-").reverse().join("-"))
+
       const mailOptions = {
         to: professional.email,
         cc: notification.result[0].CCemails,
         subject: language === 'spanish' ? notification.result[0].subjectSpanish : language === 'german' ? notification.result[0].subjectGerman : notification.result[0].subject,
-        text: language === 'spanish' ? notification.result[0].templateSpanish : language === 'german' ? notification.result[0].templateGerman : notification.result[0].template,
+        text: "",
+        html: bodyHtml,
       };
 
       try {
@@ -62,4 +66,3 @@ const handler = async (event, context) => {
 
 exports.handler = schedule("@daily", handler);
 //exports.handler = schedule("*/5 * * * *", handler);
-
