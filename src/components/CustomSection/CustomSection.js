@@ -1,14 +1,10 @@
 import React from "react";
 import {
-  Accordion,
   TextBlock,
   TextImage,
   IconsTextBlocks,
-  FullCard,
   TextBlockList,
   LogosCarousel,
-  ImageCarousel,
-  TextImageCarousel,
   TextImageButton,
   TextSubtitleBlocks,
   TextLogoButton,
@@ -56,26 +52,6 @@ const CustomSection = ({ sections }) => {
         );
       }
 
-      if (section?._type === "accordion") {
-        return (
-          <Accordion
-            key={section._key}
-            title={section?.title}
-            items={section?.accordionItems}
-          />
-        );
-      }
-
-      if (section?._type === "fullCardList") {
-        return (
-          <FullCard
-            key={section._key}
-            title={section.title}
-            cards={section.fullCardsItems}
-          />
-        );
-      }
-
       if (section?._type === "textBlockList") {
         return (
           <TextBlockList
@@ -88,21 +64,7 @@ const CustomSection = ({ sections }) => {
       if (section?._type === "logosCarousel") {
         return <LogosCarousel key={section._key} data={section}/>;
       }
-
-      if (section?._type === "imageCarousel") {
-        return <ImageCarousel key={section._key} data={section} />;
-      }
-
-      if (section?._type === "textImageCarousel") {
-        return (
-          <TextImageCarousel
-            key={section._key}
-            slides={section.slides}
-            title={section.title}
-            text={section.textBlock?._rawContent}
-          />
-        );
-      }   
+ 
       
       if (section?._type === "textImageButton") {
         return (

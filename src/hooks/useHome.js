@@ -7,36 +7,6 @@ const useHome = () => {
         sanityHome {
           titlePage
           descriptionPage
-          banner {
-            autoplay
-            slides {
-              title
-              text
-              url
-              overlay
-              image {
-                alt
-                image {
-                  _key
-                  asset {
-                    _id
-                  }
-                  crop {
-                    top
-                    right
-                    left
-                    bottom
-                  }
-                  hotspot {
-                    y
-                    x
-                    width
-                    height
-                  }
-                }
-              }
-            }
-          }
           dinamicContent {
             ... on SanityHighlightedExternalAccess {
               _key
@@ -148,83 +118,6 @@ const useHome = () => {
                 }
               }
             }
-            ... on SanityImageCarousel {
-              _key
-              _type
-              firstLineSlides {
-                _key
-                alt
-                image {
-                  asset {
-                    _id
-                  }
-                  crop {
-                    bottom
-                    left
-                    right
-                    top
-                  }
-                  hotspot {
-                    height
-                    width
-                    x
-                    y
-                  }
-                }
-              }
-              secondLineSlides {
-                alt
-                image {
-                  asset {
-                    _id
-                  }
-                  crop {
-                    bottom
-                    left
-                    right
-                    top
-                  }
-                  hotspot {
-                    height
-                    width
-                    x
-                    y
-                  }
-                }
-              }
-            }
-            ... on SanityTextImageCarousel {
-              _key
-              _type
-              title
-              slides {
-                image {
-                  alt
-                  image {
-                    hotspot {
-                      y
-                      x
-                      width
-                      height
-                    }
-                    crop {
-                      top
-                      right
-                      left
-                      bottom
-                    }
-                    asset {
-                      _id
-                    }
-                  }
-                }
-                textBlock {
-                  title
-                  _rawContent
-                }
-                _type
-              }
-            }
             ... on SanityTextBlockList {
               _key
               _type
@@ -256,45 +149,6 @@ const useHome = () => {
                       y
                     }
                   }
-              }
-            }
-            ... on SanityFullCardList {
-              _key
-              _type
-              title
-              fullCardsItems {
-                image {
-                  alt
-                  image {
-                    asset {
-                      _id
-                    }
-                    crop {
-                      bottom
-                      left
-                      right
-                      top
-                    }
-                    hotspot {
-                      height
-                      width
-                      x
-                      y
-                    }
-                  }
-                }
-                text {
-                  title
-                  _rawContent
-                }
-                link {
-                  url
-                  title
-                }
-                icon {
-                  icon
-                }
-                textIcon
               }
             }
             ... on SanityIconsTextBlocks {
@@ -330,15 +184,6 @@ const useHome = () => {
                       }
                     }
                 }
-              }
-            }
-            ... on SanityAccordion {
-              _key
-              _type
-              title
-              accordionItems {
-                title
-                _rawContent
               }
             }
             ... on SanityTextBlock {
@@ -383,36 +228,6 @@ const useHome = () => {
         sanityHomeES: sanityHome {
           titlePage: titlePageSpanish
           descriptionPage: descriptionPageSpanish
-          banner {
-            autoplay
-            slides {
-              title
-              text
-              url
-              overlay
-              image {
-                alt
-                image {
-                  _key
-                  asset {
-                    _id
-                  }
-                  crop {
-                    top
-                    right
-                    left
-                    bottom
-                  }
-                  hotspot {
-                    y
-                    x
-                    width
-                    height
-                  }
-                }
-              }
-            }
-          }
           dinamicContent {
             ... on SanityHighlightedExternalAccess {
               _key
@@ -523,83 +338,6 @@ const useHome = () => {
                 }
               }
             }
-            ... on SanityImageCarousel {
-              _key
-              _type
-              firstLineSlides {
-                _key
-                alt
-                image {
-                  asset {
-                    _id
-                  }
-                  crop {
-                    bottom
-                    left
-                    right
-                    top
-                  }
-                  hotspot {
-                    height
-                    width
-                    x
-                    y
-                  }
-                }
-              }
-              secondLineSlides {
-                alt
-                image {
-                  asset {
-                    _id
-                  }
-                  crop {
-                    bottom
-                    left
-                    right
-                    top
-                  }
-                  hotspot {
-                    height
-                    width
-                    x
-                    y
-                  }
-                }
-              }
-            }
-            ... on SanityTextImageCarousel {
-              _key
-              _type
-              title
-              slides {
-                image {
-                  alt
-                  image {
-                    hotspot {
-                      y
-                      x
-                      width
-                      height
-                    }
-                    crop {
-                      top
-                      right
-                      left
-                      bottom
-                    }
-                    asset {
-                      _id
-                    }
-                  }
-                }
-                textBlock {
-                  title
-                  _rawContent
-                }
-                _type
-              }
-            }
             ... on SanityTextBlockList {
               _key
               _type
@@ -631,45 +369,6 @@ const useHome = () => {
                       y
                     }
                   }
-              }
-            }
-            ... on SanityFullCardList {
-              _key
-              _type
-              title
-              fullCardsItems {
-                image {
-                  alt
-                  image {
-                    asset {
-                      _id
-                    }
-                    crop {
-                      bottom
-                      left
-                      right
-                      top
-                    }
-                    hotspot {
-                      height
-                      width
-                      x
-                      y
-                    }
-                  }
-                }
-                text {
-                  title
-                  _rawContent
-                }
-                link {
-                  url
-                  title
-                }
-                icon {
-                  icon
-                }
-                textIcon
               }
             }
             ... on SanityIconsTextBlocks {
@@ -705,15 +404,6 @@ const useHome = () => {
                       }
                     }
                 }
-              }
-            }
-            ... on SanityAccordion {
-              _key
-              _type
-              title: titleSpanish
-              accordionItems {
-                title: titleSpanish
-                _rawContent: _rawContentSpanish
               }
             }
             ... on SanityTextBlock {
@@ -758,36 +448,6 @@ const useHome = () => {
         sanityHomeDE: sanityHome {
           titlePage: titlePageGerman
           descriptionPage: descriptionPageGerman
-          banner {
-            autoplay
-            slides {
-              title
-              text
-              url
-              overlay
-              image {
-                alt
-                image {
-                  _key
-                  asset {
-                    _id
-                  }
-                  crop {
-                    top
-                    right
-                    left
-                    bottom
-                  }
-                  hotspot {
-                    y
-                    x
-                    width
-                    height
-                  }
-                }
-              }
-            }
-          }
           dinamicContent {
             ... on SanityHighlightedExternalAccess {
               _key
@@ -898,83 +558,6 @@ const useHome = () => {
                 }
               }
             }
-            ... on SanityImageCarousel {
-              _key
-              _type
-              firstLineSlides {
-                _key
-                alt
-                image {
-                  asset {
-                    _id
-                  }
-                  crop {
-                    bottom
-                    left
-                    right
-                    top
-                  }
-                  hotspot {
-                    height
-                    width
-                    x
-                    y
-                  }
-                }
-              }
-              secondLineSlides {
-                alt
-                image {
-                  asset {
-                    _id
-                  }
-                  crop {
-                    bottom
-                    left
-                    right
-                    top
-                  }
-                  hotspot {
-                    height
-                    width
-                    x
-                    y
-                  }
-                }
-              }
-            }
-            ... on SanityTextImageCarousel {
-              _key
-              _type
-              title
-              slides {
-                image {
-                  alt
-                  image {
-                    hotspot {
-                      y
-                      x
-                      width
-                      height
-                    }
-                    crop {
-                      top
-                      right
-                      left
-                      bottom
-                    }
-                    asset {
-                      _id
-                    }
-                  }
-                }
-                textBlock {
-                  title
-                  _rawContent
-                }
-                _type
-              }
-            }
             ... on SanityTextBlockList {
               _key
               _type
@@ -1006,45 +589,6 @@ const useHome = () => {
                       y
                     }
                   }
-              }
-            }
-            ... on SanityFullCardList {
-              _key
-              _type
-              title
-              fullCardsItems {
-                image {
-                  alt
-                  image {
-                    asset {
-                      _id
-                    }
-                    crop {
-                      bottom
-                      left
-                      right
-                      top
-                    }
-                    hotspot {
-                      height
-                      width
-                      x
-                      y
-                    }
-                  }
-                }
-                text {
-                  title
-                  _rawContent
-                }
-                link {
-                  url
-                  title
-                }
-                icon {
-                  icon
-                }
-                textIcon
               }
             }
             ... on SanityIconsTextBlocks {
@@ -1080,15 +624,6 @@ const useHome = () => {
                       }
                     }
                 }
-              }
-            }
-            ... on SanityAccordion {
-              _key
-              _type
-              title: titleGerman
-              accordionItems {
-                title: titleGerman
-                _rawContent: _rawContentGerman
               }
             }
             ... on SanityTextBlock {

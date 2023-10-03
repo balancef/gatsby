@@ -37,7 +37,6 @@
     "react-helmet": "^6.1.0",
     "react-icons": "^4.10.1",
     "react-multi-carousel": "^2.8.4",
-    "react-responsive-carousel": "^3.2.23",
     "sass": "^1.57.1",
     "sharp": "^0.31.3",
     "unorm": "^1.6.0"
