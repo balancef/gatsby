@@ -3,7 +3,7 @@
 .articleContainer {
   padding: 20px 10px;
   .markdown-format {
-    p {
+    p, li {
       a {
         color: $color-primary;
         text-decoration: none;
@@ -19,6 +19,8 @@
     h2,
     h3 {
       font-size: 32px;
+      margin-bottom: 7px;
+      font-weight: 400;
     }
   }
 }
@@ -143,6 +145,7 @@
     margin: 50px 150px;
   }
   .image_portable {
+    margin: 30px 0;
     height: 500px;
   }
   .authorTitle {

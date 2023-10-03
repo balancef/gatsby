@@ -132,11 +132,19 @@ const ProfessionalCard = ({
       <div className="professionalWrapper">
         <div className="leftContainer">
           <div className="professional__image">
-            <SanityImage
-              {...(photo ? photo : defaultPhoto)}
-              alt={`${name}`}
-              className="professional__image"
-            />
+            {photo ? (
+              <SanityImage
+                {... photo}
+                alt={`${name}`}
+                className="professional__image"
+              />
+            ) : (
+              <SanityImage
+                {... defaultPhoto}
+                alt={`${name}`}
+                className="professional__image"
+              />
+            )}
           </div>
           {ranking && (
             <div className="professional__ranking">
@@ -235,23 +243,27 @@ const ProfessionalCard = ({
                         {formatoFechas(lastCertificateUpdate)}
                       </li>
                     )}
-                    {validTo ? 
-                    (ranking.toLowerCase() === "master" || ranking.toLowerCase() === "supervisor") ? 
-                    <></> 
-                    : (
-                      <li
-                        title={
-                          language === "es"
-                            ? "Válido hasta"
-                            : language === "en"
-                            ? "Valid To"
-                            : "Gültig bis"
-                        }
-                      >
-                        <MdMoreTime size={20} />
-                        {formatoFechas(validTo)}
-                      </li>
-                    ) : <></>}
+                    {validTo ? (
+                      ranking.toLowerCase() === "master" ||
+                      ranking.toLowerCase() === "supervisor" ? (
+                        <></>
+                      ) : (
+                        <li
+                          title={
+                            language === "es"
+                              ? "Válido hasta"
+                              : language === "en"
+                              ? "Valid To"
+                              : "Gültig bis"
+                          }
+                        >
+                          <MdMoreTime size={20} />
+                          {formatoFechas(validTo)}
+                        </li>
+                      )
+                    ) : (
+                      <></>
+                    )}
                   </ul>
                 </div>
               )}
