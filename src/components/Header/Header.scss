@@ -117,6 +117,7 @@
   }
 
   .navbar-collapse {
+    padding-bottom: 10px;
     order: 2;
     .dropstart {
       .btn {
@@ -310,6 +311,7 @@
     }
 
     .navbar-collapse {
+      padding-bottom: 0px;
       order: 0;
     }
   }

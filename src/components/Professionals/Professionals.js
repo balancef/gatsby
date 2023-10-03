@@ -63,7 +63,6 @@ const Professionals = () => {
     }
   }
 
-
   return (
     <>
       <Seo
