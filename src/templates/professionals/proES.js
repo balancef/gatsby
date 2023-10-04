@@ -8,7 +8,6 @@ import useProfessionals from "../../hooks/useProfessionals";
 const ProPage = ({location,  data }) => {
   const professionalData = data?.allSanityProfessional?.nodes[0];
   const titlePage = professionalData.name
-  let query = useProfessionals();
   const description = professionalData?._rawDescription ? professionalData._rawDescription[0].children[0].text : ""
   let query = useProfessionals(); 
   let defaultData = query?.sanityProfessionalConfigES;
