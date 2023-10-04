@@ -3,7 +3,7 @@ import "./Articles.scss";
 import { LanguageContext } from "../../context/languajeContext";
 import SanityImage from "gatsby-plugin-sanity-image";
 import { format } from "date-fns";
-import { es, en, de } from "date-fns/locale";
+import { es, enGB, de } from "date-fns/locale";
 import CustomLink from "../CustomLink/CustomLink";
 
 const ArticleCard = ({
@@ -17,7 +17,7 @@ const ArticleCard = ({
   const { language } = useContext(LanguageContext);
 
   function formatDate(fecha) {
-    return format(new Date(fecha), "dd MMMM, yyyy", (language === "es" ? { locale: es } : language === "de" ? { locale: de } : { locale: en }));
+    return format(new Date(fecha), "dd MMMM, yyyy", (language === "es" ? { locale: es } : language === "de" ? { locale: de } : { locale: enGB }));
   }
 
   let text = description[0].children[0].text

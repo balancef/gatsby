@@ -194,15 +194,6 @@ export const query = graphql`
                 }
             }
           }
-          ... on SanityAccordion {
-            _key
-            _type
-            title
-            accordionItems {
-              title
-              _rawContent
-            }
-          }
           ... on SanityTextImage {
             _key
             _type
@@ -233,45 +224,6 @@ export const query = graphql`
                   height
                 }
               }
-            }
-          }
-          ... on SanityFullCardList {
-            _key
-            _type
-            title
-            fullCardsItems {
-              image {
-                alt
-                image {
-                  asset {
-                    _id
-                  }
-                  crop {
-                    bottom
-                    left
-                    right
-                    top
-                  }
-                  hotspot {
-                    height
-                    width
-                    x
-                    y
-                  }
-                }
-              }
-              text {
-                title
-                _rawContent
-              }
-              link {
-                url
-                title
-              }
-              icon {
-                icon
-              }
-              textIcon
             }
           }
           ... on SanityTextBlock {

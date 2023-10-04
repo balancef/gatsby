@@ -111,7 +111,6 @@ input[type="text"] {
   margin-top: 15px;
   p {
     font-size: 14px !important;
-    
   }
   a {
     margin-left: 5px;
@@ -211,7 +210,7 @@ input[type="text"] {
 }
 
 // professional card
-.proContainer:first-child{
+.proContainer:first-child {
   border-top: 1px solid $color-border;
 }
 .professionalWrapper {
@@ -274,6 +273,7 @@ input[type="text"] {
     img {
       display: inline;
       height: 23px;
+      width: 23;
     }
   }
 
@@ -282,13 +282,9 @@ input[type="text"] {
     gap: 10px;
     justify-content: center;
     margin-bottom: 20px;
-
-    &_academyLogo {
+    img {
       height: 25px;
-
-      img {
-        height: 100%;
-      }
+      max-width: 109px;
     }
   }
 
@@ -377,7 +373,7 @@ input[type="text"] {
     }
   }
 }
-.Pagination{
+.Pagination {
   justify-content: center;
 }
 @media (min-width: $md-breakpoint) {
