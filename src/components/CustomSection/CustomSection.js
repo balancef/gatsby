@@ -129,6 +129,7 @@ const CustomSection = ({ sections }) => {
             highlightedLink={section.highlightedLink}
             externalLinks={section.fullCardsItems}
             button={section.externalLink}
+            title={section.title}
           />
         );
       }
