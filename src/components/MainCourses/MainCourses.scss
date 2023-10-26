@@ -13,6 +13,12 @@
     height: 100%;
     border-radius: 16px;
   }
+
+  &__title {
+    width: 100%;
+    padding-bottom: 35px;
+    text-align: center;
+  }
 }
 
 .course {
@@ -36,14 +42,17 @@
     border-radius: 16px;
     background-image: linear-gradient(180deg,hsla(0,0%,100%,0),rgba(17,17,17,.95));
     &__titulo {
-      a,
-      a:hover {
+      a {
+        text-decoration: underline dashed;
         font-size: 32px;
         font-weight: 500;
         color: $color-white;
         line-height: 1.5;
-        text-decoration: none;
       }
+      a:hover {        
+        color: $color-primary;
+      }
+      
     }
   }
   &__info {

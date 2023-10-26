@@ -3,7 +3,7 @@ import Course from "./Course";
 import "./MainCourses.scss";
 import CustomLink from "../CustomLink/CustomLink";
 
-const MainCourses = ({ highlightedLink, externalLinks, button }) => {
+const MainCourses = ({ highlightedLink, externalLinks, button, title }) => {
   const destacado = (
     <Course course={highlightedLink?.link} variant={"destacado"} />
   );
@@ -18,7 +18,9 @@ const MainCourses = ({ highlightedLink, externalLinks, button }) => {
 
   return (
     <div>
+      
       <div className={`container MainCourses `}>
+      {title ? <h4 className="MainCourses__title">{title}</h4> : <></>}
         <div className={`row justify-content-center `}>
           <div className={`col-12 col-md-6`}>
             <div
