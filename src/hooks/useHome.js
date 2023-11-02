@@ -11,6 +11,7 @@ const useHome = () => {
             ... on SanityHighlightedExternalAccess {
               _key
               _type
+              title
               highlightedLink {
                 link {
                   url
@@ -232,6 +233,7 @@ const useHome = () => {
             ... on SanityHighlightedExternalAccess {
               _key
               _type
+              title: titleSpanish
               highlightedLink {
                 link {            
                   url: urlSpanish           
@@ -452,6 +454,7 @@ const useHome = () => {
             ... on SanityHighlightedExternalAccess {
               _key
               _type
+              title: titleGerman
               highlightedLink {
                 link {
                   url:urlGerman           
