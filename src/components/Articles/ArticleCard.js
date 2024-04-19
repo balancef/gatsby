@@ -19,8 +19,8 @@ const ArticleCard = ({
   function formatDate(fecha) {
     return format(new Date(fecha), "dd MMMM, yyyy", (language === "es" ? { locale: es } : language === "de" ? { locale: de } : { locale: enGB }));
   }
-
-  let text = description[0].children[0].text
+  const onlyTextDescription = description.filter(content => content._type=== "block")
+  let text = onlyTextDescription.length > 0 && onlyTextDescription[0]?.children?.length > 0 ? onlyTextDescription[0].children[0].text : ""
   const shortDescription = (texto) => {
     const textWords = texto.split(" ");
     const textDescription = textWords.slice(0, 28)

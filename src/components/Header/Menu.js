@@ -21,8 +21,8 @@ const Menu = ({ links, button, language }) => {
       >
         {link.links.map((dropdownLink) =>
           dropdownLink.separated ? (
-            <>
-              <NavDropdown.Divider key={`divider-${dropdownLink._key}`}/>
+            <div key={`divider-${dropdownLink._key}`}>
+              <NavDropdown.Divider />
               <NavDropdown.Item
                 key={dropdownLink._key}
                 href={dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.url
@@ -32,7 +32,7 @@ const Menu = ({ links, button, language }) => {
               >
                 {dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.title : dropdownLink.link.title}
               </NavDropdown.Item>
-            </>
+            </div>
           ) : (
             <NavDropdown.Item
               key={dropdownLink._key}

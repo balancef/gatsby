@@ -36,9 +36,10 @@ const Articles = () => {
   const titleWords = titlePage.split(" ");
   const lastWord = titleWords[titleWords.length - 1];
 
-  const ArticlesList = data?.map((article) => {
+  const ArticlesList = data?.map((article,index) => {
     return (
       <ArticleCard
+        key={index}
         image={article?.image}
         title={article?.title}
         link={article?.slug?.current}
@@ -103,9 +104,9 @@ const Articles = () => {
                   </li>
                 )}
                 {pageNumbers.map((number) => (
-                  <>
+                  <div key={number}>
                     {number === currentPage ? (
-                      <li key={number} className="Pagination__item active-page">
+                      <li className="Pagination__item active-page">
                         <Link
                           onClick={() => paginate(number)}
                           to="#articles"
@@ -125,7 +126,7 @@ const Articles = () => {
                         </Link>
                       </li>
                     )}
-                  </>
+                  </div>
                 ))}
                 <li className="Pagination__item">
                   {currentPage !== pageNumbers[pageNumbers.length - 1] ? (
