@@ -15,7 +15,9 @@ module.exports = {
     resolve: 'gatsby-source-sanity',
     options: {
       "projectId": process.env.SANITY_ID_PROJECT,
-      "dataset": process.env.SANITY_DATASET
+      "dataset": process.env.SANITY_DATASET,
+      //use only on develop for watch sanity graphql changes after "sanity graphql deploy"
+      // "watchMode" : true
     }
   }, "gatsby-plugin-image", "gatsby-plugin-sass", "gatsby-plugin-sitemap", {
     resolve: 'gatsby-plugin-manifest',
