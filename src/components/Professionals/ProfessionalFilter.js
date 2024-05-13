@@ -3,15 +3,12 @@ import useWindowSize from "../../hooks/useWindowSize";
 import unorm from "unorm";
 import {
   FaAngleDown,
-  FaChevronLeft,
-  FaChevronRight,
   FaStar,
 } from "react-icons/fa";
 import ProfessionalCard from "./ProfessionalCard";
 import Icon from "../Icons/Icon";
-import { Link } from "gatsby";
-import emptyState from "../../images/emptyState.png";
 import axios from "axios";
+import GoogleMap from "../Map/map"
 
 const ProfessionalsFilter = ({
   data,
@@ -25,9 +22,6 @@ const ProfessionalsFilter = ({
   countriesData,
   bccEmails,
 }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
-  const pageNumbers = [];
   const wrapperRef = useRef(null);
   const dimensions = useWindowSize();
   const [showFilter, setShowFilter] = useState(false);
@@ -35,9 +29,10 @@ const ProfessionalsFilter = ({
   const [selectedRankings, setSelectedRankings] = useState([]);
   const [selectedProfessions, setSelectedProfessions] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("AR");
   const [results, setResults] = useState(data);
   const filterByValidTo = true;
+  
 
   const isValidToValid = (professional) => {
     if (
@@ -51,22 +46,6 @@ const ProfessionalsFilter = ({
     const validToDate = new Date(professional.validTo);
     return validToDate > currentDate;
   };
-
-  useEffect(() => {
-    const apiKey = "e6889c81cf7b4529a7dd8f062ef5848a";
-
-    const fetchUserCountry = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.geoapify.com/v1/ipinfo?apiKey=${apiKey}`
-        );
-        setSelectedCountry(response.data.country.iso_code);
-      } catch (error) {
-        console.error("Error fetching user country:", error);
-      }
-    };
-    fetchUserCountry();
-  }, []);
 
   useEffect(() => {
     setResults(
@@ -94,10 +73,10 @@ const ProfessionalsFilter = ({
         const userCountryHasProfessionals = countriesData.some(
           (country) => country.countryCode === selectedCountry
         );
-        const matchesCountry =
-          !selectedCountry ||
-          !userCountryHasProfessionals ||
-          professional.country.countryCode === selectedCountry;
+        // const matchesCountry =
+        //   !selectedCountry ||
+        //   !userCountryHasProfessionals ||
+        //   professional.country.countryCode === selectedCountry;
         const isValidTo =
           (hasMasterOrSupervisorRanking || filterByValidTo) &&
           isValidToValid(professional);
@@ -105,18 +84,18 @@ const ProfessionalsFilter = ({
           matchesRanking &&
           matchesProfession &&
           matchesServices &&
-          matchesCountry &&
+          // matchesCountry &&
           isValidTo
         );
       })
     );
 
-    setCurrentPage(1);
+    // setCurrentPage(1);
   }, [
     selectedRankings,
     selectedProfessions,
     selectedServices,
-    selectedCountry,
+    // selectedCountry,
     filterByValidTo,
     countriesData,
     data,
@@ -173,7 +152,7 @@ const ProfessionalsFilter = ({
       return matches;
     });
 
-    setCurrentPage(1);
+    // setCurrentPage(1);
 
     setResults(filtered);
   };
@@ -314,23 +293,6 @@ const ProfessionalsFilter = ({
       );
     });
 
-  for (let i = 1; i <= Math.ceil(professionals?.length / postsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-
-  const currentProfessionals = professionals?.slice(
-    indexOfFirstPost,
-    indexOfLastPost
-  );
-
-  // Change page
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    wrapperRef.current.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <>
       <div ref={wrapperRef}>
@@ -338,7 +300,7 @@ const ProfessionalsFilter = ({
           <div className="search-container">
             <div className="container">
               <h6 className="input-title">{texts.inputTitle}</h6>
-              <div className="input-container">
+              {/* <div className="input-container">
                 <input
                   type="text"
                   placeholder={texts.inputPlaceholder}
@@ -353,10 +315,11 @@ const ProfessionalsFilter = ({
                 >
                   <Icon code={"FaSearch"}></Icon>
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
           <h6 className='container mt-4'>
+            
             {selectedCountry && countriesData.find(country => country.countryCode === selectedCountry) ? (
               `${texts.allIn} ${countriesData.find(country => country.countryCode === selectedCountry)?.country}`
             ) : (
@@ -374,16 +337,9 @@ const ProfessionalsFilter = ({
                   <FaAngleDown size={16} />
                 </span>
               </button>
-              <div
-                className={`filter-container ${
-                  showFilter && dimensions.windowWidth < 768
-                    ? "show-filter"
-                    : ""
-                }`}
-              >
+              <div>
                 <div className="filter-description">
-                  <p>{texts.filterBy}:</p>
-                  <button onClick={resetFilters}>{texts.resetFilters}</button>
+                    <p>Move to</p>
                 </div>
 
                 <select
@@ -398,6 +354,31 @@ const ProfessionalsFilter = ({
                     </option>
                   ))}
                 </select>
+              </div>
+              <div
+                className={`filter-container ${
+                  showFilter && dimensions.windowWidth < 768
+                    ? "show-filter"
+                    : ""
+                }`}
+              >
+                <div className="filter-description">
+                  <p>{texts.filterBy}:</p>
+                  <button onClick={resetFilters}>{texts.resetFilters}</button>
+                </div>
+
+                {/* <select
+                  className="filter-select"
+                  value={selectedCountry}
+                  onChange={handleCountrySelectChange}
+                >
+                  <option value="">{texts.allCountries}</option>
+                  {countriesData.map((country) => (
+                    <option key={country.country} value={country.countryCode}>
+                      {country.country}
+                    </option>
+                  ))}
+                </select> */}
                 <div className="filter-checkbox ranking">
                   <p className="checkbox-title">{texts.ranking}</p>
                   {renderRankingCheckboxes()}
@@ -425,75 +406,11 @@ const ProfessionalsFilter = ({
               </div>
             </div>
             <div className="results-container">
-              {currentProfessionals.length !== 0 ? (
-                <div> {currentProfessionals}</div>
-              ) : (
-                <div className="results-empty-state">
-                  <img
-                    src={emptyState}
-                    alt="no results"
-                    className="image-empty-state"
-                  />
-                  <h5>{texts.noResults}</h5>
-                  <p>{texts.noResultsExplain}</p>
-                </div>
-              )}
-
-              {pageNumbers.length >= 2 ? (
-                <nav>
-                  <ul className="Pagination">
-                    {currentPage !== 1 && (
-                      <li className="Pagination__item">
-                        {currentPage !== 1 ? (
-                          <Link
-                            onClick={() => paginate(currentPage - 1)}
-                            to="#professionals"
-                          >
-                            <FaChevronLeft />
-                          </Link>
-                        ) : (
-                          <FaChevronLeft />
-                        )}
-                      </li>
-                    )}
-                    {pageNumbers.map((number, idx) =>
-                      number === currentPage ? (
-                        <li key={idx} className="Pagination__item active-page">
-                          <Link
-                            onClick={() => paginate(number)}
-                            to="#professionals"
-                            className={`Pagination__link`}
-                          >
-                            {number}
-                          </Link>
-                        </li>
-                      ) : (
-                        <li key={idx} className="Pagination__item">
-                          <Link
-                            onClick={() => paginate(number)}
-                            to="#professionals"
-                            className={`Pagination__link `}
-                          >
-                            {number}
-                          </Link>
-                        </li>
-                      )
-                    )}
-                    <li className="Pagination__item">
-                      {currentPage !== pageNumbers[pageNumbers.length - 1] ? (
-                        <Link
-                          onClick={() => paginate(currentPage + 1)}
-                          to="#professionals"
-                        >
-                          <FaChevronRight />
-                        </Link>
-                      ) : (
-                        <FaChevronRight />
-                      )}
-                    </li>
-                  </ul>
-                </nav>
-              ) : null}
+              <GoogleMap 
+                professionals={results} 
+                logoAcademy={defaultData?.academyLogo.image}
+                defaultPhoto={defaultData.photoDefault.image}
+              />
             </div>
           </div>
         </div>

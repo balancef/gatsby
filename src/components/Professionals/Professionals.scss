@@ -65,12 +65,14 @@ input[type="text"] {
 .container.filter-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0px;
 }
 
 .filter {
   width: 80%;
   margin-top: 20px;
+  max-height: calc(100vh - 398px);
+  overflow-y: scroll;
 }
 
 .filter-button {
@@ -133,7 +135,7 @@ input[type="text"] {
   width: 80%;
   padding: 30px;
   border: 1px solid $color-border;
-  border-radius: 5px;
+  border-radius: 5px 0 0px 5px;
 }
 
 .filter-select {
@@ -157,7 +159,6 @@ input[type="text"] {
   border-bottom: 1px solid $color-border;
   display: flex;
   flex-direction: column;
-  max-height: 350px;
   overflow-y: auto;
   padding-bottom: 15px;
   .checkbox-title {
@@ -196,6 +197,7 @@ input[type="text"] {
 .results-container {
   margin: 0 auto;
   width: 100%;
+  height: calc(100vh - 398px);
 }
 
 .results-empty-state {
@@ -438,7 +440,7 @@ input[type="text"] {
     margin-top: 0;
     max-width: 250px;
     height: fit-content;
-    border-radius: 5px;
+    border-radius: 5px 0 0px 5px;
     padding: 15px;
     border: 1px solid $color-border;
   }
@@ -478,6 +480,7 @@ input[type="text"] {
   }
   .input-container,
   .input-title {
+    text-align: center;
     width: 80%;
     margin: auto;
   }
