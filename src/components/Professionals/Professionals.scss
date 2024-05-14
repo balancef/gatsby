@@ -245,8 +245,8 @@ input[type="text"] {
       border-radius: 50%;
     }
 
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     margin-bottom: 15px;
   }
 
@@ -384,6 +384,7 @@ input[type="text"] {
     gap: 10px;
 
     .leftContainer {
+      justify-content: center;
       flex: 1;
     }
 

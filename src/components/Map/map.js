@@ -207,14 +207,14 @@ const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country}) => {
               {activeMarker.professional.image?.image ? (
                 <SanityImage
                   {...activeMarker.professional.image.image}
-                  className="professional__image"
+                  className="map-professional__image"
                   alt={`${activeMarker.professional.name}`}
                 />
               ) : (
                 <SanityImage
                 {... defaultPhoto}
                 alt={`${activeMarker.professional.name}`}
-                className="professional__image"
+                className="map-professional__image"
               />
               )}
                 

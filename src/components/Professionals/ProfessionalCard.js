@@ -4,7 +4,8 @@ import {
   FaStar,
   FaGraduationCap,
   FaRegClock,
-  FaPhoneAlt
+  FaPhoneAlt,
+  FaRegStar
 } from "react-icons/fa";
 import {
   MdInfo,
@@ -63,57 +64,84 @@ const ProfessionalCard = ({
   function RankingComponent({ ranking }) {
     if (ranking.includes("1")) {
       return (
-        <div>
-          <FaStar />
+        <div style={{marginTop: "3px"}}>
+          <FaStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301'/>
         </div>
       );
     } else if (ranking.includes("2")) {
       return (
-        <div>
-          <FaStar />
-          <FaStar />
+        <div style={{marginTop: "3px"}}>
+          <FaStar size={28} color='#FFA301'/>
+          <FaStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301'/>
         </div>
       );
     } else if (ranking.includes("3")) {
       return (
-        <div>
-          <FaStar />
-          <FaStar />
-          <FaStar />
+        <div style={{marginTop: "3px"}}>
+          <FaStar size={28} color='#FFA301' />
+          <FaStar size={28} color='#FFA301' />
+          <FaStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301'/>
         </div>
       );
     } else if (ranking.includes("4")) {
       return (
-        <div>
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
+        <div style={{marginTop: "3px"}}>
+          <FaStar size={28} color='#FFA301' />
+          <FaStar size={28} color='#FFA301' />
+          <FaStar size={28} color='#FFA301' />
+          <FaStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301'/>
         </div>
       );
     } else if (ranking.includes("5")) {
       return (
-        <div>
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
+        <div style={{marginTop: "3px"}}>
+          <FaStar size={28} color='#FFA301' />
+          <FaStar size={28} color='#FFA301' />
+          <FaStar size={28} color='#FFA301' />
+          <FaStar size={28} color='#FFA301' />
+          <FaStar size={28} color='#FFA301' />
         </div>
       );
     } else if (ranking.toLowerCase() === "master") {
       return (
-        <h6>
+        <div style={{display: "flex", justifyContent: "center", marginTop: "3px"}}>
           <img
             src={masterImg}
             alt="verified"
+            height={28}
+            width={22}
+            style={{marginRight: "5px"}}
             className="professional__ranking_logo"
           />
-          {ranking}
-        </h6>
+          <h6 style={{fontWeight: "600"}}>{ranking}</h6>
+        </div>
+      );
+    } else if (ranking.toLowerCase() === "supervisor") {
+      return (
+        <div style={{display: "flex", justifyContent: "center", marginTop: "3px"}}>
+          <h6 style={{fontWeight: "600"}}>{ranking}</h6>
+        </div>
       );
     } else {
-      return <h6>{ranking}</h6>;
+      return (
+        <div style={{marginTop: "3px"}}>
+          <FaRegStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301'/>
+        </div>
+      );
     }
   }
 
