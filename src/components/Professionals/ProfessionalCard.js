@@ -1,12 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./Professionals.scss";
 import {
   FaStar,
   FaGraduationCap,
   FaRegClock,
-  FaPhoneAlt,
-  FaAngleDown,
-  FaAngleUp,
+  FaPhoneAlt
 } from "react-icons/fa";
 import {
   MdInfo,
@@ -23,7 +21,6 @@ import { PortableText } from "@portabletext/react";
 import { BsGlobe } from "react-icons/bs";
 import { CustomLink } from "..";
 import { format } from "date-fns";
-import { Link } from "gatsby";
 
 const ProfessionalCard = ({
   logoAcademy,
@@ -51,12 +48,6 @@ const ProfessionalCard = ({
   descriptionDefault,
 }) => {
   const { language } = useContext(LanguageContext);
-
-  const [IsExpanded, setIsExpanded] = useState(false);
-  const ProfessionalDescription = () => {
-    setIsExpanded(!IsExpanded);
-  };
-
 
   const professionList = professions.map((item) => item.profession).join(", ");
   const serviceList = services.map((item) => item.services).join(", ");
@@ -194,7 +185,6 @@ const ProfessionalCard = ({
               </a>
             </div>
           )}
-          {IsExpanded && (
             <div className="professional__information">
               {certificateNumber && (
                 <div className="professional__information-dates">
@@ -307,25 +297,6 @@ const ProfessionalCard = ({
                 </div>
               }
             </div>
-          )}
-          <Link
-            onClick={ProfessionalDescription}
-            to="#professional"
-            className="professional__button"
-          >
-            {IsExpanded
-              ? language === "es"
-                ? "Ocultar información"
-                : language === "en"
-                ? "Hide information"
-                : "Informationen verheimlichen"
-              : language === "es"
-              ? "Más información"
-              : language === "en"
-              ? "More information"
-              : "Mehr Informationen"}
-            {IsExpanded ? <FaAngleUp size={18} /> : <FaAngleDown size={18} />}
-          </Link>
         </div>
       </div>
     </div>

@@ -1,17 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
-import unorm from "unorm";
 import {
   FaAngleDown,
-  FaChevronLeft,
-  FaChevronRight,
   FaStar,
 } from "react-icons/fa";
-import ProfessionalCard from "./ProfessionalCard";
-import Icon from "../Icons/Icon";
-import { Link } from "gatsby";
-import emptyState from "../../images/emptyState.png";
-import axios from "axios";
+import GoogleMap from "../Map/map"
 
 const ProfessionalsFilter = ({
   data,
@@ -25,19 +18,16 @@ const ProfessionalsFilter = ({
   countriesData,
   bccEmails,
 }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
-  const pageNumbers = [];
   const wrapperRef = useRef(null);
   const dimensions = useWindowSize();
   const [showFilter, setShowFilter] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [selectedRankings, setSelectedRankings] = useState([]);
   const [selectedProfessions, setSelectedProfessions] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("AR");
   const [results, setResults] = useState(data);
   const filterByValidTo = true;
+  
 
   const isValidToValid = (professional) => {
     if (
@@ -51,22 +41,6 @@ const ProfessionalsFilter = ({
     const validToDate = new Date(professional.validTo);
     return validToDate > currentDate;
   };
-
-  useEffect(() => {
-    const apiKey = "e6889c81cf7b4529a7dd8f062ef5848a";
-
-    const fetchUserCountry = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.geoapify.com/v1/ipinfo?apiKey=${apiKey}`
-        );
-        setSelectedCountry(response.data.country.iso_code);
-      } catch (error) {
-        console.error("Error fetching user country:", error);
-      }
-    };
-    fetchUserCountry();
-  }, []);
 
   useEffect(() => {
     setResults(
@@ -91,13 +65,6 @@ const ProfessionalsFilter = ({
               (service) => service.services === selectedService
             );
           });
-        const userCountryHasProfessionals = countriesData.some(
-          (country) => country.countryCode === selectedCountry
-        );
-        const matchesCountry =
-          !selectedCountry ||
-          !userCountryHasProfessionals ||
-          professional.country.countryCode === selectedCountry;
         const isValidTo =
           (hasMasterOrSupervisorRanking || filterByValidTo) &&
           isValidToValid(professional);
@@ -105,26 +72,19 @@ const ProfessionalsFilter = ({
           matchesRanking &&
           matchesProfession &&
           matchesServices &&
-          matchesCountry &&
           isValidTo
         );
       })
     );
 
-    setCurrentPage(1);
   }, [
     selectedRankings,
     selectedProfessions,
     selectedServices,
-    selectedCountry,
     filterByValidTo,
     countriesData,
     data,
   ]);
-
-  function removeDiacritics(str) {
-    return unorm.nfkd(str).replace(/[\u0300-\u036f]/g, "");
-  }
 
   function extractNumberWithIcon(inputString) {
     const match = inputString.match(/\d+/);
@@ -142,55 +102,6 @@ const ProfessionalsFilter = ({
       return inputString;
     }
   }
-
-  const handleSearch = () => {
-    const query = removeDiacritics(searchQuery.toLowerCase());
-
-    if (query === "") {
-      setResults(results);
-      return;
-    }
-
-    const filtered = results.filter((professional) => {
-      const { address, name, profession, services, country } = professional;
-
-      const matches =
-        removeDiacritics(address.toLowerCase()).includes(query) ||
-        removeDiacritics(name.toLowerCase()).includes(query) ||
-        removeDiacritics(country.country.toLowerCase()).includes(query) ||
-        profession.some((p) =>
-          removeDiacritics(p.professionDescription.toLowerCase()).includes(
-            query
-          )
-        ) ||
-        profession.some((p) =>
-          removeDiacritics(p.profession.toLowerCase()).includes(query)
-        ) ||
-        services.some((s) =>
-          removeDiacritics(s.services.toLowerCase()).includes(query)
-        );
-
-      return matches;
-    });
-
-    setCurrentPage(1);
-
-    setResults(filtered);
-  };
-
-  const handleInputChange = (e) => {
-    const inputValue = e.target.value;
-    setSearchQuery(inputValue);
-    if (inputValue === "") {
-      setResults(data);
-    }
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
 
   const renderRankingCheckboxes = () => {
     const sortedRankings = rankingsData.sort((a, b) => a.priority - b.priority);
@@ -275,60 +186,9 @@ const ProfessionalsFilter = ({
   };
 
   const resetFilters = () => {
-    setSelectedCountry("");
     setSelectedRankings([]);
     setSelectedProfessions([]);
     setSelectedServices([]);
-  };
-
-  const professionals = results
-    .sort((a, b) => a.ranking.priority - b.ranking.priority)
-    .map((professional, idx) => {
-      return (
-        <ProfessionalCard
-          defaultPhoto={defaultData.photoDefault.image}
-          photo={professional.image?.image}
-          ranking={professional.ranking?.ranking}
-          official={professional?.official}
-          verified={professional?.verified}
-          name={professional.name}
-          professions={professional.profession}
-          services={professional?.services}
-          address={professional.address}
-          slug={professional.slug?.current}
-          logoAcademy={defaultData?.academyLogo.image}
-          descriptionDefault={defaultData._rawDescriptionDefault}
-          certificateNumber={professional?.certificateNumber}
-          certificateDate={professional?.certificateDate}
-          lastCertificateUpdate={professional?.lastCertificateUpdate}
-          validTo={professional?.validTo}
-          description={professional._rawDescription}
-          phone={professional.phone}
-          email={professional.email}
-          bccEmails={bccEmails}
-          website={professional?.website}
-          emailSubject={defaultData?.contactForm.title}
-          emailBody={defaultData?.contactForm.templateContent}
-          key={`pro-${idx}`}
-        />
-      );
-    });
-
-  for (let i = 1; i <= Math.ceil(professionals?.length / postsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-
-  const currentProfessionals = professionals?.slice(
-    indexOfFirstPost,
-    indexOfLastPost
-  );
-
-  // Change page
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    wrapperRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -338,25 +198,10 @@ const ProfessionalsFilter = ({
           <div className="search-container">
             <div className="container">
               <h6 className="input-title">{texts.inputTitle}</h6>
-              <div className="input-container">
-                <input
-                  type="text"
-                  placeholder={texts.inputPlaceholder}
-                  value={searchQuery}
-                  onChange={handleInputChange}
-                  onKeyDown={handleKeyPress}
-                />
-                <button
-                  title="Search button"
-                  className="search-icon"
-                  onClick={handleSearch}
-                >
-                  <Icon code={"FaSearch"}></Icon>
-                </button>
-              </div>
             </div>
           </div>
           <h6 className='container mt-4'>
+            
             {selectedCountry && countriesData.find(country => country.countryCode === selectedCountry) ? (
               `${texts.allIn} ${countriesData.find(country => country.countryCode === selectedCountry)?.country}`
             ) : (
@@ -374,16 +219,9 @@ const ProfessionalsFilter = ({
                   <FaAngleDown size={16} />
                 </span>
               </button>
-              <div
-                className={`filter-container ${
-                  showFilter && dimensions.windowWidth < 768
-                    ? "show-filter"
-                    : ""
-                }`}
-              >
+              <div>
                 <div className="filter-description">
-                  <p>{texts.filterBy}:</p>
-                  <button onClick={resetFilters}>{texts.resetFilters}</button>
+                    <p>Move to</p>
                 </div>
 
                 <select
@@ -398,6 +236,18 @@ const ProfessionalsFilter = ({
                     </option>
                   ))}
                 </select>
+              </div>
+              <div
+                className={`filter-container ${
+                  showFilter && dimensions.windowWidth < 768
+                    ? "show-filter"
+                    : ""
+                }`}
+              >
+                <div className="filter-description">
+                  <p>{texts.filterBy}:</p>
+                  <button onClick={resetFilters}>{texts.resetFilters}</button>
+                </div>
                 <div className="filter-checkbox ranking">
                   <p className="checkbox-title">{texts.ranking}</p>
                   {renderRankingCheckboxes()}
@@ -425,75 +275,12 @@ const ProfessionalsFilter = ({
               </div>
             </div>
             <div className="results-container">
-              {currentProfessionals.length !== 0 ? (
-                <div> {currentProfessionals}</div>
-              ) : (
-                <div className="results-empty-state">
-                  <img
-                    src={emptyState}
-                    alt="no results"
-                    className="image-empty-state"
-                  />
-                  <h5>{texts.noResults}</h5>
-                  <p>{texts.noResultsExplain}</p>
-                </div>
-              )}
-
-              {pageNumbers.length >= 2 ? (
-                <nav>
-                  <ul className="Pagination">
-                    {currentPage !== 1 && (
-                      <li className="Pagination__item">
-                        {currentPage !== 1 ? (
-                          <Link
-                            onClick={() => paginate(currentPage - 1)}
-                            to="#professionals"
-                          >
-                            <FaChevronLeft />
-                          </Link>
-                        ) : (
-                          <FaChevronLeft />
-                        )}
-                      </li>
-                    )}
-                    {pageNumbers.map((number, idx) =>
-                      number === currentPage ? (
-                        <li key={idx} className="Pagination__item active-page">
-                          <Link
-                            onClick={() => paginate(number)}
-                            to="#professionals"
-                            className={`Pagination__link`}
-                          >
-                            {number}
-                          </Link>
-                        </li>
-                      ) : (
-                        <li key={idx} className="Pagination__item">
-                          <Link
-                            onClick={() => paginate(number)}
-                            to="#professionals"
-                            className={`Pagination__link `}
-                          >
-                            {number}
-                          </Link>
-                        </li>
-                      )
-                    )}
-                    <li className="Pagination__item">
-                      {currentPage !== pageNumbers[pageNumbers.length - 1] ? (
-                        <Link
-                          onClick={() => paginate(currentPage + 1)}
-                          to="#professionals"
-                        >
-                          <FaChevronRight />
-                        </Link>
-                      ) : (
-                        <FaChevronRight />
-                      )}
-                    </li>
-                  </ul>
-                </nav>
-              ) : null}
+              <GoogleMap 
+                professionals={results} 
+                logoAcademy={defaultData?.academyLogo.image}
+                defaultPhoto={defaultData.photoDefault.image}
+                country={selectedCountry}
+              />
             </div>
           </div>
         </div>

@@ -5,7 +5,6 @@ import Icon from "./Icons/Icon";
 import FontAwesomeIcon from "./Icons/FontAwesomeIcon";
 import MaterialIcon from "./Icons/MetertialIcon";
 import CustomLink from "./CustomLink/CustomLink";
-import TextExample from "./TextExample/TextExample";
 import Home from "./Home/Home";
 import Carrousel from "./Carrousel/Carrousel";
 import TextBlock from "./TextBlock/TextBlock";
@@ -40,7 +39,6 @@ export {
   FontAwesomeIcon,
   MaterialIcon,
   CustomLink,
-  TextExample,
   Icon,
   Home,
   Carrousel,

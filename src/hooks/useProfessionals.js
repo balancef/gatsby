@@ -204,6 +204,10 @@ const useProfessionals = () => {
           certificateNumber
           certificateDate
           address
+          location {
+            lat
+            lng
+          }
           academy {
             academy
           }
@@ -268,6 +272,10 @@ const useProfessionals = () => {
           certificateNumber
           certificateDate
           address
+          location {
+            lat
+            lng
+          }
           academy {
             academy
           }
@@ -320,7 +328,7 @@ const useProfessionals = () => {
                 right
                 left
                 bottom
-              }
+              } 
               asset {
                 _id
               }
@@ -332,6 +340,10 @@ const useProfessionals = () => {
           certificateNumber
           certificateDate
           address
+          location {
+            lat
+            lng
+          }
           academy {
             academy
           }
