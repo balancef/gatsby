@@ -1,13 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
-import unorm from "unorm";
 import {
   FaAngleDown,
   FaStar,
 } from "react-icons/fa";
-import ProfessionalCard from "./ProfessionalCard";
-import Icon from "../Icons/Icon";
-import axios from "axios";
 import GoogleMap from "../Map/map"
 
 const ProfessionalsFilter = ({
@@ -25,7 +21,6 @@ const ProfessionalsFilter = ({
   const wrapperRef = useRef(null);
   const dimensions = useWindowSize();
   const [showFilter, setShowFilter] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [selectedRankings, setSelectedRankings] = useState([]);
   const [selectedProfessions, setSelectedProfessions] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
@@ -70,13 +65,6 @@ const ProfessionalsFilter = ({
               (service) => service.services === selectedService
             );
           });
-        const userCountryHasProfessionals = countriesData.some(
-          (country) => country.countryCode === selectedCountry
-        );
-        // const matchesCountry =
-        //   !selectedCountry ||
-        //   !userCountryHasProfessionals ||
-        //   professional.country.countryCode === selectedCountry;
         const isValidTo =
           (hasMasterOrSupervisorRanking || filterByValidTo) &&
           isValidToValid(professional);
@@ -84,26 +72,19 @@ const ProfessionalsFilter = ({
           matchesRanking &&
           matchesProfession &&
           matchesServices &&
-          // matchesCountry &&
           isValidTo
         );
       })
     );
 
-    // setCurrentPage(1);
   }, [
     selectedRankings,
     selectedProfessions,
     selectedServices,
-    // selectedCountry,
     filterByValidTo,
     countriesData,
     data,
   ]);
-
-  function removeDiacritics(str) {
-    return unorm.nfkd(str).replace(/[\u0300-\u036f]/g, "");
-  }
 
   function extractNumberWithIcon(inputString) {
     const match = inputString.match(/\d+/);
@@ -121,55 +102,6 @@ const ProfessionalsFilter = ({
       return inputString;
     }
   }
-
-  const handleSearch = () => {
-    const query = removeDiacritics(searchQuery.toLowerCase());
-
-    if (query === "") {
-      setResults(results);
-      return;
-    }
-
-    const filtered = results.filter((professional) => {
-      const { address, name, profession, services, country } = professional;
-
-      const matches =
-        removeDiacritics(address.toLowerCase()).includes(query) ||
-        removeDiacritics(name.toLowerCase()).includes(query) ||
-        removeDiacritics(country.country.toLowerCase()).includes(query) ||
-        profession.some((p) =>
-          removeDiacritics(p.professionDescription.toLowerCase()).includes(
-            query
-          )
-        ) ||
-        profession.some((p) =>
-          removeDiacritics(p.profession.toLowerCase()).includes(query)
-        ) ||
-        services.some((s) =>
-          removeDiacritics(s.services.toLowerCase()).includes(query)
-        );
-
-      return matches;
-    });
-
-    // setCurrentPage(1);
-
-    setResults(filtered);
-  };
-
-  const handleInputChange = (e) => {
-    const inputValue = e.target.value;
-    setSearchQuery(inputValue);
-    if (inputValue === "") {
-      setResults(data);
-    }
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
 
   const renderRankingCheckboxes = () => {
     const sortedRankings = rankingsData.sort((a, b) => a.priority - b.priority);
@@ -254,44 +186,10 @@ const ProfessionalsFilter = ({
   };
 
   const resetFilters = () => {
-    setSelectedCountry("");
     setSelectedRankings([]);
     setSelectedProfessions([]);
     setSelectedServices([]);
   };
-
-  const professionals = results
-    .sort((a, b) => a.ranking.priority - b.ranking.priority)
-    .map((professional, idx) => {
-      return (
-        <ProfessionalCard
-          defaultPhoto={defaultData.photoDefault.image}
-          photo={professional.image?.image}
-          ranking={professional.ranking?.ranking}
-          official={professional?.official}
-          verified={professional?.verified}
-          name={professional.name}
-          professions={professional.profession}
-          services={professional?.services}
-          address={professional.address}
-          slug={professional.slug?.current}
-          logoAcademy={defaultData?.academyLogo.image}
-          descriptionDefault={defaultData._rawDescriptionDefault}
-          certificateNumber={professional?.certificateNumber}
-          certificateDate={professional?.certificateDate}
-          lastCertificateUpdate={professional?.lastCertificateUpdate}
-          validTo={professional?.validTo}
-          description={professional._rawDescription}
-          phone={professional.phone}
-          email={professional.email}
-          bccEmails={bccEmails}
-          website={professional?.website}
-          emailSubject={defaultData?.contactForm.title}
-          emailBody={defaultData?.contactForm.templateContent}
-          key={`pro-${idx}`}
-        />
-      );
-    });
 
   return (
     <>
@@ -300,22 +198,6 @@ const ProfessionalsFilter = ({
           <div className="search-container">
             <div className="container">
               <h6 className="input-title">{texts.inputTitle}</h6>
-              {/* <div className="input-container">
-                <input
-                  type="text"
-                  placeholder={texts.inputPlaceholder}
-                  value={searchQuery}
-                  onChange={handleInputChange}
-                  onKeyDown={handleKeyPress}
-                />
-                <button
-                  title="Search button"
-                  className="search-icon"
-                  onClick={handleSearch}
-                >
-                  <Icon code={"FaSearch"}></Icon>
-                </button>
-              </div> */}
             </div>
           </div>
           <h6 className='container mt-4'>
@@ -366,19 +248,6 @@ const ProfessionalsFilter = ({
                   <p>{texts.filterBy}:</p>
                   <button onClick={resetFilters}>{texts.resetFilters}</button>
                 </div>
-
-                {/* <select
-                  className="filter-select"
-                  value={selectedCountry}
-                  onChange={handleCountrySelectChange}
-                >
-                  <option value="">{texts.allCountries}</option>
-                  {countriesData.map((country) => (
-                    <option key={country.country} value={country.countryCode}>
-                      {country.country}
-                    </option>
-                  ))}
-                </select> */}
                 <div className="filter-checkbox ranking">
                   <p className="checkbox-title">{texts.ranking}</p>
                   {renderRankingCheckboxes()}
@@ -410,6 +279,7 @@ const ProfessionalsFilter = ({
                 professionals={results} 
                 logoAcademy={defaultData?.academyLogo.image}
                 defaultPhoto={defaultData.photoDefault.image}
+                country={selectedCountry}
               />
             </div>
           </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./Professionals.scss";
 import {
   FaStar,
@@ -48,12 +48,6 @@ const ProfessionalCard = ({
   descriptionDefault,
 }) => {
   const { language } = useContext(LanguageContext);
-
-  const [IsExpanded, setIsExpanded] = useState(true);
-  const ProfessionalDescription = () => {
-    setIsExpanded(!IsExpanded);
-  };
-
 
   const professionList = professions.map((item) => item.profession).join(", ");
   const serviceList = services.map((item) => item.services).join(", ");
@@ -191,7 +185,6 @@ const ProfessionalCard = ({
               </a>
             </div>
           )}
-          {IsExpanded && (
             <div className="professional__information">
               {certificateNumber && (
                 <div className="professional__information-dates">
@@ -304,7 +297,6 @@ const ProfessionalCard = ({
                 </div>
               }
             </div>
-          )}
         </div>
       </div>
     </div>

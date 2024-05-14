@@ -16,9 +16,10 @@ import { FaRegStar } from "react-icons/fa";
 import masterImg from "../../images/master.png";
 import SanityImage from "gatsby-plugin-sanity-image";
 import "./ProfessionalsMap.scss";
-import {CustomMapControl} from './mapControl';
 import MapHandler from './mapHandler'
-// import {useMapsLibrary} from '@vis.gl/react-google-maps';
+
+const GEOAPIFY_API_KEY = process.env.GATSBY_GEOAPIFY_API_KEY
+const GOOGLE_MAPS_API_KEY = process.env.GATSBY_GOOGLE_MAPS_API_KEY
 
 
 function RankingComponent({ ranking }) {
@@ -114,12 +115,9 @@ function RankingComponent({ ranking }) {
 }
 
 
-const GoogleMap = ({professionals, logoAcademy, defaultPhoto}) => {
-
+const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country}) => {
   const [activeMarker, setActiveMarker] = useState(null);
-  const [selectedPlace, setSelectedPlace] = useState(null);
   const [mapCenter, setMapCenter] = useState({lat: 47.8561815, lng: 12.3490983})
-  // const geocodingLib = useMapsLibrary('geocoding')
 
   const handleMarkerMouseover = (professional) => () => {
     setActiveMarker({lat: professional.location.lat, lng: professional.location.lng, professional: professional});
@@ -152,30 +150,23 @@ const GoogleMap = ({professionals, logoAcademy, defaultPhoto}) => {
     else return null
   }
 
-  const fetchUserCountry = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.geoapify.com/v1/ipinfo?apiKey=${process.env.GEOAPIFY_API_KEY}`
-      );
-      setMapCenter({lat: response.data.location.latitude, lng: response.data.location.longitude})
-      console.log("userLocation-> ", response)
-      
-    } catch (error) {
-      console.error("Error fetching user country:", error);
-    }
-  };
-
   useEffect(() => {
-    // if (!geocodingLib) return;
-    // const geoCode = new geocodingLib.Geocoder({location: {lat: 47.8561815, lng: 12.3490983}})
-    // console.log(geoCode)
-  
+    const fetchUserCountry = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.geoapify.com/v1/ipinfo?apiKey=${GEOAPIFY_API_KEY}`
+        );
+        setMapCenter({lat: response.data.location.latitude, lng: response.data.location.longitude})
+        
+      } catch (error) {
+        console.error("Error fetching user country:", error);
+      }
+    };
     fetchUserCountry();
-    
   }, []);
 
   return (
-    <APIProvider apiKey={'AIzaSyD6E_2QSEFaNEHoUV52-U2Lb0X42Jg4IZk'}>
+    <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
       <Map 
       defaultCenter={mapCenter} 
       center={mapCenter}
@@ -245,8 +236,7 @@ const GoogleMap = ({professionals, logoAcademy, defaultPhoto}) => {
           </InfoWindow>
       )}
       </Map>
-      <CustomMapControl controlPosition={ControlPosition.TOP_RIGHT} onPlaceSelect={setSelectedPlace} />
-      <MapHandler place={selectedPlace} />
+      <MapHandler country={country} />
     </APIProvider>
   );
 }
