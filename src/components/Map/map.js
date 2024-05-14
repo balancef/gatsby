@@ -4,8 +4,7 @@ import {
   APIProvider,
   Marker,
   InfoWindow,
-  Map,
-  ControlPosition
+  Map
 } from '@vis.gl/react-google-maps';
 import axios from "axios";
 import farrierAndTrimmerIcon from "../../images/mapIcons/trimmerProfessional.png"
@@ -17,6 +16,7 @@ import masterImg from "../../images/master.png";
 import SanityImage from "gatsby-plugin-sanity-image";
 import "./ProfessionalsMap.scss";
 import MapHandler from './mapHandler'
+import verifiedImg from "../../images/verified_badge.png";
 
 const GEOAPIFY_API_KEY = process.env.GATSBY_GEOAPIFY_API_KEY
 const GOOGLE_MAPS_API_KEY = process.env.GATSBY_GOOGLE_MAPS_API_KEY
@@ -90,14 +90,6 @@ function RankingComponent({ ranking }) {
   } else if (ranking.toLowerCase() === "supervisor") {
     return (
       <div style={{display: "flex", marginTop: "3px"}}>
-        {/* <img
-          src={masterImg}
-          alt="verified"
-          height={16}
-          width={14}
-          style={{marginRight: "10px"}}
-          className="professional__ranking_logo"
-        /> */}
         <span style={{fontWeight: "500", fontSize: "14px"}}>{ranking}</span>
       </div>
     );
@@ -212,7 +204,7 @@ const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country}) => {
                 />
               ) : (
                 <SanityImage
-                {... defaultPhoto}
+                {...defaultPhoto}
                 alt={`${activeMarker.professional.name}`}
                 className="map-professional__image"
               />
@@ -220,8 +212,15 @@ const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country}) => {
                 
               </div>
               <div style={{flexDirection: "colum", marginLeft: "12px"}}>
-                <div>
+                <div style={{display: "flex", alignItems: "center"}}>
                   <span style={{marginBottom: 0, fontSize: "18px", fontWeight: "bold"}}>{activeMarker.professional.name}</span>
+                  {activeMarker.professional.verified && (
+                    <img
+                      src={verifiedImg}
+                      alt="verified"
+                      style={{width: "18px", height: "18px", marginLeft: "5px"}}
+                    />
+                  )}
                 </div>
                 {activeMarker.professional.ranking && (
                   <RankingComponent ranking={activeMarker.professional.ranking.ranking}/>
@@ -230,6 +229,13 @@ const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country}) => {
                   <div style={{marginTop: "3px"}}>
                     <span>{activeMarker.professional.profession.map((item) => item.profession).join(", ")}</span>
                   </div>
+                )}
+                {activeMarker.professional.official && (
+                    <SanityImage
+                    {...logoAcademy}
+                    alt={`${activeMarker.professional.name}`}
+                    className="map-professional__academy-image"
+                  />
                 )} 
               </div>
             </div>
