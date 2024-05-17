@@ -15,13 +15,16 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.24.5",
+    "@babel/plugin-transform-optional-chaining": "^7.24.5",
     "@netlify/functions": "^2.1.0",
     "@portabletext/react": "^2.0.1",
     "@react-icons/all-files": "^4.1.0",
     "bootstrap": "^5.3.0",
     "date-fns": "^2.30.0",
-    "gatsby": "^5.3.3",
-    "gatsby-plugin-image": "^3.3.2",
+    "gatsby": "^5.13.0",
+    "gatsby-plugin-google-gtag": "^5.13.1",
+    "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-manifest": "^5.3.1",
     "gatsby-plugin-sanity-image": "^0.13.3",
     "gatsby-plugin-sass": "^6.3.1",
@@ -38,7 +41,12 @@
     "react-icons": "^4.10.1",
     "react-multi-carousel": "^2.8.4",
     "sass": "^1.57.1",
-    "sharp": "^0.31.3",
+    "sharp": "^0.33.3",
     "unorm": "^1.6.0"
+  },
+  "overrides": {
+    "react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825": {
+      "react": "^18.2.0"
+    }
   }
 }

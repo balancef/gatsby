@@ -37,6 +37,22 @@ module.exports = {
       projectId: process.env.SANITY_ID_PROJECT,
       dataset: process.env.SANITY_DATASET,
     },
-  }
+  },
+  {
+    resolve: `gatsby-plugin-google-gtag`,
+    options: {
+      // You can add multiple tracking ids and a pageview event will be fired for all of them.
+      trackingIds: [
+        "G-FT9RWWFGZ7",
+      ],
+      gtagConfig: {
+        anonymize_ip: true,
+        cookie_expires: 0,
+      },
+      pluginConfig: {
+        head: true,
+      },
+    },
+  },
 ]
 };
