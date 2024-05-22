@@ -13,6 +13,8 @@ import { Link } from "gatsby";
 import emptyState from "../../images/emptyState.png";
 import axios from "axios";
 
+const GEOAPIFY_KEY = process.env.GATSBY_GEOAPIFY_API_KEY
+
 const ProfessionalsFilter = ({
   data,
   defaultData,
@@ -53,12 +55,10 @@ const ProfessionalsFilter = ({
   };
 
   useEffect(() => {
-    const apiKey = "e6889c81cf7b4529a7dd8f062ef5848a";
-
     const fetchUserCountry = async () => {
       try {
         const response = await axios.get(
-          `https://api.geoapify.com/v1/ipinfo?apiKey=${apiKey}`
+          `https://api.geoapify.com/v1/ipinfo?apiKey=${GEOAPIFY_KEY}`
         );
         setSelectedCountry(response.data.country.iso_code);
       } catch (error) {

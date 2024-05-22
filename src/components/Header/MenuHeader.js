@@ -9,11 +9,7 @@ const MenuHeader = ({ headerMenu, language }) => {
     <Navbar.Text key={link._key}>
       {link.link.url.includes("http") || link.link.url.includes("https") ? (
         <a
-          href={
-            language === "en"
-              ? link.link.url
-              : `/${language}/${link.link.url.replace("/", "")}`
-          }
+          href={`/${language}/${link.link.url.replace("/", "")}`}
           className="header_link"
           target="_blank"
           rel="noreferrer"
@@ -23,11 +19,7 @@ const MenuHeader = ({ headerMenu, language }) => {
         </a>
       ) : (
         <Link
-          to={
-            language === "en"
-              ? link.link.url
-              : `/${language}/${link.link.url.replace("/", "")}`
-          }
+          to={`/${language}/${link.link.url.replace("/", "")}`}
           className="header_link"
         >
           {link.icon !== null && <Icon code={link.icon.icon}></Icon>}
@@ -47,11 +39,7 @@ const MenuHeader = ({ headerMenu, language }) => {
       {headerMenu.links.map((dropdownLink) => (
         <Dropdown.Item
           key={dropdownLink._key}
-          href={
-            language === "en"
-              ? dropdownLink.link.url
-              : `/${language}/${dropdownLink.link.url.replace("/", "")}`
-          }
+          href={`/${language}/${dropdownLink.link.url.replace("/", "")}`}
         >
           {dropdownLink.link.title}
         </Dropdown.Item>
