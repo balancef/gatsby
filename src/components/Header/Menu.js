@@ -26,7 +26,7 @@ const Menu = ({ links, button, language }) => {
               <NavDropdown.Item
                 key={dropdownLink._key}
                 href={dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.url
-                  : `/${language}/${dropdownLink.link.url.replace("/", "")}`
+                  : language === "en" ? dropdownLink.link.url : `/${language}/${dropdownLink.link.url.replace("/", "")}`
                 }
                 target={dropdownLink._type === "dropdownExternalLink" ? "_blank" : ""}
               >
@@ -37,7 +37,7 @@ const Menu = ({ links, button, language }) => {
             <NavDropdown.Item
               key={dropdownLink._key}
               href={dropdownLink._type === "dropdownExternalLink" ? dropdownLink.externalLink.url
-                : `/${language}/${dropdownLink.link.url.replace("/", "")}`
+                : language === "en" ? dropdownLink.link.url : `/${language}/${dropdownLink.link.url.replace("/", "")}`
               }
               target={dropdownLink._type === "dropdownExternalLink" ? "_blank" : ""}
             >
@@ -50,7 +50,7 @@ const Menu = ({ links, button, language }) => {
       link._type === "menuLink" ?
         (
           <Nav.Link
-            href={`/${language}/${link.link.url.replace("/", "")}`}
+            href={language === "en" ? link.link.url : `/${language}/${link.link.url.replace("/", "")}`}
             key={link._key}
           >
             {link.icon !== null && <Icon code={link.icon.icon}></Icon>}

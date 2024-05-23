@@ -19,7 +19,7 @@ const TextImageButton = ({ title, text, image, button, callToActionLink }) => {
               <PortableText value={text} />
               <div className="textImageButton__text_button">
                 <CustomLink
-                  href={`/${language}/${button.url.replace("/", "")}`}
+                  href={language === "en" ? button.url : `/${language}/${button.url.replace("/", "")}`}
                   text={button.title}
                   type={"button"}
                   icon={<Icon code={"FaSearch"}></Icon>}
@@ -28,7 +28,7 @@ const TextImageButton = ({ title, text, image, button, callToActionLink }) => {
               <div className="textImageButton__text_callToAction">
                 <label>{callToActionLink.title}</label>
                 <CustomLink
-                  href={`/${language}/${callToActionLink.link.url.replace("/", "")}`}
+                  href={language === "en" ? callToActionLink.link.url : `/${language}/${callToActionLink.link.url.replace("/", "")}`}
                   text={callToActionLink.link.title}
                   type={"link-secondary"}
                 />

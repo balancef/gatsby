@@ -30,7 +30,7 @@ const Footer = () => {
           <div className="footer">
             <div className="logoContainer">
               {data.logo.image !== null && (
-                <a href={`/${language}`}>
+                <a href={language === "en" ? "/" : `/${language}`}>
                   <SanityImage
                     {...data.logo.image}
                     alt={`${data.logo.alt}`}

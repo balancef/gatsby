@@ -30,7 +30,7 @@ const TextLogoButton = ({ title, text, button, image }) => {
           ) : <></>}
           {button && language ? (<div className="textLogoButton__button">
             <CustomLink
-              href={`/${language}/${button.url.replace("/", "")}`}
+              href={language === "en" ? button.url : `/${language}/${button.url.replace("/", "")}`}
               text={button.title}
               type={"button"}
 
