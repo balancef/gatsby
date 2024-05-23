@@ -58,7 +58,7 @@ exports.createPages = async ({ graphql, actions }) => {
   result.data.pages.edges.forEach((node) => {
     const pageEN = require.resolve("./src/templates/pageEN.js");
     createPage({
-      path: "/" + node.node.slug.current,
+      path: "/en/" + node.node.slug.current,
       component: pageEN,
       context: { slug: node.node.slug.current, language: "en" },
     });
@@ -81,7 +81,7 @@ exports.createPages = async ({ graphql, actions }) => {
   result.data.help.edges.forEach((node) => {
     const pageEN = require.resolve("./src/templates/helpEN.js");
     createPage({
-      path: "/help/" + node.node.slug.current,
+      path: "/en/help/" + node.node.slug.current,
       component: pageEN,
       context: { slug: node.node.slug.current, language: "en" },
     });
@@ -104,7 +104,7 @@ exports.createPages = async ({ graphql, actions }) => {
   result.data.legal.edges.forEach((node) => {
     const LegalPagesEN = require.resolve("./src/templates/legalEN.js");
     createPage({
-      path: "/legal/" + node.node.slug.current,
+      path: "/en/legal/" + node.node.slug.current,
       component: LegalPagesEN,
       context: { slug: node.node.slug.current, language: "en" },
     });
@@ -130,7 +130,7 @@ exports.createPages = async ({ graphql, actions }) => {
       "./src/templates/professionals/proEN.js"
     );
     createPage({
-      path: "/search/" + node.node.slug.current,
+      path: "/en/search/" + node.node.slug.current,
       component: ProfessionalPagesEN,
       context: { slug: node.node.slug.current, language: "en" },
     });
@@ -159,7 +159,7 @@ exports.createPages = async ({ graphql, actions }) => {
       "./src/templates/article/articleEN.js"
     );
     createPage({
-      path: "/blog/" + node.node.slug.current,
+      path: "/en/blog/" + node.node.slug.current,
       component: ArticlePageEN,
       context: { slug: node.node.slug.current, language: "en" },
     });
