@@ -42,4 +42,4 @@ const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country}) => {
   );
 }
 
-export default React.memo(GoogleMap);
+export default GoogleMap;

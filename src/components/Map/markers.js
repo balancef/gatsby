@@ -215,6 +215,10 @@ export const Markers = ({points, logoAcademy, defaultPhoto}) => {
     clusterer.current?.addMarkers(Object.values(markers));
   }, [markers]);
 
+  useEffect(() => {
+    setMarkers({})
+  }, [points])
+
   const setMarkerRef = (marker, key) => {
     if (marker && markers[key]) return;
     if (!marker && !markers[key]) return;
