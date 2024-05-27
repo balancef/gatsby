@@ -32,9 +32,16 @@ const Header = () => {
     }
   }
 
-  const handleSelect = (language) => {
-    const url = window.location.pathname.replace(/^\/(es|de|en)/, "");
-    navigate(`/${language}${url}`);
+  const handleSelect = (e) => {
+    const url = window.location.pathname.replace(/^\/(es|de)/, "");
+
+    if (e === "es") {
+      navigate(`/es${url}`);
+    } else if (e === "de") {
+      navigate(`/de${url}`);
+    } else {
+      navigate(`${url}`);
+    }
   }
 
   const title = {
@@ -78,7 +85,7 @@ const Header = () => {
 
       <Navbar expand="lg" className="header__menu">
         <Container>
-          <Navbar.Brand href={`/${language}`}>
+          <Navbar.Brand href={language === "en" ? "/" : `/${language}`}>
             {data.logo.image !== null ? (
               <SanityImage
                 {...data.logo.image}

@@ -7,11 +7,12 @@ export const LanguageProvider = ({ children }) => {
 
   useEffect(() => {
     const currentPath = window.location.pathname;
-    const matchedLanguage = currentPath.match(/^\/(es|de|en)/);
-    const selectedLanguage = matchedLanguage ? matchedLanguage[1] : "en";
-    if(selectedLanguage === language) return;
-    setLanguage(selectedLanguage);
-  });
+    const matchedLanguage = currentPath.match(/^\/(es|de)/);
+    const defaultLanguage = matchedLanguage ? matchedLanguage[1] : "en";
+
+
+    setLanguage(defaultLanguage);
+  }, []);
   
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>

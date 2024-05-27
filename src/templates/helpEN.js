@@ -15,7 +15,7 @@ const Help = ({location, data}) => {
             <div className="container">
                 <div className="help">
                     <div className="help__breadcrumb">
-                        <Link to="en/help">Help</Link>
+                        <Link to="/help">Help</Link>
                         {` > ${title}`}
                     </div>
                     <div className="help__card">
