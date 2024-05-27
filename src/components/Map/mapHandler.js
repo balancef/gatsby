@@ -14,10 +14,10 @@ const MapHandler = ({country}) => {
         return;
       } 
       const geoCodeAPI = new geocodingLib.Geocoder()
-      const respose = await geoCodeAPI.geocode({address: country})
+      const response = await geoCodeAPI.geocode({address: country})
       try {
-        if(respose.results.length > 0) {
-          map.fitBounds(respose.results.at(0).geometry?.viewport)
+        if(response.results.length > 0) {
+          map.fitBounds(response.results.at(0).geometry?.viewport)
         } else {
           console.log(`No results found for country ${country}`)
         }

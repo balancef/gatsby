@@ -24,7 +24,7 @@ const ProfessionalsFilter = ({
   const [selectedRankings, setSelectedRankings] = useState([]);
   const [selectedProfessions, setSelectedProfessions] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState("AR");
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [results, setResults] = useState(data);
   const filterByValidTo = true;
   
@@ -231,7 +231,7 @@ const ProfessionalsFilter = ({
                 >
                   <option value="">{texts.allCountries}</option>
                   {countriesData.map((country) => (
-                    <option key={country.country} value={country.countryCode}>
+                    <option key={country.country} value={country.country}>
                       {country.country}
                     </option>
                   ))}
