@@ -11,6 +11,7 @@ const ProPage = ({location,  data }) => {
   const description = professionalData?._rawDescription ? professionalData._rawDescription[0].children[0].text : ""
   let query = useProfessionals(); 
   let defaultData = query?.sanityProfessionalConfigES;
+  
   const bccEmails = useContact().allSanityContact.ContactEN[0].ccEmails
 
   return (
