@@ -2,12 +2,12 @@
 from = "/"
 to = "/es"
 status = 301
-force = false
+force = true
 conditions = {Country = ["AR", "BO", "CL", "CO", "CR", "CU", "DO", "EC", "SV", "GQ", "GT", "HN", "MX", "NI", "PA", "PY", "PE", "PR", "ES", "UY", "VE"]}
 
 [[redirects]]
 from = "/"
 to = "/de"
 status = 301
-force = false
+force = true
 conditions = {Country = ["AT", "BE", "CH", "DE", "LI", "LU"]}
