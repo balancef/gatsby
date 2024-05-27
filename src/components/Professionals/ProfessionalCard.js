@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import "./Professionals.scss";
+import CertificateIcon from "../../images/certificate-outline.png"
 import {
   FaStar,
   FaGraduationCap,
@@ -11,7 +12,6 @@ import {
   MdInfo,
   MdLocationOn,
   MdEmail,
-  MdOutlinePersonalVideo,
   MdMoreTime,
 } from "react-icons/md";
 import { LanguageContext } from "../../context/languajeContext";
@@ -239,7 +239,7 @@ const ProfessionalCard = ({
                             : "Zertifizierungsdatum"
                         }
                       >
-                        <MdOutlinePersonalVideo size={18} />
+                        <img style={{paddingRight: '5px'}} src={CertificateIcon}/>
                         {formatoFechas(certificateDate)}
                       </li>
                     )}
