@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import {
   Marker,
   InfoWindow,
@@ -14,6 +14,7 @@ import farrierAndTrimmerIcon from "../../images/mapIcons/trimmerProfessional.png
 import farrierIcon from "../../images/mapIcons/farrierProfessional.png"
 import trimmerIcon from "../../images/mapIcons/farrierAndTrimmerProfessional.png"
 import masterImg from "../../images/master.png";
+import { LanguageContext } from "../../context/languajeContext";
 import "./ProfessionalsMap.scss";
 
 function RankingComponent({ ranking }) {
@@ -103,6 +104,7 @@ function RankingComponent({ ranking }) {
 export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef}) => {
   const [infowindowOpen, setInfowindowOpen] = useState(false);
   const [markerRef, marker] = useMarkerRef();
+  const { language } = useContext(LanguageContext);
 
   const getProfessionalProfesionIcon = (professions) => {
     const farriersI18n = ["Herrador/a", "Farrier", "Hufschmied/in"]
@@ -120,8 +122,12 @@ export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef}) =>
   }
 
   const handleMarkerClick = (professional) => {
-    //TODO move to .env
-    window.open(`http://localhost:8000/search/${professional.slug.current}`, '_blank').focus();
+    const alternativeLanguages = ["es", "de"]
+    if(alternativeLanguages.includes(language)) {
+      window.open(`/${language}/professional/${professional.slug.current}`, '_blank').focus();
+      return
+    } 
+    window.open(`/professional/${professional.slug.current}`, '_blank').focus(); 
   }
 
   useEffect(() => {

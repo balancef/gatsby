@@ -130,7 +130,7 @@ exports.createPages = async ({ graphql, actions }) => {
       "./src/templates/professionals/proEN.js"
     );
     createPage({
-      path: "/search/" + node.node.slug.current,
+      path: "/professional/" + node.node.slug.current,
       component: ProfessionalPagesEN,
       context: { slug: node.node.slug.current, language: "en" },
     });
@@ -139,7 +139,7 @@ exports.createPages = async ({ graphql, actions }) => {
       "./src/templates/professionals/proES.js"
     );
     createPage({
-      path: "/es/search/" + node.node.slug.current,
+      path: "/es/professional/" + node.node.slug.current,
       component: ProfessionalPagesES,
       context: { slug: node.node.slug.current, language: "es" },
     });
@@ -148,7 +148,7 @@ exports.createPages = async ({ graphql, actions }) => {
       "./src/templates/professionals/proDE.js"
     );
     createPage({
-      path: "/de/search/" + node.node.slug.current,
+      path: "/de/professional/" + node.node.slug.current,
       component: ProfessionalPagesGER,
       context: { slug: node.node.slug.current, language: "de" },
     });
