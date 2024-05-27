@@ -3,7 +3,7 @@
   to = "/es"
   status = 301
   force = false
-  conditions = {Language = ["es"]}
+  conditions = {Country = ["es"]}
 
 [[redirects]]
   from = "/test6"
@@ -11,3 +11,17 @@
   status = 301
   force = false
   conditions = {Language = ["de"]}
+
+[[redirects]]
+  from = "/test7"
+  to = "/es"
+  status = 301
+  force = false
+  conditions = {Country = ["AR", "BO", "CL", "CO", "CR", "CU", "DO", "EC", "SV", "GQ", "GT", "HN", "MX", "NI", "PA", "PY", "PE", "PR", "ES", "UY", "VE"]}
+
+[[redirects]]
+  from = "/test7"
+  to = "/de"
+  status = 301
+  force = false
+  conditions = {Country = ["AT", "BE", "CH", "DE", "LI", "LU"]}
