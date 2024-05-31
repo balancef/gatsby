@@ -5,6 +5,7 @@ const useHelp = () => {
   {
     allSanityHelp {
         HelpEN:nodes {
+          pageKeywords
           slug {
             current
           }
@@ -21,6 +22,7 @@ const useHelp = () => {
             }
             _id
             title:titleSpanish
+            pageKeywords: pageKeywordsSpanish
             category {
               titleCategory:titleCategorySpanish
             }
@@ -32,6 +34,7 @@ const useHelp = () => {
             }
             _id
             title:titleGerman
+            pageKeywords: pageKeywordsGerman
             category {
               titleCategory:titleCategoryGerman
             }

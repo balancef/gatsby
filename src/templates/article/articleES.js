@@ -9,13 +9,14 @@ const ArticlePage = ({ location, data }) => {
 
   const titlePage = bannerData?.title
   const descriptionPage = data?.data.nodes[0]?._rawContent[0]?.children[0]?.text;
+  const keywordsPage = bannerData?.pageKeywords
 
   return (
     <Layout location={location}>
       <Seo
         title={titlePage}
         description={descriptionPage}
-        keywords=""
+        keywords={keywordsPage}
       />
       <Article
         data={ArticleQuery}
@@ -110,6 +111,7 @@ export const query = graphql`
             }
           }
           title: titleSpanish
+          pageKeywords: pageKeywordsSpanish
         }
       }
     }
