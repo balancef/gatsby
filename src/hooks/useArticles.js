@@ -11,6 +11,9 @@ const useArticles = () => {
         descriptionPage
         descriptionPageSpanish
         descriptionPageGerman
+        pageKeywords
+        pageKeywordsSpanish
+        pageKeywordsGerman
       }
     }
 
