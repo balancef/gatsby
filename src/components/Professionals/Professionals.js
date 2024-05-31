@@ -68,7 +68,7 @@ const Professionals = () => {
       <Seo
         title={pageData.titlePage}
         description={pageData.descriptionPage}
-        keywords={pageData.pageKeywords}
+        keywords=""
       />
       {language !== null && <ProfessionalsFilter
         data={data}
