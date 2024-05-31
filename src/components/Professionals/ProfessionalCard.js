@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Professionals.scss";
 import CertificateIcon from "../../images/certificate-outline.png"
 import {
@@ -6,7 +6,8 @@ import {
   FaGraduationCap,
   FaRegClock,
   FaPhoneAlt,
-  FaRegStar
+  FaRegStar,
+  FaShareAlt
 } from "react-icons/fa";
 import {
   MdInfo,
@@ -22,6 +23,7 @@ import { PortableText } from "@portabletext/react";
 import { BsGlobe } from "react-icons/bs";
 import { CustomLink } from "..";
 import { format } from "date-fns";
+import { Button } from 'react-bootstrap';
 
 const ProfessionalCard = ({
   logoAcademy,
@@ -60,6 +62,126 @@ const ProfessionalCard = ({
   function formatoFechas(fecha) {
     return format(new Date(fecha), "dd-MM-yyyy");
   }
+
+  function ShareButton({url}) {
+    const sharei18n = {es: "Compartir", en: "Share", de: "Aktie"}
+    useEffect(() => {
+        // Cargar el script de AddToAny
+        const script = document.createElement('script');
+        script.src = 'https://static.addtoany.com/menu/page.js';
+        script.async = true;
+        document.body.appendChild(script);
+
+        // Configurar AddToAny para excluir servicios
+        window.a2a_config = window.a2a_config || {};
+        window.a2a_config.prioritize = [ 'sms', 'whatsapp', 'copy_link','email'];
+        window.a2a_config.exclude_services = [
+          "amazon_wish_list",
+          "aol_mail",
+          "balatarin",
+          "bibsonomy",
+          "blogger",
+          "blogmarks",
+          "bluesky",
+          "bookmarks_fr",
+          "box_net",
+          "buffer",
+          "diary_ru",
+          "diaspora",
+          "digg",
+          "diigo",
+          "douban",
+          "draugiem",
+          "evernote",
+          "fark",
+          "flipboard",
+          "folkd",
+          "google_classroom",
+          "google_translate",
+          "hacker_news",
+          "hatena",
+          "houzz",
+          "instapaper",
+          "kakao",
+          "known",
+          "line",
+          "linkedin",
+          "livejournal",
+          "mail_ru",
+          "mastodon",
+          "mendeley",
+          "meneame",
+          "mewe",
+          "micro_blog",
+          "mix",
+          "mixi",
+          "myspace",
+          "odnoklassniki",
+          "outlook_com",
+          "papaly",
+          "pinboard",
+          "pinterest",
+          "plurk",
+          "pocket",
+          "print",
+          "printfriendly",
+          "pusha",
+          "push_to_kindle",
+          "qzone",
+          "raindrop_io",
+          "reddit",
+          "rediff_mypage",
+          "refind",
+          "sina_weibo",
+          "sitejot",
+          "slashdot",
+          "stocktwits",
+          "svejo",
+          "symbaloo_bookmarks",
+          "teams",
+          "threads",
+          "threema",
+          "trello",
+          "tumblr",
+          "twiddla",
+          "twitter",
+          "typepad",
+          "viber",
+          "wordpress",
+          "wykop",
+          "x",
+          "xing",
+          "yahoo_mail",
+          "yummly",
+          "kindle_it",
+          "typepad_post",
+          "rediff",
+          "google_gmail",
+          "wechat",
+          "microsoft_teams"
+        ];
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+
+    return (
+        <div className="a2a_kit a2a_kit_size_32 a2a_default_style" 
+             data-a2a-url={url} 
+             data-a2a-icon-color="#FFA301"
+             data-a2a-title={name}>
+            <a className="a2a_dd" href="https://www.addtoany.com/share" style={{marginTop: "20px"}}>
+              <Button style={{backgroundColor: "#FFA301", borderColor: "#FFA301"}} size="sm">
+                <FaShareAlt size={16} color='white' style={{marginRight: "10px"}}/>
+                {sharei18n[language]}
+                {/* Quitar default a2a icon */}
+                <img style={{display: "none"}}/>
+              </Button>
+            </a>
+        </div>
+    );
+};
 
   function RankingComponent({ ranking }) {
     if (ranking.includes("1")) {
@@ -239,7 +361,7 @@ const ProfessionalCard = ({
                             : "Zertifizierungsdatum"
                         }
                       >
-                        <img style={{paddingRight: '5px'}} src={CertificateIcon}/>
+                        <img style={{paddingRight: '5px', marginLeft: "5px"}} src={CertificateIcon}/>
                         {formatoFechas(certificateDate)}
                       </li>
                     )}
@@ -324,6 +446,9 @@ const ProfessionalCard = ({
                   </ul>
                 </div>
               }
+            </div>
+            <div style={{marginTop: "10px"}}>
+              <ShareButton url={window.location.href}/>
             </div>
         </div>
       </div>
