@@ -4,6 +4,8 @@ import {
   FaAngleDown,
   FaStar,
 } from "react-icons/fa";
+import { Button } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
 import GoogleMap from "../Map/map"
 
 const ProfessionalsFilter = ({
@@ -27,8 +29,12 @@ const ProfessionalsFilter = ({
   const [selectedCountry, setSelectedCountry] = useState("");
   const [results, setResults] = useState(data);
   const filterByValidTo = true;
-  
+  const [showFiltersModal, setShowFiltersModal] = useState(false);
 
+  const handleClose = () => setShowFiltersModal(false);
+  
+  const handleShow = () => setShowFiltersModal(true);
+  
   const isValidToValid = (professional) => {
     if (
       professional?.ranking?.ranking &&
@@ -200,14 +206,21 @@ const ProfessionalsFilter = ({
               <h6 className="input-title">{texts.inputTitle}</h6>
             </div>
           </div>
-          <h6 className='container mt-4'>
-            
-            {selectedCountry && countriesData.find(country => country.countryCode === selectedCountry) ? (
-              `${texts.allIn} ${countriesData.find(country => country.countryCode === selectedCountry)?.country}`
-            ) : (
-              texts.allResults
+          <div className='container mt-4 mb-2' style={{display:"flex", justifyContent: "space-between"}}>
+            <h6>
+              {selectedCountry && countriesData.find(country => country.countryCode === selectedCountry) ? (
+                `${texts.allIn} ${countriesData.find(country => country.countryCode === selectedCountry)?.country}`
+              ) : (
+                texts.allResults
+              )}
+            </h6>
+            {dimensions.windowWidth < 768 && (
+              <Button 
+                style={{backgroundColor: "#FFA301", borderColor: "#FFA301"}} 
+                size="sm" onClick={()=>handleShow()}>{texts.filters}
+              </Button>
             )}
-          </h6>
+          </div>
           <div className="container filter-wrapper">
             <div className={`filter ${showFilter ? "filter-expanded" : ""}`}>
               <button
@@ -221,7 +234,7 @@ const ProfessionalsFilter = ({
               </button>
               <div>
                 <div className="filter-description">
-                    <p>Move to</p>
+                    <p>{texts.moveTo}</p>
                 </div>
 
                 <select
@@ -285,6 +298,78 @@ const ProfessionalsFilter = ({
           </div>
         </div>
       </div>
+      <Modal 
+        className="professional-filter-modal"
+        show={showFiltersModal} 
+        backdrop="static"
+        onHide={handleClose} 
+        aria-labelledby="contained-modal-title-vcenter"
+        centered>
+        <Modal.Header style={{backgroundColor: "#FFA301", color: "white"}}>
+          <Modal.Title>{texts.filters}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{paddingRight: "0"}}>
+        <div>
+            <div className={`dialog-filter`}>
+              <div>
+                <div className="filter-description">
+                    <p>{texts.moveTo}</p>
+                </div>
+
+                <select
+                  className="filter-select"
+                  value={selectedCountry}
+                  onChange={handleCountrySelectChange}
+                >
+                  <option value="">{texts.allCountries}</option>
+                  {countriesData.map((country) => (
+                    <option key={country.country} value={country.country}>
+                      {country.country}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div
+                className={`show-filter`}
+              >
+                <div className="filter-description">
+                  <p>{texts.filterBy}:</p>
+                  <button onClick={resetFilters}>{texts.resetFilters}</button>
+                </div>
+                <div className="filter-checkbox ranking">
+                  <p className="checkbox-title">{texts.ranking}</p>
+                  {renderRankingCheckboxes()}
+                </div>
+                <div className="filter-checkbox professions">
+                  <p className="checkbox-title">{texts.profession}</p>
+                  {renderProfessionsCheckboxes()}
+                </div>
+                <div className="filter-checkbox services">
+                  <p className="checkbox-title">{texts.services}</p>
+                  {renderServicesCheckboxes()}
+                </div>
+                <div className="no-service-results">
+                  <p>
+                    {texts.noServices}{" "}
+                    <a
+                      href={(language === "es" || language === "de") ?
+                        `${language}/help/${pageData?.linkToHelpPage?.slug.current}` :
+                        `/help/${pageData?.linkToHelpPage?.slug.current}`}
+                    >
+                      {texts.moreInfo}
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button size="sm" style={{backgroundColor: "#FFA301", borderColor: "#FFA301"}} onClick={handleClose}>
+            {texts.apply}
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
