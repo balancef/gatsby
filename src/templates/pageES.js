@@ -3,11 +3,11 @@ import { graphql } from "gatsby";
 import { Layout, CustomSection, Banner, Seo} from "../components";
 
 const Page = ({location,  data }) => {
-  const { dinamicContent, banner, titlePage, descriptionPage} = data?.allSanityPages?.nodes[0]
+  const { dinamicContent, banner, titlePage, descriptionPage, pageKeywords} = data?.allSanityPages?.nodes[0]
 
   return (
     <Layout location={location}>
-      <Seo title={titlePage} description={descriptionPage} keywords="" />
+      <Seo title={titlePage} description={descriptionPage} keywords={pageKeywords} />
       {(banner !== null) ? <Banner banner={banner}/> : <></>}    
         {dinamicContent !== null  && dinamicContent.length !==0  &&(
           <CustomSection sections={dinamicContent}/>
@@ -24,6 +24,7 @@ export const query = graphql`
       nodes {
         titlePage: titlePageSpanish
         descriptionPage: descriptionPageSpanish
+        pageKeywords: pageKeywordsSpanish
         slug {
           current
         }

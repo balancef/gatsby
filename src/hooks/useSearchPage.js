@@ -7,6 +7,7 @@ const useSearchPage = () => {
     SearchPageEN: sanitySearchPage{
         titlePage
         descriptionPage
+        pageKeywords
         linkToHelpPage {
           slug {
             current
@@ -18,6 +19,7 @@ const useSearchPage = () => {
     SearchPageES: sanitySearchPage {
         titlePage: titlePageSpanish
         descriptionPage: descriptionPageSpanish
+        pageKeywords: pageKeywordsSpanish
         linkToHelpPage {
           slug {
             current
@@ -29,6 +31,7 @@ const useSearchPage = () => {
       SearchPageDE: sanitySearchPage{
         titlePage: titlePageGerman
         descriptionPage: descriptionPageGerman
+        pageKeywords: pageKeywordsGerman
         linkToHelpPage {
           slug {
             current

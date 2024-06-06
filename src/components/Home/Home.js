@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
     <>
-      <Seo title={data.titlePage} description={data.descriptionPage} keywords="" />
+      <Seo title={data.titlePage} description={data.descriptionPage} keywords={data.pageKeywords} />
       {data !== null ? (
         <div>
           {data.dinamicContent !== null ? (

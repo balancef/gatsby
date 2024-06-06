@@ -7,6 +7,7 @@ const useHome = () => {
         sanityHome {
           titlePage
           descriptionPage
+          pageKeywords
           dinamicContent {
             ... on SanityHighlightedExternalAccess {
               _key
@@ -229,6 +230,7 @@ const useHome = () => {
         sanityHomeES: sanityHome {
           titlePage: titlePageSpanish
           descriptionPage: descriptionPageSpanish
+          pageKeywords: pageKeywordsSpanish
           dinamicContent {
             ... on SanityHighlightedExternalAccess {
               _key
@@ -450,6 +452,7 @@ const useHome = () => {
         sanityHomeDE: sanityHome {
           titlePage: titlePageGerman
           descriptionPage: descriptionPageGerman
+          pageKeywords: pageKeywordsGerman
           dinamicContent {
             ... on SanityHighlightedExternalAccess {
               _key

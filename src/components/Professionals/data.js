@@ -14,6 +14,9 @@ export const dataLanguageTexts = {
     allIn: "Todos en",
     noServices: "¿No está en la lista?",
     moreInfo: "Más información",
+    moveTo: "Mover a:",
+    filters: "Filtros",
+    apply: "Aplicar"
   },
   de: {
     inputTitle: "Suche nach Podologie-Spezialisten",
@@ -29,7 +32,10 @@ export const dataLanguageTexts = {
     allCountries: "Alle Länder",
     allIn: "Alles in",
     noServices: "Sie sind nicht gelistet?",
-    moreInfo: "Mehr erfahren"
+    moreInfo: "Mehr erfahren",
+    moveTo: "Ziehen nach:",
+    filters: "Filter",
+    apply: "Anwenden"
   },
   en: {
     inputTitle: "Search Podiatry Specialists",
@@ -45,6 +51,9 @@ export const dataLanguageTexts = {
     allCountries: "All countries",
     allIn: "All in",
     noServices: "Not listed?",
-    moreInfo: "Learn more"
+    moreInfo: "Learn more",
+    moveTo: "Move to:",
+    filters: "Filters",
+    apply: "Apply"
   },
 };

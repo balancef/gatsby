@@ -1,0 +1,32 @@
+@import "../../styles/global";
+
+.autocomplete-control {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none
+}
+
+.map-professional {
+  &__image {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin: 0;
+  }
+  &__logos {
+    width: 50px;
+    height: 25px;
+  }
+  &__academy-image {
+    width: 82px;
+    height: 20px;
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: $md-breakpoint) {
+  div[data-testid="map"] > div {
+    border-radius: 10px;
+  }
+}
