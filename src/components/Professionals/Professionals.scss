@@ -75,6 +75,17 @@ input[type="text"] {
   overflow-y: scroll;
 }
 
+.dialog-filter {
+  width: 100%;
+  max-height: 400px;
+  overflow-y: scroll;
+  padding: 1rem;
+}
+
+.professional-filter-modal .modal-body {
+  padding: 0 !important;
+}
+
 .filter-button {
   display: block;
   border: none;
@@ -378,6 +389,16 @@ input[type="text"] {
 .Pagination {
   justify-content: center;
 }
+
+@media (max-width: $md-breakpoint) {
+  .results-container {
+    height: calc(100vh - 144px);
+  }
+  .filter { 
+    display: none;
+  }
+}
+
 @media (min-width: $md-breakpoint) {
   .professionalWrapper {
     flex-direction: row;

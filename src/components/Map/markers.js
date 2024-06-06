@@ -10,6 +10,7 @@ import SanityImage from "gatsby-plugin-sanity-image";
 import verifiedImg from "../../images/verified_badge.png";
 import { FaStar } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import farrierAndTrimmerIcon from "../../images/mapIcons/trimmerProfessional.png"
 import farrierIcon from "../../images/mapIcons/farrierProfessional.png"
 import trimmerIcon from "../../images/mapIcons/farrierAndTrimmerProfessional.png"
@@ -101,10 +102,22 @@ function RankingComponent({ ranking }) {
   }
 }
 
-export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef}) => {
+export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef, windowSize}) => {
   const [infowindowOpen, setInfowindowOpen] = useState(false);
   const [markerRef, marker] = useMarkerRef();
   const { language } = useContext(LanguageContext);
+
+  const texts = {
+    es: {
+      moreInfo: "Más información"
+    },
+    de: {
+      moreInfo: "Mehr Info"
+    },
+    en: {
+      moreInfo: "More info"
+    }
+  }
 
   const getProfessionalProfesionIcon = (professions) => {
     const farriersI18n = ["Herrador/a", "Farrier", "Hufschmied/in"]
@@ -122,12 +135,24 @@ export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef}) =>
   }
 
   const handleMarkerClick = (professional) => {
+    if(windowSize?.width < 768) {
+      setInfowindowOpen(true)
+      return;
+    }
     const alternativeLanguages = ["es", "de"]
     if(alternativeLanguages.includes(language)) {
       window.open(`/${language}/professional/${professional.slug.current}`, '_blank').focus();
       return
     } 
     window.open(`/professional/${professional.slug.current}`, '_blank').focus(); 
+  }
+
+  const getProfessionalCardUrl = (professional) => {
+    const alternativeLanguages = ["es", "de"]
+    if(alternativeLanguages.includes(language)) {
+      return `/${language}/professional/${professional.slug.current}`
+    } 
+    return `/professional/${professional.slug.current}`
   }
 
   useEffect(() => {
@@ -148,9 +173,13 @@ export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef}) =>
     </Marker>
     {infowindowOpen && (
       <InfoWindow
+      headerDisabled={true}
       position={{lat: point.location.lat, lng: point.location.lng}}
       pixelOffset={[0, -40]}
       onClose={() => setInfowindowOpen(false)}>
+        {windowSize?.width < 768 &&(<div style={{display: "flex", justifyContent: "end", paddingBottom: "3px"}}>
+          <FaTimes style={{cursor: "pointer"}} onClick={() => setInfowindowOpen(false)}/>
+        </div>)}
         <div style={{ backgroundColor: 'white', color: 'black', display:"flex", flexDirection: "row", alignItems: "center" }}>
           <div style={{flexDirection: "colum", alignItems: "baseline"}}>
           {point.image?.image ? (
@@ -194,6 +223,10 @@ export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef}) =>
                 className="map-professional__academy-image"
               />
             )} 
+            {windowSize?.width < 768 &&(
+            <div style={{marginTop: "3px"}}>
+              <a href={getProfessionalCardUrl(point)} target='_blank'>{texts[language].moreInfo}</a>
+            </div>)}
           </div>
         </div>
       </InfoWindow> 
@@ -202,7 +235,7 @@ export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef}) =>
   )
 }
 
-export const Markers = ({points, logoAcademy, defaultPhoto}) => {
+export const Markers = ({points, logoAcademy, defaultPhoto, windowSize}) => {
   const map = useMap();
   const [markers, setMarkers] = useState({});
   const clusterer = useRef(null);
@@ -243,7 +276,7 @@ export const Markers = ({points, logoAcademy, defaultPhoto}) => {
   return (
     <>
       {points.map(point => (
-        <CustomMarker key={point.id} point={point} logoAcademy={logoAcademy} defaultPhoto={defaultPhoto} setMarkerRef={setMarkerRef}/>
+        <CustomMarker key={point.id} point={point} logoAcademy={logoAcademy} defaultPhoto={defaultPhoto} setMarkerRef={setMarkerRef} windowSize={windowSize}/>
       ))}
     </>
   );

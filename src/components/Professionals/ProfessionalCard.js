@@ -176,7 +176,7 @@ const ProfessionalCard = ({
                 <FaShareAlt size={16} color='white' style={{marginRight: "10px"}}/>
                 {sharei18n[language]}
                 {/* Quitar default a2a icon */}
-                <img style={{display: "none"}}/>
+                <img alt="" style={{display: "none"}}/>
               </Button>
             </a>
         </div>
@@ -361,7 +361,7 @@ const ProfessionalCard = ({
                             : "Zertifizierungsdatum"
                         }
                       >
-                        <img style={{paddingRight: '5px', marginLeft: "5px"}} src={CertificateIcon}/>
+                        <img alt="certification" style={{paddingRight: '5px', marginLeft: "5px"}} src={CertificateIcon}/>
                         {formatoFechas(certificateDate)}
                       </li>
                     )}

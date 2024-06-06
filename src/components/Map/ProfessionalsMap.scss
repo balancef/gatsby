@@ -24,3 +24,9 @@
     margin-top: 5px;
   }
 }
+
+@media (max-width: $md-breakpoint) {
+  div[data-testid="map"] > div {
+    border-radius: 10px;
+  }
+}
