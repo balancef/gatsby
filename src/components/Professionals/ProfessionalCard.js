@@ -448,7 +448,7 @@ const ProfessionalCard = ({
               }
             </div>
             <div style={{marginTop: "10px"}}>
-              <ShareButton url={window.location.href}/>
+              <ShareButton url={typeof window !== "undefined" ? window.location.href : ""}/>
             </div>
         </div>
       </div>
