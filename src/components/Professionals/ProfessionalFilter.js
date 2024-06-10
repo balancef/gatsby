@@ -7,6 +7,7 @@ import {
 import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import GoogleMap from "../Map/map"
+import axios from "axios"
 
 const ProfessionalsFilter = ({
   data,
@@ -91,6 +92,23 @@ const ProfessionalsFilter = ({
     countriesData,
     data,
   ]);
+
+  useEffect(() => {
+    const fetchUserCountry = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.geoapify.com/v1/ipinfo?apiKey=${process.env.GATSBY_GEOAPIFY_API_KEY}`
+        );
+        if(response.status === 200) {
+          const countryName = response.data.country?.names?.en ? response.data.country.names.en : response.data.country.name
+          setSelectedCountry(countryName);
+        }
+      } catch (error) {
+        console.error("Error fetching user country:", error);
+      }
+    };
+    fetchUserCountry();
+  }, []);
 
   function extractNumberWithIcon(inputString) {
     const match = inputString.match(/\d+/);

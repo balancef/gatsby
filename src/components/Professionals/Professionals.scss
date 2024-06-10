@@ -71,7 +71,7 @@ input[type="text"] {
 .filter {
   width: 80%;
   margin-top: 20px;
-  max-height: calc(100vh - 398px);
+  max-height: calc(100vh - 200px);
   overflow-y: scroll;
 }
 
@@ -208,7 +208,7 @@ input[type="text"] {
 .results-container {
   margin: 0 auto;
   width: 100%;
-  height: calc(100vh - 398px);
+  height: calc(100vh - 200px);
 }
 
 .results-empty-state {
