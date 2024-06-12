@@ -1,6 +1,6 @@
 export const dataLanguageTexts = {
   es: {
-    inputTitle: "Buscador de Especialistas en Podología",
+    inputTitle: "Encuentre su podólogo Balance Fa",
     inputPlaceholder: "Buscá especialistas por palabra clave",
     filterBy: "Filtrar por",
     resetFilters: "Reiniciar",
@@ -19,7 +19,7 @@ export const dataLanguageTexts = {
     apply: "Aplicar"
   },
   de: {
-    inputTitle: "Suche nach Podologie-Spezialisten",
+    inputTitle: "Finden Sie Ihren F-Balance Podologen",
     inputPlaceholder: "Spezialisten nach Stichworten suchen",
     filterBy: "Filtern nach",
     resetFilters: "Filter zurücksetzen",
@@ -38,7 +38,7 @@ export const dataLanguageTexts = {
     apply: "Anwenden"
   },
   en: {
-    inputTitle: "Search Podiatry Specialists",
+    inputTitle: "Find your F-Balance Podiatrist",
     inputPlaceholder: "Search specialists by keyword",
     filterBy: "Flter by",
     resetFilters: "Reset filters",

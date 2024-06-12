@@ -316,13 +316,13 @@
     }
   }
 
-  @media (min-width: $sm-breakpint) {
+  @media (min-width: $sm-breakpoint) {
     .drop-options {
       display: none !important;
     }
   }
 
-  @media (max-width: $sm-breakpint) {
+  @media (max-width: $sm-breakpoint) {
     .navbar-text {
       display: none !important;
     }

@@ -19,7 +19,7 @@ const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country}) => {
 });
 
   const fullscreenMapStyle = {
-    borderRadius: "0 5px 5px 0px", 
+    borderRadius: "0 10px 10px 0px", 
     borderTop: "1px solid rgb(231, 231, 231)", 
     borderRight: "1px solid rgb(231, 231, 231)", 
     borderBottom: "1px solid rgb(231, 231, 231)"
@@ -58,9 +58,8 @@ const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country}) => {
       center={mapCenter}
       onCenterChanged={handleCenterChanged}
       defaultZoom={2} 
-      style={windowSize.width < 768 ? mobileMapStyle : fullscreenMapStyle}
+      style={windowSize.width < 992 ? mobileMapStyle : fullscreenMapStyle}
       mapId='36948ac797603613'
-      disableDefaultUI={true}
       gestureHandling='greedy'
       >
         <Markers points={professionals} logoAcademy={logoAcademy} defaultPhoto={defaultPhoto} windowSize={windowSize}/>
