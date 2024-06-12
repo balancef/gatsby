@@ -62,10 +62,11 @@ input[type="text"] {
   transform: rotate(180deg);
 }
 
-.container.filter-wrapper {
+.filter-wrapper {
   display: flex;
   flex-direction: column;
   gap: 0px;
+  padding: 0 12px 12px 12px;
 }
 
 .filter {
@@ -390,7 +391,7 @@ input[type="text"] {
   justify-content: center;
 }
 
-@media (max-width: $md-breakpoint) {
+@media (max-width: $lg-breakpoint) {
   .results-container {
     height: calc(100vh - 144px);
   }
@@ -399,7 +400,7 @@ input[type="text"] {
   }
 }
 
-@media (min-width: $md-breakpoint) {
+@media (min-width: $lg-breakpoint) {
   .professionalWrapper {
     flex-direction: row;
     gap: 10px;
@@ -454,8 +455,10 @@ input[type="text"] {
       }
     }
   }
-  .container.filter-wrapper {
+  .filter-wrapper {
     flex-direction: row;
+    display: flex;
+    padding: 40px 40px 40px 40px;
   }
 
   .filter {
