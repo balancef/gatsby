@@ -9,6 +9,7 @@ exports.createPages = async ({ graphql, actions }) => {
             slug {
               current
             }
+            _updatedAt
           }
         }
       }
@@ -18,6 +19,7 @@ exports.createPages = async ({ graphql, actions }) => {
             slug {
               current
             }
+            _updatedAt
           }
         }
       }
@@ -27,6 +29,7 @@ exports.createPages = async ({ graphql, actions }) => {
             slug {
               current
             }
+            _updatedAt
           }
         }
       }
@@ -36,6 +39,7 @@ exports.createPages = async ({ graphql, actions }) => {
             slug {
               current
             }
+            _updatedAt
           }
         }
       }
@@ -45,6 +49,7 @@ exports.createPages = async ({ graphql, actions }) => {
             slug {
               current
             }
+            _updatedAt
           }
         }
       }
@@ -60,21 +65,33 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: "/" + node.node.slug.current,
       component: pageEN,
-      context: { slug: node.node.slug.current, language: "en" },
+      context: {
+        slug: node.node.slug.current,
+        language: "en",
+        lastmod: node.node._updatedAt,
+      },
     });
 
     const pageES = require.resolve("./src/templates/pageES.js");
     createPage({
       path: "/es/" + node.node.slug.current,
       component: pageES,
-      context: { slug: node.node.slug.current, language: "es" },
+      context: {
+        slug: node.node.slug.current,
+        language: "es",
+        lastmod: node.node._updatedAt,
+      },
     });
 
     const pageGER = require.resolve("./src/templates/pageDE.js");
     createPage({
       path: "/de/" + node.node.slug.current,
       component: pageGER,
-      context: { slug: node.node.slug.current, language: "de" },
+      context: {
+        slug: node.node.slug.current,
+        language: "de",
+        lastmod: node.node._updatedAt,
+      },
     });
   });
 
@@ -83,21 +100,33 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: "/help/" + node.node.slug.current,
       component: pageEN,
-      context: { slug: node.node.slug.current, language: "en" },
+      context: {
+        slug: node.node.slug.current,
+        language: "en",
+        lastmod: node.node._updatedAt,
+      },
     });
 
     const pageES = require.resolve("./src/templates/helpES.js");
     createPage({
       path: "/es/help/" + node.node.slug.current,
       component: pageES,
-      context: { slug: node.node.slug.current, language: "es" },
+      context: {
+        slug: node.node.slug.current,
+        language: "es",
+        lastmod: node.node._updatedAt,
+      },
     });
 
     const pageGER = require.resolve("./src/templates/helpDE.js");
     createPage({
       path: "/de/help/" + node.node.slug.current,
       component: pageGER,
-      context: { slug: node.node.slug.current, language: "de" },
+      context: {
+        slug: node.node.slug.current,
+        language: "de",
+        lastmod: node.node._updatedAt,
+      },
     });
   });
 
@@ -106,21 +135,33 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: "/legal/" + node.node.slug.current,
       component: LegalPagesEN,
-      context: { slug: node.node.slug.current, language: "en" },
+      context: {
+        slug: node.node.slug.current,
+        language: "en",
+        lastmod: node.node._updatedAt,
+      },
     });
 
     const LegalPagesES = require.resolve("./src/templates/legalES.js");
     createPage({
       path: "/es/legal/" + node.node.slug.current,
       component: LegalPagesES,
-      context: { slug: node.node.slug.current, language: "es" },
+      context: {
+        slug: node.node.slug.current,
+        language: "es",
+        lastmod: node.node._updatedAt,
+      },
     });
 
     const LegalPagesGER = require.resolve("./src/templates/legalDE.js");
     createPage({
       path: "/de/legal/" + node.node.slug.current,
       component: LegalPagesGER,
-      context: { slug: node.node.slug.current, language: "de" },
+      context: {
+        slug: node.node.slug.current,
+        language: "de",
+        lastmod: node.node._updatedAt,
+      },
     });
   });
 
@@ -132,7 +173,11 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: "/professional/" + node.node.slug.current,
       component: ProfessionalPagesEN,
-      context: { slug: node.node.slug.current, language: "en" },
+      context: {
+        slug: node.node.slug.current,
+        language: "en",
+        lastmod: node.node._updatedAt,
+      },
     });
 
     const ProfessionalPagesES = require.resolve(
@@ -141,7 +186,11 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: "/es/professional/" + node.node.slug.current,
       component: ProfessionalPagesES,
-      context: { slug: node.node.slug.current, language: "es" },
+      context: {
+        slug: node.node.slug.current,
+        language: "es",
+        lastmod: node.node._updatedAt,
+      },
     });
 
     const ProfessionalPagesGER = require.resolve(
@@ -150,7 +199,11 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: "/de/professional/" + node.node.slug.current,
       component: ProfessionalPagesGER,
-      context: { slug: node.node.slug.current, language: "de" },
+      context: {
+        slug: node.node.slug.current,
+        language: "de",
+        lastmod: node.node._updatedAt,
+      },
     });
   });
 
@@ -161,7 +214,11 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: "/blog/" + node.node.slug.current,
       component: ArticlePageEN,
-      context: { slug: node.node.slug.current, language: "en" },
+      context: {
+        slug: node.node.slug.current,
+        language: "en",
+        lastmod: node.node._updatedAt,
+      },
     });
 
     const ArticlePageES = require.resolve(
@@ -170,7 +227,11 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: "/es/blog/" + node.node.slug.current,
       component: ArticlePageES,
-      context: { slug: node.node.slug.current, language: "es" },
+      context: {
+        slug: node.node.slug.current,
+        language: "es",
+        lastmod: node.node._updatedAt,
+      },
     });
 
     const ArticlePageGER = require.resolve(
@@ -179,7 +240,11 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: "/de/blog/" + node.node.slug.current,
       component: ArticlePageGER,
-      context: { slug: node.node.slug.current, language: "de" },
+      context: {
+        slug: node.node.slug.current,
+        language: "de",
+        lastmod: node.node._updatedAt,
+      },
     });
   });
 };
