@@ -1,6 +1,6 @@
 export const dataLanguageTexts = {
   es: {
-    inputTitle: "Encuentre su podólogo Balance Fa",
+    inputTitle: "Encuentre su podólogo Balance F",
     inputPlaceholder: "Buscá especialistas por palabra clave",
     filterBy: "Filtrar por",
     resetFilters: "Reiniciar",
