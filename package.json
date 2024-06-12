@@ -30,6 +30,7 @@
     "gatsby-plugin-google-gtag": "^5.13.1",
     "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-manifest": "^5.3.1",
+    "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sanity-image": "^0.13.3",
     "gatsby-plugin-sass": "^6.3.1",
     "gatsby-plugin-sitemap": "^6.3.1",
