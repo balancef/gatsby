@@ -23,19 +23,24 @@
     }
     &_callToAction {
       display: flex;
+      justify-content: center;
       label {
-        margin-right: 10px;
+        max-width: 200px;
+        text-align: center;
         font-weight: 500;
         align-self: center;
       }
     }
     &_button {
-      margin: 20px 0 15px 0;
+      margin: 25px 0 15px 0;
+      justify-content: center;
+      display: flex;
     }
   }
   &__content {
     display: flex;
     flex-direction: column-reverse;
+    justify-content: center;
     gap: 15px;
   }
   &__image {

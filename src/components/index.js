@@ -1,10 +1,12 @@
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import Layout from "./Layout/Layout";
+import LayoutWithoutFooter from "./Layout/LayoutWithoutFooter";
 import Icon from "./Icons/Icon";
 import FontAwesomeIcon from "./Icons/FontAwesomeIcon";
 import MaterialIcon from "./Icons/MetertialIcon";
 import CustomLink from "./CustomLink/CustomLink";
+import CustomPhoneLink from "./CustomPhoneLink/CustomPhoneLink";
 import Home from "./Home/Home";
 import Carrousel from "./Carrousel/Carrousel";
 import TextBlock from "./TextBlock/TextBlock";
@@ -36,9 +38,11 @@ export {
   Header,
   Footer,
   Layout,
+  LayoutWithoutFooter,
   FontAwesomeIcon,
   MaterialIcon,
   CustomLink,
+  CustomPhoneLink,
   Icon,
   Home,
   Carrousel,
