@@ -12,7 +12,7 @@ const TextImageButton = ({ title, text, image, button, callToActionLink }) => {
 
   const buttonLabelI18n = {
     en: "Click on the map to find your nearest F-Balance podiatrist",
-    es: "Haz clic en el mapa para buscar a tu podólogo Banalance F más cercano",
+    es: "Haz clic en el mapa para buscar a tu podólogo Balance F más cercano",
     de: "Klicken Sie auf die Karte, um den nächstgelegenen F-Balance Podologen zu finden"
   }
 
