@@ -1,0 +1,87 @@
+@import "../../styles/colors";
+@import "../../styles/text";
+@import "../../styles/global";
+
+.custom-link {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  margin-right: 1rem;
+  gap: 3px;
+  &:last-child {
+    margin-right: 0rem;
+  }
+  p {
+    font-family: $primary-font;
+    white-space: nowrap;
+  }
+  &.link {
+    color: $color-text;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    svg {
+      font-size: 22px;
+      padding-right: 0.5rem;
+    }
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &.link-secondary {
+    border-bottom: 1px dashed $color-text;
+    width: max-content;
+    svg {
+      font-size: 2rem;
+      padding-right: 0.5rem;
+    }
+    &:hover {
+      small {
+        color: $color-primary;
+      }
+      border-color: $color-primary;
+    }
+  }
+
+  &.button {
+    background-color: $color-secondary;
+    padding: 12px 16px;
+    border-radius: 5px;
+    width: max-content;
+    svg {
+      font-size: 1.4rem;
+      padding-left: 0.5rem;
+      color: $color-primary;
+    }
+    p {
+      color: $color-primary;
+    }
+    &:hover {
+      background-color: $color-primary;
+      p {
+        color: $color-white;
+      }
+      svg {
+        color: $color-white;
+      }
+    }
+  }
+
+  &.button-thin {
+    padding: 8px 16px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  &.icon {
+    margin-right: 0;
+  }
+}
+
+@media (min-width: $md-breakpoint) {
+  .custom-link {
+    &.button-thin {
+      width: max-content;
+    }
+  }
+}

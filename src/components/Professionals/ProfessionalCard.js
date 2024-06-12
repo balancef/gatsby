@@ -21,7 +21,7 @@ import verifiedImg from "../../images/verified_badge.png";
 import masterImg from "../../images/master.png";
 import { PortableText } from "@portabletext/react";
 import { BsGlobe } from "react-icons/bs";
-import { CustomLink } from "..";
+import { CustomLink, CustomPhoneLink } from "..";
 import { format } from "date-fns";
 import { Button } from 'react-bootstrap';
 
@@ -315,7 +315,7 @@ const ProfessionalCard = ({
           )}
           {services.length > 0 && (
             <div className="professional__services">
-              <MdInfo size={18} />
+              <MdInfo size={20} />
               <p>{serviceList}</p>
             </div>
           )}
@@ -329,7 +329,7 @@ const ProfessionalCard = ({
                 rel="noopener noreferrer"
               >
                 {" "}
-                <MdLocationOn size={18} />
+                <MdLocationOn size={22} />
                 <br />
                 <p>{address}</p>
               </a>
@@ -348,7 +348,7 @@ const ProfessionalCard = ({
                           : "Zertifizierungsnummer"
                       }
                     >
-                      <FaGraduationCap size={18} />
+                      <FaGraduationCap size={20} />
                       {certificateNumber}
                     </li>
                     {certificateDate && (
@@ -393,7 +393,7 @@ const ProfessionalCard = ({
                               : "Gültig bis"
                           }
                         >
-                          <MdMoreTime size={20} />
+                          <MdMoreTime size={25} />
                           {formatoFechas(validTo)}
                         </li>
                       )
@@ -413,13 +413,13 @@ const ProfessionalCard = ({
                   <ul>
                     {phone && (
                       <li>
-                        <FaPhoneAlt size={18} />
-                        <CustomLink href={`phone:${phone}`} text={phone} />
+                        <FaPhoneAlt size={20} />
+                        <CustomPhoneLink href={`tel:${phone}`} text={phone} />
                       </li>
                     )}
                     {email && (
                       <li>
-                        <MdEmail size={18} />
+                        <MdEmail size={22} />
                         <a
                           target="_blank"
                           rel="noreferrer"
@@ -439,7 +439,7 @@ const ProfessionalCard = ({
                     )}
                     {website && (
                       <li>
-                        <BsGlobe size={18} />
+                        <BsGlobe size={20} />
                         <CustomLink href={website} text={website} />
                       </li>
                     )}

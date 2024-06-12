@@ -224,22 +224,24 @@ const ProfessionalsFilter = ({
               <h6 className="input-title">{texts.inputTitle}</h6>
             </div>
           </div>
-          <div className='container mt-4 mb-2' style={{display:"flex", justifyContent: "space-between"}}>
-            <h6>
+          {dimensions.windowWidth <= 992 && (
+          <div className='container-fluid mt-4 mb-4' style={{display:"flex", justifyContent: "space-between"}}>
+            <h6 style={{margin: 0}}>
               {selectedCountry && countriesData.find(country => country.countryCode === selectedCountry) ? (
                 `${texts.allIn} ${countriesData.find(country => country.countryCode === selectedCountry)?.country}`
               ) : (
                 texts.allResults
               )}
             </h6>
-            {dimensions.windowWidth < 768 && (
+            
               <Button 
                 style={{backgroundColor: "#FFA301", borderColor: "#FFA301"}} 
                 size="sm" onClick={()=>handleShow()}>{texts.filters}
               </Button>
-            )}
+            
           </div>
-          <div className="container filter-wrapper">
+          )}
+          <div className="filter-wrapper">
             <div className={`filter ${showFilter ? "filter-expanded" : ""}`}>
               <button
                 className="filter-button"

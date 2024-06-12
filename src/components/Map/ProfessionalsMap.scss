@@ -1,5 +1,7 @@
 @import "../../styles/global";
 
+.gm-style iframe + div { border:none !important; }
+
 .autocomplete-control {
   padding: 10px;
   font-size: 14px;
@@ -25,7 +27,13 @@
   }
 }
 
-@media (max-width: $md-breakpoint) {
+@media (min-width: $lg-breakpoint) {
+  div[data-testid="map"] > div {
+    border-radius: 0 10px 10px 0px;
+  }
+}
+
+@media (max-width: $lg-breakpoint) {
   div[data-testid="map"] > div {
     border-radius: 10px;
   }
