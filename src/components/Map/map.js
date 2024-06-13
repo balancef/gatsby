@@ -17,7 +17,7 @@ const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country}) => {
   const dimensions = useWindowSize();
 
   const fullscreenMapStyle = {
-    borderRadius: "0 10px 10px 0px", 
+    borderRadius: "0 10px 10px 0px",
     borderTop: "1px solid rgb(231, 231, 231)", 
     borderRight: "1px solid rgb(231, 231, 231)", 
     borderBottom: "1px solid rgb(231, 231, 231)"
