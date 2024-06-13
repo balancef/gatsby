@@ -71,9 +71,7 @@ const Article = (data) => {
                 </div>
                 <div className="authorTitle_button">
                   <CustomLink
-                    href={
-                      language === "en" ? "/contact" : `/${language}/contact`
-                    }
+                    href={`/${language}/contact`}
                     text={
                       language === "es"
                         ? "Contacto"
@@ -105,7 +103,7 @@ const Article = (data) => {
                     <div className="relatedArticle__description_date">
                       {formatDate(article._createdAt)}
                     </div>
-                    <a href={language === "en" ? `/blog/${article.slug.current}` : `/${language}/blog/${article.slug.current}`} className="relatedArticle__description_title">
+                    <a href={`/${language}/blog/${article.slug.current}`} className="relatedArticle__description_title">
                       {article.title}
                     </a>
                   </div>

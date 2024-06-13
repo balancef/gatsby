@@ -1,5 +1,6 @@
 
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
+import useWindowSize from "../../hooks/useWindowSize";
 import {
   APIProvider,
   Map
@@ -13,10 +14,7 @@ const GOOGLE_MAPS_API_KEY = process.env.GATSBY_GOOGLE_MAPS_API_KEY
 
 const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country}) => {
   const [mapCenter, setMapCenter] = useState({lat: 0, lng: 0})
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight
-});
+  const dimensions = useWindowSize();
 
   const fullscreenMapStyle = {
     borderRadius: "0 10px 10px 0px", 
@@ -36,33 +34,22 @@ const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country}) => {
     setMapCenter(data.detail.center)
   }
 
-  useEffect(() => {
-    const handleResize = () => {
-        setWindowSize({
-            width: window.innerWidth,
-            height: window.innerHeight
-        });
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-        window.removeEventListener('resize', handleResize);
-    };
-}, []);
-
   return (
     <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
       <Map
       defaultCenter={{lat: 0, lng: 0}}
       center={mapCenter}
       onCenterChanged={handleCenterChanged}
-      defaultZoom={2} 
-      style={windowSize.width < 992 ? mobileMapStyle : fullscreenMapStyle}
+      defaultZoom={2}
+      disableDefaultUI={true} 
+      streetViewControl={false}
+      zoomControl={true}
+      fullscreenControl={true}
+      style={dimensions.windowWidth <= 992 ? mobileMapStyle : fullscreenMapStyle}
       mapId='36948ac797603613'
       gestureHandling='greedy'
       >
-        <Markers points={professionals} logoAcademy={logoAcademy} defaultPhoto={defaultPhoto} windowSize={windowSize}/>
+        <Markers points={professionals} logoAcademy={logoAcademy} defaultPhoto={defaultPhoto} windowSize={dimensions}/>
       </Map>
       <MapHandler country={country} />
     </APIProvider>

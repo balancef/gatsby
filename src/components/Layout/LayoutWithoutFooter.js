@@ -1,7 +1,7 @@
 
 import React from "react";
 import PropTypes from 'prop-types'
-import { Header, Footer} from "..";
+import { Header } from "..";
 import { LanguageProvider } from "../../context/languajeContext";
 
 import "./Layout.scss";

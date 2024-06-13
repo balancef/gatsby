@@ -272,7 +272,7 @@ const ProfessionalsFilter = ({
               </div>
               <div
                 className={`filter-container ${
-                  showFilter && dimensions.windowWidth < 768
+                  showFilter && dimensions.windowWidth <= 992
                     ? "show-filter"
                     : ""
                 }`}

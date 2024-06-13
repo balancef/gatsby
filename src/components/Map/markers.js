@@ -135,24 +135,15 @@ export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef, win
   }
 
   const handleMarkerClick = (professional) => {
-    if(windowSize?.width < 768) {
+    if(windowSize?.windowWidth < 992) {
       setInfowindowOpen(true)
       return;
     }
-    const alternativeLanguages = ["es", "de"]
-    if(alternativeLanguages.includes(language)) {
-      window.open(`/${language}/professional/${professional.slug.current}`, '_blank').focus();
-      return
-    } 
-    window.open(`/professional/${professional.slug.current}`, '_blank').focus(); 
+    window.open(`/${language}/professional/${professional.slug.current}`, '_blank').focus();
   }
 
   const getProfessionalCardUrl = (professional) => {
-    const alternativeLanguages = ["es", "de"]
-    if(alternativeLanguages.includes(language)) {
-      return `/${language}/professional/${professional.slug.current}`
-    } 
-    return `/professional/${professional.slug.current}`
+    return `/${language}/professional/${professional.slug.current}`
   }
 
   useEffect(() => {
@@ -177,7 +168,7 @@ export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef, win
       position={{lat: point.location.lat, lng: point.location.lng}}
       pixelOffset={[0, -40]}
       onClose={() => setInfowindowOpen(false)}>
-        {windowSize?.width < 768 &&(<div style={{display: "flex", justifyContent: "end", paddingBottom: "3px"}}>
+        {windowSize?.windowWidth < 992 &&(<div style={{display: "flex", justifyContent: "end", paddingBottom: "3px"}}>
           <FaTimes style={{cursor: "pointer"}} onClick={() => setInfowindowOpen(false)}/>
         </div>)}
         <div style={{ backgroundColor: 'white', color: 'black', display:"flex", flexDirection: "row", alignItems: "center" }}>
@@ -223,9 +214,9 @@ export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef, win
                 className="map-professional__academy-image"
               />
             )} 
-            {windowSize?.width < 768 &&(
+            {windowSize?.windowWidth <= 992 &&(
             <div style={{marginTop: "3px"}}>
-              <a href={getProfessionalCardUrl(point)} target='_blank'>{texts[language].moreInfo}</a>
+              <a href={getProfessionalCardUrl(point)} rel="noreferrer" target='_blank'>{texts[language].moreInfo}</a>
             </div>)}
           </div>
         </div>
