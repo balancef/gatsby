@@ -26,71 +26,6 @@ module.exports = {
     {
       resolve: "gatsby-plugin-sitemap",
       options: {
-        output: "/",
-        query: `
-        {
-          allSitePage(filter: {path: {regex: "/^(?!\/(en|es|de)).*$/"}}) {
-            nodes {
-              path
-              pageContext
-            }            
-          }
-          sanityBlogPage {
-            _updatedAt
-          }
-          sanityContact {
-            _updatedAt
-          }
-          sanityHelp {
-            _updatedAt
-          }
-          sanityHome {
-            _updatedAt
-          }
-          sanitySearchPage {
-            _updatedAt
-          }
-          
-        }
-      `,
-        resolveSiteUrl: () => "https://f-balance.com/en",
-        resolvePages: ({
-          allSitePage: { nodes: allPages },
-          sanityBlogPage: blogPage,
-          sanityContact: contactPage,
-          sanityHelp: helpPage,
-          sanityHome: homePage,
-          sanitySearchPage: searchPage,
-        }) => {
-          return allPages.map((page) => {
-            if (page.path === "/en/blog/")
-              return { path: "/blog", lastmod: blogPage._updatedAt };
-            if (page.path === "/en/contact/")
-              return { path: "/en/contact", lastmod: contactPage._updatedAt };
-            if (page.path === "/help/")
-              return { path: "/en/help", lastmod: helpPage._updatedAt };
-            if (page.path === "/en/search/")
-              return { path: "/en/search/", lastmod: searchPage._updatedAt };
-            if (page.path === "/")
-              return { path: "/", lastmod: homePage._updatedAt };
-
-            return {
-              path: page.path,
-              lastmod: page?.pageContext?.lastmod,
-            };
-          });
-        },
-        serialize: ({ path, lastmod }) => {
-          return {
-            url: path,
-            lastmod: lastmod,
-          };
-        },
-      },
-    },
-    {
-      resolve: "gatsby-plugin-sitemap",
-      options: {
         output: "/es/",
         query: `
         {
@@ -136,7 +71,7 @@ module.exports = {
               return { path: "/es/help", lastmod: helpPage._updatedAt };
             if (page.path === "/es/search/")
               return { path: "/es/search/", lastmod: searchPage._updatedAt };
-            if (page.path === "/")
+            if (page.path === "/es")
               return { path: "/es/", lastmod: homePage._updatedAt };
 
             return {
@@ -221,7 +156,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-sitemap",
       options: {
-        output: "/en/",
+        output: "/",
         query: `
         {
           allSitePage(filter: {path: {glob: "/en/**"}}) {
@@ -289,7 +224,6 @@ module.exports = {
         host: "https://f-balance.com",
         sitemap: [
           "https://f-balance.com/sitemap-index.xml",
-          "https://f-balance.com/en/sitemap-index.xml",
           "https://f-balance.com/es/sitemap-index.xml",
           "https://f-balance.com/de/sitemap-index.xml",
         ],
