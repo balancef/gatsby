@@ -11,3 +11,9 @@ to = "/de"
 status = 301
 force = true
 conditions = {Country = ["AT", "BE", "CH", "DE", "LI", "LU"]}
+
+[[redirects]]
+from = "/"
+to = "/en"
+status = 301
+force = true

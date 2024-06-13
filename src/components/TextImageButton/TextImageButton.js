@@ -3,7 +3,6 @@ import { PortableText } from "@portabletext/react";
 import SanityImage from "gatsby-plugin-sanity-image";
 import { LanguageContext } from "../../context/languajeContext";
 import "./TextImageButton.scss";
-import { CustomLink, Icon } from "..";
 import SearchInMapButton from "../../images/search-in-map-btn.png"
 
 const TextImageButton = ({ title, text, image, button, callToActionLink }) => {
@@ -24,9 +23,9 @@ const TextImageButton = ({ title, text, image, button, callToActionLink }) => {
             <div className="textImageButton__text">
               <PortableText style={{textAlign: "center"}} value={text} />
               <div className="textImageButton__text_button">
-                <a href={language === "en" ? button.url : `/${language}/${button.url.replace("/", "")}`}>
+                <a href={`/${language}/${button.url.replace("/", "")}`}>
                 <img 
-                width={180} 
+                width={215} 
                 height={120} 
                 src={SearchInMapButton} 
                 alt="search-in-map" 
