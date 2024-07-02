@@ -20,6 +20,8 @@ const ProfessionalsFilter = ({
   language,
   countriesData,
   bccEmails,
+  mapFitBounds,
+  landingCountry
 }) => {
   const wrapperRef = useRef(null);
   const dimensions = useWindowSize();
@@ -31,6 +33,7 @@ const ProfessionalsFilter = ({
   const [results, setResults] = useState(data);
   const filterByValidTo = true;
   const [showFiltersModal, setShowFiltersModal] = useState(false);
+  const [mapFitBoundsPoints, setMapFitBoundsPoints] = useState(mapFitBounds?.length > 0 ? mapFitBounds : null)
 
   const handleClose = () => setShowFiltersModal(false);
   
@@ -95,6 +98,10 @@ const ProfessionalsFilter = ({
 
   useEffect(() => {
     const fetchUserCountry = async () => {
+      if(landingCountry) {
+        setSelectedCountry(landingCountry)
+        return
+      };
       try {
         const response = await axios.get(
           `https://api.geoapify.com/v1/ipinfo?apiKey=${process.env.GATSBY_GEOAPIFY_API_KEY}`
@@ -206,6 +213,7 @@ const ProfessionalsFilter = ({
   };
 
   const handleCountrySelectChange = (e) => {
+    setMapFitBoundsPoints(null);
     setSelectedCountry(e.target.value);
   };
 
@@ -313,6 +321,7 @@ const ProfessionalsFilter = ({
                 logoAcademy={defaultData?.academyLogo.image}
                 defaultPhoto={defaultData.photoDefault.image}
                 country={selectedCountry}
+                mapFitBounds={mapFitBoundsPoints}
               />
             </div>
           </div>

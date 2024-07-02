@@ -13,7 +13,7 @@ import ProfessionalsFilter from "./ProfessionalFilter";
 import useCountries from "../../hooks/useCountries";
 import useContact from '../../hooks/useContact'
 
-const Professionals = () => {
+const Professionals = ({mapFitBounds, landingCountry}) => {
 
   const query = useProfessionals();
   const page = useSearchPage();
@@ -80,6 +80,8 @@ const Professionals = () => {
         texts={texts}
         countriesData={countriesData}
         bccEmails={bccEmails}
+        mapFitBounds={mapFitBounds}
+        landingCountry={landingCountry}
       />}
     </>
   );
