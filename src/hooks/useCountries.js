@@ -5,15 +5,15 @@ const useCountries = () => {
     {
         allSanityCountry {
         CountriesEN: nodes {
-          country
+          country: nameEnglish
           countryCode
         }
         CountriesDE: nodes {
-          country: countryGerman
+          country: nameGerman
           countryCode
         }
         CountriesES: nodes {
-            country: countrySpanish
+            country: nameSpanish
             countryCode
         }
       }

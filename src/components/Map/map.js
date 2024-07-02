@@ -12,7 +12,7 @@ import { Markers } from './markers'
 
 const GOOGLE_MAPS_API_KEY = process.env.GATSBY_GOOGLE_MAPS_API_KEY
 
-const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country}) => {
+const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country, mapFitBounds}) => {
   const [mapCenter, setMapCenter] = useState({lat: 0, lng: 0})
   const dimensions = useWindowSize();
 
@@ -51,7 +51,7 @@ const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country}) => {
       >
         <Markers points={professionals} logoAcademy={logoAcademy} defaultPhoto={defaultPhoto} windowSize={dimensions}/>
       </Map>
-      <MapHandler country={country} />
+      <MapHandler country={country} mapFitBounds={mapFitBounds}/>
     </APIProvider>
   );
 }

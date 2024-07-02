@@ -147,10 +147,7 @@ const useProfessionals = () => {
       }
       allSanityProfessional {
         ProfessionalsEN: nodes {
-          country {
-            country
-            countryCode
-          }
+          country: locality { localityState { stateCountry { nameEnglish } } }
           website
           verified
           validTo
@@ -215,10 +212,7 @@ const useProfessionals = () => {
           _id
         }
         ProfessionalsES: nodes {
-          country {
-            country:countrySpanish
-            countryCode
-          }
+          country: locality { localityState { stateCountry { nameSpanish } } }
           website
           verified
           validTo
@@ -283,10 +277,7 @@ const useProfessionals = () => {
           _id
         }
         ProfessionalsDE: nodes {
-          country {
-            country: countryGerman
-            countryCode
-          }
+          country: locality { localityState { stateCountry { nameGerman } } }
           website
           verified
           validTo
