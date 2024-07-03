@@ -80,6 +80,7 @@ exports.createPages = async ({ graphql, actions }) => {
             nameGerman
             nameSpanish
             nameEnglish
+            _updatedAt
           }
         }
       }
@@ -97,6 +98,7 @@ exports.createPages = async ({ graphql, actions }) => {
               nameEnglish
               name
             }
+            _updatedAt
           }
         }
       }
@@ -120,6 +122,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 name
               }
             }
+            _updatedAt
           }
         }
       }
@@ -335,6 +338,7 @@ exports.createPages = async ({ graphql, actions }) => {
           countryId: edge.node._id,
           country: edge.node.name,
           language: "en",
+          lastmod: edge.node._updatedAt,
         },
       });
       const ProfessionalsByCountryPageDE = require.resolve(
@@ -347,6 +351,7 @@ exports.createPages = async ({ graphql, actions }) => {
           countryId: edge.node._id,
           country: edge.node.nameGerman,
           language: "de",
+          lastmod: edge.node._updatedAt,
         },
       });
       const ProfessionalsByCountryPageES = require.resolve(
@@ -359,6 +364,7 @@ exports.createPages = async ({ graphql, actions }) => {
           countryId: edge.node._id,
           country: edge.node.name,
           language: "es",
+          lastmod: edge.node._updatedAt,
         },
       });
     }
@@ -380,6 +386,7 @@ exports.createPages = async ({ graphql, actions }) => {
             stateId: edge.node._id,
             country: edge.node.stateCountry.nameEnglish,
             language: "en",
+            lastmod: edge.node._updatedAt,
           },
         });
         const ProfessionalsByStatePageDE = require.resolve(
@@ -392,6 +399,7 @@ exports.createPages = async ({ graphql, actions }) => {
             stateId: edge.node._id,
             country: edge.node.stateCountry.nameGerman,
             language: "de",
+            lastmod: edge.node._updatedAt,
           },
         });
         const ProfessionalsByStatePageES = require.resolve(
@@ -404,6 +412,7 @@ exports.createPages = async ({ graphql, actions }) => {
             stateId: edge.node._id,
             country: edge.node.stateCountry.nameSpanish,
             language: "es",
+            lastmod: edge.node._updatedAt,
           },
         });
       }
@@ -427,6 +436,7 @@ exports.createPages = async ({ graphql, actions }) => {
           nearbyLocalityIds: edge.node._id,
           country: edge.node.localityState.stateCountry.nameEnglish,
           language: "en",
+          lastmod: edge.node._updatedAt,
         },
       });
       const ProfessionalsByLocalityPageDE = require.resolve(
@@ -440,6 +450,7 @@ exports.createPages = async ({ graphql, actions }) => {
           nearbyLocalityIds: edge.node._id,
           country: edge.node.localityState.stateCountry.nameGerman,
           language: "de",
+          lastmod: edge.node._updatedAt,
         },
       });
       const ProfessionalsByLocalityPageES = require.resolve(
@@ -453,6 +464,7 @@ exports.createPages = async ({ graphql, actions }) => {
           nearbyLocalityIds: edge.node._id,
           country: edge.node.localityState.stateCountry.nameSpanish,
           language: "es",
+          lastmod: edge.node._updatedAt,
         },
       });
     }

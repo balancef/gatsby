@@ -34,6 +34,7 @@ const ProfessionalsFilter = ({
   const filterByValidTo = true;
   const [showFiltersModal, setShowFiltersModal] = useState(false);
   const [mapFitBoundsPoints, setMapFitBoundsPoints] = useState(mapFitBounds?.length > 0 ? mapFitBounds : null)
+  const [countryNames, setCountryNames] = useState([])
 
   const handleClose = () => setShowFiltersModal(false);
   
@@ -51,6 +52,26 @@ const ProfessionalsFilter = ({
     const validToDate = new Date(professional.validTo);
     return validToDate > currentDate;
   };
+  
+  useEffect(() => {
+    const activeProfessionals = data.filter((professional) => {
+      const hasMasterOrSupervisorRanking =
+        professional.ranking?.ranking.toLowerCase() === "master" ||
+        professional.ranking?.ranking.toLowerCase() === "supervisor";
+        const isValidTo = (hasMasterOrSupervisorRanking || filterByValidTo) && isValidToValid(professional);
+      return isValidTo;
+    })
+    if(language === "es") {
+      setCountryNames([...new Set(activeProfessionals.map(item => item.country.localityState.stateCountry.nameSpanish))].sort())
+    }
+    if(language === "de") {
+      setCountryNames([...new Set(activeProfessionals.map(item => item.country.localityState.stateCountry.nameGerman))].sort())
+    }
+    if(language === "en") {
+      setCountryNames([...new Set(activeProfessionals.map(item => item.country.localityState.stateCountry.nameEnglish))].sort())
+    }
+  }, [language, data, filterByValidTo])
+  
 
   useEffect(() => {
     setResults(
@@ -115,7 +136,7 @@ const ProfessionalsFilter = ({
       }
     };
     fetchUserCountry();
-  }, []);
+  }, [landingCountry]);
 
   function extractNumberWithIcon(inputString) {
     const match = inputString.match(/\d+/);
@@ -271,9 +292,9 @@ const ProfessionalsFilter = ({
                   onChange={handleCountrySelectChange}
                 >
                   <option value="">{texts.allCountries}</option>
-                  {countriesData.map((country) => (
-                    <option key={country.country} value={country.country}>
-                      {country.country}
+                  {countryNames.map((country) => (
+                    <option key={country} value={country}>
+                      {country}
                     </option>
                   ))}
                 </select>
@@ -305,9 +326,7 @@ const ProfessionalsFilter = ({
                   <p>
                     {texts.noServices}{" "}
                     <a
-                      href={(language === "es" || language === "de") ?
-                        `${language}/help/${pageData?.linkToHelpPage?.slug.current}` :
-                        `/help/${pageData?.linkToHelpPage?.slug.current}`}
+                      href={`${language}/help/${pageData?.linkToHelpPage?.slug.current}`}
                     >
                       {texts.moreInfo}
                     </a>
@@ -381,9 +400,7 @@ const ProfessionalsFilter = ({
                   <p>
                     {texts.noServices}{" "}
                     <a
-                      href={(language === "es" || language === "de") ?
-                        `${language}/help/${pageData?.linkToHelpPage?.slug.current}` :
-                        `/help/${pageData?.linkToHelpPage?.slug.current}`}
+                      href={`${language}/help/${pageData?.linkToHelpPage?.slug.current}`}
                     >
                       {texts.moreInfo}
                     </a>

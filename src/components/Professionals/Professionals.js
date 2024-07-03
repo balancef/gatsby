@@ -78,6 +78,7 @@ const Professionals = ({mapFitBounds, landingCountry}) => {
         professionsData={professionsData}
         pageData={pageData}
         texts={texts}
+        language={language}
         countriesData={countriesData}
         bccEmails={bccEmails}
         mapFitBounds={mapFitBounds}
