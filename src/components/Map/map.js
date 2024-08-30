@@ -13,7 +13,6 @@ import { Markers } from './markers'
 const GOOGLE_MAPS_API_KEY = process.env.GATSBY_GOOGLE_MAPS_API_KEY
 
 const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country, mapFitBounds}) => {
-  const [mapCenter, setMapCenter] = useState({lat: 0, lng: 0})
   const dimensions = useWindowSize();
 
   const fullscreenMapStyle = {
@@ -30,16 +29,10 @@ const GoogleMap = ({professionals, logoAcademy, defaultPhoto, country, mapFitBou
     borderLeft: "1px solid rgb(231, 231, 231)"
   }
 
-  const handleCenterChanged = (data) => {
-    setMapCenter(data.detail.center)
-  }
-
   return (
     <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
       <Map
       defaultCenter={{lat: 0, lng: 0}}
-      center={mapCenter}
-      onCenterChanged={handleCenterChanged}
       defaultZoom={2}
       disableDefaultUI={true} 
       streetViewControl={false}
