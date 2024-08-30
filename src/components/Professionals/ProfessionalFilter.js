@@ -44,7 +44,7 @@ const ProfessionalsFilter = ({
     if (
       professional?.ranking?.ranking &&
       (professional?.ranking?.ranking.toLowerCase() === "master" ||
-        professional?.ranking?.ranking.toLowerCase() === "supervisor")
+        professional?.ranking?.ranking.toLowerCase() === "director")
     ) {
       return true;
     }
@@ -55,10 +55,10 @@ const ProfessionalsFilter = ({
   
   useEffect(() => {
     const activeProfessionals = data.filter((professional) => {
-      const hasMasterOrSupervisorRanking =
+      const hasMasterOrDirectorRanking =
         professional.ranking?.ranking.toLowerCase() === "master" ||
-        professional.ranking?.ranking.toLowerCase() === "supervisor";
-        const isValidTo = (hasMasterOrSupervisorRanking || filterByValidTo) && isValidToValid(professional);
+        professional.ranking?.ranking.toLowerCase() === "director";
+        const isValidTo = (hasMasterOrDirectorRanking || filterByValidTo) && isValidToValid(professional);
       return isValidTo;
     })
     if(language === "es") {
@@ -76,9 +76,9 @@ const ProfessionalsFilter = ({
   useEffect(() => {
     setResults(
       data.filter((professional) => {
-        const hasMasterOrSupervisorRanking =
+        const hasMasterOrDirectorRanking =
           professional.ranking?.ranking.toLowerCase() === "master" ||
-          professional.ranking?.ranking.toLowerCase() === "supervisor";
+          professional.ranking?.ranking.toLowerCase() === "director";
         const matchesRanking =
           selectedRankings.length === 0 ||
           selectedRankings.includes(professional.ranking.ranking);
@@ -97,7 +97,7 @@ const ProfessionalsFilter = ({
             );
           });
         const isValidTo =
-          (hasMasterOrSupervisorRanking || filterByValidTo) &&
+          (hasMasterOrDirectorRanking || filterByValidTo) &&
           isValidToValid(professional);
         return (
           matchesRanking &&

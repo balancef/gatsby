@@ -83,7 +83,7 @@ function RankingComponent({ ranking }) {
         <span style={{fontWeight: "400", fontSize: "14px"}}>{ranking}</span>
       </div>
     );
-  } else if (ranking.toLowerCase() === "supervisor") {
+  } else if (ranking.toLowerCase() === "director") {
     return (
       <div style={{display: "flex", marginTop: "3px"}}>
         <span style={{fontWeight: "500", fontSize: "14px"}}>{ranking}</span>
