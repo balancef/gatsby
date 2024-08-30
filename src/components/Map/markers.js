@@ -102,10 +102,9 @@ function RankingComponent({ ranking }) {
   }
 }
 
-export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef, windowSize}) => {
+export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef, windowSize, language}) => {
   const [infowindowOpen, setInfowindowOpen] = useState(false);
   const [markerRef, marker] = useMarkerRef();
-  const { language } = useContext(LanguageContext);
 
   const texts = {
     es: {
@@ -229,6 +228,7 @@ export const CustomMarker = ({point, logoAcademy,defaultPhoto, setMarkerRef, win
 export const Markers = ({points, logoAcademy, defaultPhoto, windowSize}) => {
   const map = useMap();
   const [markers, setMarkers] = useState({});
+  const { language } = useContext(LanguageContext);
   const clusterer = useRef(null);
 
   // Initialize MarkerClusterer
@@ -267,7 +267,15 @@ export const Markers = ({points, logoAcademy, defaultPhoto, windowSize}) => {
   return (
     <>
       {points.map(point => (
-        <CustomMarker key={point.id} point={point} logoAcademy={logoAcademy} defaultPhoto={defaultPhoto} setMarkerRef={setMarkerRef} windowSize={windowSize}/>
+        <CustomMarker 
+          key={point.id} 
+          point={point} 
+          logoAcademy={logoAcademy} 
+          defaultPhoto={defaultPhoto} 
+          setMarkerRef={setMarkerRef} 
+          windowSize={windowSize}
+          language={language}
+        />
       ))}
     </>
   );
