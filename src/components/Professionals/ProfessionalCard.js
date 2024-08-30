@@ -248,7 +248,7 @@ const ProfessionalCard = ({
           <h6 style={{fontWeight: "600"}}>{ranking}</h6>
         </div>
       );
-    } else if (ranking.toLowerCase() === "supervisor") {
+    } else if (ranking.toLowerCase() === "director") {
       return (
         <div style={{display: "flex", justifyContent: "center", marginTop: "3px"}}>
           <h6 style={{fontWeight: "600"}}>{ranking}</h6>
@@ -381,7 +381,7 @@ const ProfessionalCard = ({
                     )}
                     {validTo ? (
                       ranking.toLowerCase() === "master" ||
-                      ranking.toLowerCase() === "supervisor" ? (
+                      ranking.toLowerCase() === "director" ? (
                         <></>
                       ) : (
                         <li
