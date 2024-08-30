@@ -19,6 +19,7 @@ import { LanguageContext } from "../../context/languajeContext";
 import "./ProfessionalsMap.scss";
 
 function RankingComponent({ ranking }) {
+  const directorI18n = ["director", "direktor"]
   if (ranking.includes("1")) {
     return (
       <div style={{marginTop: "3px"}}>
@@ -83,7 +84,7 @@ function RankingComponent({ ranking }) {
         <span style={{fontWeight: "400", fontSize: "14px"}}>{ranking}</span>
       </div>
     );
-  } else if (ranking.toLowerCase() === "director") {
+  } else if (directorI18n.includes(ranking.toLowerCase())) {
     return (
       <div style={{display: "flex", marginTop: "3px"}}>
         <span style={{fontWeight: "500", fontSize: "14px"}}>{ranking}</span>
