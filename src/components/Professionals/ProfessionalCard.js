@@ -59,6 +59,8 @@ const ProfessionalCard = ({
   const bccEmail1 = bccEmailArray[0] || "";
   const bccEmail2 = bccEmailArray[1] || "";
 
+  const directorI18n = ["director", "direktor"]
+
   function formatoFechas(fecha) {
     return format(new Date(fecha), "dd-MM-yyyy");
   }
@@ -248,7 +250,7 @@ const ProfessionalCard = ({
           <h6 style={{fontWeight: "600"}}>{ranking}</h6>
         </div>
       );
-    } else if (ranking.toLowerCase() === "director") {
+    } else if (directorI18n.includes(ranking.toLowerCase())) {
       return (
         <div style={{display: "flex", justifyContent: "center", marginTop: "3px"}}>
           <h6 style={{fontWeight: "600"}}>{ranking}</h6>
@@ -381,7 +383,7 @@ const ProfessionalCard = ({
                     )}
                     {validTo ? (
                       ranking.toLowerCase() === "master" ||
-                      ranking.toLowerCase() === "director" ? (
+                      directorI18n.includes(ranking.toLowerCase()) ? (
                         <></>
                       ) : (
                         <li

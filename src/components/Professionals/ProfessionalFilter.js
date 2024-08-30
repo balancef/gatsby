@@ -35,6 +35,7 @@ const ProfessionalsFilter = ({
   const [showFiltersModal, setShowFiltersModal] = useState(false);
   const [mapFitBoundsPoints, setMapFitBoundsPoints] = useState(mapFitBounds?.length > 0 ? mapFitBounds : null)
   const [countryNames, setCountryNames] = useState([])
+  const directorI18n = ["director", "direktor"]
 
   const handleClose = () => setShowFiltersModal(false);
   
@@ -44,7 +45,7 @@ const ProfessionalsFilter = ({
     if (
       professional?.ranking?.ranking &&
       (professional?.ranking?.ranking.toLowerCase() === "master" ||
-        professional?.ranking?.ranking.toLowerCase() === "director")
+        directorI18n.includes(professional?.ranking?.ranking.toLowerCase()))
     ) {
       return true;
     }
@@ -57,7 +58,7 @@ const ProfessionalsFilter = ({
     const activeProfessionals = data.filter((professional) => {
       const hasMasterOrDirectorRanking =
         professional.ranking?.ranking.toLowerCase() === "master" ||
-        professional.ranking?.ranking.toLowerCase() === "director";
+        directorI18n.includes(professional.ranking?.ranking.toLowerCase());
         const isValidTo = (hasMasterOrDirectorRanking || filterByValidTo) && isValidToValid(professional);
       return isValidTo;
     })
@@ -78,7 +79,7 @@ const ProfessionalsFilter = ({
       data.filter((professional) => {
         const hasMasterOrDirectorRanking =
           professional.ranking?.ranking.toLowerCase() === "master" ||
-          professional.ranking?.ranking.toLowerCase() === "director";
+          directorI18n.includes(professional.ranking?.ranking.toLowerCase());
         const matchesRanking =
           selectedRankings.length === 0 ||
           selectedRankings.includes(professional.ranking.ranking);
