@@ -324,10 +324,10 @@ exports.createPages = async ({ graphql, actions }) => {
   // CREACION DE LANDINGS POR PAIS
   const professionalsCountries = result.data.professionals.edges
     .filter(professional => professional.node.locality !== null)
-    .map(professional => ({name: professional.node.locality.localityState.stateCountry.name, _id: professional.node.locality.localityState.stateCountry._id}));
+    .map(professional => ({ name: professional.node.locality?.localityState?.stateCountry?.name, _id: professional.node.locality?.localityState?.stateCountry?._id }));
   result.data.countries.edges.forEach((edge) => {
     const haveProfessionals = professionalsCountries.filter(country => country._id === edge.node._id)
-    if(haveProfessionals && haveProfessionals.length > 0) {
+    if (haveProfessionals && haveProfessionals.length > 0) {
       const ProfessionalsByCountryPageEN = require.resolve(
         "./src/templates/search/professionalsByCountryEN.js"
       );
@@ -372,59 +372,59 @@ exports.createPages = async ({ graphql, actions }) => {
   // CREACION DE LANDINGS POR PROVINCIA
   const professionalsStates = result.data.professionals.edges
     .filter(professional => professional.node.locality !== null)
-    .map(professional => ({name: professional.node.locality.localityState.name, _id: professional.node.locality.localityState._id}));
+    .map(professional => ({ name: professional.node.locality?.localityState?.name, _id: professional.node.locality?.localityState?._id }));
   result.data.states.edges.forEach((edge) => {
-      const haveProfessionals = professionalsStates.filter(state => state._id === edge.node._id)
-      if(haveProfessionals && haveProfessionals.length > 0) {
-        const ProfessionalsByStatePageEN = require.resolve(
-          "./src/templates/search/professionalsByStateEN.js"
-        );
-        createPage({
-          path: `/en/${toKebabCase(edge.node.stateCountry.name)}/${toKebabCase(edge.node.name)}`,
-          component: ProfessionalsByStatePageEN,
-          context: {
-            stateId: edge.node._id,
-            country: edge.node.stateCountry.nameEnglish,
-            language: "en",
-            lastmod: edge.node._updatedAt,
-          },
-        });
-        const ProfessionalsByStatePageDE = require.resolve(
-          "./src/templates/search/professionalsByStateDE.js"
-        );
-        createPage({
-          path: `/de/${toKebabCase(edge.node.stateCountry.name)}/${toKebabCase(edge.node.name)}`,
-          component: ProfessionalsByStatePageDE,
-          context: {
-            stateId: edge.node._id,
-            country: edge.node.stateCountry.nameGerman,
-            language: "de",
-            lastmod: edge.node._updatedAt,
-          },
-        });
-        const ProfessionalsByStatePageES = require.resolve(
-          "./src/templates/search/professionalsByStateES.js"
-        );
-        createPage({
-          path: `/es/${toKebabCase(edge.node.stateCountry.name)}/${toKebabCase(edge.node.name)}`,
-          component: ProfessionalsByStatePageES,
-          context: {
-            stateId: edge.node._id,
-            country: edge.node.stateCountry.nameSpanish,
-            language: "es",
-            lastmod: edge.node._updatedAt,
-          },
-        });
-      }
+    const haveProfessionals = professionalsStates.filter(state => state._id === edge.node._id)
+    if (haveProfessionals && haveProfessionals.length > 0) {
+      const ProfessionalsByStatePageEN = require.resolve(
+        "./src/templates/search/professionalsByStateEN.js"
+      );
+      createPage({
+        path: `/en/${toKebabCase(edge.node.stateCountry.name)}/${toKebabCase(edge.node.name)}`,
+        component: ProfessionalsByStatePageEN,
+        context: {
+          stateId: edge.node._id,
+          country: edge.node.stateCountry.nameEnglish,
+          language: "en",
+          lastmod: edge.node._updatedAt,
+        },
+      });
+      const ProfessionalsByStatePageDE = require.resolve(
+        "./src/templates/search/professionalsByStateDE.js"
+      );
+      createPage({
+        path: `/de/${toKebabCase(edge.node.stateCountry.name)}/${toKebabCase(edge.node.name)}`,
+        component: ProfessionalsByStatePageDE,
+        context: {
+          stateId: edge.node._id,
+          country: edge.node.stateCountry.nameGerman,
+          language: "de",
+          lastmod: edge.node._updatedAt,
+        },
+      });
+      const ProfessionalsByStatePageES = require.resolve(
+        "./src/templates/search/professionalsByStateES.js"
+      );
+      createPage({
+        path: `/es/${toKebabCase(edge.node.stateCountry.name)}/${toKebabCase(edge.node.name)}`,
+        component: ProfessionalsByStatePageES,
+        context: {
+          stateId: edge.node._id,
+          country: edge.node.stateCountry.nameSpanish,
+          language: "es",
+          lastmod: edge.node._updatedAt,
+        },
+      });
+    }
   });
   // CREACION DE LANDINGS POR LOCALIDAD
   result.data.localities.edges.forEach((edge) => {
     const findedProfessionals = result.data.professionals.edges.filter(professional => {
       const localityMatches = professional.node.locality !== null && professional.node.locality._id === edge.node._id;
       const nearbyMatches = professional.node.nearbyLocations.some(location => location._id === edge.node._id);
-      return  localityMatches || nearbyMatches;
+      return localityMatches || nearbyMatches;
     })
-    if(findedProfessionals && findedProfessionals.length > 0) {
+    if (findedProfessionals && findedProfessionals.length > 0) {
       const ProfessionalsByLocalityPageEN = require.resolve(
         "./src/templates/search/professionalsByLocalityEN.js"
       );

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
 import {
   FaAngleDown,
+  FaSearch,
   FaStar,
 } from "react-icons/fa";
 import { Button } from 'react-bootstrap';
@@ -36,11 +37,12 @@ const ProfessionalsFilter = ({
   const [mapFitBoundsPoints, setMapFitBoundsPoints] = useState(mapFitBounds?.length > 0 ? mapFitBounds : null)
   const [countryNames, setCountryNames] = useState([])
   const directorI18n = ["director", "direktor"]
+  const [searchValue, setSearchValue] = useState("");
 
   const handleClose = () => setShowFiltersModal(false);
-  
+
   const handleShow = () => setShowFiltersModal(true);
-  
+
   const isValidToValid = (professional) => {
     if (
       professional?.ranking?.ranking &&
@@ -53,28 +55,41 @@ const ProfessionalsFilter = ({
     const validToDate = new Date(professional.validTo);
     return validToDate > currentDate;
   };
-  
+
   useEffect(() => {
     const activeProfessionals = data.filter((professional) => {
       const hasMasterOrDirectorRanking =
         professional.ranking?.ranking.toLowerCase() === "master" ||
         directorI18n.includes(professional.ranking?.ranking.toLowerCase());
-        const isValidTo = (hasMasterOrDirectorRanking || filterByValidTo) && isValidToValid(professional);
+      const isValidTo = (hasMasterOrDirectorRanking || filterByValidTo) && isValidToValid(professional);
       return isValidTo;
     })
-    if(language === "es") {
-      setCountryNames([...new Set(activeProfessionals.map(item => item.country.localityState.stateCountry.nameSpanish))].sort())
+    if (language === "es") {
+      setCountryNames([...new Set(activeProfessionals.map(item => item.country?.localityState?.stateCountry.nameSpanish))].sort())
     }
-    if(language === "de") {
-      setCountryNames([...new Set(activeProfessionals.map(item => item.country.localityState.stateCountry.nameGerman))].sort())
+    if (language === "de") {
+      setCountryNames([...new Set(activeProfessionals.map(item => item.country?.localityState?.stateCountry.nameGerman))].sort())
     }
-    if(language === "en") {
-      setCountryNames([...new Set(activeProfessionals.map(item => item.country.localityState.stateCountry.nameEnglish))].sort())
+    if (language === "en") {
+      setCountryNames([...new Set(activeProfessionals.map(item => item.country?.localityState?.stateCountry.nameEnglish))].sort())
     }
   }, [language, data, filterByValidTo])
-  
+
 
   useEffect(() => {
+    filterProfessionals();
+
+  }, [
+    selectedRankings,
+    selectedProfessions,
+    selectedServices,
+    filterByValidTo,
+    countriesData,
+    data,
+  ]);
+
+
+  const filterProfessionals = () => {
     setResults(
       data.filter((professional) => {
         const hasMasterOrDirectorRanking =
@@ -108,19 +123,11 @@ const ProfessionalsFilter = ({
         );
       })
     );
-
-  }, [
-    selectedRankings,
-    selectedProfessions,
-    selectedServices,
-    filterByValidTo,
-    countriesData,
-    data,
-  ]);
+  }
 
   useEffect(() => {
     const fetchUserCountry = async () => {
-      if(landingCountry) {
+      if (landingCountry) {
         setSelectedCountry(landingCountry)
         return
       };
@@ -128,7 +135,7 @@ const ProfessionalsFilter = ({
         const response = await axios.get(
           `https://api.geoapify.com/v1/ipinfo?apiKey=${process.env.GATSBY_GEOAPIFY_API_KEY}`
         );
-        if(response.status === 200) {
+        if (response.status === 200) {
           const countryName = response.data.country?.names?.en ? response.data.country.names.en : response.data.country.name
           setSelectedCountry(countryName);
         }
@@ -245,6 +252,20 @@ const ProfessionalsFilter = ({
     setSelectedServices([]);
   };
 
+  const handleSearch = (value) => {
+
+    setSearchValue(value);
+    if (value.length <= 2) {
+      filterProfessionals();
+      return;
+    };
+
+    const filteredResults = results.filter((professional) => {
+      return professional.name.toLowerCase().includes(value.toLowerCase()) || professional.keywords?.toLowerCase().includes(value.toLowerCase());
+    });
+    setResults(filteredResults);
+  }
+
   return (
     <>
       <div ref={wrapperRef}>
@@ -255,21 +276,21 @@ const ProfessionalsFilter = ({
             </div>
           </div>
           {dimensions.windowWidth <= 992 && (
-          <div className='container-fluid mt-4 mb-4' style={{display:"flex", justifyContent: "space-between"}}>
-            <h6 style={{margin: 0}}>
-              {selectedCountry && countriesData.find(country => country.countryCode === selectedCountry) ? (
-                `${texts.allIn} ${countriesData.find(country => country.countryCode === selectedCountry)?.country}`
-              ) : (
-                texts.allResults
-              )}
-            </h6>
-            
-              <Button 
-                style={{backgroundColor: "#FFA301", borderColor: "#FFA301"}} 
-                size="sm" onClick={()=>handleShow()}>{texts.filters}
+            <div className='container-fluid mt-4 mb-4' style={{ display: "flex", justifyContent: "space-between" }}>
+              <h6 style={{ margin: 0 }}>
+                {selectedCountry && countriesData.find(country => country.countryCode === selectedCountry) ? (
+                  `${texts.allIn} ${countriesData.find(country => country.countryCode === selectedCountry)?.country}`
+                ) : (
+                  texts.allResults
+                )}
+              </h6>
+
+              <Button
+                style={{ backgroundColor: "#FFA301", borderColor: "#FFA301" }}
+                size="sm" onClick={() => handleShow()}>{texts.filters}
               </Button>
-            
-          </div>
+
+            </div>
           )}
           <div className="filter-wrapper">
             <div className={`filter ${showFilter ? "filter-expanded" : ""}`}>
@@ -283,8 +304,24 @@ const ProfessionalsFilter = ({
                 </span>
               </button>
               <div>
+
+                <p style={{ fontSize: '14px', marginBottom: '10px' }}>{texts.search}:</p>
+
+                <div className="filter-search-field-wrap">
+                  <input
+                    type="text"
+                    className="filter-search-field-input"
+                    onChange={(e) => handleSearch(e.target.value)}
+                    aria-label={texts.search}
+                  />
+                  <span className="filter-search-field-icon" aria-hidden>
+                    <FaSearch size={16} />
+                  </span>
+                </div>
+              </div>
+              <div>
                 <div className="filter-description">
-                    <p>{texts.moveTo}</p>
+                  <p>{texts.moveTo}</p>
                 </div>
 
                 <select
@@ -301,11 +338,10 @@ const ProfessionalsFilter = ({
                 </select>
               </div>
               <div
-                className={`filter-container ${
-                  showFilter && dimensions.windowWidth <= 992
-                    ? "show-filter"
-                    : ""
-                }`}
+                className={`filter-container ${showFilter && dimensions.windowWidth <= 992
+                  ? "show-filter"
+                  : ""
+                  }`}
               >
                 <div className="filter-description">
                   <p>{texts.filterBy}:</p>
@@ -336,8 +372,8 @@ const ProfessionalsFilter = ({
               </div>
             </div>
             <div className="results-container">
-              <GoogleMap 
-                professionals={results} 
+              <GoogleMap
+                professionals={results}
                 logoAcademy={defaultData?.academyLogo.image}
                 defaultPhoto={defaultData.photoDefault.image}
                 country={selectedCountry}
@@ -347,22 +383,39 @@ const ProfessionalsFilter = ({
           </div>
         </div>
       </div>
-      <Modal 
+      <Modal
         className="professional-filter-modal"
-        show={showFiltersModal} 
+        show={showFiltersModal}
         backdrop="static"
-        onHide={handleClose} 
+        onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         centered>
-        <Modal.Header style={{backgroundColor: "#FFA301", color: "white"}}>
+        <Modal.Header style={{ backgroundColor: "#FFA301", color: "white" }}>
           <Modal.Title>{texts.filters}</Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{paddingRight: "0"}}>
-        <div>
+        <Modal.Body style={{ paddingRight: "0" }}>
+          <div>
             <div className={`dialog-filter`}>
               <div>
+
+                <p style={{ fontSize: '14px', marginBottom: '10px' }}>{texts.search}</p>
+
+                <div className="filter-search-field-wrap">
+                  <input
+                    type="text"
+                    className="filter-search-field-input"
+                    value={searchValue}
+                    onChange={(e) => handleSearch(e.target.value)}
+                    aria-label={texts.search}
+                  />
+                  <span className="filter-search-field-icon" aria-hidden>
+                    <FaSearch size={16} />
+                  </span>
+                </div>
+              </div>
+              <div>
                 <div className="filter-description">
-                    <p>{texts.moveTo}</p>
+                  <p>{texts.moveTo}</p>
                 </div>
 
                 <select
@@ -409,10 +462,10 @@ const ProfessionalsFilter = ({
                 </div>
               </div>
             </div>
-            </div>
+          </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button size="sm" style={{backgroundColor: "#FFA301", borderColor: "#FFA301"}} onClick={handleClose}>
+          <Button size="sm" style={{ backgroundColor: "#FFA301", borderColor: "#FFA301" }} onClick={handleClose}>
             {texts.apply}
           </Button>
         </Modal.Footer>

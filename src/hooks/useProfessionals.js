@@ -171,6 +171,7 @@ const useProfessionals = () => {
           phone
           official
           name
+          keywords
           lastCertificateUpdate
           language {
             language
@@ -236,6 +237,7 @@ const useProfessionals = () => {
           phone
           official
           name
+          keywords
           lastCertificateUpdate
           language {
             language
@@ -301,6 +303,7 @@ const useProfessionals = () => {
           phone
           official
           name
+          keywords
           lastCertificateUpdate
           language {
             language

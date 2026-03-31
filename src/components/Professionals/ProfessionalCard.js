@@ -65,170 +65,170 @@ const ProfessionalCard = ({
     return format(new Date(fecha), "dd-MM-yyyy");
   }
 
-  function ShareButton({url}) {
-    const sharei18n = {es: "Compartir", en: "Share", de: "Aktie"}
+  function ShareButton({ url }) {
+    const sharei18n = { es: "Compartir", en: "Share", de: "Aktie" }
     useEffect(() => {
-        // Cargar el script de AddToAny
-        const script = document.createElement('script');
-        script.src = 'https://static.addtoany.com/menu/page.js';
-        script.async = true;
-        document.body.appendChild(script);
+      // Cargar el script de AddToAny
+      const script = document.createElement('script');
+      script.src = 'https://static.addtoany.com/menu/page.js';
+      script.async = true;
+      document.body.appendChild(script);
 
-        // Configurar AddToAny para excluir servicios
-        window.a2a_config = window.a2a_config || {};
-        window.a2a_config.prioritize = [ 'sms', 'whatsapp', 'copy_link','email'];
-        window.a2a_config.exclude_services = [
-          "amazon_wish_list",
-          "aol_mail",
-          "balatarin",
-          "bibsonomy",
-          "blogger",
-          "blogmarks",
-          "bluesky",
-          "bookmarks_fr",
-          "box_net",
-          "buffer",
-          "diary_ru",
-          "diaspora",
-          "digg",
-          "diigo",
-          "douban",
-          "draugiem",
-          "evernote",
-          "fark",
-          "flipboard",
-          "folkd",
-          "google_classroom",
-          "google_translate",
-          "hacker_news",
-          "hatena",
-          "houzz",
-          "instapaper",
-          "kakao",
-          "known",
-          "line",
-          "linkedin",
-          "livejournal",
-          "mail_ru",
-          "mastodon",
-          "mendeley",
-          "meneame",
-          "mewe",
-          "micro_blog",
-          "mix",
-          "mixi",
-          "myspace",
-          "odnoklassniki",
-          "outlook_com",
-          "papaly",
-          "pinboard",
-          "pinterest",
-          "plurk",
-          "pocket",
-          "print",
-          "printfriendly",
-          "pusha",
-          "push_to_kindle",
-          "qzone",
-          "raindrop_io",
-          "reddit",
-          "rediff_mypage",
-          "refind",
-          "sina_weibo",
-          "sitejot",
-          "slashdot",
-          "stocktwits",
-          "svejo",
-          "symbaloo_bookmarks",
-          "teams",
-          "threads",
-          "threema",
-          "trello",
-          "tumblr",
-          "twiddla",
-          "twitter",
-          "typepad",
-          "viber",
-          "wordpress",
-          "wykop",
-          "x",
-          "xing",
-          "yahoo_mail",
-          "yummly",
-          "kindle_it",
-          "typepad_post",
-          "rediff",
-          "google_gmail",
-          "wechat",
-          "microsoft_teams"
-        ];
+      // Configurar AddToAny para excluir servicios
+      window.a2a_config = window.a2a_config || {};
+      window.a2a_config.prioritize = ['sms', 'whatsapp', 'copy_link', 'email'];
+      window.a2a_config.exclude_services = [
+        "amazon_wish_list",
+        "aol_mail",
+        "balatarin",
+        "bibsonomy",
+        "blogger",
+        "blogmarks",
+        "bluesky",
+        "bookmarks_fr",
+        "box_net",
+        "buffer",
+        "diary_ru",
+        "diaspora",
+        "digg",
+        "diigo",
+        "douban",
+        "draugiem",
+        "evernote",
+        "fark",
+        "flipboard",
+        "folkd",
+        "google_classroom",
+        "google_translate",
+        "hacker_news",
+        "hatena",
+        "houzz",
+        "instapaper",
+        "kakao",
+        "known",
+        "line",
+        "linkedin",
+        "livejournal",
+        "mail_ru",
+        "mastodon",
+        "mendeley",
+        "meneame",
+        "mewe",
+        "micro_blog",
+        "mix",
+        "mixi",
+        "myspace",
+        "odnoklassniki",
+        "outlook_com",
+        "papaly",
+        "pinboard",
+        "pinterest",
+        "plurk",
+        "pocket",
+        "print",
+        "printfriendly",
+        "pusha",
+        "push_to_kindle",
+        "qzone",
+        "raindrop_io",
+        "reddit",
+        "rediff_mypage",
+        "refind",
+        "sina_weibo",
+        "sitejot",
+        "slashdot",
+        "stocktwits",
+        "svejo",
+        "symbaloo_bookmarks",
+        "teams",
+        "threads",
+        "threema",
+        "trello",
+        "tumblr",
+        "twiddla",
+        "twitter",
+        "typepad",
+        "viber",
+        "wordpress",
+        "wykop",
+        "x",
+        "xing",
+        "yahoo_mail",
+        "yummly",
+        "kindle_it",
+        "typepad_post",
+        "rediff",
+        "google_gmail",
+        "wechat",
+        "microsoft_teams"
+      ];
 
-        return () => {
-            document.body.removeChild(script);
-        };
+      return () => {
+        document.body.removeChild(script);
+      };
     }, []);
 
     return (
-        <div className="a2a_kit a2a_kit_size_32 a2a_default_style" 
-             data-a2a-url={url} 
-             data-a2a-icon-color="#FFA301"
-             data-a2a-title={name}>
-            <a className="a2a_dd" href="https://www.addtoany.com/share" style={{marginTop: "20px"}}>
-              <Button style={{backgroundColor: "#FFA301", borderColor: "#FFA301"}} size="sm">
-                <FaShareAlt size={16} color='white' style={{marginRight: "10px"}}/>
-                {sharei18n[language]}
-                {/* Quitar default a2a icon */}
-                <img alt="" style={{display: "none"}}/>
-              </Button>
-            </a>
-        </div>
+      <div className="a2a_kit a2a_kit_size_32 a2a_default_style"
+        data-a2a-url={url}
+        data-a2a-icon-color="#FFA301"
+        data-a2a-title={name}>
+        <a className="a2a_dd" href="https://www.addtoany.com/share" style={{ marginTop: "20px" }}>
+          <Button style={{ backgroundColor: "#FFA301", borderColor: "#FFA301" }} size="sm">
+            <FaShareAlt size={16} color='white' style={{ marginRight: "10px" }} />
+            {sharei18n[language]}
+            {/* Quitar default a2a icon */}
+            <img alt="" style={{ display: "none" }} />
+          </Button>
+        </a>
+      </div>
     );
-};
+  };
 
   function RankingComponent({ ranking }) {
     if (ranking.includes("1")) {
       return (
-        <div style={{marginTop: "3px"}}>
+        <div style={{ marginTop: "3px" }}>
           <FaStar size={28} color='#FFA301' />
-          <FaRegStar size={28} color='#FFA301'/>
-          <FaRegStar size={28} color='#FFA301'/>
-          <FaRegStar size={28} color='#FFA301'/>
-          <FaRegStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301' />
         </div>
       );
     } else if (ranking.includes("2")) {
       return (
-        <div style={{marginTop: "3px"}}>
-          <FaStar size={28} color='#FFA301'/>
-          <FaStar size={28} color='#FFA301'/>
-          <FaRegStar size={28} color='#FFA301'/>
-          <FaRegStar size={28} color='#FFA301'/>
-          <FaRegStar size={28} color='#FFA301'/>
+        <div style={{ marginTop: "3px" }}>
+          <FaStar size={28} color='#FFA301' />
+          <FaStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301' />
         </div>
       );
     } else if (ranking.includes("3")) {
       return (
-        <div style={{marginTop: "3px"}}>
+        <div style={{ marginTop: "3px" }}>
           <FaStar size={28} color='#FFA301' />
           <FaStar size={28} color='#FFA301' />
           <FaStar size={28} color='#FFA301' />
-          <FaRegStar size={28} color='#FFA301'/>
-          <FaRegStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301' />
         </div>
       );
     } else if (ranking.includes("4")) {
       return (
-        <div style={{marginTop: "3px"}}>
+        <div style={{ marginTop: "3px" }}>
           <FaStar size={28} color='#FFA301' />
           <FaStar size={28} color='#FFA301' />
           <FaStar size={28} color='#FFA301' />
           <FaStar size={28} color='#FFA301' />
-          <FaRegStar size={28} color='#FFA301'/>
+          <FaRegStar size={28} color='#FFA301' />
         </div>
       );
     } else if (ranking.includes("5")) {
       return (
-        <div style={{marginTop: "3px"}}>
+        <div style={{ marginTop: "3px" }}>
           <FaStar size={28} color='#FFA301' />
           <FaStar size={28} color='#FFA301' />
           <FaStar size={28} color='#FFA301' />
@@ -238,32 +238,32 @@ const ProfessionalCard = ({
       );
     } else if (ranking.toLowerCase() === "master") {
       return (
-        <div style={{display: "flex", justifyContent: "center", marginTop: "3px"}}>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "3px" }}>
           <img
             src={masterImg}
             alt="verified"
             height={28}
             width={22}
-            style={{marginRight: "5px"}}
+            style={{ marginRight: "5px" }}
             className="professional__ranking_logo"
           />
-          <h6 style={{fontWeight: "600"}}>{ranking}</h6>
+          <h6 style={{ fontWeight: "600" }}>{ranking}</h6>
         </div>
       );
     } else if (directorI18n.includes(ranking.toLowerCase())) {
       return (
-        <div style={{display: "flex", justifyContent: "center", marginTop: "3px"}}>
-          <h6 style={{fontWeight: "600"}}>{ranking}</h6>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "3px" }}>
+          <h6 style={{ fontWeight: "600" }}>{ranking}</h6>
         </div>
       );
     } else {
       return (
-        <div style={{marginTop: "3px"}}>
-          <FaRegStar size={28} color='#FFA301'/>
-          <FaRegStar size={28} color='#FFA301'/>
-          <FaRegStar size={28} color='#FFA301'/>
-          <FaRegStar size={28} color='#FFA301'/>
-          <FaRegStar size={28} color='#FFA301'/>
+        <div style={{ marginTop: "3px" }}>
+          <FaRegStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301' />
+          <FaRegStar size={28} color='#FFA301' />
         </div>
       );
     }
@@ -276,13 +276,13 @@ const ProfessionalCard = ({
           <div className="professional__image">
             {photo ? (
               <SanityImage
-                {... photo}
+                {...photo}
                 alt={`${name}`}
                 className="professional__image"
               />
             ) : (
               <SanityImage
-                {... defaultPhoto}
+                {...defaultPhoto}
                 alt={`${name}`}
                 className="professional__image"
               />
@@ -291,13 +291,19 @@ const ProfessionalCard = ({
           {ranking && (
             <div className="professional__ranking">
               <RankingComponent ranking={ranking} />
+              {ranking.toLowerCase() !== "master" && !directorI18n.includes(ranking.toLowerCase()) &&
+                <p style={{ fontSize: '10px', fontWeight: 'bold', marginTop: '5px' }}>
+                  {language === "es" ? 'Nivel de experiencia' : language === "en" ? 'Experience level' : 'Erfahrungsniveau'}
+                </p>
+              }
+
             </div>
           )}
 
           {official && (
             <div className="professional__logos">
-                <SanityImage {...logoAcademy} alt={`Logo academy`} />
-              </div>
+              <SanityImage {...logoAcademy} alt={`Logo academy`} />
+            </div>
           )}
         </div>
         <div className="rightContainer">
@@ -337,121 +343,121 @@ const ProfessionalCard = ({
               </a>
             </div>
           )}
-            <div className="professional__information">
-              {certificateNumber && (
-                <div className="professional__information-dates">
-                  <ul>
+          <div className="professional__information">
+            {certificateNumber && (
+              <div className="professional__information-dates">
+                <ul>
+                  <li
+                    title={
+                      language === "es"
+                        ? "Número de certificación"
+                        : language === "en"
+                          ? "Certification number"
+                          : "Zertifizierungsnummer"
+                    }
+                  >
+                    <FaGraduationCap size={20} />
+                    {certificateNumber}
+                  </li>
+                  {certificateDate && (
                     <li
                       title={
                         language === "es"
-                          ? "Número de certificación"
+                          ? "Fecha de certificación"
                           : language === "en"
-                          ? "Certification number"
-                          : "Zertifizierungsnummer"
-                      }
-                    >
-                      <FaGraduationCap size={20} />
-                      {certificateNumber}
-                    </li>
-                    {certificateDate && (
-                      <li
-                        title={
-                          language === "es"
-                            ? "Fecha de certificación"
-                            : language === "en"
                             ? "Certification date"
                             : "Zertifizierungsdatum"
-                        }
-                      >
-                        <img alt="certification" style={{paddingRight: '5px', marginLeft: "5px"}} src={CertificateIcon}/>
-                        {formatoFechas(certificateDate)}
-                      </li>
-                    )}
-                    {lastCertificateUpdate && (
+                      }
+                    >
+                      <img alt="certification" style={{ paddingRight: '5px', marginLeft: "5px" }} src={CertificateIcon} />
+                      {formatoFechas(certificateDate)}
+                    </li>
+                  )}
+                  {lastCertificateUpdate && (
+                    <li
+                      title={
+                        language === "es"
+                          ? "Ultima actualización"
+                          : language === "en"
+                            ? "Last update"
+                            : "<Letztes Update>"
+                      }
+                    >
+                      <FaRegClock size={20} />
+                      {formatoFechas(lastCertificateUpdate)}
+                    </li>
+                  )}
+                  {validTo ? (
+                    ranking.toLowerCase() === "master" ||
+                      directorI18n.includes(ranking.toLowerCase()) ? (
+                      <></>
+                    ) : (
                       <li
                         title={
                           language === "es"
-                            ? "Ultima actualización"
+                            ? "Válido hasta"
                             : language === "en"
-                            ? "Last update"
-                            : "<Letztes Update>"
-                        }
-                      >
-                        <FaRegClock size={20} />
-                        {formatoFechas(lastCertificateUpdate)}
-                      </li>
-                    )}
-                    {validTo ? (
-                      ranking.toLowerCase() === "master" ||
-                      directorI18n.includes(ranking.toLowerCase()) ? (
-                        <></>
-                      ) : (
-                        <li
-                          title={
-                            language === "es"
-                              ? "Válido hasta"
-                              : language === "en"
                               ? "Valid To"
                               : "Gültig bis"
-                          }
-                        >
-                          <MdMoreTime size={25} />
-                          {formatoFechas(validTo)}
-                        </li>
-                      )
-                    ) : (
-                      <></>
-                    )}
-                  </ul>
-                </div>
-              )}
-              <div className="professional__information-description">
-                <PortableText
-                  value={description ? description : descriptionDefault}
-                />
-              </div>
-              {
-                <div className="professional__information-contact">
-                  <ul>
-                    {phone && (
-                      <li>
-                        <FaPhoneAlt size={20} />
-                        <CustomPhoneLink href={`tel:${phone}`} text={phone} />
+                        }
+                      >
+                        <MdMoreTime size={25} />
+                        {formatoFechas(validTo)}
                       </li>
-                    )}
-                    {email && (
-                      <li>
-                        <MdEmail size={22} />
-                        <a
-                          target="_blank"
-                          rel="noreferrer"
-                          href={`mailto:${encodeURIComponent(
-                            email
-                          )}?bcc=${encodeURIComponent(
-                            bccEmail1
-                          )}&bcc=${encodeURIComponent(
-                            bccEmail2
-                          )}&subject=${`${emailSubject}`}&body=${emailBody}
+                    )
+                  ) : (
+                    <></>
+                  )}
+                </ul>
+              </div>
+            )}
+            <div className="professional__information-description">
+              <PortableText
+                value={description ? description : descriptionDefault}
+              />
+            </div>
+            {
+              <div className="professional__information-contact">
+                <ul>
+                  {phone && (
+                    <li>
+                      <FaPhoneAlt size={20} />
+                      <CustomPhoneLink href={`tel:${phone}`} text={phone} />
+                    </li>
+                  )}
+                  {email && (
+                    <li>
+                      <MdEmail size={22} />
+                      <a
+                        target="_blank"
+                        rel="noreferrer"
+                        href={`mailto:${encodeURIComponent(
+                          email
+                        )}?bcc=${encodeURIComponent(
+                          bccEmail1
+                        )}&bcc=${encodeURIComponent(
+                          bccEmail2
+                        )}&subject=${`${emailSubject}`}&body=${emailBody}
 
                           `}
-                        >
-                          {email}
-                        </a>
-                      </li>
-                    )}
-                    {website && (
-                      <li>
-                        <BsGlobe size={20} />
-                        <CustomLink href={website} text={website} />
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              }
-            </div>
-            <div style={{marginTop: "10px"}}>
-              <ShareButton url={typeof window !== "undefined" ? window.location.href : ""}/>
-            </div>
+                      >
+                        {email}
+                      </a>
+                    </li>
+                  )}
+                  {website && (
+                    <li>
+                      <BsGlobe size={20} />
+                      <CustomLink href={website} text={website} />
+                    </li>
+                  )}
+                </ul>
+              </div>
+            }
+          </div>
+          <div style={{ marginTop: "10px" }}>
+            <ShareButton url={typeof window !== "undefined" ? window.location.href : ""} />
+          </div>
         </div>
       </div>
     </div>
