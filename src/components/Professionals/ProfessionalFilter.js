@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
 import {
   FaAngleDown,
@@ -9,6 +9,15 @@ import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import GoogleMap from "../Map/map"
 import axios from "axios"
+
+/** Compara sin depender de tildes ni de NFC/NFD (p. ej. "juarez" encuentra "Juárez"). */
+function normalizeForSearch(str) {
+  if (str == null || str === "") return "";
+  return String(str)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
 
 const ProfessionalsFilter = ({
   data,
@@ -25,6 +34,7 @@ const ProfessionalsFilter = ({
   landingCountry
 }) => {
   const wrapperRef = useRef(null);
+  const searchDebounceRef = useRef(null);
   const dimensions = useWindowSize();
   const [showFilter, setShowFilter] = useState(false);
   const [selectedRankings, setSelectedRankings] = useState([]);
@@ -38,6 +48,62 @@ const ProfessionalsFilter = ({
   const [countryNames, setCountryNames] = useState([])
   const directorI18n = ["director", "direktor"]
   const [searchValue, setSearchValue] = useState("");
+  /** Tras elegir país en "Mover a", el mapa debe geocodear ese país aunque haya filtros activos. */
+  const [mapFollowCountrySelect, setMapFollowCountrySelect] = useState(false);
+
+  /** Bounds para el mapa: prioriza búsqueda/filtros; si no, landing; si no, país vía MapHandler. */
+  const mapBoundsForMap = useMemo(() => {
+    const fromResults = results
+      .filter(
+        (p) =>
+          p.location != null &&
+          !Number.isNaN(Number(p.location.lat)) &&
+          !Number.isNaN(Number(p.location.lng))
+      )
+      .map((p) => ({
+        location: {
+          lat: Number(p.location.lat),
+          lng: Number(p.location.lng),
+        },
+      }));
+
+    const hasActiveSearch = searchValue.trim().length > 2;
+    const hasActiveFilters =
+      selectedRankings.length > 0 ||
+      selectedProfessions.length > 0 ||
+      selectedServices.length > 0;
+
+    if (
+      mapFollowCountrySelect &&
+      selectedCountry &&
+      String(selectedCountry).trim().length > 0
+    ) {
+      return null;
+    }
+
+    if (hasActiveSearch || hasActiveFilters) {
+      return fromResults.length > 0 ? fromResults : null;
+    }
+
+    if (mapFitBoundsPoints?.length > 0) {
+      return mapFitBoundsPoints;
+    }
+
+    if (selectedCountry && String(selectedCountry).length > 0) {
+      return null;
+    }
+
+    return fromResults.length > 0 ? fromResults : null;
+  }, [
+    results,
+    searchValue,
+    selectedRankings,
+    selectedProfessions,
+    selectedServices,
+    mapFitBoundsPoints,
+    selectedCountry,
+    mapFollowCountrySelect,
+  ]);
 
   const handleClose = () => setShowFiltersModal(false);
 
@@ -89,41 +155,54 @@ const ProfessionalsFilter = ({
   ]);
 
 
-  const filterProfessionals = () => {
-    setResults(
-      data.filter((professional) => {
-        const hasMasterOrDirectorRanking =
-          professional.ranking?.ranking.toLowerCase() === "master" ||
-          directorI18n.includes(professional.ranking?.ranking.toLowerCase());
-        const matchesRanking =
-          selectedRankings.length === 0 ||
-          selectedRankings.includes(professional.ranking.ranking);
-        const matchesProfession =
-          selectedProfessions.length === 0 ||
-          selectedProfessions.every((selectedProf) => {
-            return professional.profession.some(
-              (prof) => prof.profession === selectedProf
-            );
-          });
-        const matchesServices =
-          selectedServices.length === 0 ||
-          selectedServices.every((selectedService) => {
-            return professional.services.some(
-              (service) => service.services === selectedService
-            );
-          });
-        const isValidTo =
-          (hasMasterOrDirectorRanking || filterByValidTo) &&
-          isValidToValid(professional);
-        return (
-          matchesRanking &&
-          matchesProfession &&
-          matchesServices &&
-          isValidTo
-        );
-      })
-    );
-  }
+  const getBaseFilteredProfessionals = () => {
+    return data.filter((professional) => {
+      const hasMasterOrDirectorRanking =
+        professional.ranking?.ranking.toLowerCase() === "master" ||
+        directorI18n.includes(professional.ranking?.ranking.toLowerCase());
+      const matchesRanking =
+        selectedRankings.length === 0 ||
+        selectedRankings.includes(professional.ranking.ranking);
+      const matchesProfession =
+        selectedProfessions.length === 0 ||
+        selectedProfessions.every((selectedProf) => {
+          return professional.profession.some(
+            (prof) => prof.profession === selectedProf
+          );
+        });
+      const matchesServices =
+        selectedServices.length === 0 ||
+        selectedServices.every((selectedService) => {
+          return professional.services.some(
+            (service) => service.services === selectedService
+          );
+        });
+      const isValidTo =
+        (hasMasterOrDirectorRanking || filterByValidTo) &&
+        isValidToValid(professional);
+      return (
+        matchesRanking &&
+        matchesProfession &&
+        matchesServices &&
+        isValidTo
+      );
+    });
+  };
+
+  const filterProfessionals = (searchText) => {
+    const text =
+      searchText !== undefined ? searchText : searchValue;
+    let next = getBaseFilteredProfessionals();
+    if (text.trim().length > 2) {
+      const q = normalizeForSearch(text);
+      next = next.filter((professional) => {
+        const name = normalizeForSearch(professional.name);
+        const keywords = normalizeForSearch(professional.keywords || "");
+        return name.includes(q) || keywords.includes(q);
+      });
+    }
+    setResults(next);
+  };
 
   useEffect(() => {
     const fetchUserCountry = async () => {
@@ -213,6 +292,7 @@ const ProfessionalsFilter = ({
   };
 
   const handleRankingCheckboxChange = (e) => {
+    setMapFollowCountrySelect(false);
     const ranking = e.target.value;
     if (selectedRankings.includes(ranking)) {
       setSelectedRankings(selectedRankings.filter((item) => item !== ranking));
@@ -222,6 +302,7 @@ const ProfessionalsFilter = ({
   };
 
   const handleProfessionCheckboxChange = (e) => {
+    setMapFollowCountrySelect(false);
     const profession = e.target.value;
     if (selectedProfessions.includes(profession)) {
       setSelectedProfessions(
@@ -233,6 +314,7 @@ const ProfessionalsFilter = ({
   };
 
   const handleServicesCheckboxChange = (e) => {
+    setMapFollowCountrySelect(false);
     const service = e.target.value;
     if (selectedServices.includes(service)) {
       setSelectedServices(selectedServices.filter((item) => item !== service));
@@ -243,28 +325,43 @@ const ProfessionalsFilter = ({
 
   const handleCountrySelectChange = (e) => {
     setMapFitBoundsPoints(null);
-    setSelectedCountry(e.target.value);
+    const v = e.target.value;
+    setSelectedCountry(v);
+    setMapFollowCountrySelect(v.length > 0);
   };
 
   const resetFilters = () => {
+    setMapFollowCountrySelect(false);
     setSelectedRankings([]);
     setSelectedProfessions([]);
     setSelectedServices([]);
   };
 
   const handleSearch = (value) => {
-
+    setMapFollowCountrySelect(false);
     setSearchValue(value);
     if (value.length <= 2) {
-      filterProfessionals();
+      if (searchDebounceRef.current != null) {
+        clearTimeout(searchDebounceRef.current);
+        searchDebounceRef.current = null;
+      }
+      filterProfessionals(value);
       return;
     };
 
-    const filteredResults = results.filter((professional) => {
-      return professional.name.toLowerCase().includes(value.toLowerCase()) || professional.keywords?.toLowerCase().includes(value.toLowerCase());
-    });
-    setResults(filteredResults);
+    if (searchDebounceRef.current != null) {
+      clearTimeout(searchDebounceRef.current);
+    }
+    searchDebounceRef.current = setTimeout(() => {
+      searchDebounceRef.current = null;
+      searchByNameAndKeywords(value);
+    }, 500);
   }
+
+
+  const searchByNameAndKeywords = (value) => {
+    filterProfessionals(value);
+  };
 
   return (
     <>
@@ -377,7 +474,7 @@ const ProfessionalsFilter = ({
                 logoAcademy={defaultData?.academyLogo.image}
                 defaultPhoto={defaultData.photoDefault.image}
                 country={selectedCountry}
-                mapFitBounds={mapFitBoundsPoints}
+                mapFitBounds={mapBoundsForMap}
               />
             </div>
           </div>

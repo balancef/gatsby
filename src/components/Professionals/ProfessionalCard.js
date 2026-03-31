@@ -292,7 +292,7 @@ const ProfessionalCard = ({
             <div className="professional__ranking">
               <RankingComponent ranking={ranking} />
               {ranking.toLowerCase() !== "master" && !directorI18n.includes(ranking.toLowerCase()) &&
-                <p style={{ fontSize: '10px', fontWeight: 'bold', marginTop: '5px' }}>
+                <p style={{ fontSize: '14px', marginTop: '5px' }}>
                   {language === "es" ? 'Nivel de experiencia' : language === "en" ? 'Experience level' : 'Erfahrungsniveau'}
                 </p>
               }
