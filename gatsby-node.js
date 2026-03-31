@@ -419,6 +419,9 @@ exports.createPages = async ({ graphql, actions }) => {
   });
   // CREACION DE LANDINGS POR LOCALIDAD
   result.data.localities.edges.forEach((edge) => {
+    if (!edge?.node?.localityState?.stateCountry) {
+      return;
+    }
     const findedProfessionals = result.data.professionals.edges.filter(professional => {
       const localityMatches = professional.node.locality !== null && professional.node.locality._id === edge.node._id;
       const nearbyMatches = professional.node.nearbyLocations.some(location => location._id === edge.node._id);
