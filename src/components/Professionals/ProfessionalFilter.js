@@ -1,13 +1,23 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
 import {
   FaAngleDown,
+  FaSearch,
   FaStar,
 } from "react-icons/fa";
 import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import GoogleMap from "../Map/map"
 import axios from "axios"
+
+/** Compara sin depender de tildes ni de NFC/NFD (p. ej. "juarez" encuentra "Juárez"). */
+function normalizeForSearch(str) {
+  if (str == null || str === "") return "";
+  return String(str)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
 
 const ProfessionalsFilter = ({
   data,
@@ -24,6 +34,7 @@ const ProfessionalsFilter = ({
   landingCountry
 }) => {
   const wrapperRef = useRef(null);
+  const searchDebounceRef = useRef(null);
   const dimensions = useWindowSize();
   const [showFilter, setShowFilter] = useState(false);
   const [selectedRankings, setSelectedRankings] = useState([]);
@@ -36,11 +47,68 @@ const ProfessionalsFilter = ({
   const [mapFitBoundsPoints, setMapFitBoundsPoints] = useState(mapFitBounds?.length > 0 ? mapFitBounds : null)
   const [countryNames, setCountryNames] = useState([])
   const directorI18n = ["director", "direktor"]
+  const [searchValue, setSearchValue] = useState("");
+  /** Tras elegir país en "Mover a", el mapa debe geocodear ese país aunque haya filtros activos. */
+  const [mapFollowCountrySelect, setMapFollowCountrySelect] = useState(false);
+
+  /** Bounds para el mapa: prioriza búsqueda/filtros; si no, landing; si no, país vía MapHandler. */
+  const mapBoundsForMap = useMemo(() => {
+    const fromResults = results
+      .filter(
+        (p) =>
+          p.location != null &&
+          !Number.isNaN(Number(p.location.lat)) &&
+          !Number.isNaN(Number(p.location.lng))
+      )
+      .map((p) => ({
+        location: {
+          lat: Number(p.location.lat),
+          lng: Number(p.location.lng),
+        },
+      }));
+
+    const hasActiveSearch = searchValue.trim().length > 2;
+    const hasActiveFilters =
+      selectedRankings.length > 0 ||
+      selectedProfessions.length > 0 ||
+      selectedServices.length > 0;
+
+    if (
+      mapFollowCountrySelect &&
+      selectedCountry &&
+      String(selectedCountry).trim().length > 0
+    ) {
+      return null;
+    }
+
+    if (hasActiveSearch || hasActiveFilters) {
+      return fromResults.length > 0 ? fromResults : null;
+    }
+
+    if (mapFitBoundsPoints?.length > 0) {
+      return mapFitBoundsPoints;
+    }
+
+    if (selectedCountry && String(selectedCountry).length > 0) {
+      return null;
+    }
+
+    return fromResults.length > 0 ? fromResults : null;
+  }, [
+    results,
+    searchValue,
+    selectedRankings,
+    selectedProfessions,
+    selectedServices,
+    mapFitBoundsPoints,
+    selectedCountry,
+    mapFollowCountrySelect,
+  ]);
 
   const handleClose = () => setShowFiltersModal(false);
-  
+
   const handleShow = () => setShowFiltersModal(true);
-  
+
   const isValidToValid = (professional) => {
     if (
       professional?.ranking?.ranking &&
@@ -53,61 +121,29 @@ const ProfessionalsFilter = ({
     const validToDate = new Date(professional.validTo);
     return validToDate > currentDate;
   };
-  
+
   useEffect(() => {
     const activeProfessionals = data.filter((professional) => {
       const hasMasterOrDirectorRanking =
         professional.ranking?.ranking.toLowerCase() === "master" ||
         directorI18n.includes(professional.ranking?.ranking.toLowerCase());
-        const isValidTo = (hasMasterOrDirectorRanking || filterByValidTo) && isValidToValid(professional);
+      const isValidTo = (hasMasterOrDirectorRanking || filterByValidTo) && isValidToValid(professional);
       return isValidTo;
     })
-    if(language === "es") {
-      setCountryNames([...new Set(activeProfessionals.map(item => item.country.localityState.stateCountry.nameSpanish))].sort())
+    if (language === "es") {
+      setCountryNames([...new Set(activeProfessionals.map(item => item.country?.localityState?.stateCountry.nameSpanish))].sort())
     }
-    if(language === "de") {
-      setCountryNames([...new Set(activeProfessionals.map(item => item.country.localityState.stateCountry.nameGerman))].sort())
+    if (language === "de") {
+      setCountryNames([...new Set(activeProfessionals.map(item => item.country?.localityState?.stateCountry.nameGerman))].sort())
     }
-    if(language === "en") {
-      setCountryNames([...new Set(activeProfessionals.map(item => item.country.localityState.stateCountry.nameEnglish))].sort())
+    if (language === "en") {
+      setCountryNames([...new Set(activeProfessionals.map(item => item.country?.localityState?.stateCountry.nameEnglish))].sort())
     }
   }, [language, data, filterByValidTo])
-  
+
 
   useEffect(() => {
-    setResults(
-      data.filter((professional) => {
-        const hasMasterOrDirectorRanking =
-          professional.ranking?.ranking.toLowerCase() === "master" ||
-          directorI18n.includes(professional.ranking?.ranking.toLowerCase());
-        const matchesRanking =
-          selectedRankings.length === 0 ||
-          selectedRankings.includes(professional.ranking.ranking);
-        const matchesProfession =
-          selectedProfessions.length === 0 ||
-          selectedProfessions.every((selectedProf) => {
-            return professional.profession.some(
-              (prof) => prof.profession === selectedProf
-            );
-          });
-        const matchesServices =
-          selectedServices.length === 0 ||
-          selectedServices.every((selectedService) => {
-            return professional.services.some(
-              (service) => service.services === selectedService
-            );
-          });
-        const isValidTo =
-          (hasMasterOrDirectorRanking || filterByValidTo) &&
-          isValidToValid(professional);
-        return (
-          matchesRanking &&
-          matchesProfession &&
-          matchesServices &&
-          isValidTo
-        );
-      })
-    );
+    filterProfessionals();
 
   }, [
     selectedRankings,
@@ -118,9 +154,59 @@ const ProfessionalsFilter = ({
     data,
   ]);
 
+
+  const getBaseFilteredProfessionals = () => {
+    return data.filter((professional) => {
+      const hasMasterOrDirectorRanking =
+        professional.ranking?.ranking.toLowerCase() === "master" ||
+        directorI18n.includes(professional.ranking?.ranking.toLowerCase());
+      const matchesRanking =
+        selectedRankings.length === 0 ||
+        selectedRankings.includes(professional.ranking.ranking);
+      const matchesProfession =
+        selectedProfessions.length === 0 ||
+        selectedProfessions.every((selectedProf) => {
+          return professional.profession.some(
+            (prof) => prof.profession === selectedProf
+          );
+        });
+      const matchesServices =
+        selectedServices.length === 0 ||
+        selectedServices.every((selectedService) => {
+          return professional.services.some(
+            (service) => service.services === selectedService
+          );
+        });
+      const isValidTo =
+        (hasMasterOrDirectorRanking || filterByValidTo) &&
+        isValidToValid(professional);
+      return (
+        matchesRanking &&
+        matchesProfession &&
+        matchesServices &&
+        isValidTo
+      );
+    });
+  };
+
+  const filterProfessionals = (searchText) => {
+    const text =
+      searchText !== undefined ? searchText : searchValue;
+    let next = getBaseFilteredProfessionals();
+    if (text.trim().length > 2) {
+      const q = normalizeForSearch(text);
+      next = next.filter((professional) => {
+        const name = normalizeForSearch(professional.name);
+        const keywords = normalizeForSearch(professional.keywords || "");
+        return name.includes(q) || keywords.includes(q);
+      });
+    }
+    setResults(next);
+  };
+
   useEffect(() => {
     const fetchUserCountry = async () => {
-      if(landingCountry) {
+      if (landingCountry) {
         setSelectedCountry(landingCountry)
         return
       };
@@ -128,7 +214,7 @@ const ProfessionalsFilter = ({
         const response = await axios.get(
           `https://api.geoapify.com/v1/ipinfo?apiKey=${process.env.GATSBY_GEOAPIFY_API_KEY}`
         );
-        if(response.status === 200) {
+        if (response.status === 200) {
           const countryName = response.data.country?.names?.en ? response.data.country.names.en : response.data.country.name
           setSelectedCountry(countryName);
         }
@@ -206,6 +292,7 @@ const ProfessionalsFilter = ({
   };
 
   const handleRankingCheckboxChange = (e) => {
+    setMapFollowCountrySelect(false);
     const ranking = e.target.value;
     if (selectedRankings.includes(ranking)) {
       setSelectedRankings(selectedRankings.filter((item) => item !== ranking));
@@ -215,6 +302,7 @@ const ProfessionalsFilter = ({
   };
 
   const handleProfessionCheckboxChange = (e) => {
+    setMapFollowCountrySelect(false);
     const profession = e.target.value;
     if (selectedProfessions.includes(profession)) {
       setSelectedProfessions(
@@ -226,6 +314,7 @@ const ProfessionalsFilter = ({
   };
 
   const handleServicesCheckboxChange = (e) => {
+    setMapFollowCountrySelect(false);
     const service = e.target.value;
     if (selectedServices.includes(service)) {
       setSelectedServices(selectedServices.filter((item) => item !== service));
@@ -236,13 +325,42 @@ const ProfessionalsFilter = ({
 
   const handleCountrySelectChange = (e) => {
     setMapFitBoundsPoints(null);
-    setSelectedCountry(e.target.value);
+    const v = e.target.value;
+    setSelectedCountry(v);
+    setMapFollowCountrySelect(v.length > 0);
   };
 
   const resetFilters = () => {
+    setMapFollowCountrySelect(false);
     setSelectedRankings([]);
     setSelectedProfessions([]);
     setSelectedServices([]);
+  };
+
+  const handleSearch = (value) => {
+    setMapFollowCountrySelect(false);
+    setSearchValue(value);
+    if (value.length <= 2) {
+      if (searchDebounceRef.current != null) {
+        clearTimeout(searchDebounceRef.current);
+        searchDebounceRef.current = null;
+      }
+      filterProfessionals(value);
+      return;
+    };
+
+    if (searchDebounceRef.current != null) {
+      clearTimeout(searchDebounceRef.current);
+    }
+    searchDebounceRef.current = setTimeout(() => {
+      searchDebounceRef.current = null;
+      searchByNameAndKeywords(value);
+    }, 500);
+  }
+
+
+  const searchByNameAndKeywords = (value) => {
+    filterProfessionals(value);
   };
 
   return (
@@ -255,21 +373,21 @@ const ProfessionalsFilter = ({
             </div>
           </div>
           {dimensions.windowWidth <= 992 && (
-          <div className='container-fluid mt-4 mb-4' style={{display:"flex", justifyContent: "space-between"}}>
-            <h6 style={{margin: 0}}>
-              {selectedCountry && countriesData.find(country => country.countryCode === selectedCountry) ? (
-                `${texts.allIn} ${countriesData.find(country => country.countryCode === selectedCountry)?.country}`
-              ) : (
-                texts.allResults
-              )}
-            </h6>
-            
-              <Button 
-                style={{backgroundColor: "#FFA301", borderColor: "#FFA301"}} 
-                size="sm" onClick={()=>handleShow()}>{texts.filters}
+            <div className='container-fluid mt-4 mb-4' style={{ display: "flex", justifyContent: "space-between" }}>
+              <h6 style={{ margin: 0 }}>
+                {selectedCountry && countriesData.find(country => country.countryCode === selectedCountry) ? (
+                  `${texts.allIn} ${countriesData.find(country => country.countryCode === selectedCountry)?.country}`
+                ) : (
+                  texts.allResults
+                )}
+              </h6>
+
+              <Button
+                style={{ backgroundColor: "#FFA301", borderColor: "#FFA301" }}
+                size="sm" onClick={() => handleShow()}>{texts.filters}
               </Button>
-            
-          </div>
+
+            </div>
           )}
           <div className="filter-wrapper">
             <div className={`filter ${showFilter ? "filter-expanded" : ""}`}>
@@ -283,8 +401,24 @@ const ProfessionalsFilter = ({
                 </span>
               </button>
               <div>
+
+                <p style={{ fontSize: '14px', marginBottom: '10px' }}>{texts.search}:</p>
+
+                <div className="filter-search-field-wrap">
+                  <input
+                    type="text"
+                    className="filter-search-field-input"
+                    onChange={(e) => handleSearch(e.target.value)}
+                    aria-label={texts.search}
+                  />
+                  <span className="filter-search-field-icon" aria-hidden>
+                    <FaSearch size={16} />
+                  </span>
+                </div>
+              </div>
+              <div>
                 <div className="filter-description">
-                    <p>{texts.moveTo}</p>
+                  <p>{texts.moveTo}</p>
                 </div>
 
                 <select
@@ -301,11 +435,10 @@ const ProfessionalsFilter = ({
                 </select>
               </div>
               <div
-                className={`filter-container ${
-                  showFilter && dimensions.windowWidth <= 992
-                    ? "show-filter"
-                    : ""
-                }`}
+                className={`filter-container ${showFilter && dimensions.windowWidth <= 992
+                  ? "show-filter"
+                  : ""
+                  }`}
               >
                 <div className="filter-description">
                   <p>{texts.filterBy}:</p>
@@ -336,33 +469,50 @@ const ProfessionalsFilter = ({
               </div>
             </div>
             <div className="results-container">
-              <GoogleMap 
-                professionals={results} 
+              <GoogleMap
+                professionals={results}
                 logoAcademy={defaultData?.academyLogo.image}
                 defaultPhoto={defaultData.photoDefault.image}
                 country={selectedCountry}
-                mapFitBounds={mapFitBoundsPoints}
+                mapFitBounds={mapBoundsForMap}
               />
             </div>
           </div>
         </div>
       </div>
-      <Modal 
+      <Modal
         className="professional-filter-modal"
-        show={showFiltersModal} 
+        show={showFiltersModal}
         backdrop="static"
-        onHide={handleClose} 
+        onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         centered>
-        <Modal.Header style={{backgroundColor: "#FFA301", color: "white"}}>
+        <Modal.Header style={{ backgroundColor: "#FFA301", color: "white" }}>
           <Modal.Title>{texts.filters}</Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{paddingRight: "0"}}>
-        <div>
+        <Modal.Body style={{ paddingRight: "0" }}>
+          <div>
             <div className={`dialog-filter`}>
               <div>
+
+                <p style={{ fontSize: '14px', marginBottom: '10px' }}>{texts.search}</p>
+
+                <div className="filter-search-field-wrap">
+                  <input
+                    type="text"
+                    className="filter-search-field-input"
+                    value={searchValue}
+                    onChange={(e) => handleSearch(e.target.value)}
+                    aria-label={texts.search}
+                  />
+                  <span className="filter-search-field-icon" aria-hidden>
+                    <FaSearch size={16} />
+                  </span>
+                </div>
+              </div>
+              <div>
                 <div className="filter-description">
-                    <p>{texts.moveTo}</p>
+                  <p>{texts.moveTo}</p>
                 </div>
 
                 <select
@@ -409,10 +559,10 @@ const ProfessionalsFilter = ({
                 </div>
               </div>
             </div>
-            </div>
+          </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button size="sm" style={{backgroundColor: "#FFA301", borderColor: "#FFA301"}} onClick={handleClose}>
+          <Button size="sm" style={{ backgroundColor: "#FFA301", borderColor: "#FFA301" }} onClick={handleClose}>
             {texts.apply}
           </Button>
         </Modal.Footer>

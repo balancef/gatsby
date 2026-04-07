@@ -9,11 +9,17 @@ const MapHandler = ({country, mapFitBounds}) => {
     const fetchReverseGeocoding = async () => {
       if (!map || !geocodingLib) return;
       if(mapFitBounds?.length > 0) {
-        const bounds = new window.google.maps.LatLngBounds();
-        mapFitBounds.forEach(item => {
-          bounds.extend(new window.google.maps.LatLng(item.location.lat, item.location.lng));
-        });
-        map.fitBounds(bounds)
+        if (mapFitBounds.length === 1) {
+          const { lat, lng } = mapFitBounds[0].location;
+          map.setCenter({ lat, lng });
+          map.setZoom(14);
+        } else {
+          const bounds = new window.google.maps.LatLngBounds();
+          mapFitBounds.forEach(item => {
+            bounds.extend(new window.google.maps.LatLng(item.location.lat, item.location.lng));
+          });
+          map.fitBounds(bounds, { top: 48, right: 48, bottom: 48, left: 48 });
+        }
       } else {
         if(!country || country.length === 0) {
           map.setCenter({lat: 0, lng: 0})

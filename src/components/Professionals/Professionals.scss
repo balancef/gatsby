@@ -45,11 +45,13 @@ input[type="text"] {
   color: white;
   transition: background-color 0s, color 0s;
   cursor: pointer;
+
   .icon {
     svg {
       transition: background-color 0s, color 0s;
     }
   }
+
   &:hover {
     transition: background-color 0s, color 0s;
     color: $color-primary;
@@ -94,6 +96,7 @@ input[type="text"] {
   display: flex;
   align-items: center;
   color: $color-text;
+
   &:hover {
     color: $color-black;
   }
@@ -107,25 +110,74 @@ input[type="text"] {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+
   p {
     font-size: 14px !important;
   }
+
   button {
     font-size: 14px !important;
     border: none;
     background: none;
     color: $color-primary;
+
     &:hover {
       text-decoration: underline;
     }
   }
 }
 
+.filter-search {
+  width: 100%;
+  border: 1px solid #cfcfc8;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.filter-search-field-wrap {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+
+  .filter-search-field-input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #cfcfc8;
+    border-radius: 2px;
+    padding: 8px 36px 8px 10px;
+    margin: 0;
+    outline: none;
+  }
+
+  .filter-search-field-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.filter-input {
+  width: 100%;
+  border: 1px solid #cfcfc8;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
 .no-service-results {
   margin-top: 15px;
+
   p {
     font-size: 14px !important;
   }
+
   a {
     margin-left: 5px;
     font-size: 14px !important;
@@ -133,6 +185,7 @@ input[type="text"] {
     background: none;
     color: $color-primary;
     text-decoration: none;
+
     &:hover {
       text-decoration: underline;
     }
@@ -157,10 +210,12 @@ input[type="text"] {
   margin-bottom: 15px;
   border-color: #cfcfc8;
   background-color: white;
+
   &:focus-visible {
     outline: none;
     border: 1px solid #cfcfc8;
   }
+
   option {
     background-color: white;
   }
@@ -173,27 +228,33 @@ input[type="text"] {
   flex-direction: column;
   overflow-y: auto;
   padding-bottom: 15px;
+
   .checkbox-title {
     font-weight: 500;
     color: $color-black;
     margin-bottom: 10px;
   }
+
   label {
     font-size: 14px;
     margin-bottom: 7px;
     color: $color-black;
     display: flex;
     align-items: start;
+
     p {
       font-size: 14px;
     }
+
     .profession-description {
       color: $color-text;
     }
+
     input {
       margin-right: 8px;
       margin-top: 3px;
     }
+
     svg {
       margin-bottom: 4px;
       margin-right: 3px;
@@ -217,6 +278,7 @@ input[type="text"] {
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+
   img {
     height: 120px;
     margin-bottom: 20px;
@@ -227,6 +289,7 @@ input[type="text"] {
 .proContainer:first-child {
   border-top: 1px solid $color-border;
 }
+
 .professionalWrapper {
   padding: 30px 10px;
   border-bottom: 1px solid $color-border;
@@ -243,6 +306,7 @@ input[type="text"] {
 }
 
 .rightContainer {
+
   p,
   a {
     font-size: 14px !important;
@@ -265,17 +329,20 @@ input[type="text"] {
   &__ranking {
     text-align: center;
     margin-bottom: 5px;
+
     svg {
       color: $color-warning;
       font-size: 22px;
       margin-right: 1px;
     }
+
     h6 {
       img {
         display: inline;
         margin-right: 7px;
         height: 28px;
       }
+
       font-weight: 600;
       color: $color-black;
     }
@@ -284,6 +351,7 @@ input[type="text"] {
   &__name {
     text-align: center;
     margin-bottom: 10px;
+
     img {
       display: inline;
       height: 23px;
@@ -296,6 +364,7 @@ input[type="text"] {
     gap: 10px;
     justify-content: center;
     margin-bottom: 20px;
+
     img {
       height: 25px;
       max-width: 109px;
@@ -311,9 +380,11 @@ input[type="text"] {
 
   &__services {
     display: flex;
+
     svg {
       min-width: 35px;
     }
+
     margin-bottom: 5px;
   }
 
@@ -332,6 +403,7 @@ input[type="text"] {
         min-width: 35px;
       }
     }
+
     margin-bottom: 10px;
   }
 
@@ -352,9 +424,11 @@ input[type="text"] {
       display: flex;
       align-items: center;
     }
+
     &-dates {
       margin: 20px 0;
     }
+
     &-description {
       margin-bottom: 20px;
     }
@@ -363,6 +437,7 @@ input[type="text"] {
       a {
         text-decoration: none;
         color: $color-text;
+
         p {
           font-size: 14px;
         }
@@ -382,11 +457,13 @@ input[type="text"] {
     padding-top: 20px;
     color: $color-black;
     text-decoration: none;
+
     svg {
       min-width: 25px;
     }
   }
 }
+
 .Pagination {
   justify-content: center;
 }
@@ -395,7 +472,8 @@ input[type="text"] {
   .results-container {
     height: calc(100vh - 144px);
   }
-  .filter { 
+
+  .filter {
     display: none;
   }
 }
@@ -419,6 +497,7 @@ input[type="text"] {
         text-align: left;
         padding-left: 5px;
       }
+
       &__professions {
         text-align: left;
       }
@@ -434,10 +513,12 @@ input[type="text"] {
         &-description {
           padding-left: 5px;
         }
+
         &-contact {
           p {
             padding-left: 5px;
           }
+
           a {
             p {
               font-size: 16px;
@@ -445,6 +526,7 @@ input[type="text"] {
           }
         }
       }
+
       &__button {
         padding-left: 5px;
       }
@@ -455,6 +537,7 @@ input[type="text"] {
       }
     }
   }
+
   .filter-wrapper {
     flex-direction: row;
     display: flex;
@@ -487,6 +570,7 @@ input[type="text"] {
 @media (min-width: $lg-breakpoint) {
   .professionalWrapper {
     gap: 15px;
+
     .professional {
       &__information {
         &-dates {
@@ -495,6 +579,7 @@ input[type="text"] {
             gap: 20px;
           }
         }
+
         &-contact {
           ul {
             gap: 20px;
@@ -503,15 +588,18 @@ input[type="text"] {
       }
     }
   }
+
   .input-container,
   .input-title {
     text-align: center;
     width: 80%;
     margin: auto;
   }
+
   .input-title {
     margin-bottom: 10px;
   }
+
   .filter {
     max-width: 270px;
   }

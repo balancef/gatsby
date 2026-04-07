@@ -16,7 +16,8 @@ export const dataLanguageTexts = {
     moreInfo: "Más información",
     moveTo: "Mover a:",
     filters: "Filtros",
-    apply: "Aplicar"
+    apply: "Aplicar",
+    search: "Buscar por nombre"
   },
   de: {
     inputTitle: "Finden Sie Ihren F-Balance Podologen",
@@ -35,7 +36,8 @@ export const dataLanguageTexts = {
     moreInfo: "Mehr erfahren",
     moveTo: "Ziehen nach:",
     filters: "Filter",
-    apply: "Anwenden"
+    apply: "Anwenden",
+    search: "Nach Namen suchen"
   },
   en: {
     inputTitle: "Find your F-Balance Podiatrist",
@@ -54,6 +56,7 @@ export const dataLanguageTexts = {
     moreInfo: "Learn more",
     moveTo: "Move to:",
     filters: "Filters",
-    apply: "Apply"
+    apply: "Apply",
+    search: "Search by name"
   },
 };
